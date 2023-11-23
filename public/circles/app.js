@@ -1,9 +1,9 @@
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
-
 //////////////////////////
 //
 // 🤩 CIRCLES with CANVAS
 //
+
+import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 
 print("<center><h1><orange>Circles ")
 

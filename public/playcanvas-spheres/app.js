@@ -203,6 +203,11 @@ class X3d {
           window.addEventListener("mousedown", (event) => {
               func(event);
           });
+
+          // Gestion du tap sur les appareils tactiles
+          window.addEventListener("touchstart", (event) => {
+              func(event);
+          });
       }
  
       onUpdate(callback) {
