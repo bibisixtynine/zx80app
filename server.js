@@ -86,6 +86,88 @@ app.get('/loadApp', async (req, res) => {
   }
 });
 
+// Route pour charger le store
+app.get('/store', async (req, res) => {
+  try {
+    const appsDir = 'public';
+    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
+    let html = `
+    <html>
+      <head>
+        <title>App Store</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="theme-color" content="#f2b200" />
+        <link rel="icon" href="https://glitch.com/favicon.ico" />
+        <script>
+          if (window.location.protocol == "https:") {
+            console.log("🔒 Running in https");
+          } else if (
+            window.location.protocol !== "https:" &&
+            window.location.hostname !== "localhost" &&
+            window.location.protocol !== "file:"
+          ) {
+            window.location.protocol = "https";
+            console.log("🔒 Enforcing https");
+          } else {
+            console.log("🛠️ Running in localhost or file, not enforcing https");
+          }
+        </script>
+        <style>
+          body {
+            font-family: monospace;
+            background-color: black;
+            color: #20FF20;
+            margin: 0%;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+          }
+          #appButton {
+            border: 2px solid #20FF20;
+            border-radius: 10px;
+            background-color: #001000;
+            color: #20FF20;
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            word-wrap: break-word;
+          }
+        </style>
+      </head>
+      <body>
+        <h1 style="text-align: center;">App Store</h1>
+        <div style="display: flex; flex-wrap: wrap;">
+    `
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        // Création d'un carré cliquable pour chaque application
+        html += `
+                <div id="appButton">
+                <a href="/${entry.name}/index.html" target="_blank" style="text-decoration: none; color: #20FF20; font-family: monospace; font-size: 14px; line-height: 1.2; width: 100%;">
+                  ${entry.name}
+                </a>
+                </div>
+                `;
+      }
+    }
+
+    html += '</div></body></html>';
+    res.send(html);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erreur lors de la génération du store');
+  }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Serveur démarré sur le port ${port}`);

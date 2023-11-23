@@ -15,9 +15,23 @@
         background-color: black;
         color: #20FF20;
         margin: 0%;
-        padding: 0%;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
     </style>
+    <script>
+      if (window.location.protocol == "https:") {
+        console.log("🔒 Running in https");
+      } else if (
+        window.location.protocol !== "https:" &&
+        window.location.hostname !== "localhost" &&
+        window.location.protocol !== "file:"
+      ) {
+        window.location.protocol = "https";
+        console.log("🔒 Enforcing https");
+      } else {
+        console.log("🛠️ Running in localhost or file, not enforcing https");
+      }
+    </script>
   </head>
   <body>
     <script type="module" src="app.js"></script>

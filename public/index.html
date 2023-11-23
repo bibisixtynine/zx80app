@@ -16,7 +16,7 @@
         background-color: black;
         color: #20FF20;
         margin: 0%;
-        padding: 0%;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
       div {
         margin: 0px;
@@ -63,7 +63,7 @@
       #ui::-webkit-scrollbar {
         display: none;
       }
-      button, #appName, #appImage, #appDescription, #appList {
+      button {
         display:block;
         margin: 0px;
         margin-left: auto;
@@ -73,8 +73,17 @@
         background-color: #001000;
         color: #20FF20;
       }
+      #appName, #appImage, #appDescription, #loadApp, #appList {
+        display:block;
+        margin: 5px auto;
+        padding: 5px;
+        border: 2px solid #20FF20;
+        border-radius: 10px;
+        background-color: #001000;
+        color: #20FF20;
+      }
       
-      #toolbar, #settings {
+      #toolbar {
         display: flex;
         justify-content: center; /* Centre les boutons horizontalement */
         align-items: center; /* Centre les boutons verticalement */
@@ -82,6 +91,7 @@
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
       }
+
       #toolbar::-webkit-scrollbar {
         display: none;
       }
@@ -90,6 +100,22 @@
         padding: 8px;
       }
     </style>
+    
+    <!-- if not running in localhost or file, assure running https -->
+    <script>
+      if (window.location.protocol == "https:") {
+        console.log("🔒 Running in https");
+      } else if (
+        window.location.protocol !== "https:" &&
+        window.location.hostname !== "localhost" &&
+        window.location.protocol !== "file:"
+      ) {
+        window.location.protocol = "https";
+        console.log("🔒 Enforcing https");
+      } else {
+        console.log("🛠️ Running in localhost or file, not enforcing https");
+      }
+    </script>
   </head>
 
   <body>
@@ -99,7 +125,7 @@
 // Ma Première App //
 /////////////////////
 
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
+import {clear, print} from './toolbox.js'
  
 clear()
 
@@ -117,7 +143,7 @@ print('😎')
     
     <div id="toolbar">    
       <button onclick="Exec('ui','code')">run</button>
-      <button onclick="Load()">load</button>
+      <button onclick="LoadApp()">load</button>
       <button onclick="Save()">save</button>
       <button onclick="Publish()">publish</button>
     </div>  
@@ -130,15 +156,10 @@ print('😎')
       <input type="text" id="appName" placeholder="Nom de l'App" />
       <input type="text" id="appImage" placeholder="Lien Image" />
       <input type="text" id="appDescription" placeholder="Description de l'App"/>
+      <select id="appList"></select>
     </div>
     
-    <div id="loadApp">
-      <select id="appList">
-        <!-- Les options seront ajoutées dynamiquement -->
-      </select>
-      <button onclick="LoadApp()">Charger App</button>
-    </div>
-
+   
     <script>
       function LoadAppList() {
         fetch('/listApps')
@@ -257,7 +278,7 @@ print('😎')
                 background-color: black;
                 color: #20FF20;
                 margin: 0%;
-                padding: 0%;
+                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
               }
             </style>
           </head>

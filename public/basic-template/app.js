@@ -2,7 +2,7 @@
 // Ma Première App //
 /////////////////////
 
-import {clear, print} from "./toolbox.js"
+import {clear, print} from './toolbox.js'
  
 clear()
 
