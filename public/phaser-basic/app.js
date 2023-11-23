@@ -6,8 +6,15 @@
 
 import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 
-print('👀<center><h1><orange>Hellooo<yellow> World!</h1>')
-
+print('<center><h1><orange>👀<br><yellow>Phaser loading 😁<br></yellow>...</h1>')
+print(`
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Empêche les barres de défilement */
+        }
+    </style>
+`)
 
 // Include the Phaser library from the CDN
 const script = document.createElement('script');
@@ -17,6 +24,18 @@ document.head.appendChild(script);
 
 
 function initializeGame() {
+    setTimeout( ()=> { 
+        clear()
+        print(`
+            <style>
+                body {
+                    margin: 0;
+                    overflow: hidden; /* Empêche les barres de défilement */
+                }
+            </style>
+        `)
+    }, 5000)
+
     class Example extends Phaser.Scene {
         preload() {
             this.load.setBaseURL('https://labs.phaser.io');
@@ -26,7 +45,8 @@ function initializeGame() {
         }
 
         create() {
-            this.add.image(400, 300, 'sky');
+            this.background = this.add.image(0, 0, 'sky').setOrigin(0.5, 0.5);
+            this.resizeBackground();
 
             const particles = this.add.particles(0, 0, 'red', {
                 speed: 100,
@@ -35,27 +55,78 @@ function initializeGame() {
             });
 
             const logo = this.physics.add.image(400, 100, 'logo');
-
             logo.setVelocity(100, 200);
             logo.setBounce(1, 1);
             logo.setCollideWorldBounds(true);
+            logo.setScale(0.5); // Réduit la taille de 50%
+
+
+            // Configuration initiale des limites du monde physique
+            this.physics.world.bounds.width = window.innerWidth;
+            this.physics.world.bounds.height = window.innerHeight;
 
             particles.startFollow(logo);
+        }
+
+        resizeBackground() {
+            const scaleX = window.innerWidth / this.background.width;
+            const scaleY = window.innerHeight / this.background.height;
+            const scale = Math.max(scaleX, scaleY);
+  
+            this.background.setScale(scale).setPosition(window.innerWidth / 2, window.innerHeight / 2);
+        }
+
+        resizeScene() {
+            // Mise à jour des limites du monde physique
+            this.physics.world.setBounds(0, 0, window.innerWidth, window.innerHeight);
+
+            // Repositionner l'objet animé si nécessaire
+            if (this.logo.x > window.innerWidth) this.logo.x = window.innerWidth;
+            if (this.logo.y > window.innerHeight) this.logo.y = window.innerHeight;
+
+            // Forcez une mise à jour immédiate du monde physique
+            this.physics.world.step(0);
         }
     }
 
     const config = {
         type: Phaser.AUTO,
-        width: 1400,
-        height: 200,
+        width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
+        height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
         scene: Example,
         physics: {
             default: 'arcade',
             arcade: {
                 gravity: { y: 200 }
             }
+        },
+        scale: {
+            mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
+            parent: 'gameContainer', // Optionnel: ID de l'élément conteneur du jeu
+            width: '100%',
+            height: '100%'
         }
     };
 
     const game = new Phaser.Game(config);
+
+    let resizeTimer;
+
+    function handleResize() {
+        // Debounce pour gérer les changements rapides d'orientation
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            game.scale.resize(window.innerWidth, window.innerHeight);
+            game.scene.scenes.forEach(scene => {
+                if (scene instanceof Example) {
+                    scene.resizeBackground();
+                    scene.resizeScene();
+                }
+            });
+        }, 250); // Augmentez le délai si nécessaire
+    }
+
+    // Écouter les changements de taille et d'orientation
+    window.addEventListener('resize', handleResize, false);
+    window.addEventListener('orientationchange', handleResize, false);
 }

@@ -53,7 +53,7 @@ function _initUI(ui) {
   ui.style.overflowWrap = 'break-word'
   ui.style.wordWrap = 'break-word'
   ui.style.textAlign = 'center'
-  //ui.style.borderRadius = '25px'
+  ui.style.borderRadius = '25px'
   ui.style.margin = '0px'
   ui.style.padding = '0px'
   return ui

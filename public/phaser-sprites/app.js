@@ -5,6 +5,7 @@ import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 // 🤩 PHASER
 //
 
+
 // 🚀 Import asynchrone de Phaser
 asyncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', main)
 
