@@ -15,10 +15,11 @@ What is currently working for now :
   - qwark should work on any platform
   - editing (basic)
   - run
-  - load
-  - save
-
-What is not working :
-  - publish only open a new window and run the app full-window
+  - load from the cloud
+  - save (and publish) on the cloud
+  - the store is accessible at quark_web_adress/store 
+  
+What is not working/in progress :
   - Qwark is "installable" as a webApp on iOS only... but need internet connection...
+  - published webapps are "installable" as a webApp on iOS only... but need internet connection...
   - there is no doc... 
