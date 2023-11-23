@@ -1,0 +1,16 @@
+{
+  "name": "mon-editeur-code",
+  "version": "1.0.0",
+  "description": "Un éditeur de code avec sauvegarde et chargement sur le serveur",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  },
+  "engines": {
+    "node": "12.x"
+  }
+}
