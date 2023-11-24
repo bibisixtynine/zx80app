@@ -9,17 +9,27 @@ As far as you can install a Chrome/Chromium webbrower (with the exception of iOS
 
 Qwark is the first step for this project.
 
-A tiny environment that allow to code, run and publish your apps !
+A tiny environment that allow to code, run and publish your apps on a store !
 
 What is currently working for now :
   - qwark should work on any platform
   - editing (basic)
   - run
   - load from the cloud
-  - save (and publish) on the cloud
+  - save (publish) on the cloud
+  - windowed and fullscreen preview
   - the store is accessible at quark_web_adress/store 
-  
+  - debugging with chrome developper tools integrated in the explorer... on desktop
+  - a couple of examples works nicely : clock, basic-template, phaser-basic
+
 What is not working/in progress :
-  - Qwark is "installable" as a webApp on iOS only... but need internet connection...
-  - published webapps are "installable" as a webApp on iOS only... but need internet connection...
-  - there is no doc... 
+  - the other examples work but have problem when resizing/rotating the screen
+  - published webapps/store/qwark are "installable"... but doesn't install anything on the machine yet, so a valid internet connection is requested after installation
+  - debugging request desktop explorer...
+  - ugly ui, you can delete your files on the server if not pay attention... easy 
+  - ugly ide (it's just e textarea)
+  - there is no doc...
+  - missing relevant and easy to understand examples
+  
+Roadmap :
+  - Wondering for a version One of Qwark using Phaser 3.7 2D Game Engine only... could be a good step...
