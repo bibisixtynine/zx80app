@@ -1,8 +1,13 @@
 const express = require('express');
+const cors = require('cors');  // pour que le sw puisse intercepter les fetch des iframe.... ?
+
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Utilisation de CORS pour toutes les requêtes
+app.use(cors());
 
 app.use(bodyParser.text());
 app.use(bodyParser.json());
@@ -94,7 +99,7 @@ app.get('/store', async (req, res) => {
     let html = `
     <html>
       <head>
-        <title>App Store</title>
+        <title>App Store v7</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,7 +147,7 @@ app.get('/store', async (req, res) => {
         </style>
       </head>
       <body>
-        <h1 style="text-align: center;">App Store</h1>
+        <h1 style="text-align: center;">App Store v7</h1>
         <div style="display: flex; flex-wrap: wrap;">
     `
 
