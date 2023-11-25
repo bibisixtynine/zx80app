@@ -2,13 +2,64 @@
 <html lang="en">
 
   <head>
-    <title>Qwak</title>
     <meta charset="utf-8" />
+
+    <title>Qwark</title>
+    <meta name="application-name" content="Qwark" />
+    <meta name="description" content="Qwark Web Computer" />
     <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+    
+    <!-- manifest -->
+    <link rel="manifest" href="manifest.json"/>
+    
+    <!-- PWA - apple specific -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Qwark" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="theme-color" content="#f2b200" />
-    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+    
+    <!-- PWA - microsoft specific -->
+    <meta name="msapplication-TileColor" content="#0000FF" />
+    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+
+
+  
+    <!-- https:// -->
+    <!-- if not running in localhost or file, assure running https -->
+    <script>
+      if (window.location.protocol == "https:") {
+        console.log("🔒 Running in https");
+      } else if (
+        window.location.protocol !== "https:" &&
+        window.location.hostname !== "localhost" &&
+        window.location.protocol !== "file:"
+      ) {
+        window.location.protocol = "https";
+        console.log("🔒 Enforcing https");
+      } else {
+        console.log("🛠️ Running in localhost or file, not enforcing https");
+      }
+    </script>
+       
+    <!-- service worker -->
+    <script>
+      //if (location.protocol == "http:") location.protocol = "https:";
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then((reg) =>
+            console.log("+-> (1) 😍 Service Worker registered", reg)
+          )
+          .catch((err) =>
+            console.error("!!! (-) 🆘 Service Worker **not** registered", err)
+          );
+      } else {
+        console.warn("!!! (-) 🆘 Service Worker not supported in this browser");
+      }
+    </script>
     
     <style>
       body {
@@ -45,6 +96,7 @@
           display: none;
       }
       #ui {
+        position: relative;
         font-family: monospace;
         width:90%;
         height:30vh;
@@ -101,29 +153,14 @@
       }
     </style>
     
-    <!-- if not running in localhost or file, assure running https -->
-    <script>
-      if (window.location.protocol == "https:") {
-        console.log("🔒 Running in https");
-      } else if (
-        window.location.protocol !== "https:" &&
-        window.location.hostname !== "localhost" &&
-        window.location.protocol !== "file:"
-      ) {
-        window.location.protocol = "https";
-        console.log("🔒 Enforcing https");
-      } else {
-        console.log("🛠️ Running in localhost or file, not enforcing https");
-      }
-    </script>
   </head>
 
   <body>
     <br>
     <textarea  spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" id="code">
-/////////////////////
-// Ma Première App //
-/////////////////////
+///////////////////////
+// Ma Première App V7//
+///////////////////////
 
 import {clear, print} from './toolbox.js'
  
@@ -149,7 +186,7 @@ print('😎')
     </div>  
       
     <div id="ui">
-      
+      press [run] to see your code live ! 
     </div>
     
     <div id="settings">
@@ -162,6 +199,7 @@ print('😎')
    
     <script>
       function LoadAppList() {
+        //return
         fetch('/listApps')
           .then(response => response.json())
           .then(apps => {
@@ -193,19 +231,70 @@ print('😎')
 
       // Appelez LoadAppList au chargement de la page ou à un moment approprié
       window.onload = LoadAppList;
+      
+      // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
+      //   -> RESET
+      function resetUI() {
+        let ui = document.getElementById('ui');
+        removeChildren(ui)
+        ui.style.overflowY = '';
+        ui.style.height = '';
+      }
+      //   -> WARNING : THIS WILL RESET ALLLL TIMERS !!!!!!
+      function resetTimers() {
+        let maxId = setTimeout(function () {}, 0);
 
+        for (var i = 0; i < maxId; i += 1) {
+          clearTimeout(i);
+        }
+      }
+      //   -> REMOVE
+      function removeChildren(node) {
+        while (node.hasChildNodes()) {
+          //node.removeEventListener()
+          node.removeChild(node.lastChild)
+        }
+      }
+      //    -> EVALUATE
+      const evaluateCode = (code) => {
+        //console.clear(); ///////////////////////////////// NEW //
+        resetUI();
+        resetTimers();
+        //localStorage.setItem("mysupercomputer-code", code);
+        const scriptId = 'dynamic-module-script';
+
+        // Supprimer l'ancien script s'il existe
+        const oldScript = document.getElementById(scriptId);
+        if (oldScript) {
+          document.body.removeChild(oldScript);
+        }
+
+        // Créer un nouveau script
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.id = scriptId;
+        script.textContent = code;
+
+        // Ajouter le nouveau script au body
+        document.body.appendChild(script);
+      };
+      
+      
       function Exec(uiId,codeId) {
         let code = document.getElementById(codeId).value;
-          let ui = document.getElementById(uiId)
-          const iframe = document.createElement('iframe')
-          iframe.width = '100%'
-          iframe.height = '100%'
-          iframe.srcdoc = '<script id="code" type="module">' + code + '</' + 'script>'
-          iframe.style.border = 'none'
-          iframe.style.padding = '0px'
-          iframe.style.margin = '0px'
-          ui.innerHTML = ''
-          ui.appendChild(iframe)
+        evaluateCode(code)
+        /*
+        let ui = document.getElementById(uiId)
+        const iframe = document.createElement('iframe')
+        
+        iframe.width = '100%'
+        iframe.height = '100%'
+        iframe.srcdoc = `<script>console.log("Origine de l\'iframe:", location.origin);</s` + `cript><script id="code" type="module">` + code + '</' + 'script>'
+        iframe.style.border = 'none'
+        iframe.style.padding = '0px'
+        iframe.style.margin = '0px'
+        ui.innerHTML = ''
+        ui.appendChild(iframe)*/
       }
       /*
       function Save() {

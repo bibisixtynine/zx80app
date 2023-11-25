@@ -1,7 +1,7 @@
 //////////////////////////
 //
 // 🤩 phaser-basic
-//     v7
+//
 
 import { clear, print } from "https://qwark.glitch.me/toolbox.js";
 
@@ -66,9 +66,6 @@ function initializeGame() {
       this.physics.world.bounds.height = window.innerHeight;
 
       particles.startFollow(logo);
-    
-      // met à jour les tailles
-      handleResize()
     }
 
     resizeBackground() {
@@ -120,13 +117,8 @@ function initializeGame() {
   };
 
   const game = new Phaser.Game(config);
-  
 
   let resizeTimer;
-  
-  setTimeout(function () {
-    handleResize()
-  }, 250);
 
   function handleResize() {
     clearTimeout(resizeTimer);
@@ -146,5 +138,3 @@ function initializeGame() {
   window.addEventListener("resize", handleResize, false);
   window.addEventListener("orientationchange", handleResize, false);
 }
-
-    
