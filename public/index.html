@@ -46,19 +46,39 @@
        
     <!-- service worker -->
     <script>
-      //if (location.protocol == "http:") location.protocol = "https:";
+
       if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("sw.js")
-          .then((reg) =>
-            console.log("+-> (1) 😍10 Service Worker registered", reg)
-          )
-          .catch((err) =>
-            console.error("!!! (-) 🆘10 Service Worker **not** registered", err)
-          );
-      } else {
-        console.warn("!!! (-) 🆘10 Service Worker not supported in this browser");
-      }
+        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function(registration) {
+            console.log("+-> (1) 😍 Service Worker registered", registration);
+
+            // Écouter les mises à jour du service worker
+            registration.addEventListener('updatefound', function() {
+                let newWorker = registration.installing;
+                newWorker.addEventListener('statechange', function() {
+                    switch (newWorker.state) {
+                        case 'installed':
+                            if (navigator.serviceWorker.controller) {
+                                console.log("+-> (2) ✨ Nouvelle version du Service Worker disponible");
+                              // Ici, vous pourriez notifier l'utilisateur ou rafraîchir automatiquement la page
+                            } else {
+                                console.log("+-> (2) 🎉 Service Worker installé pour la première fois");
+                            }
+                            break;
+
+                        case 'redundant':
+                            console.error("!!! (-) 🆘 Le nouveau Service Worker a été rejeté");
+                            break;
+                    }
+                });
+            });
+
+        }).catch(function(error) {
+            console.error("!!! (-) 🆘 Service Worker registration failed", error);
+        });
+    } else {
+        console.warn("!!! (-) 🆘 Service Worker not supported in this browser");
+    }
+
     </script>
     
     <style>
@@ -159,7 +179,7 @@
     <br>
     <textarea  spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" id="code">
 //////////////////////////
-// Ma Première App V10💖 //
+// Ma Première App V12💖 //
 //////////////////////////
 
 import {clear, print} from './toolbox.js'
@@ -189,6 +209,7 @@ print('😎')
       press [run] to see your code live ! 
     </div>
     
+    
     <div id="settings">
       <input type="text" id="appName" placeholder="Nom de l'App" />
       <input type="text" id="appImage" placeholder="Lien Image" />
@@ -196,8 +217,37 @@ print('😎')
       <select id="appList"></select>
     </div>
     
+    <div id="console-messages">
+      MESSAGES CONSOLE :
+      <!-- Les messages de la console seront affichés ici -->
+    </div>
+    
    
     <script>
+      // Écoutez les messages provenant du service worker
+      document.addEventListener("DOMContentLoaded", () => {
+          navigator.serviceWorker.ready.then((registration) => {
+            // RECEPTION des messages du Service Worker :
+            navigator.serviceWorker.addEventListener("message", (event) => {
+              const message = event.data;
+              if (message.type === "console-log") {
+                displayConsoleMessage(message.text);
+              }
+            });
+            // Envoie un message "ready" au service worker :
+            registration.active.postMessage({ type: "ready" });
+          });
+      });
+
+      // Affichage de message dans le div console
+      function displayConsoleMessage(text) {
+        const consoleMessagesDiv = document.getElementById("console-messages");
+        const messageElement = document.createElement("div");
+        // Utilisez innerHTML au lieu de textContent
+        messageElement.innerHTML = text.replace(/\n/g, "<br>")
+        consoleMessagesDiv.appendChild(messageElement);
+      }
+
       function LoadAppList() {
         //return
         fetch('/listApps')
@@ -348,7 +398,6 @@ print('😎')
       }
       
       function Publish() {
-        console.log('publish')
         let code = document.getElementById('code').value;
         let newWindow = window.open('', '_blank'); // Ouvre un nouvel onglet
         newWindow.document.write(`

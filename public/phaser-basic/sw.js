@@ -1,4 +1,4 @@
-const version = "💖"
+const version = "😜"
 
 const CACHE_NAME = "qwarky-v" + version;
 
@@ -8,9 +8,9 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/sw.js",
+  "/phaser-basic/",
+  "/phaser-basic/index.html",
+  "/phaser-basic/sw.js",
   "https://qwark.glitch.me/toolbox.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555",
   "https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540",

@@ -4,18 +4,34 @@
   <head>
     <title>An App</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274" />
-    <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
+    />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
+    />
     <meta name="theme-color" content="#f2b200" />
+
+    <!-- manifest -->
+    <link rel="manifest" href="manifest.json" />
 
     <style>
       body {
         font-family: monospace;
         background-color: black;
-        color: #20FF20;
+        color: #20ff20;
         margin: 0px;
         padding: 0px;
         /*padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);*/
@@ -27,7 +43,7 @@
       }
     </style>
     <script>
-      console.log("✨🚀 Qwark V10 running")
+      console.log("✨🚀 Qwark V10 running");
       if (window.location.protocol == "https:") {
         console.log("🔒10 Running in https");
       } else if (
@@ -41,10 +57,60 @@
         console.log("🛠️10 Running in localhost or file, not enforcing https");
       }
     </script>
+
+    <!-- service worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register('/phaser-basic/sw.js', { scope: '/phaser-basic/' })
+          .then(function (registration) {
+            console.log("+-> (1) 😍 Service Worker registered", registration);
+          /*
+            if (registration.waiting) {
+              // Si le service worker est en attente, rechargez la page
+              window.location.reload();
+            }
+            */
+            // Écouter les mises à jour du service worker
+            registration.addEventListener("updatefound", function () {
+              let newWorker = registration.installing;
+              newWorker.addEventListener("statechange", function () {
+                switch (newWorker.state) {
+                  case "installed":
+                    if (navigator.serviceWorker.controller) {
+                      console.log(
+                        "+-> (2) ✨ Nouvelle version du Service Worker disponible"
+                      );
+                      // Ici, vous pourriez notifier l'utilisateur ou rafraîchir automatiquement la page
+                    } else {
+                      console.log(
+                        "+-> (2) 🎉 Service Worker installé pour la première fois"
+                      );
+                    }
+                    break;
+
+                  case "redundant":
+                    console.error(
+                      "!!! (-) 🆘 Le nouveau Service Worker a été rejeté"
+                    );
+                    break;
+                }
+              });
+            });
+          })
+          .catch(function (error) {
+            console.error(
+              "!!! (-) 🆘 Service Worker registration failed",
+              error
+            );
+          });
+      } else {
+        console.warn("!!! (-) 🆘 Service Worker not supported in this browser");
+      }
+    </script>
   </head>
   <body>
-    <div id="ui">
-    </div>
+    <div id="ui"></div>
     <script type="module" src="app.js"></script>
   </body>
 </html>
