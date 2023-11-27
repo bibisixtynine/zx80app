@@ -1,7 +1,7 @@
 //////////////////////////
 //
 // 🤩 phaser-basic
-//     v7
+//     v10🎷
 
 import { clear, print } from "https://qwark.glitch.me/toolbox.js";
 
@@ -68,7 +68,27 @@ function initializeGame() {
       particles.startFollow(logo);
     
       // met à jour les tailles
-      handleResize()
+      const gameContainer = document.getElementById("gameContainer");
+      const scaleX = gameContainer.offsetWidth / this.background.width;
+      const scaleY = gameContainer.offsetHeight / this.background.height;
+      const scale = Math.max(scaleX, scaleY);
+
+      this.background
+        .setScale(scale)
+        .setPosition(
+          gameContainer.offsetWidth / 2,
+          gameContainer.offsetHeight / 2
+        );
+     // Mise à jour des limites du monde physique
+      this.physics.world.setBounds(
+        0,
+        0,
+        gameContainer.offsetWidth,
+        gameContainer.offsetHeight
+      );
+
+      // Forcez une mise à jour immédiate du monde physique
+      this.physics.world.step(0);
     }
 
     resizeBackground() {
@@ -85,7 +105,7 @@ function initializeGame() {
         );
     }
 
-    resizeScene(parentWidth, parentHeight) {
+    resizeScene() {
       // Mise à jour des limites du monde physique
       const gameContainer = document.getElementById("gameContainer");
       this.physics.world.setBounds(
@@ -126,7 +146,7 @@ function initializeGame() {
   
   setTimeout(function () {
     handleResize()
-  }, 250);
+  }, 500);
 
   function handleResize() {
     clearTimeout(resizeTimer);

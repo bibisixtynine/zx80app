@@ -4,13 +4,13 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>Qwark</title>
+    <title>The Super Cool Computer</title>
     <meta name="application-name" content="Qwark" />
     <meta name="description" content="Qwark Web Computer" />
     <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
-    <link id="favicon" rel="icon" href="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
     
     <!-- manifest -->
     <link rel="manifest" href="manifest.json"/>
@@ -19,11 +19,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Qwark" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="apple-touch-icon" href="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
     
     <!-- PWA - microsoft specific -->
     <meta name="msapplication-TileColor" content="#0000FF" />
-    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540" />
+    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
 
 
   
@@ -31,16 +31,16 @@
     <!-- if not running in localhost or file, assure running https -->
     <script>
       if (window.location.protocol == "https:") {
-        console.log("🔒 Running in https");
+        console.log("🔒10 Running in https");
       } else if (
         window.location.protocol !== "https:" &&
         window.location.hostname !== "localhost" &&
         window.location.protocol !== "file:"
       ) {
         window.location.protocol = "https";
-        console.log("🔒 Enforcing https");
+        console.log("🔒10 Enforcing https");
       } else {
-        console.log("🛠️ Running in localhost or file, not enforcing https");
+        console.log("🛠️10 Running in localhost or file, not enforcing https");
       }
     </script>
        
@@ -51,13 +51,13 @@
         navigator.serviceWorker
           .register("sw.js")
           .then((reg) =>
-            console.log("+-> (1) 😍 Service Worker registered", reg)
+            console.log("+-> (1) 😍10 Service Worker registered", reg)
           )
           .catch((err) =>
-            console.error("!!! (-) 🆘 Service Worker **not** registered", err)
+            console.error("!!! (-) 🆘10 Service Worker **not** registered", err)
           );
       } else {
-        console.warn("!!! (-) 🆘 Service Worker not supported in this browser");
+        console.warn("!!! (-) 🆘10 Service Worker not supported in this browser");
       }
     </script>
     
@@ -158,9 +158,9 @@
   <body>
     <br>
     <textarea  spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" id="code">
-///////////////////////
-// Ma Première App V7//
-///////////////////////
+//////////////////////////
+// Ma Première App V10💖 //
+//////////////////////////
 
 import {clear, print} from './toolbox.js'
  
@@ -354,13 +354,14 @@ print('😎')
         newWindow.document.write(`
         <html>
           <head>
-            <title>Mon Code Exécuté</title>
+            <title>Qwark10 Preview</title>
             <meta charset="utf-8" />
             <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
             <meta name="theme-color" content="#f2b200" />
-            <link rel="icon" href="https://glitch.com/favicon.ico" />
+            <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
+            <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
             <style>
               body {
                 font-family: monospace;
