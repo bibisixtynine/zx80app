@@ -99,25 +99,26 @@ app.get('/store', async (req, res) => {
     let html = `
     <html>
       <head>
-        <title>App Store v7</title>
+        <title>Qwark Store</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#f2b200" />
-        <link rel="icon" href="https://glitch.com/favicon.ico" />
+        <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/store-512.png?v=1700948777364" />
+        <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/store-512.png?v=1700948777364" />
         <script>
           if (window.location.protocol == "https:") {
-            console.log("🔒 Running in https");
+            console.log("🔒10 Running in https");
           } else if (
             window.location.protocol !== "https:" &&
             window.location.hostname !== "localhost" &&
             window.location.protocol !== "file:"
           ) {
             window.location.protocol = "https";
-            console.log("🔒 Enforcing https");
+            console.log("🔒10 Enforcing https");
           } else {
-            console.log("🛠️ Running in localhost or file, not enforcing https");
+            console.log("🛠️10 Running in localhost or file, not enforcing https");
           }
         </script>
         <style>
@@ -147,7 +148,7 @@ app.get('/store', async (req, res) => {
         </style>
       </head>
       <body>
-        <h1 style="text-align: center;">App Store v7</h1>
+        <h1 style="text-align: center;">Qwark Store v10</h1>
         <div style="display: flex; flex-wrap: wrap;">
     `
 
