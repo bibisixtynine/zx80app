@@ -10,10 +10,13 @@ let isReady = false;
 const urlsToCache = [
   "/phaser-basic/",
   "/phaser-basic/index.html",
+  "/phaser-basic/manifest.json",  
+  "/phaser-basic/app.js",
+  "/phaser-basic/app.json",  
   "/phaser-basic/sw.js",
   "https://qwark.glitch.me/toolbox.js",
-  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555",
-  "https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540",
+  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
+  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"
 ];
 

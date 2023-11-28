@@ -13,7 +13,7 @@ print(`
     <style>
         body {
             margin: 0;
-            overflow: hidden; /* Empêche les barres de défilement */
+            /*overflow: hidden;  Empêche les barres de défilement */
         }
     </style>
 `);
@@ -31,7 +31,7 @@ function initializeGame() {
             <style>
                 body {
                     margin: 0;
-                    overflow: hidden; /* Empêche les barres de défilement */
+                    /*overflow: hidden;  Empêche les barres de défilement */
                 }
             </style>
         `);

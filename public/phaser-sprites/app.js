@@ -5,6 +5,18 @@ import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 // 🤩 PHASER
 //
 
+print('<div id="gameContainer" style="width:100%; height:100%"></div>');
+print(
+  "<center><h1><orange>👀<br><yellow>Phaser loading 😁<br></yellow>...</h1>"
+);
+print(`
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Empêche les barres de défilement */
+        }
+    </style>
+`);
 
 // 🚀 Import asynchrone de Phaser
 asyncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', main)
@@ -117,13 +129,27 @@ function main() {
         }
     }
 
-    // 📐 Configuration de Phaser
-    const config = {
-        type: Phaser.WEBGL,
-        parent: 'phaser-example',
-        scene: Example
-    };
-   
+const config = {
+    type: Phaser.AUTO,
+    width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
+    height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
+    scene: Example,
+    physics: {
+      default: "arcade",
+      arcade: {
+        gravity: { y: 200 },
+      },
+    },
+    scale: {
+      mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
+      parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
+      width: "100%",
+      height: "100%",
+    },
+  };
+
+
+  
     // 🕹️ Création du jeu
     const game = new Phaser.Game(config);
 }

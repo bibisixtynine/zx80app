@@ -35,11 +35,19 @@
         margin: 0px;
         padding: 0px;
         /*padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);*/
+        width: 100vw;
+        height: 100vh;
+
       }
       #ui {
         position: fixed;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
+      }
+      #console-messages {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
       }
     </style>
     <script>
@@ -60,6 +68,7 @@
 
     <!-- service worker -->
     <script>
+      window.messageLog = ['HELLO','HOW ARE YOU']
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .register('/phaser-basic/sw.js', { scope: '/phaser-basic/' })
@@ -111,6 +120,31 @@
   </head>
   <body>
     <div id="ui"></div>
+    <div id="console-messages">HELLO</div>
     <script type="module" src="app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          navigator.serviceWorker.ready.then((registration) => {
+            // RECEPTION des messages du Service Worker :
+            navigator.serviceWorker.addEventListener("message", (event) => {
+              const message = event.data;
+              if (message.type === "console-log") {
+                displayConsoleMessage(message.text);
+              }
+            });
+            // Envoie un message "ready" au service worker :
+            registration.active.postMessage({ type: "ready" });
+          });
+        });
+      
+      // Affichage de message dans le div console
+      function displayConsoleMessage(text) {
+        const consoleMessagesDiv = document.getElementById("console-messages");
+        const messageElement = document.createElement("div");
+        // Utilisez innerHTML au lieu de textContent
+        messageElement.innerHTML = text.replace(/\n/g, "<br>")
+        consoleMessagesDiv.appendChild(messageElement);
+      }
+      </script>
   </body>
 </html>

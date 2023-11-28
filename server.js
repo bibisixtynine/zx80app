@@ -40,9 +40,9 @@ app.post('/save', async (req, res) => {
     const indexPath2 = appDir + '/toolbox.js'; // Chemin destination
     await fsPromises.copyFile(modelPath2, indexPath2);
     
-    res.send('Application sauvegardée avec succès');
+    res.send(`😎🚀 <${name}> sauvegardée avec succès`);
   } catch (error) {
-    res.status(500).send('Erreur lors de la sauvegarde de l\'application');
+    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}>`);
   }
 });
 
@@ -50,7 +50,7 @@ app.post('/save', async (req, res) => {
 app.get('/load', (req, res) => {
     fs.readFile('code.txt', 'utf8', (err, data) => {
         if (err) {
-            res.status(500).send('Erreur lors du chargement');
+            res.status(500).send(`😢🛑 Erreur lors du chargement`);
         } else {
             res.send(data);
         }
@@ -73,7 +73,7 @@ app.get('/listApps', async (req, res) => {
 
     res.json(dirs);
   } catch (error) {
-    res.status(500).send('Erreur lors de la liste des applications');
+    res.status(500).send(`😭🛑 Liste des App introuvable`);
   }
 });
 
@@ -87,7 +87,7 @@ app.get('/loadApp', async (req, res) => {
     const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
     res.json({ ...JSON.parse(appData), code: appCode });
   } catch (error) {
-    res.status(500).send('Erreur lors du chargement de l\'application');
+    res.status(500).send(`😭🛑 App introuvable`);
   }
 });
 
@@ -169,7 +169,7 @@ app.get('/store', async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Erreur lors de la génération du store');
+    res.status(500).send(`😭🛑 Le Store est cassé`);
   }
 });
 
