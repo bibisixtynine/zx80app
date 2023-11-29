@@ -5,6 +5,7 @@ export {clear,print,printf,input,Button,addDiv}
 // Ma Première Boîte à Outils //
 ////////////////////////////////
 
+const ui = document.getElementById('ui-toolbox')
 
 function Button(label, onClickFunction) {
     let button = document.createElement('button');
@@ -27,21 +28,15 @@ function input(text,fct) {
 }
 
 function clear() {
-  const ui = document.getElementById('ui-toolbox')
-
   ui.innerHTML = ''
 }
   
 function print(...args) {
-  const ui = document.getElementById('ui-toolbox')
-
   let html = args.join(''); // Concatène tous les arguments en les séparant par un espace
   ui.insertAdjacentHTML('beforeend', html);
 }
 
 function printf(...args) {
-  const ui = document.getElementById('ui-toolbox')
-
   let html = args.join(''); // Concatène tous les arguments en les séparant par un espace
   ui.insertAdjacentHTML('beforeend', html+"<br>");
 }

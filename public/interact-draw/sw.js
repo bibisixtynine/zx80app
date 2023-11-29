@@ -1,4 +1,4 @@
-const version = "😜phaser-basic😜"
+const version = "😜interact-draw😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/phaser-basic/",
-  "/phaser-basic/index.html",
-  "/phaser-basic/manifest.json",  
-  "/phaser-basic/app.js",
-  "/phaser-basic/app.json",  
-  "/phaser-basic/sw.js",
+  "/interact-draw/",
+  "/interact-draw/index.html",
+  "/interact-draw/manifest.json",  
+  "/interact-draw/app.js",
+  "/interact-draw/app.json",  
+  "/interact-draw/sw.js",
   "https://qwark.glitch.me/toolbox.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",

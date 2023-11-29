@@ -30,7 +30,7 @@ function main() {
  
   // create a renderer
   var render = Render.create({
-      element: document.body,
+      element: document.getElementById('ui'),
       engine: engine
   });
  

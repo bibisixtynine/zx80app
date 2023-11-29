@@ -2,27 +2,28 @@
 
 <html lang="en">
   <head>
-    <title>An App</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
-    />
+
+    <title>phaser-basic</title>
+    <meta name="application-name" content="phaser-basic" />
+    <meta name="description" content="The Super Cool phaser-basic App" />
+    <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274" />
+    
+    <!-- manifest -->
+    <link rel="manifest" href="manifest.json"/>
+    
+    <!-- PWA - apple specific -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
-    />
-    <link
-      id="favicon"
-      rel="icon"
-      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
-    />
-    <meta name="theme-color" content="#f2b200" />
+    <meta name="apple-mobile-web-app-title" content="An App" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274" />
+    
+    <!-- PWA - microsoft specific -->
+    <meta name="msapplication-TileColor" content="#0000FF" />
+    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274" />
 
     <!-- manifest -->
     <link rel="manifest" href="manifest.json" />
@@ -43,7 +44,30 @@
         position: fixed;
         width: 100vw;
         height: 100vh;
+        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
       }
+      #ui::-webkit-scrollbar{display:none;}
+      
+      #ui-toolbox {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Permet le défilement si nécessaire */
+        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+      }
+      #ui-toolbox::-webkit-scrollbar{display:none;}
+      
+      center{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+      red{color:red;}
+      white{color:white;}
+      blue{color:blue;}
+      green{color:green;}
+      yellow{color:yellow;}
+      orange{color:orange;}
+      purple{color:purple;}
+      
       #console-messages {
         position: fixed;
         width: 100vw;
@@ -74,12 +98,7 @@
           .register('/phaser-basic/sw.js', { scope: '/phaser-basic/' })
           .then(function (registration) {
             console.log("+-> (1) 😍 Service Worker registered", registration);
-          /*
-            if (registration.waiting) {
-              // Si le service worker est en attente, rechargez la page
-              window.location.reload();
-            }
-            */
+
             // Écouter les mises à jour du service worker
             registration.addEventListener("updatefound", function () {
               let newWorker = registration.installing;
@@ -118,9 +137,12 @@
       }
     </script>
   </head>
+  
   <body>
-    <div id="ui"></div>
-    <div id="console-messages">HELLO</div>
+    <div id="ui">
+      <div id="ui-toolbox"></div>
+    </div>
+    <div id="console-messages"><h1><orange>LOG</orange></h1></div>
     <script type="module" src="app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {

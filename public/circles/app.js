@@ -3,7 +3,7 @@
 // 🤩 CIRCLES with CANVAS
 //
 
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
+import {addDiv,clear, print} from "https://qwark.glitch.me/toolbox.js"
 
 print("<center><h1><orange>Circles ")
 
@@ -12,7 +12,7 @@ const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 800;
 canvas.height = 600;
-document.body.appendChild(canvas);
+document.getElementById('ui').appendChild(canvas);
 
 // Fonction pour générer une couleur aléatoire
 function randomColor() {

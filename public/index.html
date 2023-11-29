@@ -136,6 +136,26 @@
       #ui::-webkit-scrollbar {
         display: none;
       }
+      
+      #ui-toolbox {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Permet le défilement si nécessaire */
+        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+      }
+      #ui-toolbox::-webkit-scrollbar{display:none;}
+      
+      center{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+      red{color:red;}
+      white{color:white;}
+      blue{color:blue;}
+      green{color:green;}
+      yellow{color:yellow;}
+      orange{color:orange;}
+      purple{color:purple;}
+      
       button {
         display:block;
         margin: 0px;
@@ -207,9 +227,8 @@ print('😎')
     </div>  
       
     <div id="ui">
-      press [run] to see your code live ! 
+      xxx
     </div>
-    
     
     <div id="settings">
       <input type="text" id="appName" placeholder="Nom de l'App" />
@@ -286,11 +305,19 @@ print('😎')
       // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
       //   -> RESET
       function resetUI() {
-        let ui = document.getElementById('ui');
-        removeChildren(ui)
-        ui.style.overflowY = '';
-        ui.style.height = '';
+          let ui = document.getElementById('ui');
+          removeChildren(ui); // Supprime les enfants actuels de 'ui'
+          ui.style.overflowY = '';
+          ui.style.height = '';
+
+          // Créer une nouvelle div
+          let uiToolbox = document.createElement('div');
+          uiToolbox.id = 'ui-toolbox'; // Assigner l'ID 'ui-toolbox'
+
+          // Ajouter la nouvelle div à 'ui'
+          ui.appendChild(uiToolbox);
       }
+
       //   -> WARNING : THIS WILL RESET ALLLL TIMERS !!!!!!
       function resetTimers() {
         let maxId = setTimeout(function () {}, 0);
@@ -416,13 +443,56 @@ print('😎')
               body {
                 font-family: monospace;
                 background-color: black;
-                color: #20FF20;
-                margin: 0%;
-                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+                color: #20ff20;
+                margin: 0px;
+                padding: 0px;
+                /*padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);*/
+                width: 100vw;
+                height: 100vh;
+
+              }
+              #ui {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+                -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+              }
+              #ui::-webkit-scrollbar{display:none;}
+
+              #ui-toolbox {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                overflow: auto; /* Permet le défilement si nécessaire */
+                scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+                -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+              }
+              #ui-toolbox::-webkit-scrollbar{display:none;}
+
+              center{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+              red{color:red;}
+              white{color:white;}
+              blue{color:blue;}
+              green{color:green;}
+              yellow{color:yellow;}
+              orange{color:orange;}
+              purple{color:purple;}
+
+              #console-messages {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
               }
             </style>
+
           </head>
+
           <body>
+            <div id="ui">
+              <div id="ui-toolbox"></div>
+            </div>
+            <div id="console-messages"><h1><orange>LOG</orange></h1></div>
             <script type="module">` + code + `</` + `script>
           </body>
         </html>

@@ -100,7 +100,7 @@ PlayPhaser( ()=>  {
 
   const config = {
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'ui',
     width: 800,
     height: 600,
     scene: Example,

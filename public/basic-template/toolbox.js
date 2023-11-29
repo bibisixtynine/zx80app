@@ -1,10 +1,11 @@
-export {clear,print,printf,input,Button}
+export {clear,print,printf,input,Button,addDiv}
 
 
 ////////////////////////////////
 // Ma Première Boîte à Outils //
 ////////////////////////////////
-                              
+
+
 function Button(label, onClickFunction) {
     let button = document.createElement('button');
     button.style.border = '2px solid #20FF20';
@@ -17,7 +18,7 @@ function Button(label, onClickFunction) {
 }
 
 function input(text,fct) {
-  const id=Date.now().toString()
+  const id = Date.now().toString()
   printf(text+ '<input id="'+id+'"placeholder="Enter some text" name="name" />')
   const e = document.getElementById(id)
   e.addEventListener('change',(event)=>{
@@ -25,54 +26,27 @@ function input(text,fct) {
   })
 }
 
-function getUI() {
-  const ui = document.getElementById('ui')
-  if (!ui) {
-    const div = document.createElement('div')
-    div.id = 'ui'
-    document.body.appendChild(div)
-    _initUI(div)
-  }
-  return document.getElementById('ui')
-} 
-
-function _initUI(ui) {
-  ui.innerHTML = ''
-  ui.innerHTML = '<style>::-webkit-scrollbar{display:none;} center{position:fixed; left:50%; top:50%; transform:translate(-50%,-50%)} red{color:red} white{color:white} blue{color:blue} green{color:green} yellow{color:yellow} orange{color:orange} purple{color:purple}</style>'
-  ui.style.fontFamily = 'monospace'
-  ui.style.fontSize = '20px'
-  ui.style.position = 'fixed'
-  ui.style.top = '0px'
-  ui.style.left = '0px'
-  ui.style.color = '#20FF20';
-  ui.style.backgroundColor = 'rgba(0,0,0,0.5)'
-  ui.style.width = '100%'
-  ui.style.height = '100%'
-  ui.style.overflow = 'scroll'
-  ui.style.whiteSpace = 'normal'
-  ui.style.overflowWrap = 'break-word'
-  ui.style.wordWrap = 'break-word'
-  ui.style.textAlign = 'center'
-  ui.style.borderRadius = '25px'
-  ui.style.margin = '0px'
-  ui.style.padding = '0px'
-  return ui
-}
-
 function clear() {
-  const ui = getUI('ui')
+  const ui = document.getElementById('ui-toolbox')
+
   ui.innerHTML = ''
-  ui.innerHTML = '<style>::-webkit-scrollbar{display:none;} center{position:fixed; left:50%; top:50%; transform:translate(-50%,-50%)} red{color:red} white{color:white} blue{color:blue} green{color:green} yellow{color:yellow} orange{color:orange} purple{color:purple}</style>'
 }
   
 function print(...args) {
+  const ui = document.getElementById('ui-toolbox')
+
   let html = args.join(''); // Concatène tous les arguments en les séparant par un espace
-  const ui = getUI('ui')
   ui.insertAdjacentHTML('beforeend', html);
 }
 
 function printf(...args) {
+  const ui = document.getElementById('ui-toolbox')
+
   let html = args.join(''); // Concatène tous les arguments en les séparant par un espace
-  const ui = getUI('ui')
   ui.insertAdjacentHTML('beforeend', html+"<br>");
+}
+
+function addDiv(...args) {
+  let html = args.join(''); // Concatène tous les arguments en les séparant par un espace
+  document.getElementById('ui').insertAdjacentHTML('beforeend', html);
 }

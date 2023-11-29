@@ -83,8 +83,10 @@ class X3d {
       constructor() {
           // Initialisation de l'application PlayCanvas
           print('<canvas id="application"></canvas>')
-          const canvas = document.createElement('canvas');
-          document.body.appendChild(canvas);
+          const canvas = document.getElementById('application')
+          //const canvas = document.createElement('canvas');
+          //document.body.appendChild(canvas);
+          
           this.app = new pc.Application(canvas, {});
           this.app.start();
           this.app.systems.rigidbody.setGravity(0, -9.8, 0);

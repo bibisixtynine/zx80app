@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>basic-template</title>
-    <meta name="application-name" content="basic-template" />
-    <meta name="description" content="The Super Cool basic-template App" />
+    <title>An App</title>
+    <meta name="application-name" content="An App" />
+    <meta name="description" content="The Super Cool Phaser App" />
     <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
@@ -95,7 +95,7 @@
       window.messageLog = ['HELLO','HOW ARE YOU']
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register('/basic-template/sw.js', { scope: '/basic-template/' })
+          .register('/phaser-basic/sw.js', { scope: '/phaser-basic/' })
           .then(function (registration) {
             console.log("+-> (1) 😍 Service Worker registered", registration);
 
@@ -137,7 +137,6 @@
       }
     </script>
   </head>
-  
   <body>
     <div id="ui">
       <div id="ui-toolbox"></div>
