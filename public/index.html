@@ -30,6 +30,8 @@
     <!-- https:// -->
     <!-- if not running in localhost or file, assure running https -->
     <script>
+      window.debug = false;
+
       if (window.location.protocol == "https:") {
         console.log("🔒10 Running in https");
       } else if (
@@ -95,38 +97,28 @@
       }
       textarea {
         font-family: monospace;
-        display: block;
-        width:90%;
-        height:30vh;
-        margin: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        padding:10px;
-        border: 2px solid #20FF20;
-        border-radius: 20px;
-        background-color: #001000;
-        color: #20FF20;
-        overflow: auto; /* Permet le défilement si nécessaire */
-        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+        width: 90vw;
+        height: 90vh;
+    background-color: #001000;
+    color: #20FF20;
+    overflow: auto; /* Permet le défilement si nécessaire */
+    white-space: pre; /* Empêche le retour à la ligne automatique */
+    scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+    -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
 
-        /* Pour les navigateurs basés sur WebKit comme Chrome, Safari */
-      }
-      textarea::-webkit-scrollbar {
-          display: none;
-      }
+    /* Pour masquer les barres de défilement dans WebKit (Chrome, Safari) */
+}
+textarea::-webkit-scrollbar {
+    display: none;
+}
       #ui {
         position: relative;
         font-family: monospace;
         width:90%;
-        height:30vh;
-        margin: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        padding:10px;
-        border: 2px solid #20FF20;
-        border-radius: 20px;
-        background-color: #001000;
+        height:90vh;
+        margin: 0px;
+        padding:0px;
+        background-color: black;
         color: #20FF20;
         overflow: auto; /* Permet le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
@@ -227,7 +219,7 @@ print('😎')
     </div>  
       
     <div id="ui">
-      xxx
+      press run to see your code 😋
     </div>
     
     <div id="settings">
@@ -238,8 +230,6 @@ print('😎')
     </div>
     
     <div id="console-messages">
-      MESSAGES CONSOLE :
-      <!-- Les messages de la console seront affichés ici -->
     </div>
     
    
@@ -251,7 +241,7 @@ print('😎')
             navigator.serviceWorker.addEventListener("message", (event) => {
               const message = event.data;
               if (message.type === "console-log") {
-                displayConsoleMessage(message.text);
+                      if (window.debug) displayConsoleMessage(message.text);
               }
             });
             // Envoie un message "ready" au service worker :
@@ -492,7 +482,7 @@ print('😎')
             <div id="ui">
               <div id="ui-toolbox"></div>
             </div>
-            <div id="console-messages"><h1><orange>LOG</orange></h1></div>
+            <div id="console-messages"></div>
             <script type="module">` + code + `</` + `script>
           </body>
         </html>

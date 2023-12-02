@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>phaser-basic</title>
-    <meta name="application-name" content="phaser-basic" />
-    <meta name="description" content="The Super Cool phaser-basic App" />
+    <title>Clock-red</title>
+    <meta name="application-name" content="Clock-red" />
+    <meta name="description" content="The Super Cool Clock-red App" />
     <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
@@ -98,7 +98,7 @@
       window.messageLog = ['HELLO','HOW ARE YOU']
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register('/phaser-basic/sw.js', { scope: '/phaser-basic/' })
+          .register('/Clock-red/sw.js', { scope: '/Clock-red/' })
           .then(function (registration) {
             console.log("+-> (1) 😍 Service Worker registered", registration);
 

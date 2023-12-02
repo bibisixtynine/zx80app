@@ -82,7 +82,7 @@ function main() {
 class X3d {
       constructor() {
           // Initialisation de l'application PlayCanvas
-          print('<canvas id="application"></canvas>')
+          print('<canvas id="application" style="width:100vw; height:100vh"></canvas>')
           const canvas = document.getElementById('application')
           //const canvas = document.createElement('canvas');
           //document.body.appendChild(canvas);
