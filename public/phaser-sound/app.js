@@ -1,18 +1,9 @@
-/////////////////////
-// Ma Première App //
-/////////////////////
-
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
- 
 //////////////////////////
 //
 // 🤩 PHASER-SOUND
 //
 
-//print('👀<center><h1><orange>Hellooo<yellow> World!</h1>')
-
-
-
+import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 
 function PlayPhaser(gameFunction) {
   const script = document.createElement('script');
@@ -20,7 +11,6 @@ function PlayPhaser(gameFunction) {
   script.onload = gameFunction;
   document.head.appendChild(script);
 }
-
 
 PlayPhaser( ()=>  {
   class Example extends Phaser.Scene

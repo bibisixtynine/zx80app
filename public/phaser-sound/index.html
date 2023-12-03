@@ -75,6 +75,9 @@
       }
     </style>
     <script>
+      window.debug = false;
+      
+      
       console.log("✨🚀 Qwark V10 running");
       if (window.location.protocol == "https:") {
         console.log("🔒10 Running in https");
@@ -142,7 +145,7 @@
     <div id="ui">
       <div id="ui-toolbox"></div>
     </div>
-    <div id="console-messages"><h1><orange>LOG</orange></h1></div>
+    <div id="console-messages"></div>
     <script type="module" src="app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -151,7 +154,7 @@
             navigator.serviceWorker.addEventListener("message", (event) => {
               const message = event.data;
               if (message.type === "console-log") {
-                displayConsoleMessage(message.text);
+                if (window.debug) displayConsoleMessage(message.text);
               }
             });
             // Envoie un message "ready" au service worker :

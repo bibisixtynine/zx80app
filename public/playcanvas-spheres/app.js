@@ -1,9 +1,10 @@
-import {clear,print} from "./toolbox.js"
 
 ///////////////////////////////////////////////////
 //
-// 🌟 SPHERES 3D avec Playcanvas 🌟
+// 🌟 PLAYCANVAS-SPHERES
 //
+
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
 // 🌐 Importation des librairies PlayCanvas et Ammo  
 asyncImport('https://unpkg.com/ammo.js@0.0.10/ammo.js', main)

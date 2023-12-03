@@ -1,8 +1,8 @@
 ///////////////////////
-// The Digital Clock //
+// The Digital RED Clock //
 ///////////////////////
 
-import {clear, print} from './toolbox.js'
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
 setInterval( ()=> {
   let maintenant = new Date()

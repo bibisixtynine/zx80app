@@ -1,6 +1,6 @@
 ////////////////////
 //                //
-// 🤩 SPRITES 1.0 //
+// 🤩 PHASER-SPRITES /
 //                //
 ////////////////////
 
@@ -10,7 +10,7 @@ import {addDiv,clear, print} from "https://qwark.glitch.me/toolbox.js"
 
 // 2) Message d'accueuil
 print(
-  "<center><h1><orange>👀<br><yellow>Sprites 1.0 loading 😁</h1>"
+  "<center><h1><orange>👀<br><yellow>Sprites 2.0 loading 😁</h1>"
 )
 
 // 3) Run !

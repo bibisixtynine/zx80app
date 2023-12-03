@@ -1,13 +1,12 @@
-import {clear,print,printf} from "./toolbox.js"
-
 //////////////////////////
 //
-// 🎨 PAINTER APP 1.0
+// 🎨 PLAYCANVAS-DYNAMIQUE-TEXTURE
 //
 
-clear()
+import { clear, print, addDiv, printf } from "https://qwark.glitch.me/toolbox.js";
 import "https://code.playcanvas.com/playcanvas-stable.min.js"
 
+clear()
 print('<orange>the <yellow>Painter App<orange> 1.0')
 print('<canvas id="application"></canvas>')
 
