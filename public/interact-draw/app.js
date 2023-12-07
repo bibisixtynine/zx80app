@@ -1,7 +1,8 @@
-//////////////////////////
-//
-// 👾 INTERACT-DRAW
-//
+//////////////////////
+//                  //
+// 👾 INTERACT-DRAW //
+//                  //
+//////////////////////
 
 import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 

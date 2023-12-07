@@ -209,6 +209,7 @@
         border-radius: 10px;
         background-color: #001000;
         color: #20ff20;
+        padding: 5px;
       }
       #appName,
       #appImage,
@@ -216,6 +217,10 @@
       #loadApp,
       #appList {
         display: block;
+        position: fixed;
+        z-index: 1000;
+        left: 50%; /* Centre horizontalement */
+        transform: translateX(-50%);
         margin: 5px auto;
         padding: 5px;
         border: 2px solid #20ff20;
@@ -241,7 +246,8 @@
         padding: 8px;
       }
       .cm-editor .cm-content {
-        font-size: 10px; /* or whatever size you prefer */
+        font-size: 8px; /* or whatever size you prefer */
+        background-color: #141414; /* Couleur de fond sombre */
       }
     </style>
   </head>
@@ -268,6 +274,20 @@
       style="position: fixed; bottom: 10px; right: 10px; z-index: 1000"
     >
       Save
+    </button>
+
+    <!-- Boutons pour changer la taille de la police -->
+    <button
+      id="increaseFontSize"
+      style="position: fixed; top: 20px; right: 10px; z-index: 1000"
+    >
+      +1px
+    </button>
+    <button
+      id="decreaseFontSize"
+      style="position: fixed; top: 20px; left: 10px; z-index: 1000"
+    >
+      -1px
     </button>
 
     <div id="console-messages"></div>
@@ -334,6 +354,39 @@ print('😎')`,
         options
       );
       view.setState(initialState);
+      
+      document
+        .getElementById("increaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(1);
+        });
+
+      document
+        .getElementById("decreaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(-1);
+        });
+
+      function changeFontSize(delta) {
+        const editorElement = document.querySelector(".cm-editor .cm-content");
+        const currentSize = parseInt(
+          window.getComputedStyle(editorElement).fontSize
+        );
+        const newSize = currentSize + delta;
+        editorElement.style.fontSize = `${newSize}px`;
+        
+        // Enregistrer la nouvelle taille dans localStorage
+        localStorage.setItem("editorFontSize", newSize);
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Restituer la taille de la police de l'éditeur
+        const savedFontSize = localStorage.getItem("editorFontSize");
+        if (savedFontSize) {
+            const editorElement = document.querySelector(".cm-editor .cm-content");
+            editorElement.style.fontSize = `${savedFontSize}px`;
+        }
+        
+      });
 
       // Affichage de message dans le div console
       function displayConsoleMessage(text) {
@@ -395,6 +448,11 @@ print('😎')`,
                   insert: code,
                 },
               });
+              // Restaurer la position de défilement
+              const savedScrollPosition = localStorage.getItem('scrollPosition');
+              if (savedScrollPosition) {
+                  window.scrollTo(0, parseInt(savedScrollPosition));
+              }
               isAppAlreadyLoadedFromLocalStorage = true;
             } else {
               view.dispatch({
@@ -511,6 +569,12 @@ print('😎')`,
         document.getElementById("ui").style.display = "block";
         let code = view.state.doc.toString();
         localStorage.setItem("storedBeforeRun", code);
+        
+         // Enregistrer la position de défilement
+        const scrollPosition = window.scrollY;
+        localStorage.setItem('scrollPosition', scrollPosition);
+
+       
         evaluateCode(code);
         // Changements pour basculer en mode exécution
         isEditMode = false;

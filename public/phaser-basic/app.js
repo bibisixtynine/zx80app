@@ -1,14 +1,14 @@
-//////////////////////////
-//                      //
-// 🤩 PHASER-BASIC v12  //
-//                      //
-//////////////////////////
+/////////////////////////
+//                     //
+// 🤩 PHASER-BASIC v13 //
+//                     //
+/////////////////////////
 
 import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
 addDiv('<div id="gameContainer" style="width:100%; height:100%"></div>');
 print(
-  "<center><h1><orange>👀<br><yellow>Phaser loading 😁<br></yellow>...</h1>"
+  "<center><h1><orange>👀<br><yellow>Phaser 12 loading 😁<br></yellow>...</h1>"
 );
 
 
@@ -22,6 +22,7 @@ function initializeGame() {
   setTimeout(() => clear(), 5000);
 
   class Example extends Phaser.Scene {
+    // 1) Chargement des assets
     preload() {
       this.load.setBaseURL("https://labs.phaser.io");
       this.load.image("sky", "assets/skies/space3.png");
@@ -29,6 +30,7 @@ function initializeGame() {
       this.load.image("red", "assets/particles/red.png");
     }
 
+    // 2) Initialisation de la scène
     create() {
       this.background = this.add.image(0, 0, "sky").setOrigin(0.5, 0.5);
       this.resizeBackground();
@@ -135,8 +137,10 @@ function initializeGame() {
   function handleResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-      const gameContainer = document.getElementById("gameContainer");
-      game.scale.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
+//      const gameContainer = document.getElementById("gameContainer");
+//      game.scale.resize(window.innerWidth/3, window.innerHeight/3);
+      clear()
+      print(window.innerWidth, 'x', window.innerHeight)
       game.scene.scenes.forEach((scene) => {
         if (scene instanceof Example) {
           scene.resizeBackground();
@@ -150,5 +154,3 @@ function initializeGame() {
   window.addEventListener("resize", handleResize, false);
   window.addEventListener("orientationchange", handleResize, false);
 }
-
-    
