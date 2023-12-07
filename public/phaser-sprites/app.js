@@ -1,3 +1,6 @@
+
+
+
 ///////////////////////
 //                   //
 // 🤩 PHASER-SPRITES //
@@ -138,8 +141,8 @@ function main() {
     scale: {
       mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
       parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-      width: "100%",
-      height: "100%",
+      width: "200%", // hack for android 7 moto g5
+      height: "200%", // allow rotating works nicely
     },
   };
 
@@ -158,7 +161,7 @@ function run(mainFunction) {
   addDiv('<div id="gameContainer" style="width:100%; height:100%"></div>');
 
   // 🚀 Ajout synchrone de la lib Phaser
-syncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', mainFunction)
+  syncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', mainFunction)
 
   // 🌐 Fonction d'importation asynchrone
   function syncImport(url, func) {
