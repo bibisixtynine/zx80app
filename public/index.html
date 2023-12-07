@@ -249,6 +249,14 @@
         font-size: 8px; /* or whatever size you prefer */
         background-color: #141414; /* Couleur de fond sombre */
       }
+      .hidden {
+        display: none;
+      }
+
+      .visible {
+        display: block;
+      }
+
     </style>
   </head>
 
@@ -281,13 +289,13 @@
       id="increaseFontSize"
       style="position: fixed; top: 20px; right: 10px; z-index: 1000"
     >
-      +1px
+      zoom+
     </button>
     <button
       id="decreaseFontSize"
       style="position: fixed; top: 20px; left: 10px; z-index: 1000"
     >
-      -1px
+      zoom-
     </button>
 
     <div id="console-messages"></div>
@@ -542,7 +550,7 @@ print('😎')`,
           if (isEditMode) {
             // En mode édition, exécuter le code
             Exec("ui", "code");
-            this.textContent = "Retour";
+            this.textContent = "Back";
             isEditMode = false;
           } else {
             // En mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
@@ -562,6 +570,7 @@ print('😎')`,
 
             this.textContent = "Run";
             isEditMode = true;
+            toggleEditMode(true);
           }
         });
 
@@ -569,40 +578,33 @@ print('😎')`,
         document.getElementById("ui").style.display = "block";
         let code = view.state.doc.toString();
         localStorage.setItem("storedBeforeRun", code);
-        
-         // Enregistrer la position de défilement
+
+        // Enregistrer la position de défilement
         const scrollPosition = window.scrollY;
         localStorage.setItem('scrollPosition', scrollPosition);
 
-       
+        // Cacher les boutons en mode exécution
+        toggleEditMode(false);
+        
+        // run !
         evaluateCode(code);
-        // Changements pour basculer en mode exécution
-        isEditMode = false;
-        document.getElementById("actionButton").textContent = "Retour";
       }
-      /*
-      function Save() {
-          let code = document.getElementById('code').value;
-          let blob = new Blob([code], { type: "text/plain" });
-          let anchor = document.createElement("a");
-          anchor.download = "myCode.txt";
-          anchor.href = window.URL.createObjectURL(blob);
-          anchor.click();
+
+      function toggleEditMode(isEditMode) {
+        const elementsToHide = [document.getElementById("saveButton"),
+                                document.getElementById("increaseFontSize"),
+                                document.getElementById("decreaseFontSize"),
+                                document.getElementById("settings")];
+
+        if (isEditMode) {
+          elementsToHide.forEach(el => el.classList.remove("hidden"));
+          document.getElementById("actionButton").textContent = "Run";
+        } else {
+          elementsToHide.forEach(el => el.classList.add("hidden"));
+          document.getElementById("actionButton").textContent = "Back";
+        }
       }
-      function Load() {
-          let input = document.createElement('input');
-          input.type = 'file';
-          input.onchange = e => {
-              let file = e.target.files[0];
-              let reader = new FileReader();
-              reader.readAsText(file, 'UTF-8');
-              reader.onload = readerEvent => {
-                  let content = readerEvent.target.result;
-                  document.getElementById('code').value = content; 
-              }
-          }
-          input.click();
-      }*/
+
 
       function Save() {
         const settings = {
