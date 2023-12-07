@@ -1,18 +1,19 @@
-//////////////////////////
-//
-// 🤩 CIRCLES with CANVAS
-//
+////////////////
+//            //
+// 🤩 CIRCLES //
+//            //
+////////////////
 
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
+import { addDiv, clear, print } from "https://qwark.glitch.me/toolbox.js";
 
-print("<center><h1><orange>Circles ")
+print("<center><h1><orange>Circles ");
 
 // Étape 1: Initialisation du canvas et des cercles
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
-canvas.width = 800;
-canvas.height = 600;
-document.body.appendChild(canvas);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+document.getElementById('ui').appendChild(canvas);
 
 // Fonction pour générer une couleur aléatoire
 function randomColor() {
@@ -60,9 +61,17 @@ function updateCircles() {
 
   drawCircles();
 }
- 
-// Étape 3: Gestion des clics
-canvas.addEventListener('click', function(event) {
+
+// Fonction pour repositionner les cercles en fonction des nouvelles dimensions du canvas
+function repositionCircles() {
+  circles.forEach(circle => {
+    circle.x = Math.random() * canvas.width;
+    circle.y = Math.random() * canvas.height;
+  });
+}
+
+// Gestion des clics
+canvas.addEventListener('click', function (event) {
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
@@ -77,6 +86,20 @@ canvas.addEventListener('click', function(event) {
   });
 });
 
+// Gestion du redimensionnement de la fenêtre
+window.addEventListener('resize', function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  repositionCircles();
+});
+
+// Gestion de la rotation de l'écran
+window.addEventListener('orientationchange', function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  repositionCircles();
+});
+
 // Étape 4: Boucle d'animation
 function animate() {
   requestAnimationFrame(animate);
@@ -85,11 +108,5 @@ function animate() {
 
 // Démarrage de l'animation
 animate();
-
-
-
-
-
-
 
 

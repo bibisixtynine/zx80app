@@ -1,9 +1,9 @@
 /////////////////////
-// Ma Première App //
+// BASIC TEMPLATE  //
 /////////////////////
 
-import {clear, print} from './toolbox.js'
- 
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
 clear()
 
 print('<h1>😁 hello ! </h1><br>')

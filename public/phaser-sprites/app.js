@@ -1,35 +1,37 @@
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
+///////////////////////
+//                   //
+// 🤩 PHASER-SPRITES //
+//                   //
+///////////////////////
 
-//////////////////////////
-//
-// 🤩 PHASER
-//
 
+// 1) Ajout de la boîte à outils
+import {addDiv,clear, print} from "https://qwark.glitch.me/toolbox.js"
 
-// 🚀 Import asynchrone de Phaser
-asyncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', main)
+// 2) Message d'accueuil
+print(
+  "<center><h1><orange>👀<br><yellow>Sprites 2.0 loading 😁</h1>"
+)
 
-// 🌐 Fonction d'importation asynchrone
-function asyncImport(url, func) {
-  const script = document.createElement('script');
-  script.src = url;
-  script.onload = func;
-  document.head.appendChild(script);
-}
+// 3) Run !
+run(main)
 
-// 🎮 Fonction principale
+// 4) Fonction principale
 function main() {
-    let blitter;
-    let gravity = 0.5;
-    let idx = 1;
+    // efface le message d'accueil
+    setTimeout(() => clear(), 5000)
 
-    // 🌟 Classe principale de l'exemple Phaser
+    let blitter
+    let gravity = 0.5
+    let idx = 1
+
+    // 🌟 EXAMPLE
     class Example extends Phaser.Scene {
         constructor () {
             super();
         }
 
-        // 📦 Pré-chargement des assets
+        // 1) PRELOAD 📦 Pré-chargement des assets
         preload () {
             this.load.setBaseURL('https://labs.phaser.io');
             this.load.atlas('atlas', 'assets/tests/fruit/veg.png', 'assets/tests/fruit/veg.json');
@@ -37,7 +39,7 @@ function main() {
             this.iter = 0;
         }
 
-        // 🚀 Lancement des objets
+        // 2) 🚀 Lancement des objets
         launch () {
             let frame = 'veg01';
             idx++;
@@ -59,10 +61,12 @@ function main() {
             bob.data.bounce = 0.8 + (Math.random() * 0.3);
         }
 
-        // 🔨 Création des objets et de la scène
+        // 3) 🔨 Création des objets et de la scène
         create () {
+            let digitY = gameContainer.offsetHeight - 50
+            
             for (var i = 0; i < 7; i++) {
-                this.numbers.push(this.add.image(32 + i * 50, 742, 'atlas', '0'));
+                this.numbers.push(this.add.image(32 + i * 25, digitY, 'atlas', '0').setScale(0.5).setDepth(1));
             }
 
             blitter = this.add.blitter(0, 0, 'atlas');
@@ -74,7 +78,7 @@ function main() {
             this.updateDigits();
         }
 
-        // 🔄 Mise à jour de la scène à chaque frame
+        // 4) 🔄 Mise à jour de la scène à chaque frame
         update () {
             if (this.input.activePointer.isDown) {
                 for (var i = 0; i < 250; ++i) {
@@ -84,6 +88,9 @@ function main() {
                 this.updateDigits();
             }
 
+            let maxWidth = gameContainer.offsetWidth
+            let maxHeight = gameContainer.offsetHeight
+
             for (var index = 0, length = blitter.children.list.length; index < length; ++index) {
                 var bob = blitter.children.list[index];
 
@@ -92,22 +99,22 @@ function main() {
                 bob.y += bob.data.vy;
                 bob.x += bob.data.vx;
 
-                if (bob.x > 1024) {
-                    bob.x = 1024;
+                if (bob.x > maxWidth) {
+                    bob.x = maxWidth;
                     bob.data.vx *= -bob.data.bounce;
                 } else if (bob.x < 0) {
                     bob.x = 0;
                     bob.data.vx *= -bob.data.bounce;
                 }
 
-                if (bob.y > 684) {
-                    bob.y = 684;
+                if (bob.y > maxHeight) {
+                    bob.y = maxHeight;
                     bob.data.vy *= -bob.data.bounce;
                 }
             }
         }
 
-        // 🎲 Mise à jour des chiffres à l'écran
+        // 5) 🎲 Mise à jour des chiffres à l'écran
         updateDigits () {
             const len = Phaser.Utils.String.Pad(blitter.children.list.length.toString(), 7, '0', 1);
 
@@ -117,13 +124,47 @@ function main() {
         }
     }
 
-    // 📐 Configuration de Phaser
-    const config = {
-        type: Phaser.WEBGL,
-        parent: 'phaser-example',
-        scene: Example
-    };
-   
+  const config = {
+    type: Phaser.AUTO,
+    width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
+    height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
+    scene: Example,
+    physics: {
+      default: "arcade",
+      arcade: {
+        gravity: { y: 200 },
+      },
+    },
+    scale: {
+      mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
+      parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
+      width: "100%",
+      height: "100%",
+    },
+  };
+
+
+  
     // 🕹️ Création du jeu
     const game = new Phaser.Game(config);
+}
+
+
+
+// Code de run
+
+function run(mainFunction) {
+  // création espace de dessin phaser
+  addDiv('<div id="gameContainer" style="width:100%; height:100%"></div>');
+
+  // 🚀 Ajout synchrone de la lib Phaser
+syncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', mainFunction)
+
+  // 🌐 Fonction d'importation asynchrone
+  function syncImport(url, func) {
+    const script = document.createElement('script');
+    script.src = url;
+    script.onload = func;
+    document.head.appendChild(script);
+  }
 }

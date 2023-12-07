@@ -1,9 +1,10 @@
-import {clear,print} from "./toolbox.js"
 
 ///////////////////////////////////////////////////
 //
-// 🌟 SPHERES 3D avec Playcanvas 🌟
+// 🌟 PLAYCANVAS-SPHERES
 //
+
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
 // 🌐 Importation des librairies PlayCanvas et Ammo  
 asyncImport('https://unpkg.com/ammo.js@0.0.10/ammo.js', main)
@@ -82,9 +83,11 @@ function main() {
 class X3d {
       constructor() {
           // Initialisation de l'application PlayCanvas
-          print('<canvas id="application"></canvas>')
-          const canvas = document.createElement('canvas');
-          document.body.appendChild(canvas);
+          print('<canvas id="application" style="width:100vw; height:100vh"></canvas>')
+          const canvas = document.getElementById('application')
+          //const canvas = document.createElement('canvas');
+          //document.body.appendChild(canvas);
+          
           this.app = new pc.Application(canvas, {});
           this.app.start();
           this.app.systems.rigidbody.setGravity(0, -9.8, 0);

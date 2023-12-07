@@ -1,34 +1,17 @@
-import {clear,print,printf} from "./toolbox.js"
+//////////////////////
+//                  //
+// 👾 INTERACT-DRAW //
+//                  //
+//////////////////////
 
-/////////////////////////////////////////////////////////////
-//
-// 🤖 README FIRST
-//
-//  Use chrome brower debug window for debugging (only on desktop 🥲)
-//    . Press option+command+i on chrome osx,
-//    . Use the 'console' tab to see the errors message while you
-//      are typing code,
-//    . Add 'debugger' instruction (without brackets) to add a breakpoint
-//      anywhere in your code in this page,
-//    . Each time you type a character... the app auto relaunch.
-//
-//  ✅ Done !
-//
-
-//////////////////////////
-//
-// 👾 PIXEL APP 1.0
-//
-
-// some printings
-print('<orange>the <yellow>Pixel App<orange> 1.0<br>')
-
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
 // add a drawing canvas for the pixel app !
-printf('<canvas style="border: solid 2px orange; border-radius: 15px; touch-action:none; width:80%" class="rainbow-pixel-canvas"></canvas>')
+addDiv('<canvas style="position: fixed; border:none; touch-action:none; width 100vw; height:100vh;" class="rainbow-pixel-canvas"></canvas>')
 
-// some more printings
-
+// some printings
+print('<center><h1><orange>the <yellow>Pixel App<orange> 1.0<br>')
+setTimeout(() => clear(), 5000);
 
 /////////////////////////////////////////////////////////////
 //

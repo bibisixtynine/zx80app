@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8" />
 
     <title>The Super Cool Computer</title>
     <meta name="application-name" content="Qwark" />
     <meta name="description" content="Qwark Web Computer" />
-    <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)">
-    <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
-    
+    <meta
+      name="viewport"
+      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="theme-color"
+      content="#378844"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#378844"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
+    />
+
     <!-- manifest -->
-    <link rel="manifest" href="manifest.json"/>
-    
+    <link rel="manifest" href="manifest.json" />
+
     <!-- PWA - apple specific -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Qwark" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
-    
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
+    />
+
     <!-- PWA - microsoft specific -->
     <meta name="msapplication-TileColor" content="#0000FF" />
-    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
+    <meta
+      name="msapplication-TileImage"
+      content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
+    />
 
-
-  
     <!-- https:// -->
     <!-- if not running in localhost or file, assure running https -->
     <script>
+      window.debug = false;
+
       if (window.location.protocol == "https:") {
         console.log("🔒10 Running in https");
       } else if (
@@ -43,98 +66,169 @@
         console.log("🛠️10 Running in localhost or file, not enforcing https");
       }
     </script>
-       
+
     <!-- service worker -->
     <script>
-      //if (location.protocol == "http:") location.protocol = "https:";
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register("sw.js")
-          .then((reg) =>
-            console.log("+-> (1) 😍10 Service Worker registered", reg)
-          )
-          .catch((err) =>
-            console.error("!!! (-) 🆘10 Service Worker **not** registered", err)
-          );
+          .register("/sw.js", { scope: "/" })
+          .then(function (registration) {
+            console.log("+-> (1) 😍 Service Worker registered", registration);
+
+            // Écouter les mises à jour du service worker
+            registration.addEventListener("updatefound", function () {
+              let newWorker = registration.installing;
+              newWorker.addEventListener("statechange", function () {
+                switch (newWorker.state) {
+                  case "installed":
+                    if (navigator.serviceWorker.controller) {
+                      console.log(
+                        "+-> (2) ✨ Nouvelle version du Service Worker disponible"
+                      );
+                      // Ici, vous pourriez notifier l'utilisateur ou rafraîchir automatiquement la page
+                    } else {
+                      console.log(
+                        "+-> (2) 🎉 Service Worker installé pour la première fois"
+                      );
+                    }
+                    break;
+
+                  case "redundant":
+                    console.error(
+                      "!!! (-) 🆘 Le nouveau Service Worker a été rejeté"
+                    );
+                    break;
+                }
+              });
+            });
+          })
+          .catch(function (error) {
+            console.error(
+              "!!! (-) 🆘 Service Worker registration failed",
+              error
+            );
+          });
       } else {
-        console.warn("!!! (-) 🆘10 Service Worker not supported in this browser");
+        console.warn("!!! (-) 🆘 Service Worker not supported in this browser");
       }
     </script>
-    
+
     <style>
       body {
         font-family: monospace;
         background-color: black;
-        color: #20FF20;
+        color: #20ff20;
         margin: 0%;
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
       div {
         margin: 0px;
         padding: 0px;
       }
-      textarea {
-        font-family: monospace;
-        display: block;
-        width:90%;
-        height:30vh;
-        margin: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        padding:10px;
-        border: 2px solid #20FF20;
-        border-radius: 20px;
-        background-color: #001000;
-        color: #20FF20;
-        overflow: auto; /* Permet le défilement si nécessaire */
-        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
 
-        /* Pour les navigateurs basés sur WebKit comme Chrome, Safari */
+      /* Set editor dimensions */
+      #editor {
+        height: 100%;
+        width: 100%;
       }
-      textarea::-webkit-scrollbar {
-          display: none;
+
+      /* Stretch editor to fit inside its containing div */
+      .cm-editor {
+        height: 100%;
+        width: 100%;
       }
+
       #ui {
-        position: relative;
+        position: fixed;
+        top: 0px;
+        left: 0px;
         font-family: monospace;
-        width:90%;
-        height:30vh;
-        margin: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        padding:10px;
-        border: 2px solid #20FF20;
-        border-radius: 20px;
-        background-color: #001000;
-        color: #20FF20;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        margin: 0px;
+        padding: 0px;
+        background-color: black;
+        color: #20ff20;
         overflow: auto; /* Permet le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
       }
+
       #ui::-webkit-scrollbar {
         display: none;
       }
+
+      #ui-toolbox {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Permet le défilement si nécessaire */
+        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+      }
+      #ui-toolbox::-webkit-scrollbar {
+        display: none;
+      }
+
+      center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      red {
+        color: red;
+      }
+      white {
+        color: white;
+      }
+      blue {
+        color: blue;
+      }
+      green {
+        color: green;
+      }
+      yellow {
+        color: yellow;
+      }
+      orange {
+        color: orange;
+      }
+      purple {
+        color: purple;
+      }
+
       button {
-        display:block;
+        display: block;
         margin: 0px;
         margin-left: auto;
         margin-right: auto;
-        border: 2px solid #20FF20;
+        border: 2px solid #20ff20;
         border-radius: 10px;
         background-color: #001000;
-        color: #20FF20;
+        color: #20ff20;
+        padding: 5px;
       }
-      #appName, #appImage, #appDescription, #loadApp, #appList {
-        display:block;
+      #appName,
+      #appImage,
+      #appDescription,
+      #loadApp,
+      #appList {
+        display: block;
+        position: fixed;
+        z-index: 1000;
+        left: 50%; /* Centre horizontalement */
+        transform: translateX(-50%);
         margin: 5px auto;
         padding: 5px;
-        border: 2px solid #20FF20;
+        border: 2px solid #20ff20;
         border-radius: 10px;
         background-color: #001000;
-        color: #20FF20;
+        color: #20ff20;
       }
-      
+
       #toolbar {
         display: flex;
         justify-content: center; /* Centre les boutons horizontalement */
@@ -151,19 +245,100 @@
         margin: 5px;
         padding: 8px;
       }
+      .cm-editor .cm-content {
+        font-size: 8px; /* or whatever size you prefer */
+        background-color: #141414; /* Couleur de fond sombre */
+      }
     </style>
-    
   </head>
 
   <body>
-    <br>
-    <textarea  spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" id="code">
+    <div id="settings">
+      <select id="appList"></select>
+    </div>
+
+    <div id="editor"></div>
+
+    <div id="ui"></div>
+
+    <button
+      id="actionButton"
+      style="position: fixed; bottom: 10px; left: 10px; z-index: 1000"
+    >
+      Run
+    </button>
+
+    <button
+      id="saveButton"
+      onclick="Save()"
+      style="position: fixed; bottom: 10px; right: 10px; z-index: 1000"
+    >
+      Save
+    </button>
+
+    <!-- Boutons pour changer la taille de la police -->
+    <button
+      id="increaseFontSize"
+      style="position: fixed; top: 20px; right: 10px; z-index: 1000"
+    >
+      +1px
+    </button>
+    <button
+      id="decreaseFontSize"
+      style="position: fixed; top: 20px; left: 10px; z-index: 1000"
+    >
+      -1px
+    </button>
+
+    <div id="console-messages"></div>
+
+    <!-- CodeMirror 6 -->
+    <script src="cm6.bundle.min.js"></script>
+
+    <script>
+      //document.getElementById('backButton').addEventListener('click', function() {document.getElementById('ui').style.display = 'none' })
+
+      // Écoutez les messages provenant du service worker
+      document.addEventListener("DOMContentLoaded", () => {
+        navigator.serviceWorker.ready.then((registration) => {
+          // RECEPTION des messages du Service Worker :
+          navigator.serviceWorker.addEventListener("message", (event) => {
+            const message = event.data;
+            if (message.type === "console-log") {
+              if (window.debug) displayConsoleMessage(message.text);
+            }
+          });
+          // Envoie un message "ready" au service worker :
+          registration.active.postMessage({ type: "ready" });
+        });
+      });
+
+      let currentApp = { name: "", description: "", image: "", code: "" };
+      let isAppAlreadyLoadedFromLocalStorage = false;
+
+      /////////////////////////////
+      //
+      // editor (code mirror 6)
+      //
+      // Codemirror 6
+
+      const view = cm6.createEditorView(
+        undefined,
+        document.getElementById("editor")
+      );
+
+      let options = {
+        oneDark: true,
+      };
+
+      const initialState = cm6.createEditorState(
+        `
 //////////////////////////
-// Ma Première App V10💖 //
+// Ma Première App V12💖 //
 //////////////////////////
 
-import {clear, print} from './toolbox.js'
- 
+import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
 clear()
 
 print('<h1>😁 hello ! </h1><br>')
@@ -175,71 +350,150 @@ setInterval( ()=> {
   i++;
 }, 1000)
 
-print('😎')
-    </textarea>
-    
-    <div id="toolbar">    
-      <button onclick="Exec('ui','code')">run</button>
-      <button onclick="LoadApp()">load</button>
-      <button onclick="Save()">save</button>
-      <button onclick="Publish()">preview</button>
-    </div>  
+print('😎')`,
+        options
+      );
+      view.setState(initialState);
       
-    <div id="ui">
-      press [run] to see your code live ! 
-    </div>
-    
-    <div id="settings">
-      <input type="text" id="appName" placeholder="Nom de l'App" />
-      <input type="text" id="appImage" placeholder="Lien Image" />
-      <input type="text" id="appDescription" placeholder="Description de l'App"/>
-      <select id="appList"></select>
-    </div>
-    
-   
-    <script>
+      document
+        .getElementById("increaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(1);
+        });
+
+      document
+        .getElementById("decreaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(-1);
+        });
+
+      function changeFontSize(delta) {
+        const editorElement = document.querySelector(".cm-editor .cm-content");
+        const currentSize = parseInt(
+          window.getComputedStyle(editorElement).fontSize
+        );
+        const newSize = currentSize + delta;
+        editorElement.style.fontSize = `${newSize}px`;
+        
+        // Enregistrer la nouvelle taille dans localStorage
+        localStorage.setItem("editorFontSize", newSize);
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Restituer la taille de la police de l'éditeur
+        const savedFontSize = localStorage.getItem("editorFontSize");
+        if (savedFontSize) {
+            const editorElement = document.querySelector(".cm-editor .cm-content");
+            editorElement.style.fontSize = `${savedFontSize}px`;
+        }
+        
+      });
+
+      // Affichage de message dans le div console
+      function displayConsoleMessage(text) {
+        const consoleMessagesDiv = document.getElementById("console-messages");
+        const messageElement = document.createElement("div");
+        // Utilisez innerHTML au lieu de textContent
+        messageElement.innerHTML = text.replace(/\n/g, "<br>");
+        consoleMessagesDiv.appendChild(messageElement);
+      }
+
       function LoadAppList() {
         //return
-        fetch('/listApps')
-          .then(response => response.json())
-          .then(apps => {
-            const appList = document.getElementById('appList');
-            appList.innerHTML = ''; // Nettoyer la liste avant de la remplir
-            apps.forEach(app => {
-              const option = document.createElement('option');
+        fetch("/listApps")
+          .then((response) => response.json())
+          .then((apps) => {
+            const appList = document.getElementById("appList");
+            appList.innerHTML = ""; // Nettoyer la liste avant de la remplir
+            apps.forEach((app) => {
+              const option = document.createElement("option");
               option.value = app;
               option.textContent = app;
               appList.appendChild(option);
             });
+            appList.addEventListener("change", function () {
+              LoadApp();
+              localStorage.setItem("lastEditedApp", appList.value); // Sauvegarder le nom de l'application sélectionnée
+            });
+            // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
+            const lastEditedApp = localStorage.getItem("lastEditedApp");
+            if (lastEditedApp) {
+              appList.value = lastEditedApp;
+              LoadApp(); // Charger l'application sélectionnée
+            }
           })
-          .catch(error => alert('Erreur lors du chargement de la liste: ' + error));
+          .catch((error) =>
+            alert("Erreur lors du chargement de la liste: " + error)
+          );
       }
 
       function LoadApp() {
-        const selectedApp = document.getElementById('appList').value;
+        const selectedApp = document.getElementById("appList").value;
         fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}`)
-          .then(response => response.json())
-          .then(appData => {
-            document.getElementById('code').value = appData.code;
+          .then((response) => response.json())
+          .then((appData) => {
+            //document.getElementById('code').value = appData.code;
+
+            //si le chargement de la page provient d'un retour de run, alors on charge le code dans le localStorage
+            // Créer un objet URLSearchParams à partir de la chaîne de requête actuelle
+            const urlParams = new URLSearchParams(window.location.search);
+            // Récupérer la valeur du paramètre 'param'
+            const monParam = urlParams.get("param");
+            console.log("##### param = ", monParam);
+            if (monParam && !isAppAlreadyLoadedFromLocalStorage) {
+              let code = localStorage.getItem("storedBeforeRun");
+              view.dispatch({
+                changes: {
+                  from: 0,
+                  to: view.state.doc.length,
+                  insert: code,
+                },
+              });
+              // Restaurer la position de défilement
+              const savedScrollPosition = localStorage.getItem('scrollPosition');
+              if (savedScrollPosition) {
+                  window.scrollTo(0, parseInt(savedScrollPosition));
+              }
+              isAppAlreadyLoadedFromLocalStorage = true;
+            } else {
+              view.dispatch({
+                changes: {
+                  from: 0,
+                  to: view.state.doc.length,
+                  insert: appData.code,
+                },
+              });
+            }
+            currentApp.name = appData.name;
             // Mettre à jour les champs de paramètres si nécessaire
-            document.getElementById('appName').value = appData.name;
-            document.getElementById('appImage').value = appData.image;
-            document.getElementById('appDescription').value = appData.description;
+            /*document.getElementById("appName").value = appData.name;
+            document.getElementById("appImage").value = appData.image;
+            document.getElementById("appDescription").value =
+              appData.description;*/
           })
-          .catch(error => alert("Erreur lors du chargement de l'app: " + error));
+          .catch((error) =>
+            alert("Erreur lors du chargement de l'app: " + error)
+          );
       }
 
       // Appelez LoadAppList au chargement de la page ou à un moment approprié
       window.onload = LoadAppList;
-      
+
       // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
       //   -> RESET
       function resetUI() {
-        let ui = document.getElementById('ui');
-        removeChildren(ui)
-        ui.style.overflowY = '';
-        ui.style.height = '';
+        let ui = document.getElementById("ui");
+        removeChildren(ui); // Supprime les enfants actuels de 'ui'
+        ui.style.overflowY = "";
+        ui.style.height = "";
+
+        // Créer une nouvelle div
+        let uiToolbox = document.createElement("div");
+        uiToolbox.id = "ui-toolbox"; // Assigner l'ID 'ui-toolbox'
+
+        // Ajouter la nouvelle div à 'ui'
+        ui.appendChild(uiToolbox);
       }
+
       //   -> WARNING : THIS WILL RESET ALLLL TIMERS !!!!!!
       function resetTimers() {
         let maxId = setTimeout(function () {}, 0);
@@ -252,7 +506,7 @@ print('😎')
       function removeChildren(node) {
         while (node.hasChildNodes()) {
           //node.removeEventListener()
-          node.removeChild(node.lastChild)
+          node.removeChild(node.lastChild);
         }
       }
       //    -> EVALUATE
@@ -261,7 +515,7 @@ print('😎')
         resetUI();
         resetTimers();
         //localStorage.setItem("mysupercomputer-code", code);
-        const scriptId = 'dynamic-module-script';
+        const scriptId = "dynamic-module-script";
 
         // Supprimer l'ancien script s'il existe
         const oldScript = document.getElementById(scriptId);
@@ -270,31 +524,61 @@ print('😎')
         }
 
         // Créer un nouveau script
-        const script = document.createElement('script');
-        script.type = 'module';
+        const script = document.createElement("script");
+        script.type = "module";
         script.id = scriptId;
         script.textContent = code;
 
         // Ajouter le nouveau script au body
         document.body.appendChild(script);
       };
-      
-      
-      function Exec(uiId,codeId) {
-        let code = document.getElementById(codeId).value;
-        evaluateCode(code)
-        /*
-        let ui = document.getElementById(uiId)
-        const iframe = document.createElement('iframe')
+
+      // Variable pour suivre le mode actuel
+      let isEditMode = true;
+
+      document
+        .getElementById("actionButton")
+        .addEventListener("click", function () {
+          if (isEditMode) {
+            // En mode édition, exécuter le code
+            Exec("ui", "code");
+            this.textContent = "Retour";
+            isEditMode = false;
+          } else {
+            // En mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
+
+            // Créez un objet URL à partir de l'URL actuelle
+            let url = new URL(window.location.href);
+            let params = new URLSearchParams(url.search);
+
+            // Vérifiez si le paramètre 'param' est déjà présent
+            if (!params.has("param")) {
+              params.set("param", "1"); // Ajoutez 'param=1' si ce n'est pas déjà le cas
+              url.search = params.toString(); // Mettez à jour la chaîne de requête
+            }
+
+            // Rechargez la page avec la nouvelle URL (si modifiée) ou l'URL actuelle
+            window.location.href = url.toString();
+
+            this.textContent = "Run";
+            isEditMode = true;
+          }
+        });
+
+      function Exec(uiId, codeId) {
+        document.getElementById("ui").style.display = "block";
+        let code = view.state.doc.toString();
+        localStorage.setItem("storedBeforeRun", code);
         
-        iframe.width = '100%'
-        iframe.height = '100%'
-        iframe.srcdoc = `<script>console.log("Origine de l\'iframe:", location.origin);</s` + `cript><script id="code" type="module">` + code + '</' + 'script>'
-        iframe.style.border = 'none'
-        iframe.style.padding = '0px'
-        iframe.style.margin = '0px'
-        ui.innerHTML = ''
-        ui.appendChild(iframe)*/
+         // Enregistrer la position de défilement
+        const scrollPosition = window.scrollY;
+        localStorage.setItem('scrollPosition', scrollPosition);
+
+       
+        evaluateCode(code);
+        // Changements pour basculer en mode exécution
+        isEditMode = false;
+        document.getElementById("actionButton").textContent = "Retour";
       }
       /*
       function Save() {
@@ -319,68 +603,36 @@ print('😎')
           }
           input.click();
       }*/
-      
+
       function Save() {
         const settings = {
-          name: document.getElementById('appName').value,
-          image: document.getElementById('appImage').value,
-          description: document.getElementById('appDescription').value,
-          code: document.getElementById('code').value
+          name: currentApp.name,
+          image: currentApp.image,
+          description: currentApp.description,
+          code: view.state.doc.toString(),
         };
-        fetch('/save', {
-          method: 'POST',
+        fetch("/save", {
+          method: "POST",
           body: JSON.stringify(settings),
           headers: {
-            'Content-Type': 'application/json'
-          }
+            "Content-Type": "application/json",
+          },
         })
-        .then(response => response.text())
-        .then(data => {alert(data); LoadAppList()})
-        .catch(error => alert('Erreur lors de la sauvegarde: ' + error));
+          .then((response) => response.text())
+          .then((data) => {
+            alert(data);
+            LoadAppList();
+            localStorage.setItem("lastEditedApp", currentApp.name); // Sauvegarder le nom de l'application sauvegardée
+          })
+          .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
       }
-      
 
       function Load() {
-        fetch('/load')
-        .then(response => response.text())
-        .then(data => document.getElementById('code').value = data)
-        .catch(error => alert('Erreur lors du chargement: ' + error));
+        fetch("/load")
+          .then((response) => response.text())
+          .then((data) => (document.getElementById("code").value = data))
+          .catch((error) => alert("Erreur lors du chargement: " + error));
       }
-      
-      function Publish() {
-        console.log('publish')
-        let code = document.getElementById('code').value;
-        let newWindow = window.open('', '_blank'); // Ouvre un nouvel onglet
-        newWindow.document.write(`
-        <html>
-          <head>
-            <title>Qwark10 Preview</title>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-            <meta name="theme-color" content="#f2b200" />
-            <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
-            <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555" />
-            <style>
-              body {
-                font-family: monospace;
-                background-color: black;
-                color: #20FF20;
-                margin: 0%;
-                padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-              }
-            </style>
-          </head>
-          <body>
-            <script type="module">` + code + `</` + `script>
-          </body>
-        </html>
-        `);
-        newWindow.document.close(); 
-      }
-
     </script>
   </body>
-
 </html>

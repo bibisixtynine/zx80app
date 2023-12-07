@@ -26,23 +26,54 @@ app.post('/save', async (req, res) => {
     
     const appDir = 'public/' + name
     
+    // 1) Création des fichiers app.json et app.js
     await fsPromises.mkdir(appDir, { recursive: true });
     await fsPromises.writeFile(appDir + '/app.json', JSON.stringify({ name, image, description }));
     await fsPromises.writeFile(appDir + '/app.js', code);
     
-    // Copier index_model.html dans le dossier de l'application sous le nom index.html
-    const modelPath = './index_model.html'; // Chemin vers index_model.html
-    const indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
-    await fsPromises.copyFile(modelPath, indexPath);
+    
+    // 2) Création du index.html
+    let modelPath,indexPath,modelContent
+    // Lire le contenu de index_model.html
+    modelPath = './index_model.html'; // Chemin vers index_model.html
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, name);
+    // Sauvegarder le contenu modifié dans index.html
+    indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+    
+    // 3) Création du manifest.json
+    // Lire le contenu de manifest_model.json
+    modelPath = './manifest_model.json'; // Chemin vers manifest_model.json
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, name);
+    // Sauvegarder le contenu modifié dans manifest.json
+    indexPath = appDir + '/manifest.json'; // Chemin où manifest.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+
+    // 4) Création du sw.js
+    // Lire le contenu de sw_model.js
+    modelPath = './sw_model.js'; // Chemin vers sw_model.js
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, name);
+    // Sauvegarder le contenu modifié dans sw.js
+    indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+
+    
+    
     
     // Copier toolbox.js dans le dossier de l'application sous le nom toolbox.js
     const modelPath2 = './public/toolbox.js'; // Chemin vers toolbox.js source
     const indexPath2 = appDir + '/toolbox.js'; // Chemin destination
     await fsPromises.copyFile(modelPath2, indexPath2);
     
-    res.send('Application sauvegardée avec succès');
+    res.send(`😎🚀 <${name}> sauvegardée avec succcccès`);
   } catch (error) {
-    res.status(500).send('Erreur lors de la sauvegarde de l\'application');
+    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}>`);
   }
 });
 
@@ -50,7 +81,7 @@ app.post('/save', async (req, res) => {
 app.get('/load', (req, res) => {
     fs.readFile('code.txt', 'utf8', (err, data) => {
         if (err) {
-            res.status(500).send('Erreur lors du chargement');
+            res.status(500).send(`😢🛑 Erreur lors du chargement`);
         } else {
             res.send(data);
         }
@@ -73,7 +104,7 @@ app.get('/listApps', async (req, res) => {
 
     res.json(dirs);
   } catch (error) {
-    res.status(500).send('Erreur lors de la liste des applications');
+    res.status(500).send(`😭🛑 Liste des App introuvable`);
   }
 });
 
@@ -87,7 +118,7 @@ app.get('/loadApp', async (req, res) => {
     const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
     res.json({ ...JSON.parse(appData), code: appCode });
   } catch (error) {
-    res.status(500).send('Erreur lors du chargement de l\'application');
+    res.status(500).send(`😭🛑 App introuvable`);
   }
 });
 
@@ -169,7 +200,7 @@ app.get('/store', async (req, res) => {
     res.send(html);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Erreur lors de la génération du store');
+    res.status(500).send(`😭🛑 Le Store est cassé`);
   }
 });
 

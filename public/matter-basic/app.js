@@ -1,7 +1,7 @@
 
 //////////////////////////
 //
-// 🤩 matter.js
+// 🤩 matter-basic v12
 //
 
 import {clear, print} from "https://qwark.glitch.me/toolbox.js"
@@ -30,7 +30,7 @@ function main() {
  
   // create a renderer
   var render = Render.create({
-      element: document.body,
+      element: document.getElementById('ui'),
       engine: engine
   });
  
