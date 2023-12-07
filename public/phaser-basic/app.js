@@ -1,3 +1,6 @@
+
+
+
 /////////////////////////
 //                     //
 // 🤩 PHASER-BASIC v13 //
@@ -120,8 +123,8 @@ function initializeGame() {
     scale: {
       mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
       parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-      width: "100%",
-      height: "100%",
+      width: "200%", // for android 7 moto g5
+      height: "200%", // idem
     },
   };
 
@@ -137,10 +140,10 @@ function initializeGame() {
   function handleResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-//      const gameContainer = document.getElementById("gameContainer");
-//      game.scale.resize(window.innerWidth/3, window.innerHeight/3);
       clear()
-      print(window.innerWidth, 'x', window.innerHeight)
+      //print(window.innerWidth, 'xxxx', window.innerHeight)
+      //game.scale.resize(window.innerWidth, window.innerHeight)
+
       game.scene.scenes.forEach((scene) => {
         if (scene instanceof Example) {
           scene.resizeBackground();

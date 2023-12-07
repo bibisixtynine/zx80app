@@ -1,7 +1,7 @@
 {
     "theme_color": "#f2b200",
     "background_color": "#000000",
-    "display": "standalone",
+    "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
     "name": "Qwark",
