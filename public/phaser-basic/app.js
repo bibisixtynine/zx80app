@@ -1,13 +1,14 @@
 
 
 
-/////////////////////////
-//                     //
-// 🤩 PHASER-BASIC v13 //
-//                     //
-/////////////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
+//////////////////
+// phaser-basic //
+//////////////////
+
+
+import { clear, print, addDiv } from "/toolbox.js";
 
 addDiv('<div id="gameContainer" style="width:100%; height:100%"></div>');
 print(

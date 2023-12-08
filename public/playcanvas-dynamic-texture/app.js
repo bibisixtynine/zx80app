@@ -1,9 +1,14 @@
-//////////////////////////
-//
-// 🎨 PLAYCANVAS-DYNAMIQUE-TEXTURE
-//
 
-import { clear, print, addDiv, printf } from "https://qwark.glitch.me/toolbox.js";
+
+
+
+
+////////////////////////////////
+// playcanvas-dynamic-texture //
+////////////////////////////////
+
+
+import { clear, print, addDiv, printf } from "/toolbox.js";
 import "https://code.playcanvas.com/playcanvas-stable.min.js"
 
 clear()

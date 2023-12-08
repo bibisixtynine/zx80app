@@ -1,20 +1,29 @@
-///////////////////////
-// clock v12 //
-///////////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
 
-setInterval( ()=> {
+
+
+
+///////////
+// Clock //
+///////////
+
+
+import { clear, print, addDiv } from "/toolbox.js";
+
+displayClock()
+setInterval( ()=> displayClock(), 1000)
+
+
+function displayClock() {
   let maintenant = new Date()
   let heures = maintenant.getHours().toString().padStart(2, '0')
   let minutes = maintenant.getMinutes().toString().padStart(2, '0')
   let secondes = maintenant.getSeconds().toString().padStart(2, '0')
   let horloge = `${heures}:${minutes}:${secondes}`
   clear()
-  print('<center><h1>',horloge,'<br><h3>',formaterDate(new Date()))
-}, 1000)
+  print('<center><h1>',horloge,'<br><h3>',formaterDate(new Date()))  
+}
 
- 
 function obtenirNumeroSemaine(date) {
     const premierJanvier = new Date(date.getFullYear(), 0, 1);
     const jours = Math.floor((date - premierJanvier) / (24 * 60 * 60 * 1000));

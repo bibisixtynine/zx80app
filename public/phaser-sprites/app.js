@@ -1,15 +1,15 @@
 
 
 
-///////////////////////
-//                   //
-// 🤩 PHASER-SPRITES //
-//                   //
-///////////////////////
+
+
+////////////////////
+// phaser-sprites //
+////////////////////
 
 
 // 1) Ajout de la boîte à outils
-import {addDiv,clear, print} from "https://qwark.glitch.me/toolbox.js"
+import {addDiv,clear, print} from "/toolbox.js"
 
 // 2) Message d'accueuil
 print(

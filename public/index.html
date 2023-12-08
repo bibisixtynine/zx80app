@@ -203,30 +203,32 @@
       button {
         display: block;
         margin: 0px;
-        margin-left: auto;
-        margin-right: auto;
+
         border: 2px solid #20ff20;
         border-radius: 10px;
         background-color: #001000;
         color: #20ff20;
+        
         padding: 5px;
       }
-      #appName,
-      #appImage,
-      #appDescription,
-      #loadApp,
+
       #appList {
         display: block;
-        position: fixed;
-        z-index: 1000;
-        left: 50%; /* Centre horizontalement */
-        transform: translateX(-50%);
-        margin: 5px auto;
-        padding: 5px;
+        margin: 0px;
+        
         border: 2px solid #20ff20;
         border-radius: 10px;
         background-color: #001000;
         color: #20ff20;
+        
+        position: fixed;
+        top: env(safe-area-inset-top);
+        
+        z-index: 1000;
+        
+        left: 50%; /* Centre horizontalement */
+        transform: translateX(-50%);
+        padding: 5px;
       }
 
       #toolbar {
@@ -261,17 +263,16 @@
   </head>
 
   <body>
-    <div id="settings">
-      <select id="appList"></select>
-    </div>
-
+   
+    <select id="appList"></select>
+  
     <div id="editor"></div>
 
     <div id="ui"></div>
 
     <button
       id="actionButton"
-      style="position: fixed; bottom: 10px; left: 10px; z-index: 1000"
+      style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000"
     >
       Run
     </button>
@@ -279,7 +280,7 @@
     <button
       id="saveButton"
       onclick="Save()"
-      style="position: fixed; bottom: 10px; right: 10px; z-index: 1000"
+      style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000"
     >
       Save
     </button>
@@ -287,15 +288,23 @@
     <!-- Boutons pour changer la taille de la police -->
     <button
       id="increaseFontSize"
-      style="position: fixed; top: 20px; right: 10px; z-index: 1000"
+      style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000"
     >
       zoom+
     </button>
     <button
       id="decreaseFontSize"
-      style="position: fixed; top: 20px; left: 10px; z-index: 1000"
+      style="position: fixed; top: env(safe-area-inset-top); left: 10px; z-index: 1000"
     >
       zoom-
+    </button>
+    
+    <button
+      id="usernameButton"
+      onclick="enterUsername()"
+      style="position: fixed; bottom: env(safe-area-inset-bottom); left: 50%; transform: translateX(-50%); z-index: 1000"
+    >
+      Enter Username
     </button>
 
     <div id="console-messages"></div>
@@ -472,11 +481,6 @@ print('😎')`,
               });
             }
             currentApp.name = appData.name;
-            // Mettre à jour les champs de paramètres si nécessaire
-            /*document.getElementById("appName").value = appData.name;
-            document.getElementById("appImage").value = appData.image;
-            document.getElementById("appDescription").value =
-              appData.description;*/
           })
           .catch((error) =>
             alert("Erreur lors du chargement de l'app: " + error)
@@ -484,7 +488,15 @@ print('😎')`,
       }
 
       // Appelez LoadAppList au chargement de la page ou à un moment approprié
-      window.onload = LoadAppList;
+      window.onload = function() {
+        // Reste du code onload
+        LoadAppList();
+
+        // Si un nom d'utilisateur est déjà enregistré, affichez-le
+        if (username) {
+          document.getElementById("usernameButton").textContent = `Username: ${username}`;
+        }
+      };
 
       // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
       //   -> RESET
@@ -510,6 +522,7 @@ print('😎')`,
           clearTimeout(i);
         }
       }
+      
       //   -> REMOVE
       function removeChildren(node) {
         while (node.hasChildNodes()) {
@@ -594,7 +607,9 @@ print('😎')`,
         const elementsToHide = [document.getElementById("saveButton"),
                                 document.getElementById("increaseFontSize"),
                                 document.getElementById("decreaseFontSize"),
-                                document.getElementById("settings")];
+                                document.getElementById("appList"),
+                                document.getElementById("usernameButton"),
+                               ];
 
         if (isEditMode) {
           elementsToHide.forEach(el => el.classList.remove("hidden"));
@@ -603,25 +618,26 @@ print('😎')`,
           elementsToHide.forEach(el => el.classList.add("hidden"));
           document.getElementById("actionButton").textContent = "Back";
         }
-        /*
-        if (document.body.requestFullscreen) {
-          document.body.requestFullscreen();
-        } else if (document.body.msRequestFullscreen) {
-          document.body.msRequestFullscreen();
-        } else if (document.body.mozRequestFullScreen) {
-          document.body.mozRequestFullScreen();
-        } else if (document.body.webkitRequestFullscreen) {
-          document.body.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-        }*/
       }
 
 
+      let username = localStorage.getItem("username") || "";
+
+      function enterUsername() {
+        username = prompt("Please enter your username:", username) || username;
+        if (username) {
+          localStorage.setItem("username", username);
+          document.getElementById("usernameButton").textContent = `Username: ${username}`;
+        }
+      }
+      
       function Save() {
         const settings = {
           name: currentApp.name,
           image: currentApp.image,
           description: currentApp.description,
           code: view.state.doc.toString(),
+          user: username
         };
         fetch("/save", {
           method: "POST",
@@ -639,12 +655,6 @@ print('😎')`,
           .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
       }
 
-      function Load() {
-        fetch("/load")
-          .then((response) => response.text())
-          .then((data) => (document.getElementById("code").value = data))
-          .catch((error) => alert("Erreur lors du chargement: " + error));
-      }
     </script>
   </body>
 </html>
