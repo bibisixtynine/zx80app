@@ -1,10 +1,14 @@
-////////////////
-//            //
-// 🤩 CIRCLES //
-//            //
-////////////////
 
-import { addDiv, clear, print } from "https://qwark.glitch.me/toolbox.js";
+
+
+
+
+/////////////
+// circles //
+/////////////
+
+
+import { addDiv, clear, print } from "/toolbox.js";
 
 print("<center><h1><orange>Circles ");
 

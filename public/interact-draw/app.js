@@ -1,10 +1,14 @@
-//////////////////////
-//                  //
-// 👾 INTERACT-DRAW //
-//                  //
-//////////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
+
+
+
+///////////////////
+// interact-draw //
+///////////////////
+
+
+import { clear, print, addDiv } from "/toolbox.js";
 
 // add a drawing canvas for the pixel app !
 addDiv('<canvas style="position: fixed; border:none; touch-action:none; width 100vw; height:100vh;" class="rainbow-pixel-canvas"></canvas>')
@@ -12,21 +16,6 @@ addDiv('<canvas style="position: fixed; border:none; touch-action:none; width 10
 // some printings
 print('<center><h1><orange>the <yellow>Pixel App<orange> 1.0<br>')
 setTimeout(() => clear(), 5000);
-
-/////////////////////////////////////////////////////////////
-//
-// the pixel app... could work as it is a static html file...
-//
-// <html>
-//   <head>
-//   </head>
-//   <body>
-//     <script type='module'> ... adding all the content of this file here ! </scr ipt>
-//   </body>
-// </html>
-// 
-// STRANGE BUG : NEVER PUT THE correct</sc ript> in the comment...
-
 
 import interact from 'https://cdn.interactjs.io/v1.10.11/interactjs/index.js';
 

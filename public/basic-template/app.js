@@ -1,8 +1,14 @@
-/////////////////////
-// BASIC TEMPLATE  //
-/////////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
+
+
+
+////////////////////
+// basic-template //
+////////////////////
+
+
+import { clear, print, addDiv } from "/toolbox.js";
 
 clear()
 

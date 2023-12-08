@@ -6,6 +6,66 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+
+
+// surcharge de la fonction console.log pour qu'elle enregistre tout ce qui affiché dans la console dans un fichier log.txt
+//const fs = require('fs');
+const originalConsoleLog = console.log;
+
+// Surcharge de console.log
+console.log = function() {
+    // Construire le message à partir de tous les arguments
+    const args = Array.from(arguments);
+    const message = args.map(arg => {
+        // Convertir les objets en chaînes JSON pour une meilleure lisibilité
+        if (typeof arg === 'object') {
+            return JSON.stringify(arg, null, 2);
+        } else {
+            return arg;
+        }
+    }).join(' ');
+
+    // Enregistrer dans la console
+    originalConsoleLog.apply(console, arguments);
+
+    // Ajouter au fichier log.txt
+    fs.appendFile('log.txt', message + '\n', err => {
+        if (err) {
+            originalConsoleLog('Erreur lors de l\'écriture dans log.txt:', err);
+        }
+    });
+};
+
+
+
+
+
+// permet d'obtenir la véritable adresse de client d'après GPT
+app.set('trust proxy', true);
+
+// Middleware pour consigner les adresses IP
+app.use((req, res, next) => {
+  const now = new Date();
+/*
+  const logMessage = `
+    Date/Heure: ${now.toISOString()}
+    Méthode HTTP: ${req.method}
+    URL: ${req.originalUrl}
+    Adresse IP du client: ${req.ip}
+    En-têtes: ${JSON.stringify(req.headers, null, 2)}
+  `;
+  */
+  const logMessage = `
+    Date/Heure: ${now.toISOString()}
+    URL: ${req.originalUrl}
+    Adresse IP du client: ${req.ip}`;
+  
+  console.log(logMessage);  // Affiche l'adresse IP pour chaque requête
+  
+  next();
+});
+
 // Utilisation de CORS pour toutes les requêtes
 app.use(cors());
 
@@ -17,7 +77,19 @@ app.use(express.static('public'));
 
 const fsPromises = require('fs').promises;
 
+const authorizedUsers = [ process.env.authorizedUser ]
+
 app.post('/save', async (req, res) => {
+  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+  
+  // Vérifier si l'utilisateur est autorisé
+  if (!authorizedUsers.includes(user)) {
+    res.status(403).send("😢🛑 Accès à <" + user + "> refusé. Contactez ilboued@proton.me");
+    console.log('😢🛑 accès refusé à <' + user + '>')
+    return;
+  }
+  console.log('😎🚀 accès autorisé à <' + user + '> pour la sauvegarde de ' + req.body.name)
+
   try {
     let { name, image, description, code } = req.body;
     
@@ -78,7 +150,10 @@ app.post('/save', async (req, res) => {
 });
 
 // Route pour charger le code depuis le serveur
-app.get('/load', (req, res) => {
+/*app.get('/load', (req, res) => {
+    const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+    console.log('😎🚀 <' + user + '> loaded ' + req.body.name)
+
     fs.readFile('code.txt', 'utf8', (err, data) => {
         if (err) {
             res.status(500).send(`😢🛑 Erreur lors du chargement`);
@@ -87,10 +162,13 @@ app.get('/load', (req, res) => {
         }
     });
 });
-
+*/
 
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
+  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+  console.log('😎🚀 <' + user + '> requested #listApps# ')
+  
   try {
     const appsDir = 'public';
     const entries = await fsPromises.readdir(appsDir, { withFileTypes: true }); // Utilisez withFileTypes pour obtenir des informations sur les entrées
@@ -111,6 +189,9 @@ app.get('/listApps', async (req, res) => {
 
 // Route pour charger une application spécifique
 app.get('/loadApp', async (req, res) => {
+  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+  console.log('😎🚀 <' + user + '> loaded ' + req.query.name)
+
   try {
     const appName = req.query.name;
     const appDir = 'public/' + appName

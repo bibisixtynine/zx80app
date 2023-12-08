@@ -1,22 +1,19 @@
 
-//////////////////////////
-//
-// 🤩 matter-basic v12
-//
 
-import {clear, print} from "https://qwark.glitch.me/toolbox.js"
 
-asyncImport('https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js', main)
+
+
+//////////////////
+// matter-basic //
+//////////////////
+
+
+import {clear, print} from "/toolbox.js"
+
+syncImport('https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js', main)
  
 print('<center>👀<h1><orange>matter.js</h1>')
 
-function asyncImport(url,func) {
-  const script = document.createElement('script')
-  script.src = url
-  script.onload = func
-  document.head.appendChild(script)  
-}
- 
 function main() {
   // module aliases
   var Engine = Matter.Engine,
@@ -50,7 +47,14 @@ function main() {
  
   // run the engine
   Runner.run(runner, engine);
+}
 
+
+function syncImport(url,func) {
+  const script = document.createElement('script')
+  script.src = url
+  script.onload = func
+  document.head.appendChild(script)  
 }
 
 

@@ -1,14 +1,15 @@
 
 
 
-/////////////////////
-//                 //
-// 🤩 PHASER-SOUND //
-//                 //
-/////////////////////
+
+
+//////////////////
+// phaser-sound //
+//////////////////
+
 
 // 🛠️ Importation de fonctions depuis une toolbox externe
-import { clear, print } from "https://qwark.glitch.me/toolbox.js";
+import { clear, print } from "/toolbox.js";
 
 // 🎮 Fonction pour charger et jouer Phaser
 function PlayPhaser(gameFunction) {

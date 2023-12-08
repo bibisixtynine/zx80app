@@ -1,8 +1,14 @@
-////////////////////
-// DOCUMENTATION //
-//////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
+
+
+
+
+//////////
+// Docs //
+//////////
+
+
+import { clear, print, addDiv } from "/toolbox.js";
 
 clear()
 print('<center><h1>Documentation')

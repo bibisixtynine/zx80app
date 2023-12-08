@@ -1,6 +1,7 @@
 # QWARK
 ## The online installable webapp inventor !
 
+
 So you want to learn with fun how to code Apps ?
 
 And more, how to distribute your wonderful Apps to everyone, regardless of the operating system he uses, or if it's a smartphone, a tablet, a laptop, a desktop, windows, osx, linux, android, ios etc...
@@ -30,3 +31,8 @@ What is not working/in progress :
   
 Roadmap :
   - Wondering for a version One of Qwark using Phaser 3.7 2D Game Engine only... could be a good step...
+
+
+
+## WARNING
+If you remix this app, you will have to add a .env file with a variable named authorizedUser and the corresponding name (you can choose any value) that will be allowed to save/modify to the server some code... this a very basic identification code ! ... for only one use.... no comment...
