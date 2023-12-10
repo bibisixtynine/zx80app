@@ -66,7 +66,7 @@ function main() {
 
         // 3) 🔨 Création des objets et de la scène
         create () {
-            let digitY = gameContainer.offsetHeight - 50
+            let digitY = gameContainer.offsetHeight - 100
             
             for (var i = 0; i < 7; i++) {
                 this.numbers.push(this.add.image(32 + i * 25, digitY, 'atlas', '0').setScale(0.5).setDepth(1));
@@ -79,6 +79,9 @@ function main() {
             }
 
             this.updateDigits();
+
+            // Ajout de l'écouteur d'événements pour le redimensionnement
+            window.addEventListener('resize', () => this.resizeGame());
         }
 
         // 4) 🔄 Mise à jour de la scène à chaque frame
@@ -120,9 +123,16 @@ function main() {
         // 5) 🎲 Mise à jour des chiffres à l'écran
         updateDigits () {
             const len = Phaser.Utils.String.Pad(blitter.children.list.length.toString(), 7, '0', 1);
-
             for (var i = 0; i < this.numbers.length; i++) {
                 this.numbers[i].setFrame(len[i]);
+            }
+        }
+
+        // 6) Méthode de redimensionnement
+        resizeGame() {
+            let digitY = window.innerHeight - 100;
+            for (var i = 0; i < this.numbers.length; i++) {
+                this.numbers[i].y = digitY;
             }
         }
     }

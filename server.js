@@ -84,7 +84,7 @@ app.post('/save', async (req, res) => {
   
   // Vérifier si l'utilisateur est autorisé
   if (!authorizedUsers.includes(user)) {
-    res.status(403).send("😢🛑 Accès à <" + user + "> refusé. Contactez ilboued@proton.me");
+    res.status(403).send("😢🛑\nAccès à <" + user + "> refusé. \nContactez ilboued@proton.me");
     console.log('😢🛑 accès refusé à <' + user + '>')
     return;
   }
