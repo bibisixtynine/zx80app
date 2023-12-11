@@ -3,6 +3,11 @@
 
 
 
+////////////////
+// MyFirstApp //
+////////////////
+
+
 // Cible le div avec l'ID 'ui'
 const uiDiv = document.getElementById('ui');
 

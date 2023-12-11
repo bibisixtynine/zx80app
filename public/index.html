@@ -6,47 +6,23 @@
     <title>The Super Cool Computer</title>
     <meta name="application-name" content="Qwark" />
     <meta name="description" content="Qwark Web Computer" />
-    <meta
-      name="viewport"
-      content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
-    />
-    <meta
-      name="theme-color"
-      content="#378844"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#378844"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link
-      id="favicon"
-      rel="icon"
-      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
-    />
+    <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: light)"/>
+    <meta name="theme-color" content="#378844" media="(prefers-color-scheme: dark)"/>
+    <link id="favicon" rel="icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"/>
 
-    <!-- manifest -->
+    <!-- PWA - manifest -->
     <link rel="manifest" href="manifest.json" />
 
     <!-- PWA - apple specific -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Qwark" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
-    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <link rel="apple-touch-icon" href="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"/>
 
     <!-- PWA - microsoft specific -->
     <meta name="msapplication-TileColor" content="#0000FF" />
-    <meta
-      name="msapplication-TileImage"
-      content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"
-    />
+    <meta name="msapplication-TileImage" content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"/>
 
     <!-- https:// -->
     <!-- if not running in localhost or file, assure running https -->
@@ -67,7 +43,7 @@
       }
     </script>
 
-    <!-- service worker -->
+    <!-- PWA - service worker -->
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
@@ -113,6 +89,10 @@
       }
     </script>
 
+    
+    <!-- ----------- -->
+    <!-- style sheet -->
+    <!-- ----------- -->
     <style>
       body {
         font-family: monospace;
@@ -137,6 +117,10 @@
       .cm-editor {
         height: 100%;
         width: 100%;
+      }     
+      .cm-editor .cm-content {
+        font-size: 12px; /* or whatever size you prefer */
+        background-color: #141414; /* Couleur de fond sombre */
       }
 
       #ui {
@@ -155,11 +139,9 @@
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
       }
-
       #ui::-webkit-scrollbar {
         display: none;
       }
-
       #ui-toolbox {
         position: absolute;
         width: 100%;
@@ -242,14 +224,12 @@
       #toolbar::-webkit-scrollbar {
         display: none;
       }
+      
       #toolbar button {
         margin: 5px;
         padding: 8px;
       }
-      .cm-editor .cm-content {
-        font-size: 8px; /* or whatever size you prefer */
-        background-color: #141414; /* Couleur de fond sombre */
-      }
+      
       .hidden {
         display: none;
       }
@@ -263,58 +243,38 @@
 
   <body>
    
+    <!-- -- --> 
+    <!-- UI -->    
+    <!-- -- -->
     <select id="appList"></select>
-  
     <div id="editor"></div>
-
     <div id="ui"></div>
-
-    <button
-      id="actionButton"
-      style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000"
-    >
-      Run
-    </button>
-
-    <button
-      id="saveButton"
-      onclick="Save()"
-      style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000"
-    >
-      Save
-    </button>
-
-    <!-- Boutons pour changer la taille de la police -->
-    <button
-      id="increaseFontSize"
-      style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000"
-    >
-      zoom+
-    </button>
-    <button
-      id="decreaseFontSize"
-      style="position: fixed; top: env(safe-area-inset-top); left: 10px; z-index: 1000"
-    >
-      zoom-
-    </button>
-    
-    <button
-      id="usernameButton"
-      onclick="enterUsername()"
-      style="position: fixed; bottom: env(safe-area-inset-bottom); left: 50%; transform: translateX(-50%); z-index: 1000"
-    >
-      Enter Username
-    </button>
+    <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
+    <button id="saveButton" onclick="Save()" style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000">Save</button>
+    <button id="increaseFontSize" style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000">zoom+</button>
+    <button id="decreaseFontSize" style="position: fixed; top: env(safe-area-inset-top); left: 10px; z-index: 1000">zoom-</button>
+    <button id="usernameButton" onclick="enterUsername()" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 50%; transform: translateX(-50%); z-index: 1000">Enter Username</button>
 
     <div id="console-messages"></div>
 
-    <!-- CodeMirror 6 -->
+    
+    <!-- ---------- --> 
+    <!-- librairies -->    
+    <!-- ---------- -->
+    
+    <!-- Code Mirror 6 -->
     <script src="cm6.bundle.min.js"></script>
 
+    
+    <!-- ----------- --> 
+    <!-- main script -->    
+    <!-- ----------- --> 
     <script>
-      //document.getElementById('backButton').addEventListener('click', function() {document.getElementById('ui').style.display = 'none' })
-
+      
+      /////////////////////////////////////////////////////////////
+      //
       // Écoutez les messages provenant du service worker
+      //
       document.addEventListener("DOMContentLoaded", () => {
         navigator.serviceWorker.ready.then((registration) => {
           // RECEPTION des messages du Service Worker :
@@ -332,12 +292,11 @@
       let currentApp = { name: "", description: "", image: "", code: "" };
       let isAppAlreadyLoadedFromLocalStorage = false;
 
-      /////////////////////////////
+      
+      /////////////////////////////////////////////////////////////
       //
-      // editor (code mirror 6)
+      // editor (cm6)
       //
-      // Codemirror 6
-
       const view = cm6.createEditorView(
         undefined,
         document.getElementById("editor")
@@ -369,6 +328,7 @@ setInterval( ()=> {
 print('😎')`,
         options
       );
+      
       view.setState(initialState);
       
       document
@@ -394,6 +354,7 @@ print('😎')`,
         // Enregistrer la nouvelle taille dans localStorage
         localStorage.setItem("editorFontSize", newSize);
       }
+      
       document.addEventListener("DOMContentLoaded", () => {
         // Restituer la taille de la police de l'éditeur
         const savedFontSize = localStorage.getItem("editorFontSize");
@@ -401,7 +362,6 @@ print('😎')`,
             const editorElement = document.querySelector(".cm-editor .cm-content");
             editorElement.style.fontSize = `${savedFontSize}px`;
         }
-        
       });
 
       // Affichage de message dans le div console
@@ -435,6 +395,8 @@ print('😎')`,
             if (lastEditedApp) {
               appList.value = lastEditedApp;
               LoadApp(); // Charger l'application sélectionnée
+            } else {
+              LoadApp(); // Charger l'application par défaut
             }
           })
           .catch((error) =>
@@ -531,10 +493,8 @@ print('😎')`,
       }
       //    -> EVALUATE
       const evaluateCode = (code) => {
-        //console.clear(); ///////////////////////////////// NEW //
         resetUI();
         resetTimers();
-        //localStorage.setItem("mysupercomputer-code", code);
         const scriptId = "dynamic-module-script";
 
         // Supprimer l'ancien script s'il existe
@@ -609,7 +569,6 @@ print('😎')`,
                                 document.getElementById("appList"),
                                 document.getElementById("usernameButton"),
                                ];
-
         if (isEditMode) {
           elementsToHide.forEach(el => el.classList.remove("hidden"));
           document.getElementById("actionButton").textContent = "Run";
