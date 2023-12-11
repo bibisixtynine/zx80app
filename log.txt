@@ -11341,3 +11341,2141 @@ Serveur démarré sur le port 3000
     Date/Heure: 2023-12-10T21:08:37.101Z
     URL: /sw.js
     Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:10.945Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.073Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.079Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.494Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.499Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.531Z
+    URL: /index.html
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.532Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.533Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:11.568Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:30:22.539Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:30:34.349Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:34.481Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:30:34.634Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:30:34.865Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:30:35.809Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:32:04.528Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:32:05.852Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:32:05.982Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:32:06.135Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:32:06.350Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:32:06.985Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:33:47.544Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:33:49.356Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:33:49.492Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:33:49.673Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:33:49.792Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:33:50.481Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:21.080Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:22.739Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:22.867Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:23.133Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:34:23.262Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:34:23.832Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:23.865Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:25.246Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:25.375Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:25.628Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:34:25.758Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:34:26.382Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:36.848Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:39.069Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:39.200Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:39.376Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:34:39.557Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:34:40.206Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:46.491Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:48.326Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:48.455Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:48.731Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:34:48.863Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:34:49.539Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:51.135Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:52.156Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:52.287Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:34:52.439Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:34:52.656Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:34:53.294Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:28.414Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:32.482Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:32.665Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:32.889Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:35:33.053Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:35:33.728Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:51.536Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:54.034Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:54.183Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:35:54.550Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:35:55.039Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:35:55.180Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:36:39.280Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:37:04.042Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:37:04.172Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:37:04.356Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:37:04.557Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:37:05.192Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:41:30.855Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:41:37.232Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:41:37.462Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:41:37.649Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:41:37.775Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:41:38.682Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:42:44.769Z
+    URL: /loadApp?name=phaser-sprites
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded phaser-sprites
+
+    Date/Heure: 2023-12-10T21:42:46.930Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:42:49.849Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:42:49.980Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:42:50.140Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:42:50.273Z
+    URL: /loadApp?name=phaser-sprites
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded phaser-sprites
+
+    Date/Heure: 2023-12-10T21:42:51.053Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:42:58.622Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:43:01.269Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:43:01.400Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:43:01.634Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:43:01.772Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:43:02.400Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:31.672Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:32.744Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:32.880Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:33.046Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:44:33.252Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:44:33.874Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:42.727Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:43.822Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:43.951Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:44.102Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:44:44.225Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:44:44.940Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:56.140Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:57.346Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:57.477Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:44:57.625Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:44:57.752Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:44:58.475Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:11.402Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:12.843Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:12.976Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:13.132Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:45:13.353Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:45:13.974Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:23.049Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:24.350Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:24.484Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:45:24.644Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:45:24.772Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:45:25.482Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:43.211Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:44.837Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:44.977Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:45.170Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:46:45.367Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:46:45.977Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:52.534Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:53.728Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:53.856Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:46:54.010Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:46:54.135Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:46:54.857Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:08.069Z
+    URL: /toolbox.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:09.625Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:09.768Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:09.924Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:47:10.050Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:47:10.766Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:37.974Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:38.120Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:38.306Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:47:38.443Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:47:39.100Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:39.740Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:39.878Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:40.019Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:47:40.230Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:47:40.878Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:45.092Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:45.239Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:47:45.409Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:47:45.538Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:47:46.240Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:49:51.748Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:49:51.959Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:49:52.121Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:49:52.251Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:49:53.031Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:50:43.665Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:50:43.864Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:50:44.022Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:50:44.227Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:50:44.857Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:52:52.242Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:52:52.459Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:52:52.611Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:52:52.737Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:52:53.457Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:52:55.372Z
+    URL: /save
+    Adresse IP du client: 88.182.60.159
+😎🚀 accès autorisé à <zardoz42> pour la sauvegarde de MyFirstApp
+
+    Date/Heure: 2023-12-10T21:52:57.196Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:52:57.321Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:15.128Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:15.257Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:15.412Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:53:15.539Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:16.260Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:33.940Z
+    URL: /?param=1
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:34.071Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:34.247Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:53:34.454Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:35.069Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:53:38.437Z
+    URL: /save
+    Adresse IP du client: 88.182.60.159
+😎🚀 accès autorisé à <zardoz42> pour la sauvegarde de MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:40.568Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:53:40.760Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:48.357Z
+    URL: /loadApp?name=circles
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> loaded circles
+
+    Date/Heure: 2023-12-10T21:53:48.443Z
+    URL: /loadApp?name=circles
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> loaded circles
+
+    Date/Heure: 2023-12-10T21:53:50.833Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:50.834Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> loaded MyFirstApp
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:55.516Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:55.740Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:55.834Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:56.088Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:53:56.253Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:53:57.076Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:59.721Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:53:59.957Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:54:00.081Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:54:00.313Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:54:00.497Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.21
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:54:00.940Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.21
+
+    Date/Heure: 2023-12-10T21:55:24.388Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:24.563Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:24.717Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:24.840Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:25.434Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:25.554Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:25.570Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:25.721Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:25.848Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:26.180Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:26.311Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:26.467Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:26.566Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:26.651Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:31.635Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:31.764Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:31.922Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:32.127Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:32.831Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:36.869Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:37.025Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:37.182Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:37.307Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:37.551Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:37.702Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:37.858Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:37.995Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:38.053Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:57.431Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:57.562Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:55:57.725Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:55:57.854Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:55:58.564Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:00.304Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:00.526Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:00.683Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:00.810Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:01.528Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:12.594Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:12.757Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:12.900Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:13.026Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:13.760Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:26.144Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:26.284Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:26.438Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:26.566Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:27.284Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:38.049Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:38.197Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:38.352Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:38.559Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:39.190Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:40.869Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:41.019Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:41.189Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:41.309Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:41.997Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:42.864Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:42.992Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:43.154Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:43.360Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:56:43.740Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:43.877Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:43.991Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:56:44.038Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:56:44.338Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:07.866Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:08.008Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:08.230Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:08.370Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:09.005Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:16.610Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:16.746Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:16.901Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:17.040Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:17.740Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:21.042Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:21.178Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:21.427Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:21.558Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:22.170Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:28.148Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:28.286Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:28.444Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:28.614Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:29.284Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:31.425Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:31.573Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:31.696Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:34.949Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:35.084Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:35.246Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:35.376Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:35.484Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:36.072Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:37.828Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:37.978Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:38.109Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:41.926Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:42.082Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:42.347Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:42.535Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:42.557Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:43.127Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:45.113Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:45.262Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:45.385Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:48.758Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:48.889Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:57:49.132Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:57:49.269Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:57:49.891Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:12.889Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:13.064Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:13.223Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:13.356Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:14.062Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:17.236Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:17.383Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:17.627Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:17.755Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:18.374Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:22.367Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:22.497Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:22.728Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:22.856Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:23.498Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:25.732Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:25.866Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:26.023Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:26.162Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:26.861Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:37.437Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:37.575Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:37.730Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:37.861Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:38.574Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:53.625Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:53.773Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:58:54.126Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:58:54.258Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:58:54.827Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:04.867Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:05.002Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:05.236Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:05.368Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:05.996Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:28.721Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:28.863Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:29.053Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:29.255Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:29.933Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:39.155Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:39.294Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:39.539Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:39.676Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:40.297Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:44.316Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:44.446Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:44.617Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:44.747Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:45.037Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:45.171Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:45.427Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:45.440Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:45.630Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:58.145Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:58.299Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T21:59:58.488Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T21:59:58.614Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T21:59:59.337Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:00.756Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:00.893Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:01.129Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:01.261Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:04.040Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:04.051Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:04.328Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:04.477Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:04.598Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:05.339Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:05.755Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:05.888Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:06.139Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:06.276Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:06.884Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:16.944Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:17.094Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:17.187Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:17.421Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:17.556Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:18.399Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:23.864Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:24.292Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:24.329Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:24.706Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:24.897Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:25.157Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:32.852Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:33.006Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:33.170Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:33.295Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:33.987Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:38.650Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:38.785Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:38.962Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:39.159Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:39.775Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:42.047Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:42.179Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:42.333Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:42.559Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:43.171Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:44.132Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:44.262Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:44.415Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:44.632Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:45.257Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:45.843Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:46.063Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:46.329Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:46.454Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:46.665Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:46.792Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:47.026Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:47.045Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:00:47.156Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:56.722Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:56.982Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:57.077Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:57.274Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:00:57.464Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:00:57.980Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:00:59.833Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:00.065Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:00.137Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:00.311Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:01:00.445Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:01:01.127Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:28.033Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:28.318Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:28.398Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:01:28.593Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:01:28.720Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.25
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:01:29.335Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.25
+
+    Date/Heure: 2023-12-10T22:12:30.235Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:12:30.720Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-10T22:12:30.877Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-10T22:12:31.002Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-10T22:12:31.728Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+Serveur démarré sur le port 3000
+
+    Date/Heure: 2023-12-11T20:14:32.141Z
+    URL: /
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:32.640Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:32.731Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:32.984Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.24
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T20:14:33.107Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.24
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-11T20:14:33.630Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:39.575Z
+    URL: /?param=1
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:39.930Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:39.931Z
+    URL: /manifest.json
+    Adresse IP du client: 104.28.42.24
+
+    Date/Heure: 2023-12-11T20:14:40.243Z
+    URL: /listApps
+    Adresse IP du client: 104.28.42.24
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T20:14:40.553Z
+    URL: /loadApp?name=MyFirstApp
+    Adresse IP du client: 104.28.42.24
+😎🚀 <undefined> loaded MyFirstApp
+
+    Date/Heure: 2023-12-11T20:14:40.822Z
+    URL: /sw.js
+    Adresse IP du client: 104.28.42.24
+Serveur démarré sur le port 3000
+
+    Date/Heure: 2023-12-11T22:42:56.342Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:42:56.737Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:42:57.141Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:42:57.743Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T22:43:00.618Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:00.753Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:01.311Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T22:43:01.624Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:50.742Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:50.897Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:51.386Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T22:43:51.604Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:52.947Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:53.109Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:53.598Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T22:43:53.890Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:53.996Z
+    URL: /
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:54.141Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: 88.182.60.159
+
+    Date/Heure: 2023-12-11T22:43:54.820Z
+    URL: /listApps
+    Adresse IP du client: 88.182.60.159
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-11T22:43:54.995Z
+    URL: /sw.js
+    Adresse IP du client: 88.182.60.159

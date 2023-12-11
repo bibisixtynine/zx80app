@@ -18,13 +18,21 @@ image.style.transformOrigin = 'center';
 // Ajoute l'image au div
 uiDiv.appendChild(image);
 
-// Fonction pour animer la rotation
+// Variables pour l'animation
 let angle = 0;
-function rotateImage() {
-    angle += 1; // Ajustez cette valeur pour changer la vitesse de rotation
-    image.style.transform = `rotate(${angle}deg)`;
-    requestAnimationFrame(rotateImage); // Boucle de l'animation
+let time = 0;
+
+function animateImage() {
+    angle += 1; // Vitesse de rotation
+
+    // Mise à jour de l'échelle en utilisant le sinus pour simuler un battement de cœur
+    let scale = 0.9 + 0.1 * Math.sin(time);
+    time += 0.1;
+
+    image.style.transform = `rotate(${angle}deg) scale(${scale})`;
+
+    requestAnimationFrame(animateImage); // Boucle de l'animation
 }
 
-// Commence la rotation
-rotateImage();
+// Commence l'animation
+requestAnimationFrame(animateImage);
