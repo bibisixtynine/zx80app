@@ -18186,3 +18186,101 @@ Serveur démarré sur le port 3000
     URL: /loadApp?name=Clock
     Adresse IP du client: 88.182.60.159
 😎🚀 <undefined> loaded Clock
+Serveur démarré sur le port 3000
+
+    Date/Heure: 2023-12-13T00:06:40.359Z
+    URL: /
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:06:40.375Z
+    URL: /manifest.json
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:06:52.195Z
+    URL: /
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:06:52.203Z
+    URL: /manifest.json
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:07:04.404Z
+    URL: /
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:07:04.410Z
+    URL: /manifest.json
+    Adresse IP du client: ::ffff:127.0.0.1
+
+    Date/Heure: 2023-12-13T00:08:12.652Z
+    URL: /
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.660Z
+    URL: /manifest.json
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.661Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.664Z
+    URL: /sw.js
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.714Z
+    URL: /listApps
+    Adresse IP du client: ::1
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-13T00:08:12.727Z
+    URL: /loadApp?name=Clock
+    Adresse IP du client: ::1
+😎🚀 <undefined> loaded Clock
+
+    Date/Heure: 2023-12-13T00:08:12.731Z
+    URL: /
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.731Z
+    URL: /index.html
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:12.734Z
+    URL: /sw.js
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:22.182Z
+    URL: /loadApp?name=phaser-sprites
+    Adresse IP du client: ::1
+😎🚀 <undefined> loaded phaser-sprites
+
+    Date/Heure: 2023-12-13T00:08:27.029Z
+    URL: /toolbox.js
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:37.493Z
+    URL: /?param=1
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:37.500Z
+    URL: /manifest.json
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:37.501Z
+    URL: /cm6.bundle.min.js
+    Adresse IP du client: ::1
+
+    Date/Heure: 2023-12-13T00:08:37.524Z
+    URL: /listApps
+    Adresse IP du client: ::1
+😎🚀 <undefined> requested #listApps# 
+
+    Date/Heure: 2023-12-13T00:08:37.536Z
+    URL: /loadApp?name=phaser-sprites
+    Adresse IP du client: ::1
+😎🚀 <undefined> loaded phaser-sprites
+
+    Date/Heure: 2023-12-13T00:08:38.503Z
+    URL: /sw.js
+    Adresse IP du client: ::1
