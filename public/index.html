@@ -122,6 +122,9 @@
         font-size: 12px; /* or whatever size you prefer */
         background-color: #141414; /* Couleur de fond sombre */
       }
+      .cm-lineNumbers {
+        background-color: #141414;
+      }
 
       #ui {
         position: fixed;
@@ -135,20 +138,39 @@
         padding: 0px;
         background-color: black;
         color: #20ff20;
-        overflow: auto; /* Permet le défilement si nécessaire */
+        overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+       
+        -webkit-text-size-adjust: 100%;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        -moz-user-select: -moz-none;
+        -ms-user-select: none;
+        user-select: none;
+        touch-action: none;
       }
       #ui::-webkit-scrollbar {
         display: none;
       }
+      
       #ui-toolbox {
         position: absolute;
         width: 100%;
         height: 100%;
-        overflow: auto; /* Permet le défilement si nécessaire */
+        overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+      
+        -webkit-text-size-adjust: 100%;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        user-select: none;
+        touch-action: none;
       }
       #ui-toolbox::-webkit-scrollbar {
         display: none;
@@ -575,6 +597,13 @@ print('😎')`,
         } else {
           elementsToHide.forEach(el => el.classList.add("hidden"));
           document.getElementById("actionButton").textContent = "Back";
+          
+          // to avoid magnifier is safari ios
+          const eventParams = { passive: false };
+          //document.body.addEventListener('touchcancel', ignore, eventParams);
+          function ignore(e) {
+            e.preventDefault();
+          }
         }
       }
 
