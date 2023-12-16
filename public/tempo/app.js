@@ -17,7 +17,8 @@ O   O L      I  V   V E     R   R     Q   Q U   U E     S      T
 O   O L      I  V   V EEE   RRRR      Q   Q U   U EEE    SSS   T  
 O   O L      I   V V  E     R  R      Q  QQ U   U E         S  T  
  OOO  LLLLL III   V   EEEEE R   R      QQQQ  UUU  EEEEE SSSS   T  
-
+                                          QQ
+                                           
         <purple>The Extraordinary Quest of Sir Oliver is loading... 
 </pre>`)
 
@@ -30,6 +31,7 @@ run(main)
 
 function main() {
 
+    
     ////////////////////////////////////////////////////////////
     //                                                       //
     // GameScene
@@ -233,7 +235,7 @@ function run(mainFunction) {
   addDiv('<div id="gameContainer" style="width:100%; height:100%"></div>');
 
   // 🚀 Importation synchrone de la librairie Phaser
-  syncImport('https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js', mainFunction)
+  syncImport('https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js', mainFunction)
 
   // 🌐 Fonction d'importation asynchrone
   function syncImport(url, func) {
