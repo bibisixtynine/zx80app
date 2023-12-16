@@ -7,6 +7,8 @@ export {clear,print,printf,input,Button,addDiv}
 
 
 function Button(label, onClickFunction) {
+    const ui = document.getElementById('ui-toolbox')
+
     let button = document.createElement('button');
     button.style.border = '2px solid #20FF20';
     button.style.borderRadius = '20px';
@@ -14,7 +16,7 @@ function Button(label, onClickFunction) {
     button.style.color = '#20FF20';
     button.textContent = label;
     button.onclick = onClickFunction;
-    document.body.appendChild(button);
+    ui.appendChild(button);
 }
 
 function input(text,fct) {
@@ -27,10 +29,13 @@ function input(text,fct) {
 }
 
 function clear() {
-  const ui = document.getElementById('ui-toolbox')
-
-  ui.innerHTML = ''
+  const ui = document.getElementById('ui-toolbox');
+  
+  while (ui.firstChild) {
+    ui.removeChild(ui.firstChild);
+  }
 }
+
   
 function print(...args) {
   const ui = document.getElementById('ui-toolbox')

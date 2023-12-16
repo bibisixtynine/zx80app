@@ -270,7 +270,7 @@
     <!-- -- -->
     <select id="appList"></select>
     <div id="editor"></div>
-    <div id="ui"></div>
+    <div id="ui"><div id="ui-toolbox"></div></div>
     <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
     <button id="saveButton" onclick="Save()" style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000">Save</button>
     <button id="increaseFontSize" style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000">zoom+</button>
@@ -483,6 +483,7 @@ print('😎')`,
 
       // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
       //   -> RESET
+      /*
       function resetUI() {
         let ui = document.getElementById("ui");
         removeChildren(ui); // Supprime les enfants actuels de 'ui'
@@ -512,23 +513,23 @@ print('😎')`,
           //node.removeEventListener()
           node.removeChild(node.lastChild);
         }
-      }
+      }*/
       //    -> EVALUATE
       const evaluateCode = (code) => {
-        resetUI();
-        resetTimers();
-        const scriptId = "dynamic-module-script";
+        //resetUI();
+        //resetTimers();
+        //const scriptId = "dynamic-module-script";
 
         // Supprimer l'ancien script s'il existe
-        const oldScript = document.getElementById(scriptId);
+        /*const oldScript = document.getElementById(scriptId);
         if (oldScript) {
           document.body.removeChild(oldScript);
-        }
+        }*/
 
         // Créer un nouveau script
         const script = document.createElement("script");
         script.type = "module";
-        script.id = scriptId;
+        script.id = "dynamic-module-script";
         script.textContent = code;
 
         // Ajouter le nouveau script au body
@@ -599,11 +600,11 @@ print('😎')`,
           document.getElementById("actionButton").textContent = "Back";
           
           // to avoid magnifier is safari ios
-          const eventParams = { passive: false };
+          //const eventParams = { passive: false };
           //document.body.addEventListener('touchcancel', ignore, eventParams);
-          function ignore(e) {
-            e.preventDefault();
-          }
+          //function ignore(e) {
+          //  e.preventDefault();
+          //}
         }
       }
 

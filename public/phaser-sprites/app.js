@@ -32,6 +32,9 @@ function main() {
     class Example extends Phaser.Scene {
         constructor () {
             super();
+            this.fpsText = null; // Ajout de la variable pour le texte des FPS
+            this.autoIncreaseMode = true; // Activation du mode d'augmentation automatique
+
         }
 
         // 1) PRELOAD 📦 Pré-chargement des assets
@@ -82,17 +85,20 @@ function main() {
 
             // Ajout de l'écouteur d'événements pour le redimensionnement
             window.addEventListener('resize', () => this.resizeGame());
+
+            // Création de l'objet texte pour les FPS
+            this.fpsText = this.add.text(10, 10, '', { font: '32px Impact', fill: '#ffffff' });
         }
 
         // 4) 🔄 Mise à jour de la scène à chaque frame
         update () {
-            if (this.input.activePointer.isDown) {
+            /*if (this.input.activePointer.isDown) {
                 for (var i = 0; i < 250; ++i) {
                     this.launch();
                 }
 
                 this.updateDigits();
-            }
+            }*/
 
             let maxWidth = gameContainer.offsetWidth
             let maxHeight = gameContainer.offsetHeight
@@ -118,6 +124,18 @@ function main() {
                     bob.data.vy *= -bob.data.bounce;
                 }
             }
+
+            // Mise à jour du texte des FPS et contrôle du mode d'augmentation
+            const currentFps = Math.round(this.game.loop.actualFps);
+            this.fpsText.setText(`FPS: ${currentFps} ${blitter.children.list.length.toString()}`);
+    
+            // Si le mode d'augmentation est activé et que le FPS est supérieur à 60
+            if (this.autoIncreaseMode && currentFps >= 60) {
+                for (var i = 0; i < 100; ++i) { // Vous pouvez ajuster ce nombre pour contrôler la vitesse d'augmentation
+                    this.launch();
+                }
+                this.updateDigits();
+            }  
         }
 
         // 5) 🎲 Mise à jour des chiffres à l'écran
