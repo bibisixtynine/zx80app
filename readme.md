@@ -15,11 +15,11 @@ What is currently working for now :
   - editing (basic) with codemirror (code folding and syntax coloring)
   - run
   - load from the cloud
-  - save (publish) on the cloud
+  - save (publish) on the cloud... for registered user
   - fullscreen preview
   - the store is accessible at quark_web_adress/store 
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
-  - a couple of examples works nicely : clock, basic-template, phaser-basic, phaser-sprites
+  - a couple of examples works nicely : phaser-basic, phaser-sound, phaser-sprites, phaser-game
 
 What is not working/in progress :
   - some other examples work but have problem when resizing/rotating the screen
@@ -28,7 +28,7 @@ What is not working/in progress :
   - missing relevant and easy to understand examples
   
 Roadmap :
-  - Wondering for a version One of Qwark using Phaser 3.7 2D Game Engine only... could be a good step...
+  - Version One of Qwark is Phaser 3.7 2D Game Engine oriented
 
 
 

@@ -144,6 +144,9 @@
       }
     </script>
 
+    <!-- phaser 3.7 lib -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+
     <!-- service worker -->
     <script>
       window.messageLog = ["HELLO", "HOW ARE YOU"];
@@ -213,11 +216,6 @@
           registration.active.postMessage({ type: "ready" });
         });
       });
-      
-      document.body.addEventListener('touchcancel', ignore, eventParams);
-      function ignore(e) {
-        e.preventDefault();
-      }
 
       // Affichage de message dans le div console
       function displayConsoleMessage(text) {
