@@ -42,7 +42,9 @@
         console.log("🛠️10 Running in localhost or file, not enforcing https");
       }
     </script>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+    
     <!-- PWA - service worker -->
     <script>
       if ("serviceWorker" in navigator) {
@@ -154,27 +156,6 @@
       #ui::-webkit-scrollbar {
         display: none;
       }
-      
-      #ui-toolbox {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
-        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
-      
-        -webkit-text-size-adjust: 100%;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: -moz-none;
-        user-select: none;
-        touch-action: none;
-      }
-      #ui-toolbox::-webkit-scrollbar {
-        display: none;
-      }
 
       center {
         position: absolute;
@@ -270,7 +251,7 @@
     <!-- -- -->
     <select id="appList"></select>
     <div id="editor"></div>
-    <div id="ui"><div id="ui-toolbox"></div></div>
+    <div id="ui"><div id="gameContainer" style="width:100%; height:100%"></div></div>
     <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
     <button id="saveButton" onclick="Save()" style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000">Save</button>
     <button id="increaseFontSize" style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000">zoom+</button>
@@ -330,24 +311,11 @@
 
       const initialState = cm6.createEditorState(
         `
-//////////////////////////
-// Ma Première App V12💖 //
-//////////////////////////
+////////////////////
+// LOADING  QWARK //
+////////////////////
 
-import { clear, print, addDiv } from "https://qwark.glitch.me/toolbox.js";
-
-clear()
-
-print('<h1>😁 hello ! </h1><br>')
-
-let i=1
-
-setInterval( ()=> {
-  print(i,',')
-  i++;
-}, 1000)
-
-print('😎')`,
+`,
         options
       );
       
@@ -431,8 +399,6 @@ print('😎')`,
         fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}`)
           .then((response) => response.json())
           .then((appData) => {
-            //document.getElementById('code').value = appData.code;
-
             //si le chargement de la page provient d'un retour de run, alors on charge le code dans le localStorage
             // Créer un objet URLSearchParams à partir de la chaîne de requête actuelle
             const urlParams = new URLSearchParams(window.location.search);
@@ -481,64 +447,10 @@ print('😎')`,
         }
       };
 
-      // a try to exec the code without iframe.... in order to be able the service workers to serve the code to exec
-      //   -> RESET
-      /*
-      function resetUI() {
-        let ui = document.getElementById("ui");
-        removeChildren(ui); // Supprime les enfants actuels de 'ui'
-        ui.style.overflowY = "";
-        ui.style.height = "";
-
-        // Créer une nouvelle div
-        let uiToolbox = document.createElement("div");
-        uiToolbox.id = "ui-toolbox"; // Assigner l'ID 'ui-toolbox'
-
-        // Ajouter la nouvelle div à 'ui'
-        ui.appendChild(uiToolbox);
-      }
-
-      //   -> WARNING : THIS WILL RESET ALLLL TIMERS !!!!!!
-      function resetTimers() {
-        let maxId = setTimeout(function () {}, 0);
-
-        for (var i = 0; i < maxId; i += 1) {
-          clearTimeout(i);
-        }
-      }
-      
-      //   -> REMOVE
-      function removeChildren(node) {
-        while (node.hasChildNodes()) {
-          //node.removeEventListener()
-          node.removeChild(node.lastChild);
-        }
-      }*/
-      //    -> EVALUATE
-      const evaluateCode = (code) => {
-        //resetUI();
-        //resetTimers();
-        //const scriptId = "dynamic-module-script";
-
-        // Supprimer l'ancien script s'il existe
-        /*const oldScript = document.getElementById(scriptId);
-        if (oldScript) {
-          document.body.removeChild(oldScript);
-        }*/
-
-        // Créer un nouveau script
-        const script = document.createElement("script");
-        script.type = "module";
-        script.id = "dynamic-module-script";
-        script.textContent = code;
-
-        // Ajouter le nouveau script au body
-        document.body.appendChild(script);
-      };
-
       // Variable pour suivre le mode actuel
       let isEditMode = true;
-
+      setEditMode(true);
+      
       document
         .getElementById("actionButton")
         .addEventListener("click", function () {
@@ -565,7 +477,7 @@ print('😎')`,
 
             this.textContent = "Run";
             isEditMode = true;
-            toggleEditMode(true);
+            setEditMode(true);
           }
         });
 
@@ -579,13 +491,19 @@ print('😎')`,
         localStorage.setItem('scrollPosition', scrollPosition);
 
         // Cacher les boutons en mode exécution
-        toggleEditMode(false);
+        setEditMode(false);
         
         // run !
-        evaluateCode(code);
+        const script = document.createElement("script");
+        script.type = "module";
+        script.id = "dynamic-module-script";
+        script.textContent = code;
+
+        // Ajouter le nouveau script au body
+        document.body.appendChild(script);;
       }
 
-      function toggleEditMode(isEditMode) {
+      function setEditMode(isEditMode) {
         const elementsToHide = [document.getElementById("saveButton"),
                                 document.getElementById("increaseFontSize"),
                                 document.getElementById("decreaseFontSize"),
@@ -598,13 +516,6 @@ print('😎')`,
         } else {
           elementsToHide.forEach(el => el.classList.add("hidden"));
           document.getElementById("actionButton").textContent = "Back";
-          
-          // to avoid magnifier is safari ios
-          //const eventParams = { passive: false };
-          //document.body.addEventListener('touchcancel', ignore, eventParams);
-          //function ignore(e) {
-          //  e.preventDefault();
-          //}
         }
       }
 
@@ -620,6 +531,7 @@ print('😎')`,
       }
       
       function Save() {
+        console.log("save ",currentApp.name)
         const settings = {
           name: currentApp.name,
           image: currentApp.image,
