@@ -97,27 +97,6 @@
       #ui::-webkit-scrollbar {
         display: none;
       }
-      
-      #ui-toolbox {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
-        scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
-      
-        -webkit-text-size-adjust: 100%;
-        -webkit-touch-callout: none;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: -moz-none;
-        user-select: none;
-        touch-action: none;
-      }
-      #ui-toolbox::-webkit-scrollbar {
-        display: none;
-      }
 
       center {
         position: absolute;
@@ -215,8 +194,9 @@
 
   <body>
     <div id="ui">
-      <div id="ui-toolbox"></div>
+      <div id="gameContainer" style="width:100%; height:100%"></div>
     </div>
+
     <div id="console-messages"></div>
     <script type="module" src="app.js"></script>
     <script>

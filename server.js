@@ -93,8 +93,10 @@ app.post('/save', async (req, res) => {
   try {
     let { name, image, description, code } = req.body;
     
+    console.log('name = ',name)
+    
     // Si 'name' est vide, lui attribuer la valeur 'tempo'
-    name = name.trim() ? name : 'tempo';
+    name = name.trim() ? name : 'Docs';
     
     const appDir = 'public/' + name
     
@@ -105,6 +107,7 @@ app.post('/save', async (req, res) => {
     
     
     // 2) Création du index.html
+    
     let modelPath,indexPath,modelContent
     // Lire le contenu de index_model.html
     modelPath = './index_model.html'; // Chemin vers index_model.html
@@ -134,14 +137,6 @@ app.post('/save', async (req, res) => {
     // Sauvegarder le contenu modifié dans sw.js
     indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
-
-    
-    
-    
-    // Copier toolbox.js dans le dossier de l'application sous le nom toolbox.js
-    const modelPath2 = './public/toolbox.js'; // Chemin vers toolbox.js source
-    const indexPath2 = appDir + '/toolbox.js'; // Chemin destination
-    await fsPromises.copyFile(modelPath2, indexPath2);
     
     res.send(`😎🚀 <${name}> sauvegardée avec succcccès`);
   } catch (error) {
@@ -149,20 +144,6 @@ app.post('/save', async (req, res) => {
   }
 });
 
-// Route pour charger le code depuis le serveur
-/*app.get('/load', (req, res) => {
-    const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-    console.log('😎🚀 <' + user + '> loaded ' + req.body.name)
-
-    fs.readFile('code.txt', 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send(`😢🛑 Erreur lors du chargement`);
-        } else {
-            res.send(data);
-        }
-    });
-});
-*/
 
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
