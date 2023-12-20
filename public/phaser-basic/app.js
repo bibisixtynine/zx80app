@@ -7,14 +7,12 @@
 // phaser-basic //
 //////////////////
 
-
 class Example extends Phaser.Scene {
   // 1) Chargement des assets
   preload() {
-    this.load.setBaseURL("https://labs.phaser.io");
-    this.load.image("sky", "assets/skies/space3.png");
-    this.load.image("logo", "assets/sprites/phaser3-logo.png");
-    this.load.image("red", "assets/particles/red.png");
+    this.load.image("sky", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/space3.png?v=1703078606075");
+    this.load.image("logo", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/phaser3-logo.png?v=1703078601649");
+    this.load.image("red", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/red.png?v=1703078593867");
   }
 
   // 2) Initialisation de la scène
@@ -52,7 +50,7 @@ class Example extends Phaser.Scene {
         gameContainer.offsetWidth / 2,
         gameContainer.offsetHeight / 2
       );
-   // Mise à jour des limites du monde physique
+    // Mise à jour des limites du monde physique
     this.physics.world.setBounds(
       0,
       0,
@@ -117,12 +115,15 @@ const game = new Phaser.Game(config);
 let resizeTimer;
 
 setTimeout(function () {
-  handleResize()
+  handleResize();
 }, 500);
 
 function handleResize() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function () {
+    //clear()
+    //print(window.innerWidth, 'xxxx', window.innerHeight)
+    //game.scale.resize(window.innerWidth, window.innerHeight)
 
     game.scene.scenes.forEach((scene) => {
       if (scene instanceof Example) {
@@ -131,9 +132,8 @@ function handleResize() {
       }
     });
   }, 250);
+
+  // Écouter les changements de taille et d'orientation
+  window.addEventListener("resize", handleResize, false);
+  window.addEventListener("orientationchange", handleResize, false);
 }
-
-// Écouter les changements de taille et d'orientation
-window.addEventListener("resize", handleResize, false);
-window.addEventListener("orientationchange", handleResize, false);
-
