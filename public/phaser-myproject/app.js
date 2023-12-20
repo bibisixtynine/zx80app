@@ -7,133 +7,193 @@
 // phaser-myproject //
 //////////////////////
 
+// Bullet class - fires from ship and "destroys" planet
+class Bullet extends Phaser.GameObjects.Image
+{
+    speed;
+    flame;
+    constructor(scene, x, y) {
+        super(scene, x, y, "bullet");
+        this.speed = Phaser.Math.GetSpeed(450, 1);
+        this.postFX.addBloom(0xffffff, 1, 1, 2, 1.2);
+        this.name = "bullet";
 
-class Example extends Phaser.Scene {
-  // 1) Chargement des assets
-  preload() {
-    this.load.setBaseURL("https://labs.phaser.io");
-    this.load.image("sky", "assets/skies/space3.png");
-    this.load.image("logo", "assets/sprites/phaser3-logo.png");
-    this.load.image("red", "assets/particles/red.png");
-  }
+    }
 
-  // 2) Initialisation de la scène
-  create() {
-    this.background = this.add.image(0, 0, "sky").setOrigin(0.5, 0.5);
-    this.resizeBackground();
+    fire (x, y)
+    {
+        this.setPosition(x, y);
+        this.setActive(true);
+        this.setVisible(true);
+    }
 
-    const particles = this.add.particles(0, 0, "red", {
-      speed: 100,
-      scale: { start: 1, end: 0 },
-      blendMode: "ADD",
-    });
+    destroyBullet ()
+    {
+        if (this.flame === undefined) {
+            // Create particles for flame
+            this.flame = this.scene.add.particles(this.x, this.y, 'flares',
+                {
+                    frame: 'white',
+                    color: [0xfacc22, 0xf89800, 0xf83600, 0x9f0404],
+                    colorEase: 'quad.out',
+                    lifespan: 500,
+                    scale: { start: 0.70, end: 0, ease: 'sine.out' },
+                    speed: 200,
+                    advance: 500,
+                    frequency: 50,
+                    blendMode: 'ADD',
+                    duration: 1000,
+                });
+                this.flame.setDepth(1);
+            // When particles are complete, destroy them
+            this.flame.once("complete", () => {
+                this.flame.destroy();
+            })
+        }
 
-    const logo = this.physics.add.image(400, 100, "logo");
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
-    logo.setScale(0.5); // Réduit la taille de 50%
+        // Destroy bullet after 50ms (helps to enter inside of planet)
+        this.scene.time.addEvent({
+            delay: 50,
+            callback: () => {
+                this.setActive(false);
+                this.setVisible(false);
+                this.destroy();
+            }
+        });
 
-    // Configuration initiale des limites du monde physique
-    this.physics.world.bounds.width = window.innerWidth;
-    this.physics.world.bounds.height = window.innerHeight;
+    }
 
-    particles.startFollow(logo);
+    // Update bullet position and destroy if it goes off screen
+    update (time, delta)
+    {
+        this.x += this.speed * delta;
 
-    // met à jour les tailles
-    const gameContainer = document.getElementById("gameContainer");
-    const scaleX = gameContainer.offsetWidth / this.background.width;
-    const scaleY = gameContainer.offsetHeight / this.background.height;
-    const scale = Math.max(scaleX, scaleY);
+        if (this.x > this.scene.sys.canvas.width) {
+            this.setActive(false);
+            this.setVisible(false);
+            this.destroy();
+        }
+    }
+}
 
-    this.background
-      .setScale(scale)
-      .setPosition(
-        gameContainer.offsetWidth / 2,
-        gameContainer.offsetHeight / 2
-      );
-   // Mise à jour des limites du monde physique
-    this.physics.world.setBounds(
-      0,
-      0,
-      gameContainer.offsetWidth,
-      gameContainer.offsetHeight
-    );
+// Logic game
+class Example extends Phaser.Scene
+{
+    ship;
+    bullets;
+    // Control for firing bullets
+    spacebar;
+    constructor ()
+    {
+        super({
+            key: 'MainScene'
+        });
+        this.fired = false; // Ajoutez cette variable pour suivre l'état du tir
 
-    // Forcez une mise à jour immédiate du monde physique
-    this.physics.world.step(0);
-  }
+    }
 
-  resizeBackground() {
-    const gameContainer = document.getElementById("gameContainer");
-    const scaleX = gameContainer.offsetWidth / this.background.width;
-    const scaleY = gameContainer.offsetHeight / this.background.height;
-    const scale = Math.max(scaleX, scaleY);
+    init ()
+    {
+        // Fade in camera
+        this.cameras.main.fadeIn(800);
+    }
 
-    this.background
-      .setScale(scale)
-      .setPosition(
-        gameContainer.offsetWidth / 2,
-        gameContainer.offsetHeight / 2
-      );
-  }
+    preload ()
+    {
+        this.load.image("bullet", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/bullet6.png?v=1703079024121");
+        this.load.image("ship", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/x2kship.png?v=1703079018020");
+        this.load.image("bg", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/nebula.jpg?v=1703079013307");
+        this.load.image("planet", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/blue-planet.png?v=1703079006670");
 
-  resizeScene() {
-    // Mise à jour des limites du monde physique
-    const gameContainer = document.getElementById("gameContainer");
-    this.physics.world.setBounds(
-      0,
-      0,
-      gameContainer.offsetWidth,
-      gameContainer.offsetHeight
-    );
+        this.load.atlas('flares', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/flares.png?v=1703078993457', 'https://qwark.glitch.me/assets/phaser-myproject/flares.json');
+    }
 
-    // Forcez une mise à jour immédiate du monde physique
-    this.physics.world.step(0);
-  }
+    create ()
+    {
+        // Just stars background
+        const bg = this.add.image(0, 0, "bg")
+            .setOrigin(0, 0)
+            .setTint(0x333333);
+
+        const planet = this.physics.add.image(this.sys.scale.width - 100, this.sys.scale.height / 2, "planet")
+            .setScale(.2);
+        planet.flipX = true;
+        // Tween to rotate slow planet
+        this.tweens.add({
+            targets: planet,
+            duration: 5000000,
+            rotation: 360,
+            repeat: -1
+        });
+
+        // FX bloom for the planet
+        const planetFX = planet.postFX.addBloom(0xffffff, 1, 1, 0, 1.2);
+
+        this.ship = this.add.image(100, this.sys.scale.height / 2, 'ship')
+            .setDepth(2);
+
+        this.bullets = this.physics.add.group({
+            classType: Bullet,
+            maxSize: 30,
+            runChildUpdate: true,
+        });
+
+
+        // Effect for planet bloom
+        const planetFXTween = this.tweens.add({
+            targets: planetFX,
+            blurStrength: 2,
+            yoyo: true,
+            duration: 100,
+            paused: true,
+            onComplete: () => {
+                planetFXTween.restart();
+                planetFXTween.pause();
+            }
+        });
+
+        this.physics.add.overlap(this.bullets, planet, (planet, bullet) => {
+            // If bullet hits planet, destroy the bullet and play the effect
+            bullet.destroyBullet();
+            if (!planetFXTween.isPlaying()) {
+                planetFXTween.restart();
+                planetFXTween.play();
+            }
+        })
+
+    }
+
+    // Bullet fire
+    update() {
+        if (this.input.activePointer.isDown && !this.fired) {
+            console.log('fire')
+            // Ajoutez une vérification pour s'assurer que le tir n'a pas encore été fait
+            const bullet = this.bullets.get();
+
+            if (bullet) {
+                bullet.fire(this.ship.x, this.ship.y);
+                this.fired = true; // Mettez à jour l'état du tir
+            }
+
+            setTimeout( ()=> this.fired=false, 250)
+        }
+
+
+    }
 }
 
 const config = {
-  type: Phaser.AUTO,
-  width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
-  height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
-  scene: Example,
-  physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { y: 200 },
+    type: Phaser.AUTO,
+    width: 700,
+    height: 500,
+    physics: {
+        default: 'arcade'
     },
-  },
-  scale: {
-    mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
-    parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-    width: "200%", // for android 7 moto g5
-    height: "200%", // idem
-  },
+    backgroundColor: '#2f3640',
+    parent: 'gameContainer',
+    scene: Example
 };
 
 const game = new Phaser.Game(config);
 
-let resizeTimer;
-
-setTimeout(function () {
-  handleResize()
-}, 500);
-
-function handleResize() {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function () {
-
-    game.scene.scenes.forEach((scene) => {
-      if (scene instanceof Example) {
-        scene.resizeBackground();
-        scene.resizeScene();
-      }
-    });
-  }, 250);
-}
-
-// Écouter les changements de taille et d'orientation
-window.addEventListener("resize", handleResize, false);
-window.addEventListener("orientationchange", handleResize, false);
 

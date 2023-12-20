@@ -23,8 +23,7 @@ class Example extends Phaser.Scene {
 
     // 1) PRELOAD 📦 Pré-chargement des assets
     preload () {
-        this.load.setBaseURL('https://labs.phaser.io');
-        this.load.atlas('atlas', 'assets/tests/fruit/veg.png', 'assets/tests/fruit/veg.json');
+        this.load.atlas('atlas', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/veg.png?v=1703080906421', 'https://qwark.glitch.me/assets/phaser-sprites/veg.json');
         this.numbers = [];
         this.iter = 0;
     }

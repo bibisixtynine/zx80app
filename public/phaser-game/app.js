@@ -3,10 +3,30 @@
 
 
 
-////////////////////
-// phaser-game    //
-// Oliver's Quest //
-////////////////////
+////////////////////////
+// phaser-game        //
+// Sir Oliver's Quest //
+////////////////////////
+
+// position, style et content du bouton STOP
+//  => permet de passer du jeu au code
+let actionButton = document.getElementById('actionButton')
+if (actionButton) {
+    actionButton.style.color = "gray"
+    actionButton.style.border = "solid gray 2px"
+    actionButton.style.padding = "14px"
+    actionButton.style.opacity = "50%"
+    actionButton.style.top = 'env(safe-area-inset-top)';
+    actionButton.style.left = '0';
+    actionButton.style.left = "0px"
+    actionButton.style.margin = "0px"
+    actionButton.style.bottom = ""
+    actionButton.innerText = "STOP"
+    actionButton.style.fontSize = "16px"
+    actionButton.style.borderRadius = "50%"
+    var width = actionButton.offsetWidth; // Récupère la largeur actuelle
+    actionButton.style.height = width + 'px'; // Définit la hauteur égale à la largeur
+}
 
 
 ////////////////////////////////////////////////////////////
@@ -41,16 +61,16 @@ class GameScene extends Phaser.Scene {
 
         // Chargement des sons
         this.load.audio('left', [
-            'https://labs.phaser.io/assets/audio/Rossini - William Tell Overture (8 Bits Version)/left.ogg',
-            'https://labs.phaser.io/assets/audio/Rossini - William Tell Overture (8 Bits Version)/left.mp3'
+            'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/left.ogg?v=1703076601380',
+            'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/left.mp3?v=1703076836856'
         ]);
         this.load.audio('right', [
-            'https://labs.phaser.io/assets/audio/Rossini - William Tell Overture (8 Bits Version)/right.ogg',
-            'https://labs.phaser.io/assets/audio/Rossini - William Tell Overture (8 Bits Version)/right.mp3'
+            'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/right.ogg?v=1703076629402',
+            'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/right.mp3?v=1703076853199'
         ]);
 
         this.load.audio('explosion', [
-            'https://labs.phaser.io/assets/audio/SoundEffects/explosion.mp3'
+            'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/explosion.mp3?v=1703076948031'
         ]);
     }
 
@@ -108,9 +128,6 @@ class GameScene extends Phaser.Scene {
 
         // Réinitialiser les effets de la caméra
         this.cameras.main.resetFX()
-
-        // efface le titre après 7s
-        setTimeout( ()=> clear(), 7000)
     }
 
 
@@ -191,6 +208,7 @@ const config = {
     height: 360,
     scene: GameScene,
     scale: {
+      mode: Phaser.DOM.RESIZE,
       parent: "gameContainer",
     }
 };
