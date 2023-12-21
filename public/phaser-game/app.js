@@ -15,7 +15,7 @@ if (actionButton) {
     actionButton.style.color = "gray"
     actionButton.style.border = "solid gray 2px"
     actionButton.style.padding = "14px"
-    actionButton.style.opacity = "50%"
+    actionButton.style.opacity = "0.5"
     actionButton.style.top = 'env(safe-area-inset-top)';
     actionButton.style.left = '0';
     actionButton.style.left = "0px"
@@ -47,7 +47,6 @@ class GameScene extends Phaser.Scene {
         this.enemyMinY = 80 // Position Y minimale pour l'ennemi
     }
 
-
     /////////////////////////////////////////////////////
     //
     // 📦 Chargement des ressources (images, sons, etc.)
@@ -73,7 +72,6 @@ class GameScene extends Phaser.Scene {
             'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/explosion.mp3?v=1703076948031'
         ]);
     }
-
 
     /////////////////////////////////////////////////////
     //
@@ -129,7 +127,6 @@ class GameScene extends Phaser.Scene {
         // Réinitialiser les effets de la caméra
         this.cameras.main.resetFX()
     }
-
 
     /////////////////////////////////////////////////////
     //
@@ -208,8 +205,9 @@ const config = {
     height: 360,
     scene: GameScene,
     scale: {
-      mode: Phaser.DOM.RESIZE,
-      parent: "gameContainer",
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        parent: "gameContainer",
     }
 };
 

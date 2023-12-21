@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
 
     <title>The Super Cool Computer</title>
-    
     <meta name="application-name" content="Qwark" />
     <meta name="description" content="Qwark Web Computer" />
     <meta name="viewport" content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -24,13 +23,12 @@
     <!-- PWA - microsoft specific -->
     <meta name="msapplication-TileColor" content="#0000FF" />
     <meta name="msapplication-TileImage" content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555"/>
-  
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    <!-- if not running in localhost or file, force running in https mode -->
+    <!-- https:// -->
+    <!-- if not running in localhost or file, assure running https -->
     <script>
       window.debug = false;
+
       if (window.location.protocol == "https:") {
         console.log("🔒10 Running in https");
       } else if (
@@ -44,17 +42,9 @@
         console.log("🛠️10 Running in localhost or file, not enforcing https");
       }
     </script>
-
     
-    <!-- ---- --> 
-    <!-- LIBS -->    
-    <!-- ---- -->
-    
-    <!-- phaser 3.7 -->
+    <!-- phaser 3.7 lib -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
-    <!-- Code Mirror 6 -->
-    <script src="cm6.bundle.min.js"></script>
-    
     
     <!-- PWA - service worker -->
     <script>
@@ -102,6 +92,10 @@
       }
     </script>
 
+    
+    <!-- ----------- -->
+    <!-- style sheet -->
+    <!-- ----------- -->
     <style>
       body {
         font-family: monospace;
@@ -111,47 +105,6 @@
         padding: env(safe-area-inset-top) env(safe-area-inset-right)
           env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
-      .toolbar {
-        width: 100%;
-        height: 50px;
-        background-color: #333;
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        padding-left: 10px;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-      }
-      .toolbar-btn {
-        background-color: #555;
-        color: white;
-        border: none;
-        padding: 10px;
-        margin-right: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-      }
-      .toolbar-btn:hover {
-        background-color: #777;
-      }
-      .toolbar-btn[title]:hover:after {
-        content: attr(title);
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-        padding: 5px 8px;
-        border-radius: 3px;
-        background: #000;
-        color: #fff;
-        text-transform: none;
-        font-size: 12px;
-        line-height: 1.2;
-        z-index: 9999;
-      }
-      /* Rest of your CSS */
       div {
         margin: 0px;
         padding: 0px;
@@ -191,7 +144,7 @@
         overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
         -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
-
+       
         -webkit-text-size-adjust: 100%;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
@@ -241,15 +194,29 @@
         border-radius: 10px;
         background-color: #001000;
         color: #20ff20;
+        
+        padding: 5px;
+      }
 
+      #appList {
+        margin: 0px;
+        
+        border: 2px solid #20ff20;
+        border-radius: 10px;
+        background-color: #001000;
+        color: #20ff20;
+        
+        position: fixed;
+        top: env(safe-area-inset-top);
+        
+        z-index: 1000;
+        
+        left: 50%; /* Centre horizontalement */
+        transform: translateX(-50%);
         padding: 5px;
       }
 
       #toolbar {
-        position: fixed;
-        z-index: 9999;
-        opacity: 0.5;
-
         display: flex;
         justify-content: center; /* Centre les boutons horizontalement */
         align-items: center; /* Centre les boutons verticalement */
@@ -261,12 +228,12 @@
       #toolbar::-webkit-scrollbar {
         display: none;
       }
-
+      
       #toolbar button {
         margin: 5px;
         padding: 8px;
       }
-
+      
       .hidden {
         display: none;
       }
@@ -274,54 +241,42 @@
       .visible {
         display: block;
       }
-      #appList {
-        color: #20ff20;
-        background-color: #555;
-        border: none;
-        padding: 10px;
-        margin-right: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      #usernameDisplay {
-        color: #20ff20;
-        background-color: #555;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      /* ... */
+
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
+   
     <!-- -- --> 
     <!-- UI -->    
     <!-- -- -->
-    <div id="toolbar" class="toolbar">
-      <select id="appList" class="toolbar-btn"></select>
-      <button id="runButton" class="toolbar-btn" title="Exécuter le code"><i class="fas fa-play"></i> Run</button>
-      <button id="saveButton" class="toolbar-btn" title="Sauvegarder le projet"><i class="fas fa-save"></i> Save</button>
-      <button id="zoomInButton" class="toolbar-btn" title="Agrandir la police"><i class="fas fa-search-plus"></i> zoom+</button>
-      <button id="zoomOutButton" class="toolbar-btn" title="Réduire la police"><i class="fas fa-search-minus"></i> zoom-</button>
-      <div id="usernameDisplay" title="Cliquer pour changer le nom d'utilisateur">Username: <span id="username">zardoz42</span></div>
-    </div>
-  
-    <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
-
+    <select id="appList"></select>
     <div id="editor"></div>
     <div id="ui"><div id="gameContainer" style="width:100%; height:100%"></div></div>
+    <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
+    <button id="saveButton" onclick="Save()" style="position: fixed; bottom: env(safe-area-inset-bottom); right: 10px; z-index: 1000">Save</button>
+    <button id="increaseFontSize" style="position: fixed; top: env(safe-area-inset-top); right: 10px; z-index: 1000">zoom+</button>
+    <button id="decreaseFontSize" style="position: fixed; top: env(safe-area-inset-top); left: 10px; z-index: 1000">zoom-</button>
+    <button id="usernameButton" onclick="enterUsername()" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 50%; transform: translateX(-50%); z-index: 1000">Enter Username</button>
+
     <div id="console-messages"></div>
 
-  
+    
+    <!-- ---------- --> 
+    <!-- librairies -->    
+    <!-- ---------- -->
+    
+    <!-- Code Mirror 6 -->
+    <script src="cm6.bundle.min.js"></script>
+
+    
     <!-- ----------- --> 
     <!-- main script -->    
     <!-- ----------- --> 
     <script>
       
       /////////////////////////////////////////////////////////////
+      //
       // Écoutez les messages provenant du service worker
       //
       document.addEventListener("DOMContentLoaded", () => {
@@ -337,16 +292,13 @@
           registration.active.postMessage({ type: "ready" });
         });
       });
-      //
-      // Écoutez les messages provenant du service worker
-      /////////////////////////////////////////////////////////////
-
 
       let currentApp = { name: "", description: "", image: "", code: "" };
       let isAppAlreadyLoadedFromLocalStorage = false;
 
       
       /////////////////////////////////////////////////////////////
+      //
       // editor (cm6)
       //
       const view = cm6.createEditorView(
@@ -360,23 +312,28 @@
 
       const initialState = cm6.createEditorState(
         `
-        ////////////////////
-        // LOADING  QWARK //
-        ////////////////////
+////////////////////
+// LOADING  QWARK //
+////////////////////
 
-        `,options
+`,
+        options
       );
       
       view.setState(initialState);
-      //
-      // editor (cm6)
-      /////////////////////////////////////////////////////////////
- 
       
-      
-      /////////////////////////////////////////////////////////
-      // changeFontSize()
-      //
+      document
+        .getElementById("increaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(1);
+        });
+
+      document
+        .getElementById("decreaseFontSize")
+        .addEventListener("click", function () {
+          changeFontSize(-1);
+        });
+
       function changeFontSize(delta) {
         const editorElement = document.querySelector(".cm-editor .cm-content");
         const currentSize = parseInt(
@@ -388,14 +345,7 @@
         // Enregistrer la nouvelle taille dans localStorage
         localStorage.setItem("editorFontSize", newSize);
       }
-      //
-      // changeFontSize()
-      /////////////////////////////////////////////////////////   
       
-      
-      /////////////////////////////////////////////////////////
-      // DOMContentLoaded Event
-      //
       document.addEventListener("DOMContentLoaded", () => {
         // Restituer la taille de la police de l'éditeur
         const savedFontSize = localStorage.getItem("editorFontSize");
@@ -404,14 +354,8 @@
             editorElement.style.fontSize = `${savedFontSize}px`;
         }
       });
-      //
-      // DOMContentLoaded Event
-      /////////////////////////////////////////////////////////   
-      
 
-      /////////////////////////////////////////////////////////
-      // displayConsoleMessage()
-      //
+      // Affichage de message dans le div console
       function displayConsoleMessage(text) {
         const consoleMessagesDiv = document.getElementById("console-messages");
         const messageElement = document.createElement("div");
@@ -419,49 +363,7 @@
         messageElement.innerHTML = text.replace(/\n/g, "<br>");
         consoleMessagesDiv.appendChild(messageElement);
       }
-      //
-      // displayConsoleMessage()
-      /////////////////////////////////////////////////////////   
-      
-      
-      /////////////////////////////////////////////////////////
-      // updateAppList()
-      //
-      function updateAppList(apps) {
-        const appList = document.getElementById('appList');
-        apps.forEach(app => {
-          const option = document.createElement('option');
-          option.value = app.name;
-          option.textContent = app.name;
-          appList.appendChild(option);
-        });
-      }
-      //
-      // updateAppList()
-      /////////////////////////////////////////////////////////      
-      
-      
-      /////////////////////////////////////////////////////////
-      // usernameDisplay clicked
-      //
-      document.getElementById('usernameDisplay').addEventListener('click', function() {
-        username = prompt('Please enter your username:', document.getElementById('username').textContent);
-        if (username) {
-          document.getElementById('username').textContent = username;
-          localStorage.setItem("username", username);
 
-          // Supposons que vous ayez une fonction saveUsername pour enregistrer le nom d'utilisateur
-          // saveUsername(username);
-        }
-      });
-      //
-      // usernameDisplay clicked
-      /////////////////////////////////////////////////////////
-      
-
-      /////////////////////////////////////////////////////////
-      // LoadAppList()
-      //
       function LoadAppList() {
         //return
         fetch("/listApps")
@@ -492,14 +394,7 @@
             alert("Erreur lors du chargement de la liste: " + error)
           );
       }
-      //
-      // LoadAppList()
-      /////////////////////////////////////////////////////////
 
-      
-      /////////////////////////////////////////////////////////
-      // LoadApp()
-      //
       function LoadApp() {
         const selectedApp = document.getElementById("appList").value;
         fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}`)
@@ -541,14 +436,7 @@
             alert("Erreur lors du chargement de l'app: " + error)
           );
       }
-      //
-      // LoadApp()
-      /////////////////////////////////////////////////////////
-      
 
-      /////////////////////////////////////////////////////////
-      // window.onload()
-      //
       // Appelez LoadAppList au chargement de la page ou à un moment approprié
       window.onload = function() {
         // Reste du code onload
@@ -556,27 +444,21 @@
 
         // Si un nom d'utilisateur est déjà enregistré, affichez-le
         if (username) {
-          document.getElementById("username").textContent = username;
+          document.getElementById("usernameButton").textContent = `Username: ${username}`;
         }
       };
-      //
-      // window.onload()
-      /////////////////////////////////////////////////////////
 
-      
       // Variable pour suivre le mode actuel
       let isEditMode = true;
       setEditMode(true);
       
-      
-      /////////////////////////////////////////////////////////
-      // runButtonPressed()
-      //
-      function runButtonPressed() {
+      document
+        .getElementById("actionButton")
+        .addEventListener("click", function () {
           if (isEditMode) {
             // En mode édition, exécuter le code
             Exec("ui", "code");
-            //this.textContent = "Back";
+            this.textContent = "Back";
             isEditMode = false;
           } else {
             // En mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
@@ -594,19 +476,12 @@
             // Rechargez la page avec la nouvelle URL (si modifiée) ou l'URL actuelle
             window.location.href = url.toString();
 
-            //this.textContent = "Run";
+            this.textContent = "Run";
             isEditMode = true;
             setEditMode(true);
           }
-      };
-      //
-      // runButtonPressed()
-      /////////////////////////////////////////////////////////
-      
+        });
 
-      /////////////////////////////////////////////////////////
-      // Exec()
-      //
       function Exec(uiId, codeId) {
         document.getElementById("ui").style.display = "block";
         let code = view.state.doc.toString();
@@ -628,20 +503,13 @@
         // Ajouter le nouveau script au body
         document.body.appendChild(script);;
       }
-      //
-      // Exec()()
-      /////////////////////////////////////////////////////////
 
-      
-      /////////////////////////////////////////////////////////
-      // setEditMode()
-      //
       function setEditMode(isEditMode) {
         const elementsToHide = [document.getElementById("saveButton"),
-                                document.getElementById("zoomInButton"),
-                                document.getElementById("zoomOutButton"),
+                                document.getElementById("increaseFontSize"),
+                                document.getElementById("decreaseFontSize"),
                                 document.getElementById("appList"),
-                                document.getElementById("usernameDisplay"),
+                                document.getElementById("usernameButton"),
                                ];
         if (isEditMode) {
           elementsToHide.forEach(el => el.classList.remove("hidden"));
@@ -651,22 +519,20 @@
           document.getElementById("actionButton").textContent = "Back";
         }
       }
-      //
-      // setEditMode()
-      /////////////////////////////////////////////////////////
-
 
 
       let username = localStorage.getItem("username") || "";
-      console.log('username = ',username)
+
+      function enterUsername() {
+        username = prompt("Please enter your username:", username) || username;
+        if (username) {
+          localStorage.setItem("username", username);
+          document.getElementById("usernameButton").textContent = `Username: ${username}`;
+        }
+      }
       
-      /////////////////////////////////////////////////////////
-      // Save()
-      //
       function Save() {
         console.log("save ",currentApp.name)
-        console.log(' -> username = ',username)
-
         const settings = {
           name: currentApp.name,
           image: currentApp.image,
@@ -689,21 +555,7 @@
           })
           .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
       }
-      //
-      // Save()
-      /////////////////////////////////////////////////////////
 
     </script>
-
-    <script>
-      // JavaScript for the new toolbar buttons
-      document.getElementById('actionButton').addEventListener('click', runButtonPressed);
-      document.getElementById('runButton').addEventListener('click', runButtonPressed);
-      document.getElementById('saveButton').addEventListener('click', Save);
-      document.getElementById('zoomInButton').addEventListener('click', () => changeFontSize(1));
-      document.getElementById('zoomOutButton').addEventListener('click', () => changeFontSize(-1));
-    </script>
-  
   </body>
-  
 </html>
