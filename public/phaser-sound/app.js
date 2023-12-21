@@ -8,12 +8,12 @@
 //////////////////
 
 
-// 🎲 Lancer Phaser avec une fonction anonyme
-// 🎭 Classe de scène pour notre jeu Phaser
-class Example extends Phaser.Scene {
+// 🎭 Classe de scene pour notre jeu Phaser
+class MaScene extends Phaser.Scene {
+    
     // 📦 Méthode pour charger des ressources avant le jeu
     preload() {
-        this.load.image('title', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/catastrophi.png?v=1703080414518');
+        this.load.image('background', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/catastrophi.png?v=1703080414518');
         this.load.spritesheet('button', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/flixel-button.png?v=1703080317855', { frameWidth: 80, frameHeight: 20 });
         this.load.bitmapFont('nokia', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/nokia16black.png?v=1703080310329', 'https://qwark.glitch.me/assets/phaser-sound/nokia16black.xml');
         this.load.audioSprite('sfx', 'https://qwark.glitch.me/assets/phaser-sound/fx_mixdown.json', ['https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.ogg?v=1703080305830', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.mp3?v=1703080298380']);
@@ -21,7 +21,7 @@ class Example extends Phaser.Scene {
 
     // 🎬 Méthode pour créer la scène initiale du jeu
     create() {
-        this.add.image(400, 300, 'title');
+        this.add.image(400, 300, 'background');
         const spritemap = this.cache.json.get('sfx').spritemap;
         let i = 0;
         for (const spriteName in spritemap) {
@@ -69,16 +69,16 @@ class Example extends Phaser.Scene {
 
 // 📐 Configuration du jeu Phaser
 const config = {
+    // D'autres réglages techniques pour notre jeu...
     type: Phaser.AUTO,
-    parent: 'gameContainer',
-    scene: Example,
+    scene: MaScene,
+    width: 575,
+    height: 300,
     scale: {
-        mode: Phaser.DOM.RESIZE, // Active le redimensionnement automatique
-        parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-        width: "100%", // for android 7 moto g5
-        height: "100%", // idem
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        parent: "gameContainer",
     },
-    pixelArt: true
 };
 
 // 🕹️ Création d'une nouvelle instance de jeu
