@@ -118,21 +118,18 @@ function updateAppList(apps) {
 /////////////////////////////////////////////////////////
 // usernameDisplay clicked
 //
-document
-  .getElementById("usernameDisplay")
-  .addEventListener("click", function () {
+function askUsername() {
     username = prompt(
       "Please enter your username:",
-      document.getElementById("username").textContent
+      username
     );
     if (username) {
-      document.getElementById("username").textContent = username;
       localStorage.setItem("username", username);
 
       // Supposons que vous ayez une fonction saveUsername pour enregistrer le nom d'utilisateur
       // saveUsername(username);
     }
-  });
+  };
 //
 // usernameDisplay clicked
 /////////////////////////////////////////////////////////
@@ -156,6 +153,7 @@ function LoadAppList() {
       appList.addEventListener("change", function () {
         LoadApp();
         localStorage.setItem("lastEditedApp", appList.value); // Sauvegarder le nom de l'application sélectionnée
+        document.getElementById("centered-container").style.display = "none"
       });
       // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
       const lastEditedApp = localStorage.getItem("lastEditedApp");
@@ -225,11 +223,6 @@ function LoadApp() {
 window.onload = function () {
   // Reste du code onload
   LoadAppList();
-
-  // Si un nom d'utilisateur est déjà enregistré, affichez-le
-  if (username) {
-    document.getElementById("username").textContent = username;
-  }
 };
 //
 // window.onload()
@@ -305,17 +298,15 @@ function setEditMode(isEditMode) {
     document.getElementById("saveButton"),
     document.getElementById("zoomInButton"),
     document.getElementById("zoomOutButton"),
-    document.getElementById("appList"),
-    document.getElementById("usernameDisplay"),
+    document.getElementById("settingsButton"),
+    document.getElementById("loadButton"),
     document.getElementById("runButton"),
     document.getElementById("toolbar"),
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
-    document.getElementById("actionButton").textContent = "Run";
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
-    document.getElementById("actionButton").textContent = "Back";
   }
 }
 //
@@ -368,3 +359,8 @@ document
 document
   .getElementById("zoomOutButton")
   .addEventListener("click", () => changeFontSize(-1));
+document.getElementById("loadButton").addEventListener("click", function () {
+   document.getElementById("centered-container").style.display = "flex"
+});
+
+document.getElementById("settingsButton").addEventListener("click", askUsername)

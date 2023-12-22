@@ -8,26 +8,6 @@
 // Sir Oliver's Quest //
 ////////////////////////
 
-// position, style et content du bouton STOP
-//  => permet de passer du jeu au code
-let actionButton = document.getElementById('actionButton')
-if (actionButton) {
-    actionButton.style.color = "gray"
-    actionButton.style.border = "solid gray 2px"
-    actionButton.style.padding = "14px"
-    actionButton.style.opacity = "0.5"
-    actionButton.style.top = 'env(safe-area-inset-top)';
-    actionButton.style.left = '0';
-    actionButton.style.left = "0px"
-    actionButton.style.margin = "0px"
-    actionButton.style.bottom = ""
-    actionButton.innerText = "STOP"
-    actionButton.style.fontSize = "16px"
-    actionButton.style.borderRadius = "50%"
-    var width = actionButton.offsetWidth; // Récupère la largeur actuelle
-    actionButton.style.height = width + 'px'; // Définit la hauteur égale à la largeur
-}
-
 
 ////////////////////////////////////////////////////////////
 //                                                       //

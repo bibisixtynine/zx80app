@@ -75,14 +75,6 @@ class Example extends Phaser.Scene {
 
     // 4) 🔄 Mise à jour de la scène à chaque frame
     update () {
-        /*if (this.input.activePointer.isDown) {
-            for (var i = 0; i < 250; ++i) {
-                this.launch();
-            }
-
-            this.updateDigits();
-        }*/
-
         let maxWidth = gameContainer.offsetWidth
         let maxHeight = gameContainer.offsetHeight
 
@@ -139,24 +131,23 @@ class Example extends Phaser.Scene {
 }
 
 const config = {
-type: Phaser.AUTO,
-width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
-height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
-scene: Example,
-physics: {
-  default: "arcade",
-  arcade: {
-    gravity: { y: 200 },
-  },
-},
-scale: {
-  mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
-  parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-  width: "200%", // hack for android 7 moto g5
-  height: "200%", // allow rotating works nicely
-},
+    type: Phaser.AUTO,
+    width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
+    height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
+    scene: Example,
+    physics: {
+        default: "arcade",
+        arcade: {
+            gravity: { y: 200 },
+        },
+    },
+    scale: {
+        mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
+        parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
+        width: "200%", // hack for android 7 moto g5
+       height: "200%", // allow rotating works nicely
+    },
 };
-
 
 
 // 🕹️ Création du jeu
