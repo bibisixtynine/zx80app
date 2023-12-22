@@ -47,18 +47,24 @@
   <body>
     <!-- UI -->    
     <div id="toolbar" class="toolbar">
-      <select id="appList" class="toolbar-btn"></select>
-      <button id="runButton" class="toolbar-btn" title="Exécuter le code"><i class="fas fa-play"></i> Run</button>
-      <button id="saveButton" class="toolbar-btn" title="Sauvegarder le projet"><i class="fas fa-save"></i> Save</button>
-      <button id="zoomInButton" class="toolbar-btn" title="Agrandir la police"><i class="fas fa-search-plus"></i> zoom+</button>
-      <button id="zoomOutButton" class="toolbar-btn" title="Réduire la police"><i class="fas fa-search-minus"></i> zoom-</button>
-      <div id="usernameDisplay" title="Cliquer pour changer le nom d'utilisateur">Username: <span id="username">zardoz42</span></div>
+      <button id="loadButton" class="toolbar-btn" title="Charger une application"><i class="fas fa-cloud-download-alt"></i></button>
+      <button id="runButton" class="toolbar-btn" title="Exécuter le code"><i class="fas fa-play"></i></button>
+      <button id="saveButton" class="toolbar-btn" title="Sauvegarder le projet"><i class="fas fa-cloud-upload-alt"></i></button>
+      <button id="zoomOutButton" class="toolbar-btn" title="Réduire la police"><i class="fas fa-search-minus"></i></button>
+      <button id="zoomInButton" class="toolbar-btn" title="Agrandir la police"><i class="fas fa-search-plus"></i></button>
+      <button id="settingsButton" class="toolbar-btn" title="Paramètres"><i class="fas fa-cog"></i></button>
     </div>
-    <button id="actionButton" style="position: fixed; bottom: env(safe-area-inset-bottom); left: 10px; z-index: 1000">Run</button>
+    
+    <button id="actionButton"><i class="fas fa-code"></i></button>
+    
     <div id="editor"></div>
     <div id="ui"><div id="gameContainer" style="width:100%; height:100%"></div></div>
     <div id="console-messages"></div>
 
+    <div id="centered-container">
+          <select id="appList"></select>
+    </div>
+    
     <!-- main script -->    
     <script src="index.js"></script>
   </body>

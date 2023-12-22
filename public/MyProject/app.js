@@ -2,8 +2,12 @@
 
 
 
-// 🚀 Bienvenue dans l'aventure spatiale ! 🌌
 
+///////////////
+// MyProject //
+///////////////
+
+// 🚀 Bienvenue dans l'aventure spatiale ! 🌌
 
 ////////////////////////////////////////////////////////////
 //                                                       //
@@ -119,7 +123,6 @@ class MainScene extends Phaser.Scene {
         }
     }
 
-
     // 💥 Quand une balle touche un alien
     bulletHitAlien(bullet, alien) {
         // L'alien disparaît et on gagne des points !
@@ -193,25 +196,6 @@ const config = {
     },
 };
 
-// 🤓 position, style et contenu du bouton STOP
-//  => permet de revenir au code depuis le jeu
-let actionButton = document.getElementById('actionButton')
-if (actionButton) {
-    actionButton.style.color = "gray"
-    actionButton.style.border = "solid gray 2px"
-    actionButton.style.padding = "14px"
-    actionButton.style.opacity = "0.5"
-    actionButton.style.top = 'env(safe-area-inset-top)';
-    actionButton.style.left = '0';
-    actionButton.style.left = "0px"
-    actionButton.style.margin = "0px"
-    actionButton.style.bottom = ""
-    actionButton.innerText = "STOP"
-    actionButton.style.fontSize = "16px"
-    actionButton.style.borderRadius = "50%"
-    var width = actionButton.offsetWidth; // Récupère la largeur actuelle
-    actionButton.style.height = width + 'px'; // Définit la hauteur égale à la largeur
-}
 
 // Et voilà, on lance le jeu ! 🎉
 const game = new Phaser.Game(config);
