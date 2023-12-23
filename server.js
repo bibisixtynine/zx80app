@@ -39,8 +39,6 @@ console.log = function() {
 
 
 
-
-
 // permet d'obtenir la véritable adresse de client d'après GPT
 app.set('trust proxy', true);
 

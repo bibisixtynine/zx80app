@@ -1,3 +1,4 @@
+
 window.debug = false;
 if (window.location.protocol == "https:") {
   console.log("🔒10 Running in https");
