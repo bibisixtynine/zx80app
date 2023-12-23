@@ -35,6 +35,7 @@ Bugs :
   - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications
   - B2 if you change app before saving it... you loose your changes
   - B3 after some time... the joystick is not responding correctly (see MyProject) 
+  - B4 a new version of an app on the server... will erase your version on your machine as soon as you get connected to the internet
   
   
   

@@ -11,8 +11,11 @@ let isAppAlreadyLoadedFromLocalStorage = false;
 
 
 /////////////////////////////////////////////////////////////
-// Écoutez les messages provenant du service worker
+// Écoutez et afficher les messages provenant du service worker
 //
+// Nécessite un div du type :
+//   <div id="console-messages"></div>
+
 document.addEventListener("DOMContentLoaded", () => {
   navigator.serviceWorker.ready.then((registration) => {
     // RECEPTION des messages du Service Worker :
@@ -26,13 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     registration.active.postMessage({ type: "ready" });
   });
 });
-//
-// Écoutez les messages provenant du service worker
-/////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////
-// displayConsoleMessage()
-//
 function displayConsoleMessage(text) {
   const consoleMessagesDiv = document.getElementById("console-messages");
   const messageElement = document.createElement("div");
@@ -41,8 +38,9 @@ function displayConsoleMessage(text) {
   consoleMessagesDiv.appendChild(messageElement);
 }
 //
-// displayConsoleMessage()
-/////////////////////////////////////////////////////////
+// Écoutez et afficher les messages provenant du service worker
+/////////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////////
 // editor (cm6)
@@ -68,9 +66,19 @@ view.setState(initialState);
 // editor (cm6)
 /////////////////////////////////////////////////////////////
 
+
 /////////////////////////////////////////////////////////
-// changeFontSize()
+// Gestion de la taille des fonts de l'éditeur, et stockage/restitution
 //
+document.addEventListener("DOMContentLoaded", () => {
+  // Restituer la taille de la police de l'éditeur
+  const savedFontSize = localStorage.getItem("editorFontSize");
+  if (savedFontSize) {
+    const editorElement = document.querySelector(".cm-editor .cm-content");
+    editorElement.style.fontSize = `${savedFontSize}px`;
+  }
+});
+
 function changeFontSize(delta) {
   const editorElement = document.querySelector(".cm-editor .cm-content");
   const currentSize = parseInt(window.getComputedStyle(editorElement).fontSize);
@@ -84,20 +92,19 @@ function changeFontSize(delta) {
 // changeFontSize()
 /////////////////////////////////////////////////////////
 
+
 /////////////////////////////////////////////////////////
-// DOMContentLoaded Event
+// window.onload()
 //
-document.addEventListener("DOMContentLoaded", () => {
-  // Restituer la taille de la police de l'éditeur
-  const savedFontSize = localStorage.getItem("editorFontSize");
-  if (savedFontSize) {
-    const editorElement = document.querySelector(".cm-editor .cm-content");
-    editorElement.style.fontSize = `${savedFontSize}px`;
-  }
-});
+// Appelez LoadAppList au chargement de la page ou à un moment approprié
+window.onload = function () {
+  // Reste du code onload
+  LoadAppList();
+};
 //
-// DOMContentLoaded Event
+// window.onload()
 /////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////
 // updateAppList()
@@ -125,9 +132,6 @@ function askUsername() {
     );
     if (username) {
       localStorage.setItem("username", username);
-
-      // Supposons que vous ayez une fonction saveUsername pour enregistrer le nom d'utilisateur
-      // saveUsername(username);
     }
   };
 //
@@ -138,7 +142,6 @@ function askUsername() {
 // LoadAppList()
 //
 function LoadAppList() {
-  //return
   fetch("/listApps")
     .then((response) => response.json())
     .then((apps) => {
@@ -216,17 +219,7 @@ function LoadApp() {
 // LoadApp()
 /////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////
-// window.onload()
-//
-// Appelez LoadAppList au chargement de la page ou à un moment approprié
-window.onload = function () {
-  // Reste du code onload
-  LoadAppList();
-};
-//
-// window.onload()
-/////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////
 // runButtonPressed()
@@ -346,21 +339,31 @@ function Save() {
 // Save()
 /////////////////////////////////////////////////////////
 
+
+/////////////////////////////////////////////////////////
+// UI
+//
 document
   .getElementById("actionButton")
-  .addEventListener("click", runButtonPressed);
+  .addEventListener("click", ()=> runButtonPressed() )
 document
   .getElementById("runButton")
-  .addEventListener("click", runButtonPressed);
-document.getElementById("saveButton").addEventListener("click", Save);
+  .addEventListener("click", ()=> runButtonPressed() )
+document
+  .getElementById("saveButton")
+  .addEventListener("click", ()=> Save() )
 document
   .getElementById("zoomInButton")
-  .addEventListener("click", () => changeFontSize(1));
+  .addEventListener("click", ()=> changeFontSize(1) )
 document
   .getElementById("zoomOutButton")
-  .addEventListener("click", () => changeFontSize(-1));
-document.getElementById("loadButton").addEventListener("click", function () {
-   document.getElementById("centered-container").style.display = "flex"
-});
-
-document.getElementById("settingsButton").addEventListener("click", askUsername)
+  .addEventListener("click", ()=> changeFontSize(-1) )
+document
+  .getElementById("loadButton")
+  .addEventListener("click", ()=> {document.getElementById("centered-container").style.display = "flex"} )
+document
+  .getElementById("settingsButton")
+  .addEventListener("click", ()=> askUsername() )
+//
+// UI
+/////////////////////////////////////////////////////////
