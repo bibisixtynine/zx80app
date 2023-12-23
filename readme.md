@@ -22,12 +22,21 @@ What is currently working for now :
   - a couple of examples works nicely
 
 What is not working/in progress :
-  - debugging request desktop explorer...
-  - there is no doc...
-  - missing relevant examples
-  - no interactive tutorial
-  - single file only
-  - assets must come from an url
+  - W1 debugging request desktop explorer...
+  - W2 there is no doc...
+  - W3 missing relevant examples
+  - W4 no interactive tutorial
+  - W5 single file only
+  - W6 assets must come from an url
+  - W7 save&publish on the cloud... for registered user... only
+   -W8 app names are bof bof
+  
+Bugs :
+  - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications
+  - B2 if you change app before saving it... you loose your changes
+  - B3 after some time... the joystick is not responding correctly (see MyProject) 
+  
+  
   
 
 

@@ -30,6 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
 // Écoutez les messages provenant du service worker
 /////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////
+// displayConsoleMessage()
+//
+function displayConsoleMessage(text) {
+  const consoleMessagesDiv = document.getElementById("console-messages");
+  const messageElement = document.createElement("div");
+  // Utilisez innerHTML au lieu de textContent
+  messageElement.innerHTML = text.replace(/\n/g, "<br>");
+  consoleMessagesDiv.appendChild(messageElement);
+}
+//
+// displayConsoleMessage()
+/////////////////////////////////////////////////////////
+
 /////////////////////////////////////////////////////////////
 // editor (cm6)
 //
@@ -83,20 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //
 // DOMContentLoaded Event
-/////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////
-// displayConsoleMessage()
-//
-function displayConsoleMessage(text) {
-  const consoleMessagesDiv = document.getElementById("console-messages");
-  const messageElement = document.createElement("div");
-  // Utilisez innerHTML au lieu de textContent
-  messageElement.innerHTML = text.replace(/\n/g, "<br>");
-  consoleMessagesDiv.appendChild(messageElement);
-}
-//
-// displayConsoleMessage()
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////

@@ -1,7 +1,7 @@
 body {
   font-family: monospace;
   background-color: black;
-  color: #20ff20;
+  /*color: #20ff20;*/
   margin: 0%;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -142,8 +142,8 @@ div {
 }
 
 #appList {
-  color: #20ff20;
-  background-color: #555;
+  /*color: #20ff20;
+  background-color: #555;*/
   border: none;
   padding: 10px;
   margin-right: 10px;
@@ -153,15 +153,6 @@ div {
   text-align: center;
 }
 
-#usernameDisplay {
-  color: #20ff20;
-  background-color: #555;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 #actionButton {
   position: fixed;
