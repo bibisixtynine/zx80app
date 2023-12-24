@@ -3,7 +3,9 @@ let isEditMode = true;
 setEditMode(true);
 
 // utilisateur
-let username = localStorage.getItem("username") || "";
+let username = localStorage.getItem("username");
+if (!username) newUsername()
+
 
 // app
 let currentApp = { name: "", description: "", image: "", code: "" };
@@ -127,12 +129,24 @@ function updateAppList(apps) {
 //
 function askUsername() {
     username = prompt(
-      "Please enter your username:",
+      "Change de Dossier Perso :",
       username
     );
     if (username) {
       localStorage.setItem("username", username);
+      LoadAppList();
     }
+};
+
+function newUsername() {
+    username = prompt(
+      "Nom de Dossier Perso :",
+      username
+    );
+    if (username) {
+      localStorage.setItem("username", username);
+      LoadAppList();
+    } else window.location.reload(true);
   };
 //
 // Settings clicked
@@ -149,8 +163,12 @@ function newProject() {
       currentApp.name
     );
     if (currentApp.name) {
-      //localStorage.setItem("projectName", projectName);
+      console.log(" newProject, currentApp.name = ", currentApp.name)
+      localStorage.setItem("lastEditedApp-"+username, currentApp.name); // Sauvegarder le nom de l'application sélectionnée
+      console.log('NEW PROJECT, STORAGE = ',localStorage.getItem( "lastEditedApp-" + username) )
       Save()
+    } else {
+      console.log(" BUG newProject, currentApp.name = ", currentApp.name)
     }
   };
 //
@@ -175,11 +193,15 @@ function LoadAppList() {
       });
       appList.addEventListener("change", function () {
         LoadApp();
-        localStorage.setItem("lastEditedApp", appList.value); // Sauvegarder le nom de l'application sélectionnée
+        console.log('CHANGE TO ',appList.value)
+        localStorage.setItem("lastEditedApp-"+username, appList.value); // Sauvegarder le nom de l'application sélectionnée
+        console.log('LOAD APP LIST, STORAGE = ',localStorage.getItem( "lastEditedApp-" + username) )
+
         document.getElementById("centered-container").style.display = "none"
       });
       // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-      const lastEditedApp = localStorage.getItem("lastEditedApp");
+      const lastEditedApp = localStorage.getItem("lastEditedApp-"+username);
+      console.log('lasteditedapp = ',lastEditedApp)
       if (lastEditedApp) {
         appList.value = lastEditedApp;
         LoadApp(); // Charger l'application sélectionnée
@@ -232,6 +254,7 @@ function LoadApp() {
         });
       }
       currentApp.name = appData.name;
+      console.log('LOAD => currentApp.name = ',currentApp.name)
     })
     .catch((error) => alert("Erreur lors du chargement de l'app: " + error));
 }
@@ -331,8 +354,10 @@ function setEditMode(isEditMode) {
 // Save()
 //
 function Save() {
-  console.log("save ", currentApp.name);
+  console.log("save currentApp.name =", currentApp.name);
   console.log(" -> username = ", username);
+  localStorage.setItem("lastEditedApp-"+username, currentApp.name)
+  console.log('SAVE, STORAGE = ',localStorage.getItem( "lastEditedApp-" + username) )
 
   const settings = {
     name: currentApp.name,
@@ -352,7 +377,10 @@ function Save() {
     .then((data) => {
       alert(data);
       LoadAppList();
-      localStorage.setItem("lastEditedApp", currentApp.name); // Sauvegarder le nom de l'application sauvegardée
+      console.log('Save... currentApp.name = '+currentApp.name )
+      localStorage.setItem("lastEditedApp-"+username, currentApp.name); // Sauvegarder le nom de l'application sauvegardée
+      console.log('SAVE, STORAGE = ',localStorage.getItem( "lastEditedApp-" + username) )
+
     })
     .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
 }
