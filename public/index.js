@@ -138,11 +138,12 @@ function askUsername() {
 // usernameDisplay clicked
 /////////////////////////////////////////////////////////
 
+
 /////////////////////////////////////////////////////////
 // LoadAppList()
 //
 function LoadAppList() {
-  fetch("/listApps")
+  fetch(`/listApps?user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((apps) => {
       const appList = document.getElementById("appList");
@@ -178,7 +179,7 @@ function LoadAppList() {
 //
 function LoadApp() {
   const selectedApp = document.getElementById("appList").value;
-  fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}`)
+  fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}&user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((appData) => {
       //si le chargement de la page provient d'un retour de run, alors on charge le code dans le localStorage

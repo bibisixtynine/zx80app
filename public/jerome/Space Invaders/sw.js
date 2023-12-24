@@ -1,4 +1,4 @@
-const version = "😜phaser-sprites😜"
+const version = "😜Space Invaders😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/phaser-sprites/",
-  "/phaser-sprites/index.html",
-  "/phaser-sprites/manifest.json",  
-  "/phaser-sprites/app.js",
-  "/phaser-sprites/app.json",  
-  "/phaser-sprites/sw.js",
+  "/Space Invaders/",
+  "/Space Invaders/index.html",
+  "/Space Invaders/manifest.json",  
+  "/Space Invaders/app.js",
+  "/Space Invaders/app.json",  
+  "/Space Invaders/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

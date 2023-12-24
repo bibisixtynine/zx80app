@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/phaser-sprites/",
-    "name": "phaser-sprites",
-    "short_name": "phaser-sprites",
-    "description": "the super cool phaser-sprites App !",
+    "start_url": "/Space Invaders/",
+    "name": "Space Invaders",
+    "short_name": "Space Invaders",
+    "description": "the super cool Space Invaders App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
