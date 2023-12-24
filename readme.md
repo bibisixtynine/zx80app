@@ -1,4 +1,4 @@
-# QWARK ALPHA 0.1a
+# QWARK ALPHA 0.2a
 ## the multi-platform T-PAC, Tiny - Phaser App Creator !
 
 
@@ -15,7 +15,7 @@ What is currently working for now :
   - editing (basic) with codemirror (syntax coloring)
   - run
   - load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
-  - save&publish on the cloud... for registered user
+  - save&publish on the cloud.
   - NEW 231224: create new project from existing
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
