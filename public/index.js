@@ -3,7 +3,9 @@ let isEditMode = true;
 setEditMode(true);
 
 // utilisateur
-let username = localStorage.getItem("username") || "";
+let username = localStorage.getItem("username");
+if (!username) newUsername()
+
 
 // app
 let currentApp = { name: "", description: "", image: "", code: "" };
@@ -127,13 +129,24 @@ function updateAppList(apps) {
 //
 function askUsername() {
     username = prompt(
-      "Please enter your username:",
+      "Change de Dossier Perso :",
       username
     );
     if (username) {
       localStorage.setItem("username", username);
       LoadAppList();
     }
+};
+
+function newUsername() {
+    username = prompt(
+      "Nom de Dossier Perso :",
+      username
+    );
+    if (username) {
+      localStorage.setItem("username", username);
+      LoadAppList();
+    } else window.location.reload(true);
   };
 //
 // Settings clicked

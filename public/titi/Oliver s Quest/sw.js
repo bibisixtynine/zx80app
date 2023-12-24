@@ -1,4 +1,4 @@
-const version = "😜Docs 2😜"
+const version = "😜phaser-game😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/Docs 2/",
-  "/Docs 2/index.html",
-  "/Docs 2/manifest.json",  
-  "/Docs 2/app.js",
-  "/Docs 2/app.json",  
-  "/Docs 2/sw.js",
+  "/phaser-game/",
+  "/phaser-game/index.html",
+  "/phaser-game/manifest.json",  
+  "/phaser-game/app.js",
+  "/phaser-game/app.json",  
+  "/phaser-game/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"
