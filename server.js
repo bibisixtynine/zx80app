@@ -150,6 +150,7 @@ app.post('/save', async (req, res) => {
 
 
 // Route pour lister les applications
+/*
 app.get('/listApps', async (req, res) => {
   const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
   console.log('😎🚀 <' + user + '> requested #listApps# ')
@@ -171,6 +172,60 @@ app.get('/listApps', async (req, res) => {
     res.status(500).send(`😭🛑 Liste des App introuvable`);
   }
 });
+*/
+const path = require('path');
+
+async function copyDirectory(src, dest) {
+  await fsPromises.mkdir(dest, { recursive: true });
+  let entries = await fsPromises.readdir(src, { withFileTypes: true });
+
+  for (let entry of entries) {
+    let srcPath = path.join(src, entry.name);
+    let destPath = path.join(dest, entry.name);
+
+    entry.isDirectory() ? 
+      await copyDirectory(srcPath, destPath) : 
+      await fsPromises.copyFile(srcPath, destPath);
+  }
+}
+
+// Route pour lister les applications
+app.get('/listApps', async (req, res) => {
+  const user = req.query.user;
+  console.log('😎🚀 <' + user + '> requested #listApps# ');
+
+  try {
+    const appsDir = path.join('public', user);
+    console.log('/listApps : appsDir = ' + appsDir);
+
+    // Vérifier si le répertoire de l'utilisateur existe
+    console.log( '-> appsDir <',appsDir,'> exists ?')
+    if (!fs.existsSync(appsDir)) {
+      console.log('-> non... duplication zardoz42 !')
+      // Transférer le contenu de zardoz42 vers le nouveau répertoire
+      const sourceDir = path.join('public', 'zardoz42');
+      await copyDirectory(sourceDir, appsDir);
+    } else {
+      console.log('-> oui... on prépare la liste des dossiers contenu dans ',appsDir,'...')
+    }
+
+    // Lister le contenu du répertoire de l'utilisateur
+    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
+    const dirs = [];
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        dirs.push(entry.name);
+      }
+    }
+
+    res.json(dirs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(`😭🛑 Liste des App introuvable`);
+  }
+});
+
 
 
 // Route pour charger une application spécifique

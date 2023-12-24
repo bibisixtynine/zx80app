@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/MyProject/",
-    "name": "MyProject",
-    "short_name": "MyProject",
-    "description": "the super cool MyProject App !",
+    "start_url": "/Space Invaders 2/",
+    "name": "Space Invaders 2",
+    "short_name": "Space Invaders 2",
+    "description": "the super cool Space Invaders 2 App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
