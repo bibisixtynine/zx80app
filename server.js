@@ -75,17 +75,23 @@ app.use(express.static('public'));
 
 const fsPromises = require('fs').promises;
 
-const authorizedUsers = [ process.env.authorizedUser ]
+const authorizedUsers = process.env.authorizedUser.split(',')
+
+authorizedUsers.forEach(user => {
+    console.log("-> authorised user : ",user);
+});
 
 app.post('/save', async (req, res) => {
   const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
   
   // Vérifier si l'utilisateur est autorisé
+  /*
   if (!authorizedUsers.includes(user)) {
     res.status(403).send("😢🛑\nAccès à <" + user + "> refusé. \nContactez ilboued@proton.me");
     console.log('😢🛑 accès refusé à <' + user + '>')
     return;
-  }
+  }*/
+  
   console.log('😎🚀 accès autorisé à <' + user + '> pour la sauvegarde de ' + req.body.name)
 
   try {
@@ -96,7 +102,7 @@ app.post('/save', async (req, res) => {
     // Si 'name' est vide, lui attribuer la valeur 'tempo'
     name = name.trim() ? name : 'Docs';
     
-    const appDir = 'public/' + name
+    const appDir = 'public/' + user + '/' + name
     
     // 1) Création des fichiers app.json et app.js
     await fsPromises.mkdir(appDir, { recursive: true });
@@ -136,20 +142,21 @@ app.post('/save', async (req, res) => {
     indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
     
-    res.send(`😎🚀 <${name}> sauvegardée avec succcccès`);
+    res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
   } catch (error) {
-    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}>`);
+    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }
 });
 
 
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
-  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+  const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
   console.log('😎🚀 <' + user + '> requested #listApps# ')
   
   try {
-    const appsDir = 'public';
+    const appsDir = 'public/'  + user;
+    console.log('/listApps : appsDir = ' + appsDir)
     const entries = await fsPromises.readdir(appsDir, { withFileTypes: true }); // Utilisez withFileTypes pour obtenir des informations sur les entrées
     const dirs = [];
 
@@ -168,12 +175,12 @@ app.get('/listApps', async (req, res) => {
 
 // Route pour charger une application spécifique
 app.get('/loadApp', async (req, res) => {
-  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
+  const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
   console.log('😎🚀 <' + user + '> loaded ' + req.query.name)
 
   try {
     const appName = req.query.name;
-    const appDir = 'public/' + appName
+    const appDir = 'public/' + user + '/' + appName
     const appData = await fsPromises.readFile(appDir + '/app.json', 'utf8');
     const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
     res.json({ ...JSON.parse(appData), code: appCode });

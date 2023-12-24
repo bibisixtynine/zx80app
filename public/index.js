@@ -123,7 +123,7 @@ function updateAppList(apps) {
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
-// usernameDisplay clicked
+// Settings clicked
 //
 function askUsername() {
     username = prompt(
@@ -135,14 +135,34 @@ function askUsername() {
     }
   };
 //
+// Settings clicked
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// newProjetct clicked
+//
+
+function newProject() {
+    currentApp.name = prompt(
+      "New Project Name :",
+      currentApp.name
+    );
+    if (currentApp.name) {
+      //localStorage.setItem("projectName", projectName);
+      Save()
+    }
+  };
+//
 // usernameDisplay clicked
 /////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////
 // LoadAppList()
 //
 function LoadAppList() {
-  fetch("/listApps")
+  fetch(`/listApps?user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((apps) => {
       const appList = document.getElementById("appList");
@@ -178,7 +198,7 @@ function LoadAppList() {
 //
 function LoadApp() {
   const selectedApp = document.getElementById("appList").value;
-  fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}`)
+  fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}&user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((appData) => {
       //si le chargement de la page provient d'un retour de run, alors on charge le code dans le localStorage
@@ -294,6 +314,7 @@ function setEditMode(isEditMode) {
     document.getElementById("settingsButton"),
     document.getElementById("loadButton"),
     document.getElementById("runButton"),
+    document.getElementById("newProjectButton"),
     document.getElementById("toolbar"),
   ];
   if (isEditMode) {
@@ -364,6 +385,9 @@ document
 document
   .getElementById("settingsButton")
   .addEventListener("click", ()=> askUsername() )
+document
+  .getElementById("newProjectButton")
+  .addEventListener("click", ()=> newProject() )
 //
 // UI
 /////////////////////////////////////////////////////////
