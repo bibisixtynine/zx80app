@@ -14,10 +14,10 @@ What is currently working for now :
   - qwark should work on any platform
   - editing (basic) with codemirror (syntax coloring)
   - run
-  - load from the cloud
+  - load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
   - save&publish on the cloud... for registered user
+  - NEW 231224: create new project from existing
   - fullscreen preview
-  - the store is accessible at quark_web_adress/store 
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
   - a couple of examples works nicely
 
@@ -27,9 +27,12 @@ What is not working/in progress :
   - W3 missing relevant examples
   - W4 no interactive tutorial
   - W5 single file only
-  - W6 assets must come from an url
-  - W7 save&publish on the cloud... for registered user... only
-   -W8 app names are bof bof
+  - W6 assets must come from an url...
+  - XX W7 CORRECTED 231224: save&publish on the cloud... for everyone
+  - XX W8 CORRECTED 231224: app names are ok
+  - W9 load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
+  - W10 delete project not available
+  - W11 Store (REGRESSION)
   
 Bugs :
   - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications

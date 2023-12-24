@@ -123,7 +123,7 @@ function updateAppList(apps) {
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
-// usernameDisplay clicked
+// Settings clicked
 //
 function askUsername() {
     username = prompt(
@@ -132,6 +132,25 @@ function askUsername() {
     );
     if (username) {
       localStorage.setItem("username", username);
+    }
+  };
+//
+// Settings clicked
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// newProjetct clicked
+//
+
+function newProject() {
+    currentApp.name = prompt(
+      "New Project Name :",
+      currentApp.name
+    );
+    if (currentApp.name) {
+      //localStorage.setItem("projectName", projectName);
+      Save()
     }
   };
 //
@@ -295,6 +314,7 @@ function setEditMode(isEditMode) {
     document.getElementById("settingsButton"),
     document.getElementById("loadButton"),
     document.getElementById("runButton"),
+    document.getElementById("newProjectButton"),
     document.getElementById("toolbar"),
   ];
   if (isEditMode) {
@@ -365,6 +385,9 @@ document
 document
   .getElementById("settingsButton")
   .addEventListener("click", ()=> askUsername() )
+document
+  .getElementById("newProjectButton")
+  .addEventListener("click", ()=> newProject() )
 //
 // UI
 /////////////////////////////////////////////////////////
