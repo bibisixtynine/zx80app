@@ -1,6 +1,6 @@
-const version = "💖"
+const version = "😜phaser-basic😜"
 
-const CACHE_NAME = "qwarky-v" + version;
+const CACHE_NAME = "🐘" + version;
 
 // variables de mise en tampon pour les emmissions de message vers la page HTML tant que celle-ci n'est pas ready
 const messageBuffer = [];
@@ -8,16 +8,14 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/index.css",
-  "/index.js",
-  "/index-sw.js",
-  "/index-https.js",
-  "/sw.js",
-  "/cm6.bundle.min.js",
-  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555",
-  "https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540",
+  "/phaser-basic/",
+  "/phaser-basic/index.html",
+  "/phaser-basic/manifest.json",  
+  "/phaser-basic/app.js",
+  "/phaser-basic/app.json",  
+  "/phaser-basic/sw.js",
+  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
+  "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"
 ];
 
@@ -59,45 +57,21 @@ self.addEventListener('activate', event => {
 
 // 3) FETCH : interception des requetes 
 self.addEventListener("fetch", (event) => {
-  // Créer un nouvel objet URL à partir de l'URL de la requête
-  let url = new URL(event.request.url);
-
-  // Utiliser URLSearchParams pour manipuler les paramètres de l'URL
-  let params = new URLSearchParams(url.search);
-
-  // Vérifier si le paramètre 'param' est présent et le supprimer
-  if (params.has('param')) {
-    params.delete('param');
-    // Reconstruire l'URL sans le paramètre 'param'
-    url.search = params.toString();
-  }
-
-  // Utiliser l'URL modifiée pour la correspondance de cache
-  const urlToMatch = url.href;
-
-  postMessageToClients(` 📩 FETCH -> Requête interceptée pour : ${urlToMatch}`);
-
-  // Vérifie si la requête est de type POST
-  if (event.request.method === 'POST') {
-    // Pour les requêtes POST, simplement récupérer la réponse du réseau
-    event.respondWith(fetch(event.request));
-    return;
-  }
-
+  postMessageToClients(` 📩 FETCH -> Requête interceptée pour : ${event.request.url}`);
   event.respondWith(
     fetch(event.request.clone())
       .then((response) => {
         // Si la réponse du réseau est valide, la mettre en cache.
         if (response && response.status === 200 && response.type === "basic") {
-          postMessageToClients(` -> Mise à jour du fichier dans le cache : ${urlToMatch}`);
+          postMessageToClients(` -> Mise à jour du fichier dans le cache : ${event.request.url}`);
           // Cloner la réponse avant de la mettre en cache.
           let responseToCache = response.clone();
           caches.open(CACHE_NAME)
             .then((cache) => {
-              cache.put(urlToMatch, responseToCache);
+              cache.put(event.request, responseToCache);
             })
             .catch((error) => {
-              postMessageToClients(` -> ###ERROR### lors de la mise en cache : ${urlToMatch}. Erreur : ${error}`);
+              postMessageToClients(` -> ###ERROR### lors de la mise en cache : ${event.request.url}. Erreur : ${error}`);
             });
           return response;
         }
@@ -105,23 +79,21 @@ self.addEventListener("fetch", (event) => {
         return response;
       })
       .catch(() => {
-        postMessageToClients(` -> Utilisation du cache suite à une erreur réseau pour : ${urlToMatch}`);
-        // Utilise basePath pour la correspondance de cache
-        return caches.match(urlToMatch)
+        postMessageToClients(` -> Utilisation du cache suite à une erreur réseau pour : ${event.request.url}`);
+        return caches.match(event.request)
           .then((response) => {
             if (response) {
               return response;
             } else {
               // Si la ressource n'est pas dans le cache, on renvoie une erreur.
-              let message = ` -> La ressource n'est pas en cache et la requête réseau a échoué pour : ${urlToMatch}`
-              postMessageToClients(message)
+              let message = ` -> La ressource n'est pas en cache et la requête réseau a échoué pour : ${event.request.url}`
               throw Error(message);
+              postMessageToClients(message)
             }
           });
       })
   );
 });
-
 
 
 // 4) RECEPTION des messages de la page HTML
