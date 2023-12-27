@@ -144,7 +144,6 @@ div {
 #appList {
   color: #20ff20;
   background-color: #444;
-  /*border: solid red 2px;*/
   padding: 10px;
   margin-right: 10px;
   font-size: 18px;
@@ -156,7 +155,7 @@ div {
 
 #actionButton {
   position: fixed;
-  bottom: env(safe-area-inset-bottom);
-  left: 10px;
+  bottom: 20px;
+  left: 20px;
   z-index: 1000;
 }

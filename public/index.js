@@ -139,8 +139,9 @@ function askUsername() {
 };
 
 function newUsername() {
+    username = ""
     username = prompt(
-      "Nom de Dossier Perso :",
+      "Choisissez votre identifiant unique (par exemple votre prenom suivi d'un code à 4 chiffres, sans aucun espace) :",
       username
     );
     if (username) {
@@ -152,6 +153,56 @@ function newUsername() {
 // Settings clicked
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////
+// link clicked
+//
+function displayAppLink() {
+  // Obtenez l'URL de la page courante sans les paramètres
+  const currentPageURL = `${window.location.origin}${window.location.pathname}`;
+
+  // Obtenez le nom d'utilisateur
+  const username = localStorage.getItem("username");
+
+  // Obtenez le nom de l'application courante
+  const appList = document.getElementById("appList");
+  const currentAppName = appList.value;
+
+  // Assurez-vous que l'utilisateur a sélectionné une application valide
+  if (currentAppName) {
+    // Créez l'URL du lien en remplaçant les espaces par "%20"
+    const appLinkURL = `${currentPageURL}${username}/${currentAppName}`.replace(/ /g, "%20");
+
+    // Créez un élément de texte pour afficher le lien
+    const linkTextElement = document.createElement("textarea");
+    linkTextElement.value = appLinkURL;
+    linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
+    linkTextElement.style.position = "absolute";
+    linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
+
+    // Ajoutez le champ de texte à la page
+    document.body.appendChild(linkTextElement);
+
+    // Sélectionnez le texte dans le champ de texte
+    linkTextElement.select();
+
+    // Copiez le texte sélectionné dans le presse-papiers
+    document.execCommand("copy");
+
+    // Supprimez le champ de texte de la page (il n'est plus nécessaire)
+    document.body.removeChild(linkTextElement);
+
+    // Affichez un message pour informer l'utilisateur que le lien a été copié
+    alert("Le lien a été copié dans le presse-papiers.");
+  } else {
+    // Si aucune application n'est sélectionnée, affichez un message d'erreur
+    alert("Veuillez sélectionner une application avant de générer le lien.");
+  }
+}
+
+
+//
+// link clicked
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // newProjetct clicked
@@ -336,7 +387,7 @@ function setEditMode(isEditMode) {
     document.getElementById("zoomOutButton"),
     document.getElementById("settingsButton"),
     document.getElementById("loadButton"),
-    document.getElementById("runButton"),
+    document.getElementById("linkButton"),
     document.getElementById("newProjectButton"),
     document.getElementById("toolbar"),
   ];
@@ -395,9 +446,9 @@ function Save() {
 document
   .getElementById("actionButton")
   .addEventListener("click", ()=> runButtonPressed() )
-document
+/*document
   .getElementById("runButton")
-  .addEventListener("click", ()=> runButtonPressed() )
+  .addEventListener("click", ()=> runButtonPressed() )*/
 document
   .getElementById("saveButton")
   .addEventListener("click", ()=> Save() )
@@ -416,6 +467,9 @@ document
 document
   .getElementById("newProjectButton")
   .addEventListener("click", ()=> newProject() )
+document
+  .getElementById("linkButton")
+  .addEventListener("click", ()=> displayAppLink() )
 //
 // UI
 /////////////////////////////////////////////////////////

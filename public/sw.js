@@ -10,8 +10,12 @@ let isReady = false;
 const urlsToCache = [
   "/",
   "/index.html",
+  "/index.css",
+  "/index.js",
+  "/index-sw.js",
+  "/index-https.js",
   "/sw.js",
-  "https://qwark.glitch.me/cm6.bundle.min.js",
+  "/cm6.bundle.min.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555",
   "https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

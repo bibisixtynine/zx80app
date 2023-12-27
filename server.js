@@ -75,11 +75,11 @@ app.use(express.static('public'));
 
 const fsPromises = require('fs').promises;
 
-const authorizedUsers = process.env.authorizedUser.split(',')
+//const authorizedUsers = process.env.authorizedUser.split(',')
 
-authorizedUsers.forEach(user => {
-    console.log("-> authorised user : ",user);
-});
+//authorizedUsers.forEach(user => {
+//    console.log("-> authorised user : ",user);
+//});
 
 app.post('/save', async (req, res) => {
   const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
@@ -92,7 +92,7 @@ app.post('/save', async (req, res) => {
     return;
   }*/
   
-  console.log('😎🚀 accès autorisé à <' + user + '> pour la sauvegarde de ' + req.body.name)
+  console.log('😎🚀 SAVE()  <',req.body.name,'> par <',user,'>')
 
   try {
     let { name, image, description, code } = req.body;
@@ -117,7 +117,7 @@ app.post('/save', async (req, res) => {
     modelPath = './index_model.html'; // Chemin vers index_model.html
     modelContent = await fsPromises.readFile(modelPath, 'utf8');
     // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, name);
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
     // Sauvegarder le contenu modifié dans index.html
     indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
@@ -127,7 +127,7 @@ app.post('/save', async (req, res) => {
     modelPath = './manifest_model.json'; // Chemin vers manifest_model.json
     modelContent = await fsPromises.readFile(modelPath, 'utf8');
     // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, name);
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
     // Sauvegarder le contenu modifié dans manifest.json
     indexPath = appDir + '/manifest.json'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
@@ -137,7 +137,7 @@ app.post('/save', async (req, res) => {
     modelPath = './sw_model.js'; // Chemin vers sw_model.js
     modelContent = await fsPromises.readFile(modelPath, 'utf8');
     // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, name);
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
     // Sauvegarder le contenu modifié dans sw.js
     indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);

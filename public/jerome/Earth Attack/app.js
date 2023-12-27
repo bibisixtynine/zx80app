@@ -53,7 +53,7 @@ class Bullet extends Phaser.GameObjects.Image
                     duration: 1000,
                 });
                 this.flame.setDepth(1);
-            this.flame.once("complete", () => {
+                this.flame.once("complete", () => {
                 this.flame.destroy();
             });
         }
