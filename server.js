@@ -75,11 +75,11 @@ app.use(express.static('public'));
 
 const fsPromises = require('fs').promises;
 
-const authorizedUsers = process.env.authorizedUser.split(',')
+//const authorizedUsers = process.env.authorizedUser.split(',')
 
-authorizedUsers.forEach(user => {
-    console.log("-> authorised user : ",user);
-});
+//authorizedUsers.forEach(user => {
+//    console.log("-> authorised user : ",user);
+//});
 
 app.post('/save', async (req, res) => {
   const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
