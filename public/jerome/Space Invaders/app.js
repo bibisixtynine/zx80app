@@ -142,6 +142,7 @@ class MainScene extends Phaser.Scene {
         // On fait une grosse explosion et c'est la fin de la partie.
         this.player.setActive(false).setVisible(false);
         this.createExplosion(this.player.x, this.player.y);
+        this.soundExplosion.play();
         this.gameOver();
     }
 
@@ -156,7 +157,11 @@ class MainScene extends Phaser.Scene {
     // 🎮 Game Over !
     gameOver() {
         // Affiche "Game Over" et comment recommencer.
-        this.add.text(200, 150, '💫You killed all Dragons !🚀', { fontSize: '18px', fill: '#fff' });
+        if (this.score>390)
+            this.add.text(200, 150, '💫You killed all Dragons !🚀', { fontSize: '22px', fill: '#fff' })
+        else
+            this.add.text(200, 150, '☠️ You are all Dead !', { fontSize: '22px', fill: '#fff' })
+
         setTimeout( ()=> {
             this.score = 0
             this.bulletsFired = 0
@@ -191,7 +196,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-            gravity: { y: 0 },
+            gravity: { y: 5 },
         },
     },
 };

@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/Docs/",
-    "name": "Docs",
-    "short_name": "Docs",
-    "description": "the super cool Docs App !",
+    "start_url": "/renaud/Docs/",
+    "name": "renaud/Docs",
+    "short_name": "renaud/Docs",
+    "description": "the super cool renaud/Docs App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

@@ -17,6 +17,7 @@ What is currently working for now :
   - load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
   - save&publish on the cloud.
   - NEW 231224: create new project from existing
+  - NEW 231227: create link to share the game
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
   - a couple of examples works nicely
@@ -37,16 +38,10 @@ What is not working/in progress :
 Bugs :
   - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications
   - B2 if you change app before saving it... you loose your changes
-  - B3 after some time... the joystick is not responding correctly (see MyProject) 
+  - B3 after some time... the joystick is not responding correctly (see Space Invaders) 
   - B4 a new version of an app on the server... will erase your version on your machine as soon as you get connected to the internet
   
   
-  
-
-
-## WARNING
-If you remix this app on glitch, you will have to add a .env file with a variable named authorizedUser and the corresponding name (you can choose any value) that will be allowed to save/modify to your server some code... this a very basic identification ! ... for only one user.... no comment...
-
 ## MINIMAL REQUIREMENT TESTED (but may work on older configuration) :
 
 As far as you can install the 2023 (lower version may also work... not tested) Chrome/Chromium/Thorium,microsoft edge/safari(17 on osx) webbrower version 119? or more, or , (with the exception of iOS, where Safari is a must), you'll be able to achieve this easily !
