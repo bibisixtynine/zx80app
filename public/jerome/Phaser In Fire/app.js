@@ -100,6 +100,8 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
+      fixedStep: false,
+      //fps: 60
     },
   },
   scale: {

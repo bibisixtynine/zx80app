@@ -20,6 +20,7 @@ What is currently working for now :
   - NEW 231227: create link to share the game
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
+  - NEW 231230: Error message will display in red
   - a couple of examples works nicely
 
 What is not working/in progress :

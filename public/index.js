@@ -32,13 +32,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/*
 function displayConsoleMessage(text) {
   const consoleMessagesDiv = document.getElementById("console-messages");
   const messageElement = document.createElement("div");
   // Utilisez innerHTML au lieu de textContent
   messageElement.innerHTML = text.replace(/\n/g, "<br>");
   consoleMessagesDiv.appendChild(messageElement);
+}*/
+
+function displayConsoleMessage(...args) {
+  // Récupération de l'élément du DOM où les messages seront affichés
+  const consoleMessagesDiv = document.getElementById("console-messages");
+  
+  // Création de l'élément qui contiendra le message
+  const messageElement = document.createElement("div");
+  
+  // Conversion de tous les arguments en chaîne de caractères
+  // et gestion des objets pour éviter [object Object]
+  const message = args.map(arg => {
+    if (typeof arg === 'object') {
+      try {
+        return JSON.stringify(arg, null, 2); // Joli format pour les objets
+      } catch (error) {
+        return String(arg); // Fallback en cas d'erreur dans la conversion
+      }
+    }
+    return String(arg); // Conversion en chaîne pour les types non-objets
+  }).join(' '); // Séparation des arguments par un espace
+
+  // Insertion du message dans l'élément
+  messageElement.innerHTML = message.replace(/\n/g, "<br>");
+  
+  // Ajout de l'élément au DOM
+  consoleMessagesDiv.appendChild(messageElement);
 }
+
 //
 // Écoutez et afficher les messages provenant du service worker
 /////////////////////////////////////////////////////////////
@@ -198,16 +227,14 @@ function displayAppLink() {
     alert("Veuillez sélectionner une application avant de générer le lien.");
   }
 }
-
-
 //
 // link clicked
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // newProjetct clicked
 //
-
 function newProject() {
     currentApp.name = prompt(
       "New Project Name :",
@@ -265,6 +292,7 @@ function LoadAppList() {
 //
 // LoadAppList()
 /////////////////////////////////////////////////////////
+
 
 /////////////////////////////////////////////////////////
 // LoadApp()
@@ -349,6 +377,7 @@ function runButtonPressed() {
 // runButtonPressed()
 /////////////////////////////////////////////////////////
 
+
 /////////////////////////////////////////////////////////
 // Exec()
 //
@@ -369,6 +398,23 @@ function Exec(uiId, codeId) {
   script.type = "module";
   script.id = "dynamic-module-script";
   script.textContent = code;
+  
+
+  /*script.onerror = (event) => {
+      console.log('⛑️ Erreur lors du chargement du module:', event)
+      displayConsoleMessage('⛑️ Erreur lors du chargement du module:', event);
+  };*/
+  
+  window.onerror = function(message, source, lineno, colno, error) {
+    console.error('⛑️✋ERREUR:\n', message, '\nà:\n', source, '\nligne:', lineno, 'colonne:', colno);
+    displayConsoleMessage('⛑️✋ERREUR:\n', message, '\nà:\n', source, '\nligne:', lineno, 'colonne:', colno);
+};
+
+/*
+  script.onload = () => {
+      displayConsoleMessage('🤩 Module chargé avec succès');
+  };
+*/
 
   // Ajouter le nouveau script au body
   document.body.appendChild(script);
