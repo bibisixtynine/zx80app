@@ -159,3 +159,16 @@ div {
   left: 20px;
   z-index: 1000;
 }
+
+#console-messages {
+  position: fixed;
+  padding: 30px;
+  top: 0px;
+  left: 0px;
+  right: 0px; /* Ajouté pour limiter la largeur à la largeur de l'écran */
+  overflow-x: auto;
+  overflow-y: auto;
+  z-index: 1000;
+  background: #22222222;
+  color: #cc0000;
+}
