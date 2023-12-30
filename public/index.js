@@ -64,6 +64,8 @@ function displayConsoleMessage(...args) {
   // Insertion du message dans l'élément
   messageElement.innerHTML = message.replace(/\n/g, "<br>");
   
+  consoleMessagesDiv.style.right = "0px"
+  
   // Ajout de l'élément au DOM
   consoleMessagesDiv.appendChild(messageElement);
 }
