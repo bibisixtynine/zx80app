@@ -17,7 +17,7 @@ let isAppAlreadyLoadedFromLocalStorage = false;
 //
 // Nécessite un div du type :
 //   <div id="console-messages"></div>
-
+//
 document.addEventListener("DOMContentLoaded", () => {
   navigator.serviceWorker.ready.then((registration) => {
     // RECEPTION des messages du Service Worker :
@@ -31,16 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
     registration.active.postMessage({ type: "ready" });
   });
 });
+//
+// Écoutez et afficher les messages provenant du service worker
+/////////////////////////////////////////////////////////////
 
-/*
-function displayConsoleMessage(text) {
-  const consoleMessagesDiv = document.getElementById("console-messages");
-  const messageElement = document.createElement("div");
-  // Utilisez innerHTML au lieu de textContent
-  messageElement.innerHTML = text.replace(/\n/g, "<br>");
-  consoleMessagesDiv.appendChild(messageElement);
-}*/
 
+/////////////////////////////////////////////////////////////
+// displayConsoleMessage
+//
 function displayConsoleMessage(...args) {
   // Récupération de l'élément du DOM où les messages seront affichés
   const consoleMessagesDiv = document.getElementById("console-messages");
@@ -69,9 +67,8 @@ function displayConsoleMessage(...args) {
   // Ajout de l'élément au DOM
   consoleMessagesDiv.appendChild(messageElement);
 }
-
 //
-// Écoutez et afficher les messages provenant du service worker
+// displayConsoleMessage
 /////////////////////////////////////////////////////////////
 
 
@@ -494,9 +491,6 @@ function Save() {
 document
   .getElementById("actionButton")
   .addEventListener("click", ()=> runButtonPressed() )
-/*document
-  .getElementById("runButton")
-  .addEventListener("click", ()=> runButtonPressed() )*/
 document
   .getElementById("saveButton")
   .addEventListener("click", ()=> Save() )
