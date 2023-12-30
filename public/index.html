@@ -3,6 +3,24 @@
   
   <head>
     <meta charset="utf-8" />
+    
+    <!-- Network load bench -->
+    <script>
+      // Créer un observateur de performance pour suivre les nouvelles ressources chargées
+      let observer = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+              console.log(`🛜 Ressource chargée: ${entry.name} en ${Math.round(entry.duration)}ms`);
+          });
+      });
+
+      // Démarrer l'observation des ressources chargées
+      observer.observe({ entryTypes: ["resource"] });
+
+      // Obtenir des informations sur les ressources déjà chargées
+      performance.getEntriesByType("resource").forEach((resource) => {
+          console.log(`🛜 Ressource DÉJÀ chargée: ${resource.name} en ${Math.round(resource.duration)}ms`);
+      });
+    </script>
 
     <title>The Super Cool Computer</title>
     
@@ -28,7 +46,7 @@
   
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
+    
     <!-- if not running in localhost or file, force running in https mode -->
     <script src="index-https.js"></script>
     
@@ -66,10 +84,6 @@
 
     <div id="centered-container">
           <select id="appList"></select>
-    </div>
-    
-    <div id="appListContainer">
-    <!-- Les applications seront ajoutées ici dynamiquement -->
     </div>
 
     <!-- main script -->    

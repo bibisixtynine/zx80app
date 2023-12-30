@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/phaser-game/",
-    "name": "phaser-game",
-    "short_name": "phaser-game",
-    "description": "the super cool phaser-game App !",
+    "start_url": "/jerome/Oliver s Quest/",
+    "name": "jerome/Oliver s Quest",
+    "short_name": "jerome/Oliver s Quest",
+    "description": "the super cool jerome/Oliver s Quest App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

@@ -156,6 +156,8 @@ div {
 #actionButton {
   position: fixed;
   bottom: 20px;
+  padding: 12px;
+  opacity: 50%;
   left: 20px;
   z-index: 1000;
 }
@@ -165,7 +167,6 @@ div {
   padding: 30px;
   top: 0px;
   left: 0px;
-  right: 0px; /* Ajouté pour limiter la largeur à la largeur de l'écran */
   overflow-x: auto;
   overflow-y: auto;
   z-index: 1000;

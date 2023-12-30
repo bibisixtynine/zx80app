@@ -1,4 +1,4 @@
-const version = "😜phaser-game😜"
+const version = "😜jerome/Oliver s Quest😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/phaser-game/",
-  "/phaser-game/index.html",
-  "/phaser-game/manifest.json",  
-  "/phaser-game/app.js",
-  "/phaser-game/app.json",  
-  "/phaser-game/sw.js",
+  "/jerome/Oliver s Quest/",
+  "/jerome/Oliver s Quest/index.html",
+  "/jerome/Oliver s Quest/manifest.json",  
+  "/jerome/Oliver s Quest/app.js",
+  "/jerome/Oliver s Quest/app.json",  
+  "/jerome/Oliver s Quest/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"
