@@ -21,6 +21,8 @@
 //     d'une scène... de quoi lui donner
 //     la vie étape par étape !
 //  
+
+
 class Example extends Phaser.Scene {
     
   // 1) Chargement des éléments
