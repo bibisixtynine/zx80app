@@ -59,7 +59,7 @@ app.use((req, res, next) => {
     URL: ${req.originalUrl}
     Adresse IP du client: ${req.ip}`;
   
-  console.log(logMessage);  // Affiche l'adresse IP pour chaque requête
+  //console.log(logMessage);  // Affiche l'adresse IP pour chaque requête
   
   next();
 });
@@ -92,12 +92,16 @@ app.post('/save', async (req, res) => {
     return;
   }*/
   
-  console.log('😎🚀 SAVE()  <',req.body.name,'> par <',user,'>')
-
+  //console.log('😎🚀 SAVE()  <',req.body.name,'> par <',user,'>')
+  let now = new Date();
+  now.setHours(now.getHours() + 1); // utc+1
+  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
+  console.log(`${formattedDate} <${user}> 🛑SAVED <${req.body.name}>  🛜${req.ip}`);
+  
   try {
     let { name, image, description, code } = req.body;
     
-    console.log('name = ',name)
+    //console.log('name = ',name)
     
     // Si 'name' est vide, lui attribuer la valeur 'tempo'
     name = name.trim() ? name : 'Docs';
@@ -192,21 +196,21 @@ async function copyDirectory(src, dest) {
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
   const user = req.query.user;
-  console.log('😎🚀 <' + user + '> requested #listApps# ');
+  //console.log('😎🚀 <' + user + '> requested #listApps# ');
 
   try {
     const appsDir = path.join('public', user);
-    console.log('/listApps : appsDir = ' + appsDir);
+    //console.log('/listApps : appsDir = ' + appsDir);
 
     // Vérifier si le répertoire de l'utilisateur existe
-    console.log( '-> appsDir <',appsDir,'> exists ?')
+    //console.log( '-> appsDir <',appsDir,'> exists ?')
     if (!fs.existsSync(appsDir)) {
-      console.log('-> non... duplication zardoz42 !')
+      console.log('🛑 NEW USER <',user,'>')
       // Transférer le contenu de zardoz42 vers le nouveau répertoire
       const sourceDir = path.join('public', 'zardoz42');
       await copyDirectory(sourceDir, appsDir);
     } else {
-      console.log('-> oui... on prépare la liste des dossiers contenu dans ',appsDir,'...')
+      //console.log('-> oui... on prépare la liste des dossiers contenu dans ',appsDir,'...')
     }
 
     // Lister le contenu du répertoire de l'utilisateur
@@ -231,7 +235,10 @@ app.get('/listApps', async (req, res) => {
 // Route pour charger une application spécifique
 app.get('/loadApp', async (req, res) => {
   const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  console.log('😎🚀 <' + user + '> loaded ' + req.query.name)
+  let now = new Date();
+  now.setHours(now.getHours() + 1); // utc+1
+  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
+  console.log(`${formattedDate} <${user}> LOADED <${req.query.name}>  🛜${req.ip}`);
 
   try {
     const appName = req.query.name;
