@@ -18,10 +18,10 @@ vers le bas, puis appuye sur bouton de
 sélection vert pour choisir une App
 
 2) Pour lancer l'App :
-utilise le bouton <\> en bas à gauche
+utilise le bouton </> en bas à gauche
 
 3) Pour revenir au code :
-ré-utilise le bouton <\> en bas à gauche
+ré-utilise le bouton </> en bas à gauche
 
 4) Sauvegarde tes changements avec 
 le bouton nuage fleche vers le haut

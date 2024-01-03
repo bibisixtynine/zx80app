@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/jerome/gps/",
-    "name": "jerome/gps",
-    "short_name": "jerome/gps",
-    "description": "the super cool jerome/gps App !",
+    "start_url": "/Lui102450/Mosquitos Party/",
+    "name": "Lui102450/Mosquitos Party",
+    "short_name": "Lui102450/Mosquitos Party",
+    "description": "the super cool Lui102450/Mosquitos Party App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

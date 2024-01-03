@@ -173,3 +173,17 @@ div {
   background: #22222222;
   color: #cc0000;
 }
+
+#progressBar {
+    position: fixed; /* Fixe la barre de progression par rapport à la fenêtre du navigateur */
+    top: 50%;       /* Positionne la barre au milieu de l'écran verticalement */
+    left: 0;        /* Alignement à gauche de l'écran */
+    width: 100%;    /* Prend toute la largeur de l'écran */
+    height: 20px;   /* Hauteur de la barre de progression */
+    background-color: blue; /* Couleur de la barre de progression */
+    transition: width 0.4s ease; /* Transition fluide pour les changements de largeur */
+    transform: translateY(-50%); /* Déplace la barre vers le haut de moitié de sa hauteur pour un centrage parfait */
+    z-index: 1000;
+
+}
+
