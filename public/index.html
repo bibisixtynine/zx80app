@@ -6,20 +6,106 @@
     
     <!-- Network load bench -->
     <script>
-      // Créer un observateur de performance pour suivre les nouvelles ressources chargées
-      let observer = new PerformanceObserver((list) => {
-          list.getEntries().forEach((entry) => {
-              console.log(`🛜 Ressource chargée: ${entry.name} en ${Math.round(entry.duration)}ms`);
-          });
-      });
+      /*
+      document.addEventListener('DOMContentLoaded', function() {
+        let totalResources = 0;
+        let loadedResources = 0;
 
-      // Démarrer l'observation des ressources chargées
-      observer.observe({ entryTypes: ["resource"] });
+        // Afficher la barre de progression
+        function showProgressBar() {
+            document.getElementById('progressBar').style.display = 'block';
+            document.getElementById('progressBar').style.width = '0%';
+        }
 
-      // Obtenir des informations sur les ressources déjà chargées
-      performance.getEntriesByType("resource").forEach((resource) => {
-          console.log(`🛜 Ressource DÉJÀ chargée: ${resource.name} en ${Math.round(resource.duration)}ms`);
-      });
+        // Mettre à jour la barre de progression
+        function updateProgressBar() {
+            console.log('🛜 UPDATE : load = ',loadedResources," / ",totalResources)
+
+            if (totalResources === 0) return; // Éviter la division par zéro
+            let progress = (loadedResources / totalResources) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+
+            if (loadedResources === totalResources) {
+                setTimeout(hideProgressBar, 500); // Retard pour laisser voir la barre complète
+            }
+        }
+
+        // Cacher la barre de progression
+        function hideProgressBar() {
+            document.getElementById('progressBar').style.display = 'none';
+        }
+
+        // Observateur de performance
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                loadedResources++;
+                updateProgressBar();
+            });
+        });
+
+        // Démarrer l'observation des ressources chargées
+        observer.observe({ entryTypes: ["resource"] });
+
+        // Compter les ressources déjà chargées et les nouvelles
+        performance.getEntriesByType("resource").forEach(() => totalResources++);
+        console.log('🛜 load = ',loadedResources," / ",totalResources)
+
+        showProgressBar();
+        updateProgressBar();
+
+        // Surveiller les nouvelles ressources chargées
+        observer.observe({ entryTypes: ['resource'] });
+      });*/
+      
+document.addEventListener('DOMContentLoaded', function() {
+  return
+    let loadedResources = 0;
+    const resourceTypesToCount = ['fetch', 'img', 'link','icon','xmlhttprequest']; // Types de ressources à compter
+
+    function showProgressBar() {
+        document.getElementById('progressBar').style.display = 'block';
+        document.getElementById('progressBar').style.width = '0%';
+    }
+
+    function updateProgressBar() {
+        let progress = (loadedResources / initialTotalResources) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+
+        if (loadedResources >= initialTotalResources) {
+            setTimeout(hideProgressBar, 500);
+        }
+    }
+
+    function hideProgressBar() {
+        document.getElementById('progressBar').style.display = 'none';
+    }
+
+    let initialTotalResources = performance.getEntriesByType("resource").filter(resource => {
+        return resourceTypesToCount.includes(resource.initiatorType);
+    }).length;
+  
+  
+
+    const observer = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+                         console.log("🛜 entry.initiatorType",entry.initiatorType)
+  
+          if (resourceTypesToCount.includes(entry.initiatorType)) {
+                loadedResources++;
+                updateProgressBar();
+            }
+        });
+    });
+
+    observer.observe({ entryTypes: ["resource"] });
+
+    showProgressBar();
+    updateProgressBar();
+});
+
+
+
+
     </script>
 
     <title>The Super Cool Computer</title>
@@ -76,7 +162,8 @@
       <button id="settingsButton" class="toolbar-btn" title="Paramètres"><i class="fas fa-cog"></i></button>
     </div>
     
-    <button id="actionButton"><i class="fas fa-code"></i></button>
+    <button id="actionButton" class="toolbar-btn"><i class="fas fa-code"></i></button>
+
     
     <div id="editor"></div>
     <div id="ui"><div id="gameContainer" style="width:100%; height:100%"></div></div>
@@ -85,9 +172,13 @@
     <div id="centered-container">
           <select id="appList"></select>
     </div>
+    
+    <div id="progressBar" style="display: none;"></div>
+
 
     <!-- main script -->    
     <script src="index.js"></script>
+    
     
   </body>
   
