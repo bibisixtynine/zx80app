@@ -1,21 +1,32 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// server.js
+//   
+//
+
+// libs
 const express = require('express');
 const cors = require('cors');  // pour que le sw puisse intercepter les fetch des iframe.... ?
-
 const fs = require('fs');
+const fsPromises = require('fs').promises;
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// config
+app.set('trust proxy', true); // permet d'obtenir la véritable adresse de client (??)
+app.use(cors()); // Utilisation de CORS pour toutes les requêtes
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+app.use(express.static('public'));
 
 
-
-// surcharge de la fonction console.log pour qu'elle enregistre tout ce qui affiché dans la console dans un fichier log.txt
-//const fs = require('fs');
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// augmente console.log pour enregistrer aussi dans le repertoire jerome
+//
 const originalConsoleLog = console.log;
-
-// Surcharge de console.log
 console.log = function() {
-    // Construire le message à partir de tous les arguments
     const args = Array.from(arguments);
     const message = args.map(arg => {
         // Convertir les objets en chaînes JSON pour une meilleure lisibilité
@@ -25,97 +36,69 @@ console.log = function() {
             return arg;
         }
     }).join(' ');
-
-    // Enregistrer dans la console
-    originalConsoleLog.apply(console, arguments);
-
-    // Ajouter au fichier log.txt
-    fs.appendFile('log.txt', message + '\n', err => {
+    originalConsoleLog.apply(console, arguments);  // Affiche dans la console
+    fs.appendFile('public/jerome/log/app.js', message + '\n', err => {
         if (err) {
             originalConsoleLog('Erreur lors de l\'écriture dans log.txt:', err);
         }
     });
 };
+//                                                                                    
+// augmente console.log pour enregistrer dans log.txt
+//
+///////////////////////////////////////////////////////////////////////////////////////
 
 
-
-// permet d'obtenir la véritable adresse de client d'après GPT
-app.set('trust proxy', true);
-
-// Middleware pour consigner les adresses IP
-app.use((req, res, next) => {
-  const now = new Date();
-/*
-  const logMessage = `
-    Date/Heure: ${now.toISOString()}
-    Méthode HTTP: ${req.method}
-    URL: ${req.originalUrl}
-    Adresse IP du client: ${req.ip}
-    En-têtes: ${JSON.stringify(req.headers, null, 2)}
-  `;
-  */
-  const logMessage = `
-    Date/Heure: ${now.toISOString()}
-    URL: ${req.originalUrl}
-    Adresse IP du client: ${req.ip}`;
-  
-  //console.log(logMessage);  // Affiche l'adresse IP pour chaque requête
-  
-  next();
-});
-
-// Utilisation de CORS pour toutes les requêtes
-app.use(cors());
-
-app.use(bodyParser.text());
-app.use(bodyParser.json());
-
-// Pour servir des fichiers statiques comme votre fichier HTML
-app.use(express.static('public'));
-
-const fsPromises = require('fs').promises;
-
-//const authorizedUsers = process.env.authorizedUser.split(',')
-
-//authorizedUsers.forEach(user => {
-//    console.log("-> authorised user : ",user);
-//});
-
-app.post('/save', async (req, res) => {
-  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  
-  // Vérifier si l'utilisateur est autorisé
-  /*
-  if (!authorizedUsers.includes(user)) {
-    res.status(403).send("😢🛑\nAccès à <" + user + "> refusé. \nContactez ilboued@proton.me");
-    console.log('😢🛑 accès refusé à <' + user + '>')
-    return;
-  }*/
-  
-  //console.log('😎🚀 SAVE()  <',req.body.name,'> par <',user,'>')
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// formatted log for Load and Save requests
+//
+function formattedLog(user,action,appName,ip) {
   let now = new Date();
   now.setHours(now.getHours() + 1); // utc+1
-  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
-  console.log(`${formattedDate} <${user}> 🛑SAVED <${req.body.name}>  🛜${req.ip}`);
+  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
+
+  // longueur de chaque champ
+  const userFieldLength = 15;  // Longueur pour le nom d'utilisateur
+  const actionFieldLength = 10; // Longueur pour l'action (LOADED, SAVED, etc.)
+  const appNameFieldLength = 20;  // Longueur pour le nom de la requête
+
+  // Ajustage de chaque champ à la longueur
+  let userField = `<${user}>`.padEnd(userFieldLength);
+  let actionField = action.padEnd(actionFieldLength);
+  let nameField = `<${appName}>`.padEnd(appNameFieldLength);
+
+  // Construction et affichage du message de journal
+  console.log(`${formattedDate} ${userField} ${actionField} ${nameField} 🛜${ip}`);
+}
+//                                                                                    
+// formatted log pour Load and Save
+//
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 1) POST /save
+//
+app.post('/save', async (req, res) => {
+  const user = req.body.user; // identifiant de l'utilisateur
+  
+  formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
   
   try {
     let { name, image, description, code } = req.body;
-    
-    //console.log('name = ',name)
-    
-    // Si 'name' est vide, lui attribuer la valeur 'tempo'
+    // Si 'name' est vide, lui attribuer la valeur 'Docs'
     name = name.trim() ? name : 'Docs';
-    
+
     const appDir = 'public/' + user + '/' + name
     
-    // 1) Création des fichiers app.json et app.js
+    // a) Création des fichiers app.json et app.js
     await fsPromises.mkdir(appDir, { recursive: true });
     await fsPromises.writeFile(appDir + '/app.json', JSON.stringify({ name, image, description }));
     await fsPromises.writeFile(appDir + '/app.js', code);
     
-    
-    // 2) Création du index.html
-    
+    // b) Création du index.html
     let modelPath,indexPath,modelContent
     // Lire le contenu de index_model.html
     modelPath = './index_model.html'; // Chemin vers index_model.html
@@ -126,7 +109,7 @@ app.post('/save', async (req, res) => {
     indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
     
-    // 3) Création du manifest.json
+    // c) Création du manifest.json
     // Lire le contenu de manifest_model.json
     modelPath = './manifest_model.json'; // Chemin vers manifest_model.json
     modelContent = await fsPromises.readFile(modelPath, 'utf8');
@@ -136,7 +119,7 @@ app.post('/save', async (req, res) => {
     indexPath = appDir + '/manifest.json'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
 
-    // 4) Création du sw.js
+    // d) Création du sw.js
     // Lire le contenu de sw_model.js
     modelPath = './sw_model.js'; // Chemin vers sw_model.js
     modelContent = await fsPromises.readFile(modelPath, 'utf8');
@@ -151,94 +134,20 @@ app.post('/save', async (req, res) => {
     res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }
 });
+//                                                                                    
+// POST /save
+//
+/////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Route pour lister les applications
-/*
-app.get('/listApps', async (req, res) => {
-  const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  console.log('😎🚀 <' + user + '> requested #listApps# ')
-  
-  try {
-    const appsDir = 'public/'  + user;
-    console.log('/listApps : appsDir = ' + appsDir)
-    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true }); // Utilisez withFileTypes pour obtenir des informations sur les entrées
-    const dirs = [];
-
-    for (const entry of entries) {
-      if (entry.isDirectory()) { // Vérifie si l'entrée est un dossier
-        dirs.push(entry.name);
-      }
-    }
-
-    res.json(dirs);
-  } catch (error) {
-    res.status(500).send(`😭🛑 Liste des App introuvable`);
-  }
-});
-*/
-const path = require('path');
-
-async function copyDirectory(src, dest) {
-  await fsPromises.mkdir(dest, { recursive: true });
-  let entries = await fsPromises.readdir(src, { withFileTypes: true });
-
-  for (let entry of entries) {
-    let srcPath = path.join(src, entry.name);
-    let destPath = path.join(dest, entry.name);
-
-    entry.isDirectory() ? 
-      await copyDirectory(srcPath, destPath) : 
-      await fsPromises.copyFile(srcPath, destPath);
-  }
-}
-
-// Route pour lister les applications
-app.get('/listApps', async (req, res) => {
-  const user = req.query.user;
-  //console.log('😎🚀 <' + user + '> requested #listApps# ');
-
-  try {
-    const appsDir = path.join('public', user);
-    //console.log('/listApps : appsDir = ' + appsDir);
-
-    // Vérifier si le répertoire de l'utilisateur existe
-    //console.log( '-> appsDir <',appsDir,'> exists ?')
-    if (!fs.existsSync(appsDir)) {
-      console.log('🛑 NEW USER <',user,'>')
-      // Transférer le contenu de zardoz42 vers le nouveau répertoire
-      const sourceDir = path.join('public', 'zardoz42');
-      await copyDirectory(sourceDir, appsDir);
-    } else {
-      //console.log('-> oui... on prépare la liste des dossiers contenu dans ',appsDir,'...')
-    }
-
-    // Lister le contenu du répertoire de l'utilisateur
-    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
-    const dirs = [];
-
-    for (const entry of entries) {
-      if (entry.isDirectory()) {
-        dirs.push(entry.name);
-      }
-    }
-
-    res.json(dirs);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(`😭🛑 Liste des App introuvable`);
-  }
-});
-
-
-
-// Route pour charger une application spécifique
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 2) GET /loadApp
+//
 app.get('/loadApp', async (req, res) => {
-  const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  let now = new Date();
-  now.setHours(now.getHours() + 1); // utc+1
-  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
-  console.log(`${formattedDate} <${user}> LOADED <${req.query.name}>  🛜${req.ip}`);
+  const user = req.query.user;
+  
+  formattedLog(user,'LOADED',req.query.name,req.ip)
 
   try {
     const appName = req.query.name;
@@ -250,11 +159,70 @@ app.get('/loadApp', async (req, res) => {
     res.status(500).send(`😭🛑 App introuvable`);
   }
 });
+//                                                                                    
+// GET /loadApp
+//
+///////////////////////////////////////////////////////////////////////////////////////////
 
-// Route pour charger le store
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 3) GET /lispApps
+//
+const path = require('path');
+
+async function copyDirectory(src, dest) {
+  await fsPromises.mkdir(dest, { recursive: true });
+  let entries = await fsPromises.readdir(src, { withFileTypes: true });
+  for (let entry of entries) {
+    let srcPath = path.join(src, entry.name);
+    let destPath = path.join(dest, entry.name);
+    entry.isDirectory() ? 
+      await copyDirectory(srcPath, destPath) : 
+      await fsPromises.copyFile(srcPath, destPath);
+  }
+}
+
+// Route pour lister les applications
+app.get('/listApps', async (req, res) => {
+  const user = req.query.user;
+  try {
+    const appsDir = path.join('public', user);
+    // nouveau user ? => création d'un nouveau répertoire et transfert du contenu
+    // du répertoire modèle zardoz42
+    if (!fs.existsSync(appsDir)) {
+      formattedLog(user,'is NEW 🤩','',req.ip)
+      // Transférer le contenu de zardoz42 vers le nouveau répertoire
+      const sourceDir = path.join('public', 'zardoz42');
+      await copyDirectory(sourceDir, appsDir);
+    }
+    // Lister le contenu du répertoire du user
+    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
+    const dirs = [];
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        dirs.push(entry.name);
+      }
+    }
+    res.json(dirs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(`😭🛑 Liste des App introuvable`);
+  }
+});
+//                                                                                    
+// GET /lispApps
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 4) GET /store
+//
 app.get('/store', async (req, res) => {
   try {
-    const appsDir = 'public';
+    const appsDir = 'public/zardoz42';
     const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
     let html = `
     <html>
@@ -289,40 +257,47 @@ app.get('/store', async (req, res) => {
             margin: 0%;
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
           }
-          #appButton {
+          * {
+            box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale de l'élément */
+            margin: 0; /* Réinitialise les marges */
+            padding: 0; /* Réinitialise les paddings */
+          }
+          .container-interne {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+            gap: 25px; /* Espacement fixe entre les éléments */
+            justify-content: center;
+          }
+          .appButton {
             border: 2px solid #20FF20;
             border-radius: 10px;
             background-color: #001000;
             color: #20FF20;
             width: 100px;
             height: 100px;
-            margin: 10px auto;
-            padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            overflow: hidden;
-            word-wrap: break-word;
           }
         </style>
       </head>
       <body>
-        <h1 style="text-align: center;">Qwark Store v10</h1>
-        <div style="display: flex; flex-wrap: wrap;">
+        <h1 style="text-align: center; margin:20px;">Qwark Store v10</h1>
+        <div class="container-interne">
     `
 
     for (const entry of entries) {
-      if (entry.isDirectory()) {
-        // Création d'un carré cliquable pour chaque application
-        html += `
-                <div id="appButton">
-                <a href="/${entry.name}/index.html" target="_blank" style="text-decoration: none; color: #20FF20; font-family: monospace; font-size: 14px; line-height: 1.2; width: 100%;">
-                  ${entry.name}
-                </a>
-                </div>
-                `;
-      }
+        if (entry.isDirectory()) {
+            html += `
+                    <div class="appButton">
+                        <a href="/zardoz42/${entry.name}/index.html" target="_blank" style="text-decoration: none; color: #20FF20; font-family: monospace; font-size: 14px; line-height: 1.2; width: 100%;">
+                            ${entry.name}
+                        </a>
+                    </div>
+                    `;
+        }
     }
 
     html += '</div></body></html>';
@@ -332,9 +307,21 @@ app.get('/store', async (req, res) => {
     res.status(500).send(`😭🛑 Le Store est cassé`);
   }
 });
+//                                                                                    
+// GET /store
+//
+///////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// SERVER START
+//
 app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port}`);
+    originalConsoleLog(`Serveur démarré sur le port ${port}`);
 });
+//                                                                                    
+// SERVER START
+//
+///////////////////////////////////////////////////////////////////////////////////////////

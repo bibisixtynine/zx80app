@@ -1,17 +1,28 @@
 {
-  "name": "mon-editeur-code",
-  "version": "1.0.0",
-  "description": "Un éditeur de code avec sauvegarde et chargement sur le serveur",
+  "name": "qwark",
+  "version": "0.0.2",
+  "description": "A Phaser 3 webApp creator",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "author": {
+    "name": "bibi69",
+    "email": "ilboued@proton.me",
+    "url": "https://zx80.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bibisixtynine/qwark.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5"
   },
   "engines": {
-    "node": "18.x"
+    "node": "10.x"
   }
 }
+

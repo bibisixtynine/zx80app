@@ -1,4 +1,4 @@
-const version = "😜jerome/Sound Player😜"
+const version = "😜zardoz42/Earth Attack😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/jerome/Sound Player/",
-  "/jerome/Sound Player/index.html",
-  "/jerome/Sound Player/manifest.json",  
-  "/jerome/Sound Player/app.js",
-  "/jerome/Sound Player/app.json",  
-  "/jerome/Sound Player/sw.js",
+  "/zardoz42/Earth Attack/",
+  "/zardoz42/Earth Attack/index.html",
+  "/zardoz42/Earth Attack/manifest.json",  
+  "/zardoz42/Earth Attack/app.js",
+  "/zardoz42/Earth Attack/app.json",  
+  "/zardoz42/Earth Attack/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"
