@@ -13,7 +13,18 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// surcharge de la fonction console.log pour qu'elle enregistre tout ce qui affiché dans la console dans un fichier log.txt
+// config
+app.set('trust proxy', true); // permet d'obtenir la véritable adresse de client (??)
+app.use(cors()); // Utilisation de CORS pour toutes les requêtes
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// augmente console.log pour enregistrer aussi dans le repertoire jerome
+//
 const originalConsoleLog = console.log;
 console.log = function() {
     const args = Array.from(arguments);
@@ -25,32 +36,45 @@ console.log = function() {
             return arg;
         }
     }).join(' ');
-    originalConsoleLog.apply(console, arguments);  // Enregistrer dans la console
-    fs.appendFile('log.txt', message + '\n', err => {
+    originalConsoleLog.apply(console, arguments);  // Affiche dans la console
+    fs.appendFile('public/jerome/log/app.js', message + '\n', err => {
         if (err) {
             originalConsoleLog('Erreur lors de l\'écriture dans log.txt:', err);
         }
     });
 };
+//                                                                                    
+// augmente console.log pour enregistrer dans log.txt
+//
+///////////////////////////////////////////////////////////////////////////////////////
 
-// permet d'obtenir la véritable adresse de client d'après GPT
-app.set('trust proxy', true);
 
-// Middleware pour consigner les adresses IP
-/*
-app.use((req, res, next) => {
-  const now = new Date();
-  const logMessage = `
-    Date/Heure: ${now.toISOString()}
-    URL: ${req.originalUrl}
-    Adresse IP du client: ${req.ip}`;
-  next();
-});*/
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// formatted log for Load and Save requests
+//
+function formattedLog(user,action,appName,ip) {
+  let now = new Date();
+  now.setHours(now.getHours() + 1); // utc+1
+  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
 
-app.use(cors()); // Utilisation de CORS pour toutes les requêtes
-app.use(bodyParser.text());
-app.use(bodyParser.json());
-app.use(express.static('public'));
+  // longueur de chaque champ
+  const userFieldLength = 15;  // Longueur pour le nom d'utilisateur
+  const actionFieldLength = 10; // Longueur pour l'action (LOADED, SAVED, etc.)
+  const appNameFieldLength = 20;  // Longueur pour le nom de la requête
+
+  // Ajustage de chaque champ à la longueur
+  let userField = `<${user}>`.padEnd(userFieldLength);
+  let actionField = action.padEnd(actionFieldLength);
+  let nameField = `<${appName}>`.padEnd(appNameFieldLength);
+
+  // Construction et affichage du message de journal
+  console.log(`${formattedDate} ${userField} ${actionField} ${nameField} 🛜${ip}`);
+}
+//                                                                                    
+// formatted log pour Load and Save
+//
+///////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -58,15 +82,13 @@ app.use(express.static('public'));
 // 1) POST /save
 //
 app.post('/save', async (req, res) => {
-  const user = req.body.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  let now = new Date();
-  now.setHours(now.getHours() + 1); // utc+1
-  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
-  console.log(`${formattedDate} <${user}> 🛑SAVED <${req.body.name}>  🛜${req.ip}`);
+  const user = req.body.user; // identifiant de l'utilisateur
+  
+  formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
   
   try {
     let { name, image, description, code } = req.body;
-    // Si 'name' est vide, lui attribuer la valeur 'tempo'
+    // Si 'name' est vide, lui attribuer la valeur 'Docs'
     name = name.trim() ? name : 'Docs';
 
     const appDir = 'public/' + user + '/' + name
@@ -118,9 +140,34 @@ app.post('/save', async (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 2) GET /loadApp
+//
+app.get('/loadApp', async (req, res) => {
+  const user = req.query.user;
+  
+  formattedLog(user,'LOADED',req.query.name,req.ip)
+
+  try {
+    const appName = req.query.name;
+    const appDir = 'public/' + user + '/' + appName
+    const appData = await fsPromises.readFile(appDir + '/app.json', 'utf8');
+    const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
+    res.json({ ...JSON.parse(appData), code: appCode });
+  } catch (error) {
+    res.status(500).send(`😭🛑 App introuvable`);
+  }
+});
+//                                                                                    
+// GET /loadApp
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// 2) GET /lispApps
+// 3) GET /lispApps
 //
 const path = require('path');
 
@@ -144,7 +191,7 @@ app.get('/listApps', async (req, res) => {
     // nouveau user ? => création d'un nouveau répertoire et transfert du contenu
     // du répertoire modèle zardoz42
     if (!fs.existsSync(appsDir)) {
-      console.log('🛑 NEW USER <',user,'>')
+      formattedLog(user,'is NEW 🤩','',req.ip)
       // Transférer le contenu de zardoz42 vers le nouveau répertoire
       const sourceDir = path.join('public', 'zardoz42');
       await copyDirectory(sourceDir, appsDir);
@@ -165,32 +212,6 @@ app.get('/listApps', async (req, res) => {
 });
 //                                                                                    
 // GET /lispApps
-//
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                    
-// 3) GET /loadApp
-//
-app.get('/loadApp', async (req, res) => {
-  const user = req.query.user; // Ou obtenez l'identifiant de l'utilisateur via un jeton d'authentification
-  let now = new Date();
-  now.setHours(now.getHours() + 1); // utc+1
-  let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16) + "(UTC+1)";
-  console.log(`${formattedDate} <${user}> LOADED <${req.query.name}>  🛜${req.ip}`);
-  try {
-    const appName = req.query.name;
-    const appDir = 'public/' + user + '/' + appName
-    const appData = await fsPromises.readFile(appDir + '/app.json', 'utf8');
-    const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
-    res.json({ ...JSON.parse(appData), code: appCode });
-  } catch (error) {
-    res.status(500).send(`😭🛑 App introuvable`);
-  }
-});
-//                                                                                    
-// 3) GET /loadApp
 //
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,40 +257,47 @@ app.get('/store', async (req, res) => {
             margin: 0%;
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
           }
-          #appButton {
+          * {
+            box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur/hauteur totale de l'élément */
+            margin: 0; /* Réinitialise les marges */
+            padding: 0; /* Réinitialise les paddings */
+          }
+          .container-interne {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+            gap: 25px; /* Espacement fixe entre les éléments */
+            justify-content: center;
+          }
+          .appButton {
             border: 2px solid #20FF20;
             border-radius: 10px;
             background-color: #001000;
             color: #20FF20;
             width: 100px;
             height: 100px;
-            margin: 10px auto;
-            padding: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            overflow: hidden;
-            word-wrap: break-word;
           }
         </style>
       </head>
       <body>
-        <h1 style="text-align: center;">Qwark Store v10</h1>
-        <div style="display: flex; flex-wrap: wrap;">
+        <h1 style="text-align: center; margin:20px;">Qwark Store v10</h1>
+        <div class="container-interne">
     `
 
     for (const entry of entries) {
-      if (entry.isDirectory()) {
-        // Création d'un carré cliquable pour chaque application
-        html += `
-                <div id="appButton">
-                <a href="/zardoz42/${entry.name}/index.html" target="_blank" style="text-decoration: none; color: #20FF20; font-family: monospace; font-size: 14px; line-height: 1.2; width: 100%;">
-                  ${entry.name}
-                </a>
-                </div>
-                `;
-      }
+        if (entry.isDirectory()) {
+            html += `
+                    <div class="appButton">
+                        <a href="/zardoz42/${entry.name}/index.html" target="_blank" style="text-decoration: none; color: #20FF20; font-family: monospace; font-size: 14px; line-height: 1.2; width: 100%;">
+                            ${entry.name}
+                        </a>
+                    </div>
+                    `;
+        }
     }
 
     html += '</div></body></html>';
@@ -291,7 +319,7 @@ app.get('/store', async (req, res) => {
 // SERVER START
 //
 app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port}`);
+    originalConsoleLog(`Serveur démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START
