@@ -284,7 +284,7 @@ app.get('/store', async (req, res) => {
         </style>
       </head>
       <body>
-        <h1 style="text-align: center; margin:20px;">Qwark Store v10</h1>
+        <h1 style="text-align: center; margin:20px;">Qwark Store</h1>
         <div class="container-interne">
     `
 

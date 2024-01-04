@@ -1,6 +1,5 @@
-
-
-
+let el = document.getElementById('gameContainer')
+el.innerHtml = `
 
 ##################
 # DOSSIER JEROME #
@@ -66,4 +65,4 @@ ps: Ce type d'app est une PWA, une Progressive Web App.
 Amuses toi bien, et partage tes créations !
 
 Avanti !
-        
+`
