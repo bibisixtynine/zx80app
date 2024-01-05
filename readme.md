@@ -1,4 +1,4 @@
-# QWARK ALPHA 0.2a
+# QWARK ALPHA 0.0.3
 ## the multi-platform T-PAC, Tiny - Phaser App Creator !
 
 
@@ -15,26 +15,22 @@ What is currently working for now :
   - editing (basic) with codemirror (syntax coloring)
   - run
   - load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
-  - save&publish on the cloud.
-  - NEW 231224: create new project from existing
-  - NEW 231227: create link to share the game
+  - create new project from existing
+  - create link to share the game
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
-  - NEW 231230: Error message will display in red
+  - Error message will display in red
   - a couple of examples works nicely
 
 What is not working/in progress :
   - W1 debugging request desktop explorer...
-  - W2 there is no doc...
+  - W2 there is nearly no doc...
   - W3 missing relevant examples
   - W4 no interactive tutorial
   - W5 single file only
   - W6 assets must come from an url...
-  - XX W7 CORRECTED 231224: save&publish on the cloud... for everyone
-  - XX W8 CORRECTED 231224: app names are ok
   - W9 load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
   - W10 delete project not available
-  - W11 Store (REGRESSION)
   
 Bugs :
   - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications
