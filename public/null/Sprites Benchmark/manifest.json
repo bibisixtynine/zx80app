@@ -1,12 +1,12 @@
 {
     "theme_color": "#000000",
     "background_color": "#000000",
-    "display": "fullscreen",
+    "display": "standalone",
     "scope": "/",
-    "start_url": "/zardoz42/Mosquitos Party/",
-    "name": "zardoz42/Mosquitos Party",
-    "short_name": "zardoz42/Mosquitos Party",
-    "description": "the super cool zardoz42/Mosquitos Party App !",
+    "start_url": "/zardoz42/Sprites Benchmark/",
+    "name": "zardoz42/Sprites Benchmark",
+    "short_name": "zardoz42/Sprites Benchmark",
+    "description": "the super cool zardoz42/Sprites Benchmark App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

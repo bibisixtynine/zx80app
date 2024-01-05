@@ -6,10 +6,10 @@ setEditMode(true);
 let username = localStorage.getItem("username");
 if (!username) newUsername()
 
-
 // app
 let currentApp = { name: "", description: "", image: "", code: "" };
 let isAppAlreadyLoadedFromLocalStorage = false;
+let appList = []
 
 
 /////////////////////////////////////////////////////////////
@@ -283,9 +283,9 @@ function LoadAppList() {
       console.log('lasteditedapp = ',lastEditedApp)
       if (lastEditedApp) {
         appList.value = lastEditedApp;
-        LoadApp(); // Charger l'application sélectionnée
+        LoadApp(lastEditedApp); // Charger l'application sélectionnée
       } else {
-        LoadApp(); // Charger l'application par défaut
+        LoadApp("Docs"); // Charger l'application par défaut
       }
     })
     .catch((error) => alert("Erreur lors du chargement de la liste: " + error));
@@ -295,11 +295,12 @@ function LoadAppList() {
 /////////////////////////////////////////////////////////
 
 
+
 /////////////////////////////////////////////////////////
 // LoadApp()
 //
-function LoadApp() {
-  const selectedApp = document.getElementById("appList").value;
+function LoadApp(selectedApp) {
+  //const selectedApp = document.getElementById("appList").value;
   fetch(`/loadApp?name=${encodeURIComponent(selectedApp)}&user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((appData) => {
@@ -489,6 +490,49 @@ function Save() {
 
 
 /////////////////////////////////////////////////////////
+// displayStore()
+//
+function displayStore(apps) {
+  fetch(`/listApps?user=${encodeURIComponent(username)}`)
+    .then((response) => response.json())
+    .then((apps) => {
+      const container = document.querySelector('.appStore-container'); // Assurez-vous que cette classe correspond à votre conteneur HTML.
+      container.innerHTML = ''; // Nettoie le contenu actuel du conteneur.
+      apps.forEach(app => {
+          // Crée un élément div pour chaque application.
+          const appDiv = document.createElement('div');
+          appDiv.className = 'appButton';
+          appDiv.style.cursor = 'pointer'; // Ajoute un curseur de pointeur pour indiquer qu'il s'agit d'un élément cliquable.
+          // Ajoute un écouteur d'événements pour gérer les clics sur le bouton de l'application.
+          appDiv.addEventListener('click', () => {
+              container.innerHTML = ''; // Nettoie le contenu actuel du conteneur.
+              LoadApp(app); // Appelle la fonction loadApp avec le nom de l'application.
+          });
+          // Ajoute le nom de l'application au div.
+          appDiv.innerText = app;
+          appDiv.style.textAlign = 'center';
+          appDiv.style.color = '#20FF20';
+          appDiv.style.fontFamily = 'monospace';
+          appDiv.style.fontSize = '14px';
+          appDiv.style.lineHeight = '1.2';
+          appDiv.style.width = '100%';
+          // Ajoute le div de l'application au conteneur.
+          container.appendChild(appDiv);
+      });
+    })
+    .catch((error) => alert("Erreur lors du chargement de la liste: " + error));
+}
+//
+// displayStore()
+/////////////////////////////////////////////////////////
+
+// Exemple d'utilisation:
+// Vous pouvez appeler cette fonction après avoir récupéré les données des applications.
+// generateAppButtons([{ name: 'App1' }, { name: 'App2' }]); // Exemple de données.
+
+
+
+/////////////////////////////////////////////////////////
 // UI
 //
 document
@@ -505,7 +549,8 @@ document
   .addEventListener("click", ()=> changeFontSize(-1) )
 document
   .getElementById("loadButton")
-  .addEventListener("click", ()=> {document.getElementById("centered-container").style.display = "flex"} )
+//  .addEventListener("click", ()=> {document.getElementById("centered-container").style.display = "flex"} )
+  .addEventListener("click", ()=> displayStore([{name:"Space Invaders"},{name:"log"},{name:"Space Invaders"},{name:"log"},{name:"Space Invaders"},{name:"log"},{name:"Space Invaders"},{name:"log"},{name:"Space Invaders"},{name:"log"}]) )
 document
   .getElementById("settingsButton")
   .addEventListener("click", ()=> askUsername() )
