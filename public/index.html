@@ -3,110 +3,6 @@
   
   <head>
     <meta charset="utf-8" />
-    
-    <!-- Network load bench -->
-    <script>
-      /*
-      document.addEventListener('DOMContentLoaded', function() {
-        let totalResources = 0;
-        let loadedResources = 0;
-
-        // Afficher la barre de progression
-        function showProgressBar() {
-            document.getElementById('progressBar').style.display = 'block';
-            document.getElementById('progressBar').style.width = '0%';
-        }
-
-        // Mettre à jour la barre de progression
-        function updateProgressBar() {
-            console.log('🛜 UPDATE : load = ',loadedResources," / ",totalResources)
-
-            if (totalResources === 0) return; // Éviter la division par zéro
-            let progress = (loadedResources / totalResources) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-
-            if (loadedResources === totalResources) {
-                setTimeout(hideProgressBar, 500); // Retard pour laisser voir la barre complète
-            }
-        }
-
-        // Cacher la barre de progression
-        function hideProgressBar() {
-            document.getElementById('progressBar').style.display = 'none';
-        }
-
-        // Observateur de performance
-        const observer = new PerformanceObserver((list) => {
-            list.getEntries().forEach((entry) => {
-                loadedResources++;
-                updateProgressBar();
-            });
-        });
-
-        // Démarrer l'observation des ressources chargées
-        observer.observe({ entryTypes: ["resource"] });
-
-        // Compter les ressources déjà chargées et les nouvelles
-        performance.getEntriesByType("resource").forEach(() => totalResources++);
-        console.log('🛜 load = ',loadedResources," / ",totalResources)
-
-        showProgressBar();
-        updateProgressBar();
-
-        // Surveiller les nouvelles ressources chargées
-        observer.observe({ entryTypes: ['resource'] });
-      });*/
-      
-document.addEventListener('DOMContentLoaded', function() {
-  return
-    let loadedResources = 0;
-    const resourceTypesToCount = ['fetch', 'img', 'link','icon','xmlhttprequest']; // Types de ressources à compter
-
-    function showProgressBar() {
-        document.getElementById('progressBar').style.display = 'block';
-        document.getElementById('progressBar').style.width = '0%';
-    }
-
-    function updateProgressBar() {
-        let progress = (loadedResources / initialTotalResources) * 100;
-        document.getElementById('progressBar').style.width = `${progress}%`;
-
-        if (loadedResources >= initialTotalResources) {
-            setTimeout(hideProgressBar, 500);
-        }
-    }
-
-    function hideProgressBar() {
-        document.getElementById('progressBar').style.display = 'none';
-    }
-
-    let initialTotalResources = performance.getEntriesByType("resource").filter(resource => {
-        return resourceTypesToCount.includes(resource.initiatorType);
-    }).length;
-  
-  
-
-    const observer = new PerformanceObserver((list) => {
-        list.getEntries().forEach((entry) => {
-                         console.log("🛜 entry.initiatorType",entry.initiatorType)
-  
-          if (resourceTypesToCount.includes(entry.initiatorType)) {
-                loadedResources++;
-                updateProgressBar();
-            }
-        });
-    });
-
-    observer.observe({ entryTypes: ["resource"] });
-
-    showProgressBar();
-    updateProgressBar();
-});
-
-
-
-
-    </script>
 
     <title>The Super Cool Computer</title>
     
@@ -149,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   
   <body>
-    
+
     <!-- UI -->    
     <div id="toolbar" class="toolbar">
       <button id="loadButton" class="toolbar-btn" title="Charger une application"><i class="fas fa-cloud-download-alt"></i></button>
@@ -173,7 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
           <select id="appList"></select>
     </div>
     
+    
     <div id="progressBar" style="display: none;"></div>
+
+    <div class="appStore-container"></div>
 
 
     <!-- main script -->    
