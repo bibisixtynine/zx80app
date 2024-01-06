@@ -469,8 +469,13 @@ function displayStore() {
     .then((apps) => {
       // Cacher les boutons & cm6 en mode exécution
       setEditMode(false);
+      // Cacher l'editeur
       const editorElement = document.getElementById("editor");
       if (editorElement) editorElement.style.display = 'none';
+      // Cacher le bouton actionButton
+      const actionButtonElement = document.getElementById("actionButton");
+      if (actionButtonElement) actionButtonElement.style.display = 'none';
+
       const container = document.querySelector(".appsList-container"); // Assurez-vous que cette classe correspond à votre conteneur HTML.
       container.innerHTML = `<h1 style="color:green;">${username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach((app) => {
@@ -482,8 +487,12 @@ function displayStore() {
         appDiv.addEventListener("click", () => {
           container.innerHTML = ""; // Nettoie le contenu actuel du conteneur.
           setEditMode(true);
+          // Afficher l'editeur
           const editorElement = document.getElementById("editor");
           if (editorElement) editorElement.style.display = 'block';
+          // Afficher le bouton actionButton
+          const actionButtonElement = document.getElementById("actionButton");
+          if (actionButtonElement) actionButtonElement.style.display = 'block';
           LoadApp(app); // Appelle la fonction loadApp avec le nom de l'application.
         });
         // Ajoute le nom de l'application au div.
