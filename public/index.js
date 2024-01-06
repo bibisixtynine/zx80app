@@ -193,14 +193,10 @@ function displayAppLink() {
   // Obtenez le nom d'utilisateur
   const username = localStorage.getItem("username");
 
-  // Obtenez le nom de l'application courante
-  const appList = document.getElementById("appList");
-  const currentAppName = appList.value;
-
   // Assurez-vous que l'utilisateur a sélectionné une application valide
-  if (currentAppName) {
+  if (currentApp.name) {
     // Créez l'URL du lien en remplaçant les espaces par "%20"
-    const appLinkURL = `${currentPageURL}${username}/${currentAppName}`.replace(/ /g, "%20");
+    const appLinkURL = `${currentPageURL}${username}/${currentApp.name}`.replace(/ /g, "%20");
 
     // Créez un élément de texte pour afficher le lien
     const linkTextElement = document.createElement("textarea");
@@ -222,7 +218,7 @@ function displayAppLink() {
     document.body.removeChild(linkTextElement);
 
     // Affichez un message pour informer l'utilisateur que le lien a été copié
-    alert("Le lien a été copié dans le presse-papiers.");
+    alert(`Le lien vers <${currentApp.name}> a été copié dans le presse-papiers.`);
   } else {
     // Si aucune application n'est sélectionnée, affichez un message d'erreur
     alert("Veuillez sélectionner une application avant de générer le lien.");
@@ -335,6 +331,8 @@ function LoadApp(selectedApp) {
         });
       }
       currentApp.name = appData.name;
+      localStorage.setItem("lastEditedApp-"+username, currentApp.name)
+
       console.log('LOAD => currentApp.name = ',currentApp.name)
     })
     .catch((error) => alert("Erreur lors du chargement de l'app: " + error));
@@ -369,7 +367,6 @@ function runButtonPressed() {
     // Rechargez la page avec la nouvelle URL (si modifiée) ou l'URL actuelle
     window.location.href = url.toString();
 
-    //this.textContent = "Run";
     isEditMode = true;
     setEditMode(true);
   }
@@ -496,8 +493,10 @@ function displayStore(apps) {
   fetch(`/listApps?user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((apps) => {
-      const container = document.querySelector('.appStore-container'); // Assurez-vous que cette classe correspond à votre conteneur HTML.
-      container.innerHTML = ''; // Nettoie le contenu actuel du conteneur.
+      // Cacher les boutons en mode exécution
+      setEditMode(false);
+      const container = document.querySelector('.appsList-container'); // Assurez-vous que cette classe correspond à votre conteneur HTML.
+      container.innerHTML = `<h1 style="color:green;">${username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach(app => {
           // Crée un élément div pour chaque application.
           const appDiv = document.createElement('div');
@@ -506,6 +505,7 @@ function displayStore(apps) {
           // Ajoute un écouteur d'événements pour gérer les clics sur le bouton de l'application.
           appDiv.addEventListener('click', () => {
               container.innerHTML = ''; // Nettoie le contenu actuel du conteneur.
+              setEditMode(true);
               LoadApp(app); // Appelle la fonction loadApp avec le nom de l'application.
           });
           // Ajoute le nom de l'application au div.
