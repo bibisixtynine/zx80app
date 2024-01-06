@@ -3,74 +3,82 @@
 
 
 
+// App Doc
+
+////////////////////////////////
+//                            //
+//     A FAIRE EN PREMIER     //
+//                            //
+//    Appuye sur le bouton    //
+//                            //
+//            </>             //
+//                            //
+//    en BAS à GAUCHE pour    //
+// lancer cette App d'intro ! //
+//                            //
+////////////////////////////////
+
+
 let el = document.getElementById('gameContainer')
 el.style.whiteSpace = 'pre-wrap'
 el.style.overflow = 'auto'
-    
+el.style.margin = 'auto'
+el.style.maxWidth = '500px'
 el.innerHTML = `
+<h1 style="color:yellow">
+-----
+Qwark
+-----
+</h1>
+<h1 style="color:orange">
+Bravo !
+</h1>
+Tu viens de lancer une première App conçue avec <span style="color:yellow">Qwark</span> en appuyant sur le bouton <i style="color:grey" class="fas fa-code"></i> !
+<h2 style="color:orange">
+Quark ? Quésaco ?
+</h2>
 
-##################
-# DOSSIER JEROME #
-##################
+Quark est une boîte à outils très pratique pour partager facilement sur ton tel, ta tablette ou ton ordi des mini-jeux... que tu auras créés pour les drôles de 7 à 77 ans !
 
----------------
-Qwark Alpha 0.3
----------------
-La boîte à outils pour créer et
-partager des Apps récréatives
-non addictives... pour les gamins et
-gamines de 7 à 77 ans !
+<h2 style="color:orange">
+Quelques instructions utiles et pas futiles...
+</h2>
+(quand tu seras revenu au code de cette App)
 
+<span style="color:orange">1)</span> <i style="color:grey" class="fas fa-cloud-download-alt"></i> sert à choisir de charger le code d'une autre App
 
-Quelques instructions :
------------------------
+<span style="color:orange">2)</span> <i style="color:grey" class="fas fa-code"></i> pour lancer l'App
 
-1) Choisi une App avec le bouton nuage fleche
-vers le bas, puis appuye sur bouton de
-sélection vert pour choisir une App
+<span style="color:orange">3)</span> <i style="color:grey" class="fas fa-code"></i> pour revenir au code de l'App!
 
-2) Pour lancer l'App :
-utilise le bouton <\> en bas à gauche
+<span style="color:orange">4)</span> <i style="color:grey" class="fas fa-cloud-upload-alt"></i> permet de sauvegarder tes changements sur ton cloud
 
-3) Pour revenir au code :
-ré-utilise le bouton <\> en bas à gauche
+<span style="color:orange">5)</span> <i style="color:grey" class="fas fa-link"></i> récupère un lien internet à coller et partager pour que d'autres jouent avec ton App
 
-4) Sauvegarde tes changements avec 
-le bouton nuage fleche vers le haut
-dans le cloud (il te faut être connecté
-à internet pour cette étape)
+<span style="color:orange">6)</span> <i style="color:grey" class="fas fa-plus"></i> permet de créer une nouvelle App dans ton cloud à partir de l'App courante 
 
-5) Partage un lien vers ton App pour permettre
-à d'autres de jouer avec, avec le bouton lien
-en haut à droite
-
-6) Pour créer une nouvelle App à partir d'une
-App existante, duplique le code de l'App courante avec
-le bouton + et donne lui un nouveau nom (une
-connection internet est nécessaire pour cette
-étape)
+<span style="color:orange">7)</span> <i style="color:grey" class="fas fa-cog"></i> contient le nom de ton dossier ou sont rangé tes Apps
 
 
-Tu peux aussi aller dans un autre dossier internet
-que celui où sont rangées tes Apps, avec
-le bouton en forme d'engrenage... mais
-attention à ne pas modifier le dossier de
-quelqu'un d'autre !
+<h2 style="color:orange">Installe Qwark ! Ton experience utilisateur sera bien meilleur sans les barres de navigation.</h2>
+-> Sur iPhone&Cie, il faut appuyer sur le bouton de partage, représenté par un carré avec une flêche vers le haut, puis selectionner : ajouter à l'écran d'accueil.
 
-N'hésite pas à installer Qwark ! Elle s'executera
-en plein écran plus facilement. Sur iOS, il faut
-appuyer sur le bouton de partage, puis ajouter à l'écran
-d'accueil. Sur OSX/Chrome, une icone à presser représentant
-un écran d'ordi avec une flêche vers le bas
-devrait apparaître automatiquement.
+-> Sur Chrome, une icone à presser représentant un écran d'ordi avec une flêche vers le bas devrait apparaître automatiquement, sinon cherche dans le menu un item comme "installation"
 
-Tu peux aussi installer une App obtenue en utilisant le lien (5)
-C'est la même méthode que pour installer Qwark !
+-> Tes Apps pour lesquelles tu auras passé un lien sont aussi installables !
+
 N'hésite pas à partager cela avec tes utilisateurs !
 
-ps: Ce type d'app est une PWA, une Progressive Web App.
+<span style="color:orange">ps:</span> Ce type d'app est une PWA, une Progressive Web App.
 
-Amuses toi bien, et partage tes créations !
-
+<h2 style="color:orange">
+Amuse toi bien, et partage tes créations !
+</h2>
+<h1 style="color:yellow">
 Avanti !
+</h1>
+
+
+
+
 `

@@ -373,15 +373,10 @@ function Exec(uiId, codeId) {
       "colonne:",
       colno
     );
-    displayConsoleMessage(
-      "⛑️✋ERREUR:\n",
-      message,
-      "\nà:\n",
-      source,
-      "\nligne:",
-      lineno,
-      "colonne:",
-      colno
+    alert(
+      `${message}
+      ${source}
+      ligne ${lineno} (colonne ${colno})`
     );
   };
 
