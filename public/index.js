@@ -405,8 +405,6 @@ function setEditMode(isEditMode) {
     document.getElementById("linkButton"),
     document.getElementById("newProjectButton"),
     document.getElementById("toolbar"),
-    /*document.getElementById("editor"),*/
-
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
@@ -513,7 +511,9 @@ function displayStore() {
 document
   .getElementById("actionButton")
   .addEventListener("click", () => runButtonPressed());
-document.getElementById("saveButton").addEventListener("click", () => Save());
+document
+  .getElementById("saveButton")
+  .addEventListener("click", () => Save());
 document
   .getElementById("zoomInButton")
   .addEventListener("click", () => changeFontSize(1));

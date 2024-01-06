@@ -4,6 +4,9 @@
 
 
 let el = document.getElementById('gameContainer')
+el.style.whiteSpace = 'pre-wrap'
+el.style.overflow = 'auto'
+    
 el.innerHTML = `
 
 ##################
