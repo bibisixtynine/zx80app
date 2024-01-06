@@ -405,7 +405,7 @@ function setEditMode(isEditMode) {
     document.getElementById("linkButton"),
     document.getElementById("newProjectButton"),
     document.getElementById("toolbar"),
-    document.getElementById("editor"),
+    /*document.getElementById("editor"),*/
 
   ];
   if (isEditMode) {
@@ -469,8 +469,10 @@ function displayStore() {
   fetch(`/listApps?user=${encodeURIComponent(username)}`)
     .then((response) => response.json())
     .then((apps) => {
-      // Cacher les boutons en mode exécution
+      // Cacher les boutons & cm6 en mode exécution
       setEditMode(false);
+      const editorElement = document.getElementById("editor");
+      if (editorElement) editorElement.style.display = 'none';
       const container = document.querySelector(".appsList-container"); // Assurez-vous que cette classe correspond à votre conteneur HTML.
       container.innerHTML = `<h1 style="color:green;">${username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach((app) => {
@@ -482,6 +484,8 @@ function displayStore() {
         appDiv.addEventListener("click", () => {
           container.innerHTML = ""; // Nettoie le contenu actuel du conteneur.
           setEditMode(true);
+          const editorElement = document.getElementById("editor");
+          if (editorElement) editorElement.style.display = 'block';
           LoadApp(app); // Appelle la fonction loadApp avec le nom de l'application.
         });
         // Ajoute le nom de l'application au div.
