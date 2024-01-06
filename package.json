@@ -4,8 +4,7 @@
   "description": "A Phaser 3 webApp creator",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "[my-framework] build --output public"
+    "start": "node server.js"
   },
   "author": {
     "name": "bibi69",
@@ -23,6 +22,6 @@
     "cors": "^2.8.5"
   },
   "engines": {
-    "node": "18.x"
+    "node": "10.x"
   }
 }
