@@ -19,8 +19,7 @@ What is currently working for now :
   - create link to share the game
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
-  - Error message will display in red
-  - a couple of examples works nicely
+  - Error message
 
 What is not working/in progress :
   - W1 debugging request desktop explorer...
@@ -33,11 +32,9 @@ What is not working/in progress :
   - W10 delete project not available
   
 Bugs :
-  - B1 too much ctr-z or command-z will get back to the initial doc loaded... and you will loose all modifications
   - B2 if you change app before saving it... you loose your changes
-  - B3 after some time... the joystick is not responding correctly (see Space Invaders) 
   - B4 a new version of an app on the server... will erase your version on your machine as soon as you get connected to the internet
-  
+  - B5 it is not possible to ctrl/command-z coming back from a run
   
 ## MINIMAL REQUIREMENT TESTED (but may work on older configuration) :
 
