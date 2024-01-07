@@ -98,6 +98,76 @@ view.setState(initialState);
 /////////////////////////////////////////////////////////////
 
 
+/////////////////////////////////////////////////////////////
+// resetEditorState - Réinitialise l'état de l'éditeur
+//
+function resetEditorState(newCode) {
+  const newState = cm6.createEditorState(newCode, options);
+  view.setState(newState);
+}
+//
+// resetEditorState - Réinitialise l'état de l'éditeur
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+// saveEditorState
+//
+function saveEditorState() {
+  const editorState = view.state;
+  const editorContent = editorState.doc.toString();
+  //const editorHistory = editorState.toJSON().history;
+
+  localStorage.setItem("editorContent", editorContent);
+  //localStorage.setItem("editorHistory", JSON.stringify(editorHistory));
+
+  const scrollPosition = window.scrollY;
+  localStorage.setItem("editorScrollPosition", scrollPosition);
+}
+//
+// saveEditorState
+/////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////
+// loadEditorState
+//
+function loadEditorState() {
+  const savedContent = localStorage.getItem("editorContent");
+  resetEditorState(savedContent)
+  
+  /*
+  const savedHistory = JSON.parse(localStorage.getItem("editorHistory"));
+
+  const newState = cm6.createEditorState(savedContent, {
+    ...options,
+    extensions: [
+      // Ajoutez vos autres extensions ici
+      cm6.history({ preserveItems: true }), // Active l'historique
+    ],
+  });
+
+  // Appliquez l'historique sauvegardé
+  if (savedHistory) {
+    const transaction = newState.update({
+      effects: cm6.setHistory.of(savedHistory),
+    });
+    view.update([transaction]);
+  }
+
+  view.setState(newState);
+  */
+  // Restaurer la position de défilement
+  const savedScrollPosition = localStorage.getItem("editorScrollPosition");
+  if (savedScrollPosition) {
+    window.scrollTo(0, parseInt(savedScrollPosition));
+  }
+}
+//
+// loadEditorState
+/////////////////////////////////////////////////////////////
+
+
 /////////////////////////////////////////////////////////
 // Gestion de la taille des fonts de l'éditeur, et stockage/restitution
 //
@@ -272,7 +342,7 @@ function LoadApp(selectedApp) {
       const monParam = urlParams.get("param");
       console.log("##### param = ", monParam);
       if (monParam && !isAppAlreadyLoadedFromLocalStorage) {
-        let code = localStorage.getItem("storedBeforeRun");
+        /*let code = localStorage.getItem("storedBeforeRun");
         view.dispatch({
           changes: {
             from: 0,
@@ -285,15 +355,14 @@ function LoadApp(selectedApp) {
         if (savedScrollPosition) {
           window.scrollTo(0, parseInt(savedScrollPosition));
         }
+        */
+        console.log("🕛 BACK TO STATE ! isAppAlreadyLoadedFromLocalStorage")
+        loadEditorState()
         isAppAlreadyLoadedFromLocalStorage = true;
       } else {
-        view.dispatch({
-          changes: {
-            from: 0,
-            to: view.state.doc.length,
-            insert: appData.code,
-          },
-        });
+        console.log("🤓 FIRST LOAD -? isAppAlreadyLoadedFromLocalStorage")
+        // Réinitialisez l'état de l'éditeur avec le nouveau code
+        resetEditorState(appData.code);
       }
       currentApp.name = appData.name;
       localStorage.setItem("lastEditedApp-" + username, currentApp.name);
@@ -346,17 +415,14 @@ function runButtonPressed() {
 //
 function Exec(uiId, codeId) {
   document.getElementById("ui").style.display = "block";
-  let code = view.state.doc.toString();
-  localStorage.setItem("storedBeforeRun", code);
-
-  // Enregistrer la position de défilement
-  const scrollPosition = window.scrollY;
-  localStorage.setItem("scrollPosition", scrollPosition);
+  console.log("🕛👍 SAVE STATE !")
+  saveEditorState()
 
   // Cacher les boutons en mode exécution
   setEditMode(false);
 
   // run !
+  let code = view.state.doc.toString();
   const script = document.createElement("script");
   script.type = "module";
   script.id = "dynamic-module-script";
