@@ -140,16 +140,16 @@ app.post('/save', async (req, res) => {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
-///////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
 // 2) GET /loadApp
 //
 app.get('/loadApp', async (req, res) => {
   const user = req.query.user;
-  
   formattedLog(user,'LOADED',req.query.name,req.ip)
-
   try {
+    await checkAndCreateUserDir(user);
+
     const appName = req.query.name;
     const appDir = 'public/' + user + '/' + appName
     const appData = await fsPromises.readFile(appDir + '/app.json', 'utf8');
@@ -162,7 +162,21 @@ app.get('/loadApp', async (req, res) => {
 //                                                                                    
 // GET /loadApp
 //
-///////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Fonction pour vérifier et créer le répertoire de l'utilisateur
+async function checkAndCreateUserDir(user, ip) {
+  const userDir = path.join('public', user);
+  if (!fs.existsSync(userDir)) {
+    formattedLog(user, 'is NEW 🤩', '', ip);
+    const sourceDir = path.join('public', 'zardoz42');
+    await copyDirectory(sourceDir, userDir);
+  }
+}
+//
+/////////////////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -187,16 +201,9 @@ async function copyDirectory(src, dest) {
 app.get('/listApps', async (req, res) => {
   const user = req.query.user;
   try {
-    const appsDir = path.join('public', user);
-    // nouveau user ? => création d'un nouveau répertoire et transfert du contenu
-    // du répertoire modèle zardoz42
-    if (!fs.existsSync(appsDir)) {
-      formattedLog(user,'is NEW 🤩','',req.ip)
-      // Transférer le contenu de zardoz42 vers le nouveau répertoire
-      const sourceDir = path.join('public', 'zardoz42');
-      await copyDirectory(sourceDir, appsDir);
-    }
+    await checkAndCreateUserDir(user, req.ip);
     // Lister le contenu du répertoire du user
+    const appsDir = path.join('public', user);
     const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
     const dirs = [];
     for (const entry of entries) {
@@ -214,7 +221,6 @@ app.get('/listApps', async (req, res) => {
 // GET /lispApps
 //
 ///////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
