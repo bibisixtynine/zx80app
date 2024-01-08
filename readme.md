@@ -4,7 +4,7 @@
 
 Are you looking to code with ease and fun tiny Game Apps ?
 
-And more, how to distribute your wonderful Tiny Phaser Apps to everyone, regardless of the operating system he uses, or if it's a smartphone, a tablet, a laptop, a desktop, windows, osx, linux, android, ios etc...
+And more, how to distribute your wonderful Tiny Phaser Apps to everyone, regardless of the operating system, or if it's a smartphone, a tablet, a laptop, a desktop, windows, osx, linux, android, ios etc...
 
 Qwark is the first step for this project.
 

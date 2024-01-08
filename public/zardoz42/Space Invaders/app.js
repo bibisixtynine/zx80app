@@ -4,7 +4,7 @@
 
 
 ////////////////////
-// Space Invaders 42 //
+// Space Invaders //
 ////////////////////
 
 // 🚀 Bienvenue dans l'aventure spatiale ! 🌌

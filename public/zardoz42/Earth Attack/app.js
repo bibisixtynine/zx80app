@@ -16,8 +16,8 @@
 //
 class Bullet extends Phaser.GameObjects.Image
 {
-    speed; // 💨 Vitesse du projectile
-    flame; // 🔥 Flamme du projectile
+    // speed; // 💨 Vitesse du projectile
+    // flame; // 🔥 Flamme du projectile
 
     constructor(scene, x, y) {
         super(scene, x, y, "bullet");
