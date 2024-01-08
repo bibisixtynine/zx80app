@@ -7,8 +7,8 @@ body {
   font-family: monospace;
   background-color: black;
   margin: 0%;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /*padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);*/
 }
 .toolbar {
   position: fixed;
@@ -73,9 +73,9 @@ div {
 }
 
 #ui {
-  position: fixed;
+  /*position: fixed;
   top: 0px;
-  left: 0px;
+  left: 0px;*/
   font-family: monospace;
   width: 100vw;
   height: 100vh;
@@ -164,13 +164,13 @@ div {
 
 }
 
-.appsList-container {
+#appsList-container {
+  display: none;
   background-color: black;
   z-index: 2000;
   position: initial;
   padding-top: env( safe-area-inset-top );
   width: 100vw;
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
   gap: 25px; /* Espacement fixe entre les éléments */
   justify-content: center;

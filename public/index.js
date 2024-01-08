@@ -382,9 +382,9 @@ function LoadApp(selectedApp) {
 function runButtonPressed() {
   if (isEditMode) {
     // En mode édition, exécuter le code
+
     Exec("ui", "code");
     //this.textContent = "Back";
-    isEditMode = false;
   } else {
     // En mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
@@ -401,8 +401,8 @@ function runButtonPressed() {
     // Rechargez la page avec la nouvelle URL (si modifiée) ou l'URL actuelle
     window.location.href = url.toString();
 
-    isEditMode = true;
-    setEditMode(true);
+    //isEditMode = true;
+    //setEditMode(true);
   }
 }
 //
@@ -419,6 +419,7 @@ function Exec(uiId, codeId) {
   saveEditorState()
 
   // Cacher les boutons en mode exécution
+  isEditMode = false;
   setEditMode(false);
 
   // run !
@@ -469,8 +470,11 @@ function setEditMode(isEditMode) {
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
+    document.getElementById("editor").style.display = "block"
+
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
+    document.getElementById("editor").style.display = "none"
   }
 }
 //
@@ -529,15 +533,14 @@ function displayStore() {
     .then((response) => response.json())
     .then((apps) => {
       // Cacher les boutons & cm6 en mode exécution
+      isEditMode = false
       setEditMode(false);
-      // Cacher l'editeur
-      const editorElement = document.getElementById("editor");
-      if (editorElement) editorElement.style.display = 'none';
       // Cacher le bouton actionButton
       const actionButtonElement = document.getElementById("actionButton");
       if (actionButtonElement) actionButtonElement.style.display = 'none';
 
-      const container = document.querySelector(".appsList-container"); // Assurez-vous que cette classe correspond à votre conteneur HTML.
+      const container = document.getElementById("appsList-container"); 
+      container.style.display = "grid"
       container.innerHTML = `<h1 style="color:green;">${username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach((app) => {
         // Crée un élément div pour chaque application.
@@ -546,11 +549,10 @@ function displayStore() {
         appDiv.style.cursor = "pointer"; // Ajoute un curseur de pointeur pour indiquer qu'il s'agit d'un élément cliquable.
         // Ajoute un écouteur d'événements pour gérer les clics sur le bouton de l'application.
         appDiv.addEventListener("click", () => {
-          container.innerHTML = ""; // Nettoie le contenu actuel du conteneur.
+          const container = document.getElementById("appsList-container"); 
+          container.style.display = "none"
+          isEditMode = true
           setEditMode(true);
-          // Afficher l'editeur
-          const editorElement = document.getElementById("editor");
-          if (editorElement) editorElement.style.display = 'block';
           // Afficher le bouton actionButton
           const actionButtonElement = document.getElementById("actionButton");
           if (actionButtonElement) actionButtonElement.style.display = 'block';
