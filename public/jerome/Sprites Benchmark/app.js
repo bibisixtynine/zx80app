@@ -17,7 +17,7 @@ class Example extends Phaser.Scene {
     constructor () {
         super();
         this.fpsText = null; // Ajout de la variable pour le texte des FPS
-        this.autoIncreaseMode = true; // Activation du mode d'augmentation automatique
+        this.autoIncreaseMode = false; // Activation du mode d'augmentation automatique
 
     }
 
@@ -60,7 +60,7 @@ class Example extends Phaser.Scene {
 
         blitter = this.add.blitter(0, 0, 'atlas');
 
-        for (var i = 0; i < 100; ++i) {
+        for (var i = 0; i < 1000; ++i) {
             this.launch();
         }
 

@@ -175,7 +175,8 @@ div {
   gap: 25px; /* Espacement fixe entre les éléments */
   justify-content: center;
   overflow-y: auto; /* Permet le défilement vertical si nécessaire */
-  max-height: 100vh; /* Hauteur maximale pour le défilement */
+  height: auto;
+  /*max-height: 100vh;*/ /* Hauteur maximale pour le défilement */
 }
 .appButton {
   border: 2px solid #20FF20;
