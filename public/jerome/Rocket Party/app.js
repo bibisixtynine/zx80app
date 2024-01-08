@@ -52,8 +52,6 @@ class Example extends Phaser.Scene {
     this.input.on('pointerup', () => this.rocket.body.setAccelerationY(0), this);
   }
 
-
-
   // 3) Animation !
   update() {
   }

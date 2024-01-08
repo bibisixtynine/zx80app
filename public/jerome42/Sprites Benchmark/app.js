@@ -144,8 +144,8 @@ const config = {
     scale: {
         mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
         parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-        width: "100%",
-       height: "100%", 
+        width: "200%", // hack for android 7 moto g5
+       height: "200%", // allow rotating works nicely
     },
 };
 
