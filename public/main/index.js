@@ -462,10 +462,10 @@ function setEditMode(isEditMode) {
     document.getElementById("loadButton"),
     document.getElementById("linkButton"),
     document.getElementById("newProjectButton"),
-    document.getElementById("toolbar"),
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
+    document.getElementById("toolbar").style.display = "flex"
     document.getElementById("editor").style.display = "block"
     document.getElementById("actionButton").style.top = "auto"
     document.getElementById("actionButton").style.right = "auto"
@@ -474,6 +474,7 @@ function setEditMode(isEditMode) {
   
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
+    document.getElementById("toolbar").style.display = "none"
     document.getElementById("editor").style.display = "none"
     document.getElementById("actionButton").style.bottom = "auto"
     document.getElementById("actionButton").style.left = "auto"
