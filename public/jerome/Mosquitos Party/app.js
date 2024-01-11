@@ -39,7 +39,7 @@ class Example extends Phaser.Scene {
       "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/mosquito-22808.mp3?v=1703709898648",
     ]);
 
-    this.nbMosquitos = 2;
+    this.nbMosquitos = 42;
     this.nbMosquitosKilled = 0;
     this.scaleFactor = 0.3;
 

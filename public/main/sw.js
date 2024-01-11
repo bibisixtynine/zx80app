@@ -8,14 +8,14 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/index.css",
-  "/index.js",
-  "/index-sw.js",
-  "/index-https.js",
-  "/sw.js",
-  "/cm6.bundle.min.js",
+  "https://qwark.glitch.me/main/",
+  "https://qwark.glitch.me/main/index.html",
+  "https://qwark.glitch.me/main/index.css",
+  "https://qwark.glitch.me/main/index.js",
+  "https://qwark.glitch.me/main/index-sw.js",
+  "https://qwark.glitch.me/main/index-https.js",
+  "https://qwark.glitch.me/main/sw.js",
+  "https://qwark.glitch.me/main/cm6.bundle.min.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/icon-computer-512.png?v=1700841061555",
   "https://cdn.glitch.global/7a1a98ee-e506-4952-9e03-e1100cc9f492/icon.png?v=1694288507540",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

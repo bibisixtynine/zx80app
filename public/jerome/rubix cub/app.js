@@ -3,13 +3,12 @@
 
 
 
-////////////////
-// moon crash //
-////////////////
+///////////////
+// rubix cub //
+///////////////
 
 
-
-let url = "playcanv.as/p/yun0F3bD/"
+let url = "playcanv.as/e/p/V9B7k46n/"
 
 url =  "https://" + url
 

@@ -4,12 +4,11 @@
 
 
 ////////////////
-// moon crash //
+// acceleraly //
 ////////////////
 
 
-
-let url = "playcanv.as/p/yun0F3bD/"
+let url = "playcanv.as/e/p/dq0cXdTJ/"
 
 url =  "https://" + url
 

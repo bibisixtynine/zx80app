@@ -9,7 +9,7 @@
 
 
 
-let url = "playcanv.as/p/yun0F3bD/"
+let url = "playcanv.as/e/p/yun0F3bD/"
 
 url =  "https://" + url
 

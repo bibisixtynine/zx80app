@@ -258,7 +258,7 @@ function newUsername() {
 //
 function displayAppLink() {
   // Obtenez l'URL de la page courante sans les paramètres
-  const currentPageURL = `${window.location.origin}${window.location.pathname}`;
+  const currentPageURL = `${window.location.origin}/`//${window.location.pathname}`;
 
   // Obtenez le nom d'utilisateur
   const username = localStorage.getItem("username");
@@ -381,13 +381,12 @@ function LoadApp(selectedApp) {
 //
 function runButtonPressed() {
   if (isEditMode) {
-    // En mode édition, exécuter le code
-
+    // En venant du mode édition, exécuter le code
     Exec("ui", "code");
-    //this.textContent = "Back";
   } else {
-    // En mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
+    // En  enant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
+    
     // Créez un objet URL à partir de l'URL actuelle
     let url = new URL(window.location.href);
     let params = new URLSearchParams(url.search);
@@ -400,9 +399,6 @@ function runButtonPressed() {
 
     // Rechargez la page avec la nouvelle URL (si modifiée) ou l'URL actuelle
     window.location.href = url.toString();
-
-    //isEditMode = true;
-    //setEditMode(true);
   }
 }
 //
@@ -466,15 +462,24 @@ function setEditMode(isEditMode) {
     document.getElementById("loadButton"),
     document.getElementById("linkButton"),
     document.getElementById("newProjectButton"),
-    document.getElementById("toolbar"),
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
+    document.getElementById("toolbar").style.display = "flex"
     document.getElementById("editor").style.display = "block"
-
+    document.getElementById("actionButton").style.top = "auto"
+    document.getElementById("actionButton").style.right = "auto"
+    document.getElementById("actionButton").style.bottom = "20px"
+    document.getElementById("actionButton").style.left = "20px"
+  
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
+    document.getElementById("toolbar").style.display = "none"
     document.getElementById("editor").style.display = "none"
+    document.getElementById("actionButton").style.bottom = "auto"
+    document.getElementById("actionButton").style.left = "auto"
+    document.getElementById("actionButton").style.top = "calc( env( safe-area-inset-top ) + 10px )"
+    document.getElementById("actionButton").style.right = "10px"
   }
 }
 //
