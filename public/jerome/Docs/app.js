@@ -18,6 +18,8 @@
 //                            //
 ////////////////////////////////
 
+let ui = document.getElementById('ui')
+ui.style.height = "auto"
 
 let el = document.getElementById('gameContainer')
 el.style.whiteSpace = 'pre-wrap'
@@ -25,10 +27,11 @@ el.style.overflow = 'auto'
 el.style.margin = 'auto'
 el.style.maxWidth = '500px'
 el.innerHTML = `
+<div id='phaser-scene' style="position:absolute; top:0; left:0; background:transparent; pointer-events: none;"></div>
 <h1 style="color:yellow; text-align:center;">
------
+---
 Qwark
------
+---
 </h1>
 <h1 style="color:orange">
 👏 Bravissimo !
@@ -37,9 +40,9 @@ Tu viens de lancer un aperçu de ta première webApp conçue avec <span style="c
 Pour revenir à son code, appuye à nouveau sur <i style="color:grey" class="fas fa-code"></i>.
 Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey" class="fas fa-link"></i> !
 <h2 style="color:orange">
-🧐 Quark ? Quésaco ?
+🧐 Qwark ? Quésaco ?
 </h2>
-Quark est une boîte à outils très pratique pour créer et partager facilement des mini-jeux, sous la forme de webApp !
+<span style="color:yellow">Qwark</span> est une boîte à outils très pratique pour créer et partager facilement des mini-jeux, sous la forme de webApp !
 <h2 style="color:orange">
 😜 Quelques instructions...
 </h2>
@@ -75,3 +78,10 @@ N'hésite pas à partager cela avec tes utilisateurs !
 
 
 `
+window.scrollTo(0,0)
+
+
+
+
+
+

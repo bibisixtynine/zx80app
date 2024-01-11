@@ -258,7 +258,7 @@ function newUsername() {
 //
 function displayAppLink() {
   // Obtenez l'URL de la page courante sans les paramètres
-  const currentPageURL = `${window.location.origin}${window.location.pathname}`;
+  const currentPageURL = `${window.location.origin}/`//${window.location.pathname}`;
 
   // Obtenez le nom d'utilisateur
   const username = localStorage.getItem("username");
