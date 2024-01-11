@@ -133,7 +133,7 @@ div {
   position: fixed;
   bottom: 20px;
   padding: 12px;
-  opacity: 50%;
+  opacity: 0.5;
   left: 20px;
   z-index: 1000;
 }
@@ -176,7 +176,6 @@ div {
   justify-content: center;
   overflow-y: auto; /* Permet le défilement vertical si nécessaire */
   height: auto;
-  /*max-height: 100vh;*/ /* Hauteur maximale pour le défilement */
 }
 .appButton {
   border: 2px solid #20FF20;
