@@ -1,8 +1,3 @@
-
-
-
-
-
 ////////////////////////
 // Sprites Benchmarks //
 ////////////////////////
@@ -17,7 +12,7 @@ class Example extends Phaser.Scene {
     constructor () {
         super();
         this.fpsText = null; // Ajout de la variable pour le texte des FPS
-        this.autoIncreaseMode = false; // Activation du mode d'augmentation automatique
+        this.autoIncreaseMode = true; // Activation du mode d'augmentation automatique
 
     }
 

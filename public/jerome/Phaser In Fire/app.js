@@ -1,11 +1,7 @@
-
-
-
-
-
 /////////////////////
 // Phaser in  Fire //
 /////////////////////
+
 
 class Example extends Phaser.Scene {
   // 1) Chargement des assets
