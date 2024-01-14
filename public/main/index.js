@@ -216,8 +216,9 @@ window.onload = function () {
 // Settings clicked
 //
 function askUsername() {
-  username = prompt("Change de Dossier Perso :", username);
-  if (username) {
+  const newUsername = prompt("Change de Dossier Perso :", username);
+  if (newUsername) {
+    username = newUsername;
     localStorage.setItem("username", username);
     // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
     const lastEditedApp = localStorage.getItem("lastEditedApp-" + username);
@@ -466,7 +467,9 @@ function setEditMode(isEditMode) {
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
     document.getElementById("toolbar").style.display = "flex"
+    document.getElementById("safeSpaceAboveEditor").style.display = "block"
     document.getElementById("editor").style.display = "block"
+    document.getElementById("safeSpaceUnderEditor").style.display = "block"
     document.getElementById("actionButton").style.top = "auto"
     document.getElementById("actionButton").style.right = "auto"
     document.getElementById("actionButton").style.bottom = "20px"
@@ -475,7 +478,9 @@ function setEditMode(isEditMode) {
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
     document.getElementById("toolbar").style.display = "none"
+    document.getElementById("safeSpaceAboveEditor").style.display = "none"
     document.getElementById("editor").style.display = "none"
+    document.getElementById("safeSpaceUnderEditor").style.display = "none"
     document.getElementById("actionButton").style.bottom = "auto"
     document.getElementById("actionButton").style.left = "auto"
     document.getElementById("actionButton").style.top = "calc( env( safe-area-inset-top ) + 10px )"

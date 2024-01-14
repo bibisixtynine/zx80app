@@ -50,6 +50,10 @@
       name="msapplication-TileImage"
       content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
     />
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
 
     <!-- manifest -->
     <link rel="manifest" href="manifest.json" />
@@ -57,12 +61,8 @@
     <!-- style sheet -->
     <style>
       body {
-        font-family: monospace;
         background-color: black;
-        color: #20ff20;
         margin: 0%;
-        padding: env(safe-area-inset-top) env(safe-area-inset-right)
-          env(safe-area-inset-bottom) env(safe-area-inset-left);
       }
       div {
         margin: 0px;
@@ -70,9 +70,6 @@
       }
 
       #ui {
-        position: fixed;
-        top: 0px;
-        left: 0px;
         font-family: monospace;
         width: 100vw;
         height: 100vh;
@@ -81,10 +78,8 @@
         padding: 0px;
         background-color: black;
         color: #20ff20;
-        overflow: hidden; /* NE Permet PAS le défilement si nécessaire */
         scrollbar-width: none; /* Pour les navigateurs basés sur Firefox */
-        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
-       
+        -ms-overflow-style: none; /* Pour Internet Explorer et Edge */       
         -webkit-text-size-adjust: 100%;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;

@@ -5,7 +5,9 @@
 //
 
 // libs
+
 const express = require('express');
+
 const cors = require('cors');  // pour que le sw puisse intercepter les fetch des iframe.... ?
 const fs = require('fs');
 const fsPromises = require('fs').promises;
@@ -80,7 +82,8 @@ function formattedLog(user,action,appName,ip) {
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
 // 1) POST /save
-//
+//   -> a besoin de app, formattedLog, 
+
 app.post('/save', async (req, res) => {
   const user = req.body.user; // identifiant de l'utilisateur
   
@@ -223,6 +226,108 @@ app.get('/listApps', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 5) Authentification avec Github
+//
+const fetch = require('node-fetch');
+
+// Variables d'environnement pour les identifiants GitHub
+const clientId = process.env.ClientId;
+const clientSecret = process.env.ClientSecret;
+
+// Fonction pour échanger le code contre un token
+function exchangeCodeForToken(code) {
+    return new Promise((resolve, reject) => {
+        fetch('https://github.com/login/oauth/access_token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                client_id: clientId,
+                client_secret: clientSecret,
+                code: code
+            })
+        })
+        .then(response => response.json())
+        .then(tokenData => resolve(tokenData))
+        .catch(error => reject(error));
+    });
+}
+
+// Route pour initier la connexion via GitHub
+app.get('/login', (req, res) => {
+    // Redirection vers GitHub pour authentification
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}`;
+    res.redirect(githubAuthUrl);
+});
+
+// Route pour gérer le callback de GitHub
+/*app.get('/github/callback', async (req, res) => {
+    const code = req.query.code;
+    if (!code) {
+        return res.status(400).send('Code not found');
+    }
+
+    try {
+        const tokenData = await exchangeCodeForToken(code);
+        // Traiter les données reçues de GitHub
+        console.log(tokenData);
+        // Ici, vous pouvez rediriger l'utilisateur vers une page de votre application avec les données reçues
+        res.send('Connexion réussie'); // Modifiez cette partie selon vos besoins
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});*/
+
+app.get('/github/callback', async (req, res) => {
+    const code = req.query.code;
+    if (!code) {
+        return res.status(400).send('Code not found');
+    }
+
+    try {
+        const tokenData = await exchangeCodeForToken(code);
+        if (!tokenData.access_token) {
+            return res.status(400).send('Token not found');
+        }
+
+        // Utiliser le token pour obtenir les informations de l'utilisateur
+        const userResponse = await fetch('https://api.github.com/user', {
+            headers: {
+                'Authorization': `token ${tokenData.access_token}`
+            }
+        });
+        const userData = await userResponse.json();
+
+        // Maintenant, userData contient les informations de l'utilisateur, y compris le nom d'utilisateur
+        console.log(userData);
+        const username = userData.login; // Le nom d'utilisateur GitHub
+
+        // Vous pouvez maintenant utiliser ces informations comme vous le souhaitez
+        res.redirect(`/?username=${encodeURIComponent(userData.login)}&avatar_url=${encodeURIComponent(userData.avatar_url)}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+//                                                                                    
+// Authentification avec Github
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
 // SERVER START
@@ -234,3 +339,5 @@ app.listen(port, () => {
 // SERVER START
 //
 ///////////////////////////////////////////////////////////////////////////////////////////
+
+
