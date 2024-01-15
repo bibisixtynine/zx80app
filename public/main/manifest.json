@@ -2,7 +2,7 @@
     "theme_color": "#000000",
     "background_color": "#000000",
     "display": "fullscreen",
-    "scope": "/main/",
+    "scope": "/",
     "start_url": "/main/",
     "name": "Qwark",
     "short_name": "Qwark",

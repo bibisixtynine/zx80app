@@ -67,6 +67,7 @@ class Bullet extends Phaser.GameObjects.Image
                 this.destroy();
             }
         });
+
     }
 
     // 🔄 Fonction de mise à jour du projectile

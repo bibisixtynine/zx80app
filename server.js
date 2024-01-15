@@ -6,6 +6,27 @@
 
 // libs
 
+// 
+  /*console.log('💫🤓🚀 starting server ...');
+  const Database = require("@replit/database");
+  const db = new Database();
+
+  let oldValue
+  db.get("secret")
+    .then(value => {
+      oldValue = value;
+      console.log('💫🤓🚀 db get ',value);
+        db.set("secret", oldValue + "abcdef")
+          .then( () => {
+            console.log('💫🤓🚀 db set');
+            db.get("secret")
+              .then(value => {
+                console.log('💫🤓🚀 db get ',value)
+              })
+          })
+    });;
+*/
+
 const express = require('express');
 
 const cors = require('cors');  // pour que le sw puisse intercepter les fetch des iframe.... ?
