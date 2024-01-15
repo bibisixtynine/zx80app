@@ -3,7 +3,7 @@
     "background_color": "#000000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/main/",
+    "start_url": "/",
     "name": "Qwark",
     "short_name": "Qwark",
     "description": "the super cool computer !",
