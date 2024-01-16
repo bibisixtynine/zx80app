@@ -216,7 +216,7 @@ window.onload = function () {
 // Settings clicked
 //
 function askUsername() {
-  const newUsername = prompt("CCCChange de Dossier Perso :", username);
+  const newUsername = prompt("CChange de Dossier Perso :", username);
   if (newUsername) {
     username = newUsername;
     localStorage.setItem("username", username);
@@ -234,7 +234,7 @@ function askUsername() {
 function newUsername() {
   username = "";
   username = prompt(
-    "CCCChoisissez votre identifiant unique (par exemple votre prenom suivi d'un code à 4 chiffres, sans aucun espace) :",
+    "Choisissez votre identifiant unique (par exemple votre prenom suivi d'un code à 4 chiffres, sans aucun espace) :",
     username
   );
   if (username) {
