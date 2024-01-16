@@ -153,7 +153,8 @@ app.post('/save', async (req, res) => {
     indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
     await fsPromises.writeFile(indexPath, modelContent);
     
-    res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
+    //res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
+    res.status(500).send(`😢🛑 Sauvegarde Impossible jusqu'au 21 janvier 2024`);
   } catch (error) {
     res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }

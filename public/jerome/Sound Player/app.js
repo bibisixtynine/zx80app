@@ -10,8 +10,8 @@ class MaScene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/catastrophi.png?v=1703080414518');
         this.load.spritesheet('button', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/flixel-button.png?v=1703080317855', { frameWidth: 80, frameHeight: 20 });
-        this.load.bitmapFont('nokia', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/nokia16black.png?v=1703080310329', 'https://qwark.glitch.me/assets/phaser-sound/nokia16black.xml');
-        this.load.audioSprite('sfx', 'https://qwark.glitch.me/assets/phaser-sound/fx_mixdown.json', ['https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.ogg?v=1703080305830', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.mp3?v=1703080298380']);
+        this.load.bitmapFont('nokia', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/nokia16black.png?v=1703080310329', 'https://zx80.app/assets/phaser-sound/nokia16black.xml');
+        this.load.audioSprite('sfx', 'https://zx80.app/assets/phaser-sound/fx_mixdown.json', ['https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.ogg?v=1703080305830', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/fx_mixdown.mp3?v=1703080298380']);
     }
 
     // 🎬 Méthode pour créer la scène initiale du jeu

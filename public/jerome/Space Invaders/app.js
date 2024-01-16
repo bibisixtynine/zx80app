@@ -38,7 +38,7 @@ class MainScene extends Phaser.Scene {
         this.load.spritesheet('boom', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/kaboom.png?v=1703082254588', { frameWidth: 64, frameHeight: 64 });
         this.load.audio('explosion', ['https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/explosion.mp3?v=1703076948031']);
         this.load.audio('blaster', ['https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/blaster.mp3?v=1703106687829']);
-        this.load.plugin('rexvirtualjoystickplugin', 'https://qwark.glitch.me/assets/MyProject/joystick.js', true);
+        this.load.plugin('rexvirtualjoystickplugin', 'https://zx80.app/assets/MyProject/joystick.js', true);
     }
 
     // ⭐ Créer le jeu ici !
