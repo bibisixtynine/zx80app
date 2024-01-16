@@ -1,10 +1,5 @@
-
-
-
-
-
 ////////////////////
-// Oliver s Quest // 42
+// Oliver s Quest //
 ////////////////////
 
 
@@ -192,8 +187,5 @@ const config = {
 
 // 🕹️ Création du jeu
 const game = new Phaser.Game(config);
-
-
-
 
 

@@ -1,11 +1,7 @@
-
-
-
-
-
 /////////////////////
 // Phaser in  Fire //
 /////////////////////
+
 
 class Example extends Phaser.Scene {
   // 1) Chargement des assets
@@ -100,13 +96,15 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
+      fixedStep: false,
+      //fps: 60
     },
   },
   scale: {
     mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
     parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-    width: "200%", // for android 7 moto g5
-    height: "200%", // idem
+    width: "100%", // for android 7 moto g5
+    height: "100%", // idem
   },
 };
 

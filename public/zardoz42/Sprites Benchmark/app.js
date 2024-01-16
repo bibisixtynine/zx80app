@@ -1,8 +1,3 @@
-
-
-
-
-
 ////////////////////////
 // Sprites Benchmarks //
 ////////////////////////
@@ -23,7 +18,7 @@ class Example extends Phaser.Scene {
 
     // 1) PRELOAD 📦 Pré-chargement des assets
     preload () {
-        this.load.atlas('atlas', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/veg.png?v=1703080906421', 'https://qwark.glitch.me/assets/phaser-sprites/veg.json');
+        this.load.atlas('atlas', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/veg.png?v=1703080906421', 'https://zx80.app/assets/phaser-sprites/veg.json');
         this.numbers = [];
         this.iter = 0;
     }
@@ -52,7 +47,7 @@ class Example extends Phaser.Scene {
 
     // 3) 🔨 Création des objets et de la scène
     create () {
-        let digitY = gameContainer.offsetHeight - 100
+        let digitY = gameContainer.offsetHeight - 42
 
         for (var i = 0; i < 7; i++) {
             this.numbers.push(this.add.image(32 + i * 25, digitY, 'atlas', '0').setScale(0.5).setDepth(1));
@@ -60,7 +55,7 @@ class Example extends Phaser.Scene {
 
         blitter = this.add.blitter(0, 0, 'atlas');
 
-        for (var i = 0; i < 100; ++i) {
+        for (var i = 0; i < 1000; ++i) {
             this.launch();
         }
 
@@ -70,7 +65,7 @@ class Example extends Phaser.Scene {
         window.addEventListener('resize', () => this.resizeGame());
 
         // Création de l'objet texte pour les FPS
-        this.fpsText = this.add.text(10, 10, '', { font: '32px Impact', fill: '#ffffff' });
+        this.fpsText = this.add.text(10, 42, '', { font: '32px Impact', fill: '#ffffff' });
     }
 
     // 4) 🔄 Mise à jour de la scène à chaque frame
@@ -144,14 +139,13 @@ const config = {
     scale: {
         mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
         parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
-        width: "200%", // hack for android 7 moto g5
-       height: "200%", // allow rotating works nicely
+        width: "100%",
+       height: "100%", 
     },
 };
 
 
 // 🕹️ Création du jeu
 const game = new Phaser.Game(config);
-
 
 

@@ -1,8 +1,3 @@
-
-
-
-
-
 //////////////////
 // Earth Attack //
 //////////////////
@@ -16,8 +11,8 @@
 //
 class Bullet extends Phaser.GameObjects.Image
 {
-    // speed; // 💨 Vitesse du projectile
-    // flame; // 🔥 Flamme du projectile
+    speed; // 💨 Vitesse du projectile
+    flame; // 🔥 Flamme du projectile
 
     constructor(scene, x, y) {
         super(scene, x, y, "bullet");
@@ -53,7 +48,7 @@ class Bullet extends Phaser.GameObjects.Image
                     duration: 1000,
                 });
                 this.flame.setDepth(1);
-            this.flame.once("complete", () => {
+                this.flame.once("complete", () => {
                 this.flame.destroy();
             });
         }
@@ -114,7 +109,7 @@ class MainScene extends Phaser.Scene
         this.load.image("ship", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/x2kship.png?v=1703079018020");
         this.load.image("bg", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/nebula.jpg?v=1703079013307");
         this.load.image("planet", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/blue-planet.png?v=1703079006670");
-        this.load.atlas('flares', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/flares.png?v=1703078993457', 'https://qwark.glitch.me/assets/phaser-myproject/flares.json');
+        this.load.atlas('flares', 'https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/flares.png?v=1703078993457', 'https://zx80.app/assets/phaser-myproject/flares.json');
     }
 
     create() {
@@ -220,6 +215,4 @@ const game = new Phaser.Game(config);
 // 🎮 Configuration et lancement
 //
 ///////////////////////////////////////////////////////////////////////////
-
-
 
