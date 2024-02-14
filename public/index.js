@@ -216,7 +216,7 @@ window.onload = function () {
 // Settings clicked
 //
 function askUsername() {
-  const newUsername = prompt("CChange de Dossier Perso :", username);
+  const newUsername = prompt("Change de Dossier Perso :", username);
   if (newUsername) {
     username = newUsername;
     localStorage.setItem("username", username);
