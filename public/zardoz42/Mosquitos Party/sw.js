@@ -1,4 +1,4 @@
-const version = "😜zardoz42/Mosquitos Party😜"
+const version = "😜jerome/Mosquitos Party😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/zardoz42/Mosquitos Party/",
-  "/zardoz42/Mosquitos Party/index.html",
-  "/zardoz42/Mosquitos Party/manifest.json",  
-  "/zardoz42/Mosquitos Party/app.js",
-  "/zardoz42/Mosquitos Party/app.json",  
-  "/zardoz42/Mosquitos Party/sw.js",
+  "/jerome/Mosquitos Party/",
+  "/jerome/Mosquitos Party/index.html",
+  "/jerome/Mosquitos Party/manifest.json",  
+  "/jerome/Mosquitos Party/app.js",
+  "/jerome/Mosquitos Party/app.json",  
+  "/jerome/Mosquitos Party/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

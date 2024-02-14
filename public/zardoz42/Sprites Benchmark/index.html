@@ -6,9 +6,9 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>zardoz42/Sprites Benchmark</title>
-    <meta name="application-name" content="zardoz42/Sprites Benchmark" />
-    <meta name="description" content="The Super Cool zardoz42/Sprites Benchmark App" />
+    <title>jerome/Sprites Benchmark</title>
+    <meta name="application-name" content="jerome/Sprites Benchmark" />
+    <meta name="description" content="The Super Cool jerome/Sprites Benchmark App" />
     <meta
       name="viewport"
       content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
@@ -50,6 +50,10 @@
       name="msapplication-TileImage"
       content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
     />
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
 
     <!-- manifest -->
     <link rel="manifest" href="manifest.json" />
@@ -143,7 +147,7 @@
       window.messageLog = ["HELLO", "HOW ARE YOU"];
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register("/zardoz42/Sprites Benchmark/sw.js", { scope: "/zardoz42/Sprites Benchmark/" })
+          .register("/jerome/Sprites Benchmark/sw.js", { scope: "/jerome/Sprites Benchmark/" })
           .then(function (registration) {
             console.log("+-> (1) 😍 Service Worker registered", registration);
 

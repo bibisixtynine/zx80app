@@ -1,4 +1,4 @@
-const version = "😜zardoz42/Tuto 1😜"
+const version = "😜jerome/Tuto 1😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/zardoz42/Tuto 1/",
-  "/zardoz42/Tuto 1/index.html",
-  "/zardoz42/Tuto 1/manifest.json",  
-  "/zardoz42/Tuto 1/app.js",
-  "/zardoz42/Tuto 1/app.json",  
-  "/zardoz42/Tuto 1/sw.js",
+  "/jerome/Tuto 1/",
+  "/jerome/Tuto 1/index.html",
+  "/jerome/Tuto 1/manifest.json",  
+  "/jerome/Tuto 1/app.js",
+  "/jerome/Tuto 1/app.json",  
+  "/jerome/Tuto 1/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

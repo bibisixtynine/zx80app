@@ -1,12 +1,12 @@
 {
     "theme_color": "#000000",
     "background_color": "#000000",
-    "display": "standalone",
+    "display": "fullscreen",
     "scope": "/",
-    "start_url": "/zardoz42/Phaser In Fire/",
-    "name": "zardoz42/Phaser In Fire",
-    "short_name": "zardoz42/Phaser In Fire",
-    "description": "the super cool zardoz42/Phaser In Fire App !",
+    "start_url": "/jerome/Phaser In Fire/",
+    "name": "jerome/Phaser In Fire",
+    "short_name": "jerome/Phaser In Fire",
+    "description": "the super cool jerome/Phaser In Fire App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

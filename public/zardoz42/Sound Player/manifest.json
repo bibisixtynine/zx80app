@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/zardoz42/Sound Player/",
-    "name": "zardoz42/Sound Player",
-    "short_name": "zardoz42/Sound Player",
-    "description": "the super cool zardoz42/Sound Player App !",
+    "start_url": "/jerome/Sound Player/",
+    "name": "jerome/Sound Player",
+    "short_name": "jerome/Sound Player",
+    "description": "the super cool jerome/Sound Player App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

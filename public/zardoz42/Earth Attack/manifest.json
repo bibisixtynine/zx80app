@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/zardoz42/Earth Attack/",
-    "name": "zardoz42/Earth Attack",
-    "short_name": "zardoz42/Earth Attack",
-    "description": "the super cool zardoz42/Earth Attack App !",
+    "start_url": "/jerome/Earth Attack/",
+    "name": "jerome/Earth Attack",
+    "short_name": "jerome/Earth Attack",
+    "description": "the super cool jerome/Earth Attack App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",

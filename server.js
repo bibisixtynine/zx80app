@@ -6,26 +6,9 @@
 
 // libs
 
-// 
-  /*console.log('💫🤓🚀 starting server ...');
-  const Database = require("@replit/database");
-  const db = new Database();
-
-  let oldValue
-  db.get("secret")
-    .then(value => {
-      oldValue = value;
-      console.log('💫🤓🚀 db get ',value);
-        db.set("secret", oldValue + "abcdef")
-          .then( () => {
-            console.log('💫🤓🚀 db set');
-            db.get("secret")
-              .then(value => {
-                console.log('💫🤓🚀 db get ',value)
-              })
-          })
-    });;
-*/
+const Database = require("./Database");
+const db = new Database('key_value_store')
+db.open();
 
 const express = require('express');
 const cors = require('cors');
@@ -58,7 +41,7 @@ app.use(express.static('public'));
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// augmente console.log pour enregistrer aussi dans le repertoire jerome
+// (1/6) augmente console.log pour enregistrer aussi dans le repertoire jerome
 //
 const originalConsoleLog = console.log;
 console.log = function() {
@@ -72,7 +55,7 @@ console.log = function() {
         }
     }).join(' ');
     originalConsoleLog.apply(console, arguments);  // Affiche dans la console
-    fs.appendFile('public/jerome/log/app.js', message + '\n', err => {
+    fs.appendFile('public/zardoz42/log/app.js', message + '\n', err => {
         if (err) {
             originalConsoleLog('Erreur lors de l\'écriture dans log.txt:', err);
         }
@@ -86,7 +69,7 @@ console.log = function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// formatted log for Load and Save requests
+// (2/6) formatted log for Load and Save requests
 //
 function formattedLog(user,action,appName,ip) {
   let now = new Date();
@@ -114,7 +97,7 @@ function formattedLog(user,action,appName,ip) {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// 1) POST /save
+// (3/6) POST /save
 //   -> a besoin de app, formattedLog, 
 
 app.post('/save', async (req, res) => {
@@ -179,7 +162,7 @@ app.post('/save', async (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// 2) GET /loadApp
+// (4/6) GET /loadApp
 //
 app.get('/loadApp', async (req, res) => {
   const user = req.query.user;
@@ -188,12 +171,20 @@ app.get('/loadApp', async (req, res) => {
     await checkAndCreateUserDir(user);
 
     const appName = req.query.name;
-    const appDir = 'public/' + user + '/' + appName
-    const appData = await fsPromises.readFile(appDir + '/app.json', 'utf8');
-    const appCode = await fsPromises.readFile(appDir + '/app.js', 'utf8');
-    res.json({ ...JSON.parse(appData), code: appCode });
+    const appKeyPrefix = `${user}/${appName}`;
+    const appDataKey = `${appKeyPrefix}/app.json`;
+    const appCodeKey = `${appKeyPrefix}/app.js`;
+
+    const appData = await db.get(appDataKey);
+    const appCode = await db.get(appCodeKey);
+
+    if (appData && appCode) {
+      res.json({ ...JSON.parse(appData), code: appCode });
+    } else {
+      throw new Error('App data or code not found in the database.');
+    }
   } catch (error) {
-    res.status(500).send(`😭🛑 App introuvable`);
+    res.status(500).send(`No app <${req.query.name}> missing for user <${req.query.user}>`);
   }
 });
 //                                                                                    
@@ -203,13 +194,29 @@ app.get('/loadApp', async (req, res) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// Fonction pour vérifier et créer le répertoire de l'utilisateur
+// (5/6) Fonction pour vérifier et créer le répertoire de l'utilisateur
 async function checkAndCreateUserDir(user, ip) {
   const userDir = path.join('public', user);
-  if (!fs.existsSync(userDir)) {
-    formattedLog(user, 'is NEW 🤩', '', ip);
+  if (!await db.asKeyWithPrefix(user)) {
+    formattedLog(user, 'is NEW \ud83e\udd29', '', ip);
     const sourceDir = path.join('public', 'zardoz42');
-    await copyDirectory(sourceDir, userDir);
+    async function copyFiles(srcDir) {
+      const entries = await fsPromises.readdir(srcDir, { withFileTypes: true });
+      for (const entry of entries) {
+        const entryPath = path.join(srcDir, entry.name);
+        if (entry.isDirectory()) {
+          await copyFiles(entryPath); // Recursive call for subdirectories
+        } else {
+          const fileContent = await fsPromises.readFile(entryPath, 'utf8');
+          let fileKey = `${user}/${entryPath}`;
+          fileKey = fileKey.replace('public/zardoz42/', ''); // Supress "public/zardoz42/" in fileKey
+          console.log('Processing file:', fileKey);
+          await db.set(fileKey, fileContent);
+        }
+      }
+    }
+    await copyFiles(sourceDir); // Start the recursive file copy
+    console.log(" ===> all files transferred to database")
   }
 }
 //
@@ -218,7 +225,7 @@ async function checkAndCreateUserDir(user, ip) {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// 3) GET /lispApps
+// (6/6) GET /lispApps
 //
 // const path = require('path');
 
@@ -240,7 +247,7 @@ app.get('/listApps', async (req, res) => {
   try {
     await checkAndCreateUserDir(user, req.ip);
     // Lister le contenu du répertoire du user
-    const appsDir = path.join('public', user);
+    const appsDir = path.join('public', 'zardoz42');
     const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
     const dirs = [];
     for (const entry of entries) {
@@ -249,6 +256,7 @@ app.get('/listApps', async (req, res) => {
       }
     }
     res.json(dirs);
+    //res.json(['log','Docs'])
   } catch (error) {
     console.error(error);
     res.status(500).send(`😭🛑 Liste des App introuvable`);
@@ -259,126 +267,6 @@ app.get('/listApps', async (req, res) => {
 //
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                    
-// 5) Authentification avec Github
-//
-const fetch = require('node-fetch');
-
-// Variables d'environnement pour les identifiants GitHub
-const clientId = process.env.ClientId;
-const clientSecret = process.env.ClientSecret;
-
-// Fonction pour échanger le code contre un token
-function exchangeCodeForToken(code) {
-    return new Promise((resolve, reject) => {
-        fetch('https://github.com/login/oauth/access_token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                client_id: clientId,
-                client_secret: clientSecret,
-                code: code
-            })
-        })
-        .then(response => response.json())
-        .then(tokenData => resolve(tokenData))
-        .catch(error => reject(error));
-    });
-}
-
-// Route pour initier la connexion via GitHub
-app.get('/login', (req, res) => {
-    // Redirection vers GitHub pour authentification
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}`;
-    res.redirect(githubAuthUrl);
-});
-
-// Route pour gérer le callback de GitHub
-/*app.get('/github/callback', async (req, res) => {
-    const code = req.query.code;
-    if (!code) {
-        return res.status(400).send('Code not found');
-    }
-
-    try {
-        const tokenData = await exchangeCodeForToken(code);
-        // Traiter les données reçues de GitHub
-        console.log(tokenData);
-        // Ici, vous pouvez rediriger l'utilisateur vers une page de votre application avec les données reçues
-        res.send('Connexion réussie'); // Modifiez cette partie selon vos besoins
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});*/
-
-// Route pour gérer le callback de GitHub
-app.get('/github/callback', async (req, res) => {
-    const code = req.query.code;
-    if (!code) {
-        return res.status(400).send('Code not found');
-    }
-
-    try {
-        const tokenData = await exchangeCodeForToken(code);
-        if (!tokenData.access_token) {
-            return res.status(400).send('Token not found');
-        }
-
-        // Utiliser le token pour obtenir les informations de l'utilisateur
-        const userResponse = await fetch('https://api.github.com/user', {
-            headers: {
-                'Authorization': `token ${tokenData.access_token}`
-            }
-        });
-        const userData = await userResponse.json();
-
-        // Maintenant, userData contient les informations de l'utilisateur, y compris le nom d'utilisateur
-        console.log(userData);
-        const username = userData.login; // Le nom d'utilisateur GitHub
-
-        // Vous pouvez maintenant utiliser ces informations comme vous le souhaitez
-        res.redirect(`/?username=${encodeURIComponent(userData.login)}&avatar_url=${encodeURIComponent(userData.avatar_url)}`);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-//                                                                                    
-// Authentification avec Github
-//
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                    
-// 6) Sous-domaines
-//
-app.get('*', (req, res, next) => {
-    if (req.subdomain) {
-        handleSubdomainRequest(req, res);
-    } else {
-        next();
-    }
-});
-
-function handleSubdomainRequest(req, res) {
-    const subdomain = req.subdomain;
-    res.send(`Vous êtes sur le sous-domaine : ${subdomain}`);
-}
-//                                                                                    
-// Sous-domaines
-//
-///////////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////

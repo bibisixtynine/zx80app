@@ -3,10 +3,10 @@
     "background_color": "#000000",
     "display": "fullscreen",
     "scope": "/",
-    "start_url": "/zardoz42/Mosquitos Party/",
-    "name": "zardoz42/Mosquitos Party",
-    "short_name": "zardoz42/Mosquitos Party",
-    "description": "the super cool zardoz42/Mosquitos Party App !",
+    "start_url": "/jerome/Mosquitos Party/",
+    "name": "jerome/Mosquitos Party",
+    "short_name": "jerome/Mosquitos Party",
+    "description": "the super cool jerome/Mosquitos Party App !",
     "icons": [
         {
             "src": "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
