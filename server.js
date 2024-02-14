@@ -103,55 +103,33 @@ function formattedLog(user,action,appName,ip) {
 app.post('/save', async (req, res) => {
   const user = req.body.user; // identifiant de l'utilisateur
   
-  formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
+  formattedLog(user,'SAVED  \\ud83d\\udd34',req.body.name,req.ip)
   
   try {
     let { name, image, description, code } = req.body;
     // Si 'name' est vide, lui attribuer la valeur 'Docs'
     name = name.trim() ? name : 'Docs';
 
-    const appDir = 'public/' + user + '/' + name
-    
-    // a) Création des fichiers app.json et app.js
-    await fsPromises.mkdir(appDir, { recursive: true });
-    await fsPromises.writeFile(appDir + '/app.json', JSON.stringify({ name, image, description }));
-    await fsPromises.writeFile(appDir + '/app.js', code);
-    
-    // b) Création du index.html
-    let modelPath,indexPath,modelContent
-    // Lire le contenu de index_model.html
-    modelPath = './index_model.html'; // Chemin vers index_model.html
-    modelContent = await fsPromises.readFile(modelPath, 'utf8');
-    // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
-    // Sauvegarder le contenu modifié dans index.html
-    indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
-    await fsPromises.writeFile(indexPath, modelContent);
-    
-    // c) Création du manifest.json
-    // Lire le contenu de manifest_model.json
-    modelPath = './manifest_model.json'; // Chemin vers manifest_model.json
-    modelContent = await fsPromises.readFile(modelPath, 'utf8');
-    // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
-    // Sauvegarder le contenu modifié dans manifest.json
-    indexPath = appDir + '/manifest.json'; // Chemin où manifest.html sera créé
-    await fsPromises.writeFile(indexPath, modelContent);
+    const appKeyPrefix = `${user}/${name}`;
+    const appDataKey = `${appKeyPrefix}/app.json`;
+    const appCodeKey = `${appKeyPrefix}/app.js`;
 
-    // d) Création du sw.js
-    // Lire le contenu de sw_model.js
-    modelPath = './sw_model.js'; // Chemin vers sw_model.js
-    modelContent = await fsPromises.readFile(modelPath, 'utf8');
-    // Remplacer $${name} par la valeur de 'name'
-    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
-    // Sauvegarder le contenu modifié dans sw.js
-    indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
-    await fsPromises.writeFile(indexPath, modelContent);
-    
-    res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
-    //res.status(500).send(`😢🛑 Sauvegarde Impossible jusqu'au 21 janvier 2024`);
+    // a) Sauvegarde des fichiers app.json et app.js dans la base de donnees
+    await db.set(appDataKey, JSON.stringify({ name, image, description }));
+    await db.set(appCodeKey, code);
+
+    // b) Mise \\u00e0 jour de la liste des applications de l'utilisateur dans la base de donnees
+    const appsListKey = `${user}`;
+    let appsList = await db.get(appsListKey);
+    appsList = appsList ? JSON.parse(appsList) : [];
+    if (!appsList.includes(name)) {
+      appsList.push(name);
+      await db.set(appsListKey, JSON.stringify(appsList));
+    }
+
+    res.send(`\\ud83d\\ude0e\\u2708 <${name}> sauvegard\\u00e9e avec succ\\u00e8s par <${user}>`);
   } catch (error) {
-    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
+    res.status(500).send(`\\ud83d\\ude22\\ud83d\\udd34 Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }
 });
 //                                                                                    
