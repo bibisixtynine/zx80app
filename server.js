@@ -162,7 +162,7 @@ app.post('/save', async (req, res) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// (4/6) GET /loadApp
+// (4/6) GET /loadApp OK
 //
 app.get('/loadApp', async (req, res) => {
   const user = req.query.user;
@@ -194,17 +194,22 @@ app.get('/loadApp', async (req, res) => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
+//
 // (5/6) Fonction pour vérifier et créer le répertoire de l'utilisateur
+//
 async function checkAndCreateUserDir(user, ip) {
   const userDir = path.join('public', user);
   if (!await db.asKeyWithPrefix(user)) {
     formattedLog(user, 'is NEW \ud83e\udd29', '', ip);
     const sourceDir = path.join('public', 'zardoz42');
+    let appsName = [];
     async function copyFiles(srcDir) {
       const entries = await fsPromises.readdir(srcDir, { withFileTypes: true });
       for (const entry of entries) {
         const entryPath = path.join(srcDir, entry.name);
         if (entry.isDirectory()) {
+          appsName.push(entry.name)
+          console.log(` ### PUSHED ${entry.name} ### `)
           await copyFiles(entryPath); // Recursive call for subdirectories
         } else {
           const fileContent = await fsPromises.readFile(entryPath, 'utf8');
@@ -216,6 +221,7 @@ async function checkAndCreateUserDir(user, ip) {
       }
     }
     await copyFiles(sourceDir); // Start the recursive file copy
+    await db.set(user, JSON.stringify(appsName));
     console.log(" ===> all files transferred to database")
   }
 }
@@ -227,36 +233,16 @@ async function checkAndCreateUserDir(user, ip) {
 //                                                                                    
 // (6/6) GET /lispApps
 //
-// const path = require('path');
-
-async function copyDirectory(src, dest) {
-  await fsPromises.mkdir(dest, { recursive: true });
-  let entries = await fsPromises.readdir(src, { withFileTypes: true });
-  for (let entry of entries) {
-    let srcPath = path.join(src, entry.name);
-    let destPath = path.join(dest, entry.name);
-    entry.isDirectory() ? 
-      await copyDirectory(srcPath, destPath) : 
-      await fsPromises.copyFile(srcPath, destPath);
-  }
-}
-
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
   const user = req.query.user;
   try {
     await checkAndCreateUserDir(user, req.ip);
-    // Lister le contenu du répertoire du user
-    const appsDir = path.join('public', 'zardoz42');
-    const entries = await fsPromises.readdir(appsDir, { withFileTypes: true });
-    const dirs = [];
-    for (const entry of entries) {
-      if (entry.isDirectory()) {
-        dirs.push(entry.name);
-      }
-    }
-    res.json(dirs);
-    //res.json(['log','Docs'])
+    // Retrieve the list of apps from the database with key user
+    const appsListKey = `${user}`;
+    const appsListJson = await db.get(appsListKey);
+    const appsList = JSON.parse(appsListJson);
+    res.json(appsList);
   } catch (error) {
     console.error(error);
     res.status(500).send(`😭🛑 Liste des App introuvable`);
