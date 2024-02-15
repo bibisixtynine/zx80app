@@ -11,6 +11,8 @@
 //                            //
 ////////////////////////////////
 
+// contact : ilboued@proton.me
+
 let ui = document.getElementById('ui')
 ui.style.height = "auto"
 
@@ -66,6 +68,7 @@ N'hésite pas à partager cela avec tes utilisateurs !
 <h2 style="color:orange">🥳 Amuse toi bien, et partage tes créations !</h2>
 
 <h1 style="color:yellow; text-align:center;">Avanti 💫😋🚀 !</h1>
+<h1 style="color:yellow; text-align:center;">ilboued@proton.me</h1>
 
 
 
