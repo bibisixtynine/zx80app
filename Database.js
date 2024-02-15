@@ -102,7 +102,8 @@ class Database {
   
     return connectionErrorCodes.includes(err.code) || (err.message && err.message.includes('timeout'));
   }
-  
+
+  /*
   isConnectionError(err) {
     // Add logic to determine if the error is a connection error.
     // This is dependent on the specifics of the PostgreSQL library in use.
@@ -111,7 +112,7 @@ class Database {
            err.code === '57P02' || // crash_shutdown
            err.code === '57P03' || // cannot_connect_now
            err.code === '01002';   // connection_exception
-  }
+  }*/
 
   // PUBLIC : Retrieve a value by key from the database
   async get(url) {

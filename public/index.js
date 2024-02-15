@@ -1,14 +1,14 @@
 // Variable pour suivre le mode actuel
-let isEditMode = true;
-setEditMode(true);
+let g_isEditMode = true;
+switchUI(g_isEditMode);
 
 // utilisateur
-let username = localStorage.getItem("username");
-if (!username) newUsername();
+let g_username = localStorage.getItem("username");
+if (!g_username) newUsername();
 
 // app
-let currentApp = { name: "", description: "", image: "", code: "" };
-let isAppAlreadyLoadedFromLocalStorage = false;
+let g_currentApp = { name: "", description: "", image: "", code: "" };
+let g_isAppAlreadyLoadedFromLocalStorage = false;
 
 
 /////////////////////////////////////////////////////////////
@@ -76,23 +76,23 @@ function displayConsoleMessage(...args) {
 /////////////////////////////////////////////////////////////
 // editor (cm6)
 //
-const view = cm6.createEditorView(undefined, document.getElementById("editor"));
+const g_view = cm6.createEditorView(undefined, document.getElementById("editor"));
 
-let options = {
+let g_options = {
   oneDark: true,
 };
 
-const initialState = cm6.createEditorState(
+const g_initialState = cm6.createEditorState(
   `
         ////////////////////
         // LOADING  QWARK //
         ////////////////////
 
         `,
-  options
+  g_options
 );
 
-view.setState(initialState);
+g_view.setState(g_initialState);
 //
 // editor (cm6)
 /////////////////////////////////////////////////////////////
@@ -102,8 +102,8 @@ view.setState(initialState);
 // resetEditorState - Réinitialise l'état de l'éditeur
 //
 function resetEditorState(newCode) {
-  const newState = cm6.createEditorState(newCode, options);
-  view.setState(newState);
+  const newState = cm6.createEditorState(newCode, g_options);
+  g_view.setState(newState);
 }
 //
 // resetEditorState - Réinitialise l'état de l'éditeur
@@ -114,7 +114,7 @@ function resetEditorState(newCode) {
 // saveEditorState
 //
 function saveEditorState() {
-  const editorState = view.state;
+  const editorState = g_view.state;
   const editorContent = editorState.doc.toString();
   //const editorHistory = editorState.toJSON().history;
 
@@ -199,13 +199,13 @@ function changeFontSize(delta) {
 //
 window.onload = function () {
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-  const lastEditedApp = localStorage.getItem("lastEditedApp-" + username);
+  const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
   if (lastEditedApp) {
-    console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${username}` );
-    LoadApp(lastEditedApp); // Charger l'application sélectionnée
+    console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
+    LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
   } else {
-    console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${username}` );
-    LoadApp("Docs"); // Charger l'application par défaut
+    console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
+    LoadApp(g_username, "Docs"); // Charger l'application par défaut
   }
 };
 //
@@ -217,36 +217,36 @@ window.onload = function () {
 // Settings clicked
 //
 function askUsername() {
-  const newUsername = prompt("Change de Dossier Perso :", username);
+  const newUsername = prompt("Change de Dossier Perso :", g_username);
   if (newUsername) {
-    username = newUsername;
-    localStorage.setItem("username", username);
+    g_username = newUsername;
+    localStorage.setItem("username", g_username);
     // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-    const lastEditedApp = localStorage.getItem("lastEditedApp-" + username);
+    const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
     console.log("lasteditedapp = ", lastEditedApp);
     if (lastEditedApp) {
-      LoadApp(lastEditedApp); // Charger l'application sélectionnée
+      LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
     } else {
-      LoadApp("Docs"); // Charger l'application par défaut
+      LoadApp(g_username, "Docs"); // Charger l'application par défaut
     }
   }
 }
 
 function newUsername() {
-  username = "";
-  username = prompt(
+  g_username = "";
+  g_username = prompt(
     "Choisissez votre identifiant unique (par exemple votre prenom suivi d'un code à 4 chiffres, sans aucun espace) :",
-    username
+    g_username
   );
-  if (username) {
-    localStorage.setItem("username", username);
+  if (g_username) {
+    localStorage.setItem("username", g_username);
     // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-    const lastEditedApp = localStorage.getItem("lastEditedApp-" + username);
+    const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
     console.log("lasteditedapp = ", lastEditedApp);
     if (lastEditedApp) {
-      LoadApp(lastEditedApp); // Charger l'application sélectionnée
+      LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
     } else {
-      LoadApp("Docs"); // Charger l'application par défaut
+      LoadApp(g_username, "Docs"); // Charger l'application par défaut
     }
   } else window.location.reload(true);
 }
@@ -311,17 +311,17 @@ function displayAppLink() {
 // newProjetct clicked
 //
 function newProject() {
-  currentApp.name = prompt("New Project Name :", currentApp.name);
-  if (currentApp.name) {
-    console.log(" newProject, currentApp.name = ", currentApp.name);
-    localStorage.setItem("lastEditedApp-" + username, currentApp.name); // Sauvegarder le nom de l'application sélectionnée
+  g_currentApp.name = prompt("New Project Name :", g_currentApp.name);
+  if (g_currentApp.name) {
+    console.log(" newProject, currentApp.name = ", g_currentApp.name);
+    localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name); // Sauvegarder le nom de l'application sélectionnée
     console.log(
       "NEW PROJECT, STORAGE = ",
-      localStorage.getItem("lastEditedApp-" + username)
+      localStorage.getItem("lastEditedApp-" + g_username)
     );
     Save();
   } else {
-    console.log(" BUG newProject, currentApp.name = ", currentApp.name);
+    console.log(" BUG newProject, currentApp.name = ", g_currentApp.name);
   }
 }
 //
@@ -332,7 +332,7 @@ function newProject() {
 /////////////////////////////////////////////////////////
 // LoadApp()
 //
-function LoadApp(selectedApp) {
+function LoadApp(username,selectedApp) {
   fetch(
     `/loadApp?name=${encodeURIComponent(selectedApp)}&user=${encodeURIComponent(
       username
@@ -346,7 +346,7 @@ function LoadApp(selectedApp) {
       // Récupérer la valeur du paramètre 'param'
       const monParam = urlParams.get("param");
       console.log("##### param = ", monParam);
-      if (monParam && !isAppAlreadyLoadedFromLocalStorage) {
+      if (monParam && !g_isAppAlreadyLoadedFromLocalStorage) {
         /*let code = localStorage.getItem("storedBeforeRun");
         view.dispatch({
           changes: {
@@ -363,17 +363,17 @@ function LoadApp(selectedApp) {
         */
         console.log("🕛 BACK TO STATE ! isAppAlreadyLoadedFromLocalStorage")
         loadEditorState()
-        isAppAlreadyLoadedFromLocalStorage = true;
+        g_isAppAlreadyLoadedFromLocalStorage = true;
       } else {
         console.log("🤓 FIRST LOAD -? isAppAlreadyLoadedFromLocalStorage")
         // Réinitialisez l'état de l'éditeur avec le nouveau code
         resetEditorState(appData.code);
       }
-      currentApp.name = appData.name;
+      g_currentApp.name = appData.name;
   
-      localStorage.setItem("lastEditedApp-" + username, currentApp.name);
+      localStorage.setItem("lastEditedApp-" + username, g_currentApp.name);
 
-      console.log("LOAD => currentApp.name = ", currentApp.name);
+      console.log("LOAD => currentApp.name = ", g_currentApp.name);
     })
     .catch((error) => alert("Erreur lors du chargement de l'app: " + error));
 }
@@ -386,9 +386,9 @@ function LoadApp(selectedApp) {
 // </> button pressed
 //
 function runButtonPressed() {
-  if (isEditMode) {
+  if (g_isEditMode) {
     // En venant du mode édition, exécuter le code
-    Exec("ui", "code");
+    Exec();
   } else {
     // En  venant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
@@ -415,17 +415,17 @@ function runButtonPressed() {
 /////////////////////////////////////////////////////////
 // Exec()
 //
-function Exec(uiId, codeId) {
+function Exec() {
   document.getElementById("ui").style.display = "block";
   console.log("🕛👍 SAVE STATE !")
   saveEditorState()
 
   // Cacher les boutons en mode exécution
-  isEditMode = false;
-  setEditMode(false);
+  g_isEditMode = false;
+  switchUI(g_isEditMode);
 
   // run !
-  let code = view.state.doc.toString();
+  let code = g_view.state.doc.toString();
   const script = document.createElement("script");
   script.type = "module";
   script.id = "dynamic-module-script";
@@ -457,9 +457,9 @@ function Exec(uiId, codeId) {
 
 
 /////////////////////////////////////////////////////////
-// setEditMode()
+// switchUI()
 //
-function setEditMode(isEditMode) {
+function switchUI(isEditMode) {
   const elementsToHide = [
     document.getElementById("saveButton"),
     document.getElementById("zoomInButton"),
@@ -493,7 +493,7 @@ function setEditMode(isEditMode) {
   }
 }
 //
-// setEditMode()
+// switchUI()
 /////////////////////////////////////////////////////////
 
 
@@ -501,18 +501,18 @@ function setEditMode(isEditMode) {
 // Save()
 //
 function Save() {
-  console.log("save currentApp.name =", currentApp.name);
-  console.log(" -> username = ", username);
-  localStorage.setItem("lastEditedApp-" + username, currentApp.name);
+  console.log("save currentApp.name =", g_currentApp.name);
+  console.log(" -> username = ", g_username);
+  localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name);
   console.log(
     "SAVE, STORAGE = ",
-    localStorage.getItem("lastEditedApp-" + username)
+    localStorage.getItem("lastEditedApp-" + g_username)
   );
 
   const settings = {
-    name: currentApp.name,
-    code: view.state.doc.toString(),
-    user: username,
+    name: g_currentApp.name,
+    code: g_view.state.doc.toString(),
+    user: g_username,
   };
   fetch("/save", {
     method: "POST",
@@ -524,11 +524,11 @@ function Save() {
     .then((response) => response.text())
     .then((data) => {
       alert(data);
-      console.log("Save... currentApp.name = " + currentApp.name);
-      localStorage.setItem("lastEditedApp-" + username, currentApp.name); // Sauvegarder le nom de l'application sauvegardée
+      console.log("Save... currentApp.name = " + g_currentApp.name);
+      localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name); // Sauvegarder le nom de l'application sauvegardée
       console.log(
         "SAVE, STORAGE = ",
-        localStorage.getItem("lastEditedApp-" + username)
+        localStorage.getItem("lastEditedApp-" + g_username)
       );
     })
     .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
@@ -542,19 +542,19 @@ function Save() {
 // displayStore()
 //
 function displayStore() {
-  fetch(`/listApps?user=${encodeURIComponent(username)}`)
+  fetch(`/listApps?user=${encodeURIComponent(g_username)}`)
     .then((response) => response.json())
     .then((apps) => {
       // Cacher les boutons & cm6 en mode exécution
-      isEditMode = false
-      setEditMode(false);
+      g_isEditMode = false
+      switchUI(g_isEditMode);
       // Cacher le bouton actionButton
       const actionButtonElement = document.getElementById("actionButton");
       if (actionButtonElement) actionButtonElement.style.display = 'none';
 
       const container = document.getElementById("appsList-container"); 
       container.style.display = "grid"
-      container.innerHTML = `<h1 style="color:green;">${username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
+      container.innerHTML = `<h1 style="color:green;">${g_username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach((app) => {
         // Crée un élément div pour chaque application.
         const appDiv = document.createElement("div");
@@ -564,12 +564,12 @@ function displayStore() {
         appDiv.addEventListener("click", () => {
           const container = document.getElementById("appsList-container"); 
           container.style.display = "none"
-          isEditMode = true
-          setEditMode(true);
+          g_isEditMode = true
+          switchUI(true);
           // Afficher le bouton actionButton
           const actionButtonElement = document.getElementById("actionButton");
           if (actionButtonElement) actionButtonElement.style.display = 'block';
-          LoadApp(app); // Appelle la fonction loadApp avec le nom de l'application.
+          LoadApp(g_username,app); // Appelle la fonction loadApp avec le nom de l'application.
         });
         // Ajoute le nom de l'application au div.
         appDiv.innerText = app;
