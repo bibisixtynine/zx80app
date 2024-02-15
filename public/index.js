@@ -258,6 +258,7 @@ function newUsername() {
 // link clicked
 //
 function displayAppLink() {
+  /*
   // Obtenez l'URL de la page courante sans les paramètres
   const currentPageURL = `${window.location.origin}/`//${window.location.pathname}`;
 
@@ -296,7 +297,9 @@ function displayAppLink() {
   } else {
     // Si aucune application n'est sélectionnée, affichez un message d'erreur
     alert("Veuillez sélectionner une application avant de générer le lien.");
-  }
+  }*/
+  alert("temporairement indisponible");
+
 }
 //
 // link clicked
@@ -611,6 +614,7 @@ document
 document
   .getElementById("newProjectButton")
   .addEventListener("click", () => newProject());
+
 document
   .getElementById("linkButton")
   .addEventListener("click", () => displayAppLink());

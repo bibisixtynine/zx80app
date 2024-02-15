@@ -1,4 +1,4 @@
-const version = "😜zardoz42/Sprites Benchmark😜"
+const version = "😜jerome/Sprites Benchmark😜"
 
 const CACHE_NAME = "🐘" + version;
 
@@ -8,12 +8,12 @@ let isReady = false;
 
 // URL à mettre en cache initiallement
 const urlsToCache = [
-  "/zardoz42/Sprites Benchmark/",
-  "/zardoz42/Sprites Benchmark/index.html",
-  "/zardoz42/Sprites Benchmark/manifest.json",  
-  "/zardoz42/Sprites Benchmark/app.js",
-  "/zardoz42/Sprites Benchmark/app.json",  
-  "/zardoz42/Sprites Benchmark/sw.js",
+  "/jerome/Sprites Benchmark/",
+  "/jerome/Sprites Benchmark/index.html",
+  "/jerome/Sprites Benchmark/manifest.json",  
+  "/jerome/Sprites Benchmark/app.js",
+  "/jerome/Sprites Benchmark/app.json",  
+  "/jerome/Sprites Benchmark/sw.js",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274",
   "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-192.png?v=1700949019501",
   "https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"

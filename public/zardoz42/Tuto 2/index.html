@@ -6,9 +6,9 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>zardoz42/Tuto 2</title>
-    <meta name="application-name" content="zardoz42/Tuto 2" />
-    <meta name="description" content="The Super Cool zardoz42/Tuto 2 App" />
+    <title>jerome/Tuto 2</title>
+    <meta name="application-name" content="jerome/Tuto 2" />
+    <meta name="description" content="The Super Cool jerome/Tuto 2 App" />
     <meta
       name="viewport"
       content="viewport-fit=cover,user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
@@ -50,6 +50,10 @@
       name="msapplication-TileImage"
       content="https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/application-512.png?v=1700949025274"
     />
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
 
     <!-- manifest -->
     <link rel="manifest" href="manifest.json" />
@@ -143,7 +147,7 @@
       window.messageLog = ["HELLO", "HOW ARE YOU"];
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register("/zardoz42/Tuto 2/sw.js", { scope: "/zardoz42/Tuto 2/" })
+          .register("/jerome/Tuto 2/sw.js", { scope: "/jerome/Tuto 2/" })
           .then(function (registration) {
             console.log("+-> (1) 😍 Service Worker registered", registration);
 
