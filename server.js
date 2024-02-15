@@ -11,7 +11,6 @@
 const Database = require("./Database");
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const fsPromises = require('fs').promises;
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -115,9 +114,9 @@ app.post('/save', async (req, res) => {
       await db.set(appsListKey, JSON.stringify(appsList));
     }
 
-    res.send(`\\ud83d\\ude0e\\u2708 <${name}> sauvegard\\u00e9e avec succ\\u00e8s par <${user}>`);
+    res.send(`<${name}> sauvegardé avec succés par <${user}>`);
   } catch (error) {
-    res.status(500).send(`\\ud83d\\ude22\\ud83d\\udd34 Erreur lors de la sauvegarde <${name}> par <${user}>`);
+    res.status(500).send(`Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }
 });
 //                                                                                    
