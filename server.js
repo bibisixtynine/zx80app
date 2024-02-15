@@ -11,7 +11,6 @@
 const Database = require("./Database");
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const fsPromises = require('fs').promises;
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -93,7 +92,7 @@ function formattedLog(user,action,appName,ip) {
 app.post('/save', async (req, res) => {
   const user = req.body.user; // identifiant de l'utilisateur
   
-  formattedLog(user,'SAVED  \\ud83d\\udd34',req.body.name,req.ip)
+  formattedLog(user,'SAVED 💋',req.body.name,req.ip)
   
   try {
     let { name, code } = req.body;
@@ -115,9 +114,9 @@ app.post('/save', async (req, res) => {
       await db.set(appsListKey, JSON.stringify(appsList));
     }
 
-    res.send(`\\ud83d\\ude0e\\u2708 <${name}> sauvegard\\u00e9e avec succ\\u00e8s par <${user}>`);
+    res.send(`<${name}> sauvegardé avec succés par <${user}>`);
   } catch (error) {
-    res.status(500).send(`\\ud83d\\ude22\\ud83d\\udd34 Erreur lors de la sauvegarde <${name}> par <${user}>`);
+    res.status(500).send(`Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }
 });
 //                                                                                    
@@ -162,7 +161,7 @@ app.get('/loadApp', async (req, res) => {
 // (5/6) Fonction pour vérifier et créer le répertoire de l'utilisateur
 //
 async function checkAndCreateUserDir(user, ip) {
-  if (!await db.asKeyWithPrefix(user+'/apps')) {
+  if (!await db.hasKeyWithPrefix(user+'/apps')) {
     formattedLog(user, 'is NEW \ud83e\udd29', '', ip);
     const sourceDir = 'defaultApps';
     let appsName = [];
@@ -227,7 +226,7 @@ app.listen(port, () => {
     now.setHours(now.getHours() + 1); // utc+1
     let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
   
-    log(`💫🤩🚀 ${formattedDate} - Serveur démarré sur le port ${port}`);
+    log(`${formattedDate} <💫🤩🚀> --> Serveur démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START
