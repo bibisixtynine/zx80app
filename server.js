@@ -93,7 +93,7 @@ function formattedLog(user,action,appName,ip) {
 app.post('/save', async (req, res) => {
   const user = req.body.user; // identifiant de l'utilisateur
   
-  formattedLog(user,'SAVED  \\ud83d\\udd34',req.body.name,req.ip)
+  formattedLog(user,'SAVED 💋',req.body.name,req.ip)
   
   try {
     let { name, code } = req.body;
@@ -227,7 +227,7 @@ app.listen(port, () => {
     now.setHours(now.getHours() + 1); // utc+1
     let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
   
-    log(`💫🤩🚀 ${formattedDate} - Serveur démarré sur le port ${port}`);
+    log(`${formattedDate} <💫🤩🚀> --> Serveur démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START
