@@ -7,14 +7,8 @@
 // libs
 
 (async () => {
-const Database = require("./Database");
-const db = new Database('key_value_store')
   
-
-await db.open();
-console.log("===> open DONE")
-
-
+const Database = require("./Database");
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -24,18 +18,6 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware pour extraire le sous-domaine
-app.use((req, res, next) => {
-    const host = req.get('Host');
-    const hostParts = host.split('.');
-    if (hostParts.length > 2) {
-        req.subdomain = hostParts[0];
-    } else {
-        req.subdomain = null;
-    }
-    next();
-});
-
 // Configuration de base
 app.set('trust proxy', true);
 app.use(cors());
@@ -43,6 +25,8 @@ app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+const db = new Database('key_value_store')
+await db.open();
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
@@ -60,9 +44,9 @@ log = async function() {
     }).join(' ');
     console.log(message);  // Affiche dans la console
     try {
-        let log = await db.get('log-zardoz')
+        let log = await db.get('jerome/Logs/app.js')
         if (!log) log = ''
-        await db.set('log-zardoz', log + message + '\n');
+        await db.set('jerome/Logs/app.js', log + message + '\n');
     } catch (err) {
         originalConsoleLog('Erreur lors de l\u2019\u00e9criture dans la base de donn\u00e9es:', err);
     }
@@ -112,20 +96,18 @@ app.post('/save', async (req, res) => {
   formattedLog(user,'SAVED  \\ud83d\\udd34',req.body.name,req.ip)
   
   try {
-    let { name, image, description, code } = req.body;
+    let { name, code } = req.body;
     // Si 'name' est vide, lui attribuer la valeur 'Docs'
     name = name.trim() ? name : 'Docs';
 
     const appKeyPrefix = `${user}/${name}`;
-    const appDataKey = `${appKeyPrefix}/app.json`;
     const appCodeKey = `${appKeyPrefix}/app.js`;
 
-    // a) Sauvegarde des fichiers app.json et app.js dans la base de donnees
-    await db.set(appDataKey, JSON.stringify({ name, image, description }));
+    // a) Sauvegarde des fichiers app.js dans la base de donnees
     await db.set(appCodeKey, code);
 
     // b) Mise \\u00e0 jour de la liste des applications de l'utilisateur dans la base de donnees
-    const appsListKey = `${user}`;
+    const appsListKey = `${user}/apps`;
     let appsList = await db.get(appsListKey);
     appsList = appsList ? JSON.parse(appsList) : [];
     if (!appsList.includes(name)) {
@@ -156,16 +138,14 @@ app.get('/loadApp', async (req, res) => {
 
     const appName = req.query.name;
     const appKeyPrefix = `${user}/${appName}`;
-    const appDataKey = `${appKeyPrefix}/app.json`;
     const appCodeKey = `${appKeyPrefix}/app.js`;
 
-    const appData = await db.get(appDataKey);
     const appCode = await db.get(appCodeKey);
 
-    if (appData && appCode) {
-      res.json({ ...JSON.parse(appData), code: appCode });
+    if (appCode) {
+      res.json({ name: appName, code: appCode });
     } else {
-      throw new Error('App data or code not found in the database.');
+      throw new Error('code not found in the database.');
     }
   } catch (error) {
     res.status(500).send(`No app <${req.query.name}> missing for user <${req.query.user}>`);
@@ -182,10 +162,9 @@ app.get('/loadApp', async (req, res) => {
 // (5/6) Fonction pour vérifier et créer le répertoire de l'utilisateur
 //
 async function checkAndCreateUserDir(user, ip) {
-  const userDir = path.join('public', user);
-  if (!await db.asKeyWithPrefix(user)) {
+  if (!await db.asKeyWithPrefix(user+'/apps')) {
     formattedLog(user, 'is NEW \ud83e\udd29', '', ip);
-    const sourceDir = path.join('public', 'zardoz42');
+    const sourceDir = 'defaultApps';
     let appsName = [];
     async function copyFiles(srcDir) {
       const entries = await fsPromises.readdir(srcDir, { withFileTypes: true });
@@ -198,14 +177,14 @@ async function checkAndCreateUserDir(user, ip) {
         } else {
           const fileContent = await fsPromises.readFile(entryPath, 'utf8');
           let fileKey = `${user}/${entryPath}`;
-          fileKey = fileKey.replace('public/zardoz42/', ''); // Supress "public/zardoz42/" in fileKey
+          fileKey = fileKey.replace('defaultApps/', ''); // Supress "public/zardoz42/" in fileKey
           //console.log('Processing file:', fileKey);
           await db.set(fileKey, fileContent);
         }
       }
     }
     await copyFiles(sourceDir); // Start the recursive file copy
-    await db.set(user, JSON.stringify(appsName));
+    await db.set(user+'/apps', JSON.stringify(appsName));
     //console.log(" ===> all files transferred to database")
   }
 }
@@ -223,7 +202,7 @@ app.get('/listApps', async (req, res) => {
   try {
     await checkAndCreateUserDir(user, req.ip);
     // Retrieve the list of apps from the database with key user
-    const appsListKey = `${user}`;
+    const appsListKey = `${user}/apps`;
     const appsListJson = await db.get(appsListKey);
     const appsList = JSON.parse(appsListJson);
     res.json(appsList);

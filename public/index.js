@@ -200,10 +200,11 @@ function changeFontSize(delta) {
 window.onload = function () {
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
   const lastEditedApp = localStorage.getItem("lastEditedApp-" + username);
-  console.log("lasteditedapp = ", lastEditedApp);
   if (lastEditedApp) {
+    console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${username}` );
     LoadApp(lastEditedApp); // Charger l'application sélectionnée
   } else {
+    console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${username}` );
     LoadApp("Docs"); // Charger l'application par défaut
   }
 };
@@ -369,6 +370,7 @@ function LoadApp(selectedApp) {
         resetEditorState(appData.code);
       }
       currentApp.name = appData.name;
+  
       localStorage.setItem("lastEditedApp-" + username, currentApp.name);
 
       console.log("LOAD => currentApp.name = ", currentApp.name);
@@ -388,7 +390,7 @@ function runButtonPressed() {
     // En venant du mode édition, exécuter le code
     Exec("ui", "code");
   } else {
-    // En  enant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
+    // En  venant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
     
     // Créez un objet URL à partir de l'URL actuelle
@@ -509,8 +511,6 @@ function Save() {
 
   const settings = {
     name: currentApp.name,
-    image: currentApp.image,
-    description: currentApp.description,
     code: view.state.doc.toString(),
     user: username,
   };
