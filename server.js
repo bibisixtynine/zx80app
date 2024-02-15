@@ -162,7 +162,7 @@ app.get('/loadApp', async (req, res) => {
 // (5/6) Fonction pour vérifier et créer le répertoire de l'utilisateur
 //
 async function checkAndCreateUserDir(user, ip) {
-  if (!await db.asKeyWithPrefix(user+'/apps')) {
+  if (!await db.hasKeyWithPrefix(user+'/apps')) {
     formattedLog(user, 'is NEW \ud83e\udd29', '', ip);
     const sourceDir = 'defaultApps';
     let appsName = [];
