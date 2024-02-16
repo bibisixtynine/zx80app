@@ -1,18 +1,3 @@
 {
-  "files": {
-    "server.js": [
-      {
-        "id": "4402be1c-379f-44b2-bd3b-d21b56288574",
-        "line": 48,
-        "version": 2049,
-        "index": 1425
-      },
-      {
-        "id": "95a065dd-2460-4e09-a419-712aa4ab4417",
-        "line": 49,
-        "version": 1893,
-        "index": 1451
-      }
-    ]
-  }
+  "files": {}
 }
