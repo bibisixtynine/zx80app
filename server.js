@@ -226,7 +226,7 @@ app.listen(port, () => {
     now.setHours(now.getHours() + 1); // utc+1
     let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
   
-    log(`${formattedDate} <***> --> Serveur démarré sur le port ${port}`);
+    log(`${formattedDate} <💫🤩🚀> --> Serveur démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START

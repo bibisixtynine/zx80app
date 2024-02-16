@@ -34,7 +34,7 @@ class Database {
       }
     });
 
-    console.log("\x1b[32m", `=> ${this.tableName} instantiated`, "\x1b[0m");
+    console.log("\x1b[32m", `Database.js : => ${this.tableName} instantiated`, "\x1b[0m");
   }
 
   // PUBLIC : Connect method with error handling + Create key/value table if not exists
@@ -43,25 +43,26 @@ class Database {
       await this.client.connect(); // Attempt to connect to the database
       // Create the key_value_store table if it does not exist
       await this.client.query(`CREATE TABLE IF NOT EXISTS ${this.tableName} ( key VARCHAR(255) PRIMARY KEY, value TEXT );`);
-      console.log("\x1b[32m", `=> and connected`, "\x1b[0m");
+      console.log("\x1b[32m", `Database.js : connected !!!`, "\x1b[0m");
     } catch (err) {
-      console.error("\x1b[31m", 'Could not connect to the database!', err, "\x1b[0m"); // Log connection error
+      console.error("\x1b[31m", `Database.js : Error executing open() :\x1b[0m\n`, err); // Log query execution error
       throw err; // Rethrow the error for upstream handling
     }
 
     // Add reconnection strategy
     this.client.on('error', async (err) => {
-      console.error("\x1b[31m", 'Database connection error!', err, "\x1b[0m");
-      await this.reconnect();
+      console.error("\x1b[31m", `Database.js : ignore received error :\x1b[0m\n`, err); // Log query execution error
+      
+      //await this.reconnect();
     });
   }
 
   async reconnect() {
-    console.log("\x1b[33m", 'Attempting to reconnect to the database...', "\x1b[0m");
+    console.log("\x1b[33m", 'Database.js : Attempting to reconnect to the database...', "\x1b[0m");
     try {
       await this.client.end();
     } catch (err) {
-      console.error("\x1b[31m", 'Error disconnecting during reconnect', err, "\x1b[0m");
+      console.error("\x1b[31m", `Database.js : Error executing reconnect() :\x1b[0m\n`, err); // Log query execution error
     }
     this.client = new Client({
       connectionString: process.env.DATABASE_URL,
@@ -77,15 +78,16 @@ class Database {
     try {
       // Execute SQL query to insert or update the key-value pair
       await this.client.query(`INSERT INTO ${this.tableName} (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`, [url, fileContent]);
-      console.log("\x1b[32m", `=> ${url} saved`, "\x1b[0m");
+      // console.log("\x1b[32m", `=> ${url} saved`, "\x1b[0m");
     } catch (err) {
-      if (this.isConnectionError(err)) {
+      //if (this.isConnectionError(err)) {
+        console.error("\x1b[31m", `Database.js : Error executing set() :\x1b[0m\n`, err); // Log query execution error
         await this.reconnect();
         return this.set(url, fileContent); // Retry the query
-      } else {
-        console.error("\x1b[31m", 'Error executing SAVE query', err, "\x1b[0m"); // Log query execution error
-        throw err; // Rethrow the error for upstream handling
-      }
+      //} else {
+      //  console.error("\x1b[31m", 'Error executing SAVE query', err, "\x1b[0m"); // Log query execution error
+      //  throw err; // Rethrow the error for upstream handling
+      //}
     }
   }
 
@@ -121,22 +123,23 @@ class Database {
       const result = await this.client.query(`SELECT value FROM ${this.tableName} WHERE key = $1`, [url]);
       // Check if the key was found and return its value, otherwise return null
       if (result.rows.length > 0) {
-        console.log("\x1b[32m", `=> ${url} loaded`, "\x1b[0m");
+        // console.log("\x1b[32m", `=> ${url} loaded`, "\x1b[0m");
         return result.rows[0].value;
       } else {
         console.log("\x1b[33m", `=> ${url} not found`, "\x1b[0m");
         return null;
       }
     } catch (err) {
-      if (this.isConnectionError(err)) {
+      //if (this.isConnectionError(err)) {
         // If a connection error is detected, reconnect and retry the get operation
+        console.error("\x1b[31m", `Database.js : Error executing get() :\x1b[0m\n`, err); // Log query execution error
         await this.reconnect();
         return this.get(url);
-      } else {
-        // If the error is not a connection error, log it and re-throw
-        console.error("\x1b[31m", `Error executing GET query for ${url}`, err, "\x1b[0m");
-        throw err;
-      }
+      //} else {
+      //  If the error is not a connection error, log it and re-throw
+      //  console.error("\x1b[31m", `Error executing GET query for ${url}`, err, "\x1b[0m");
+      //  throw err;
+      //}
     }
   }
   
@@ -154,13 +157,14 @@ async getAll() {
     return JSON.stringify(keyValuePairs);
   } catch (err) {
     // Detect if the error is related to the connection and reconnect if necessary
-    if (this.isConnectionError(err)) {
+    //if (this.isConnectionError(err)) {
+      console.error("\x1b[31m", `Database.js : Error executing getAll() :\x1b[0m\n`, err); // Log query execution error
       await this.reconnect();
       return this.getAll(); // Retry the query after reconnection
-    } else {
-      console.error("\x1b[31m", 'Error executing GET ALL query', err, "\x1b[0m"); // Log query execution error
-      throw err; // Rethrow the error for upstream handling
-    }
+    //} else {
+    //  console.error("\x1b[31m", 'Error executing GET ALL query', err, "\x1b[0m"); // Log query execution error
+    //  throw err; // Rethrow the error for upstream handling
+    //}
   }
 }
 
@@ -182,14 +186,15 @@ async getAll() {
       console.log("\x1b[32m", `=> All key-value pairs were set`, "\x1b[0m");
     } catch (err) {
       // If an error occurs, rollback the transaction
-      if (this.isConnectionError(err)) {
+      //if (this.isConnectionError(err)) {
+        console.error("\x1b[31m", `Database.js : Error executing setAll() :\x1b[0m\n`, err); // Log query execution error
         await this.reconnect();
         return this.setAll(jsonString); // Retry the query after reconnection
-      } else {
-        await this.client.query('ROLLBACK');
-        console.error("\x1b[31m", 'Error executing SET ALL query', err, "\x1b[0m"); // Log query execution error
-        throw err; // Rethrow the error for upstream handling
-      }
+      //} else {
+      //  await this.client.query('ROLLBACK');
+      //  console.error("\x1b[31m", 'Error executing SET ALL query', err, "\x1b[0m"); // Log query execution error
+      //  throw err; // Rethrow the error for upstream handling
+      //}
     }
   }
 
@@ -203,13 +208,14 @@ async getAll() {
       console.log("\x1b[32m", 'All key-value pairs have been erased from the database.', "\x1b[0m");
     } catch (err) {
       // If there is a connection error, try to reconnect and call eraseAll again
-      if (this.isConnectionError(err)) {
+      //if (this.isConnectionError(err)) {
+        console.error("\x1b[31m", `Database.js : Error executing eraseAll() :\x1b[0m\n`, err); // Log query execution error
         await this.reconnect();
         return this.eraseAll(); // Retry the query after reconnection
-      } else {
-        console.error("\x1b[31m", 'Error executing ERASE ALL query', err, "\x1b[0m"); // Log query execution error
-        throw err; // Rethrow the error for upstream handling
-      }
+      //} else {
+      //  console.error("\x1b[31m", 'Error executing ERASE ALL query', err, "\x1b[0m"); // Log query execution error
+      //  throw err; // Rethrow the error for upstream handling
+      //}
     }
   }
 
@@ -221,14 +227,15 @@ async getAll() {
       await this.client.query(`DELETE FROM ${this.tableName} WHERE key = $1`, [key]);
       console.log("\x1b[32m", `Key-value pair with key '${key}' has been erased from the database.`, "\x1b[0m");
     } catch (err) {
-      if (this.isConnectionError(err)) {
+      //if (this.isConnectionError(err)) {
+        console.error("\x1b[31m", `Database.js : Error executing erase() :\x1b[0m\n`, err);
         // If a connection error, try to reconnect and call erase again
         await this.reconnect();
         return this.erase(key); // Retry the query after reconnection
-      } else {
-        console.error("\x1b[31m", 'Error executing ERASE query', err, "\x1b[0m"); // Log query execution error
-        throw err; // Rethrow the error for upstream handling
-      }
+      //} else {
+      //  console.error("\x1b[31m", 'Error executing ERASE query', err, "\x1b[0m"); // Log query execution error
+      //  throw err; // Rethrow the error for upstream handling
+      //}
     }
   }
 
@@ -252,13 +259,16 @@ async getAll() {
       const result = await this.client.query(`SELECT EXISTS(SELECT 1 FROM ${this.tableName} WHERE key LIKE $1 LIMIT 1)`, [prefix + '%']);
       return result.rows[0].exists; // Return true if a key with the prefix exists, otherwise false
     } catch (err) {
-      if (this.isConnectionError(err)) {
+      console.error("\x1b[31m", `Database.js : Error executing hasKeyWithPrefix() :\x1b[0m\n`, err); // Log query execution error
+
+      //if (this.isConnectionError(err)) {
         await this.reconnect();
         return this.hasKeyWithPrefix(prefix); // Retry the query after reconnection
-      } else {
-        console.error("\x1b[31m", 'Error executing ASK KEY WITH PREFIX query', err, "\x1b[0m"); // Log query execution error
-        throw err; // Rethrow the error for upstream handling
-      }
+      //} else {
+      //  console.error("\x1b[31m", `Database.js : Error executing hasKeyWithPrefix() :\n`, err, "\x1b[0m"); // Log query execution error
+        
+      //  throw err; // Rethrow the error for upstream handling
+      //}
     }
   }
 
