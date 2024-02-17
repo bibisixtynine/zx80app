@@ -32,7 +32,10 @@ await db.open();
 
 
 
-
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// (0/6) replit logging
+//
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/logged-only/index.html');
 });
@@ -41,6 +44,10 @@ app.get('/getUsername', function (req, res) {
   const user = getUserInfo(req)
   res.send(`${user.name}`);
 });
+//                                                                                    
+// (0/6) replit logging
+//
+///////////////////////////////////////////////////////////////////////////////////////
 
   
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -247,7 +254,7 @@ app.listen(port, () => {
     now.setHours(now.getHours() + 1); // utc+1
     let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
   
-    log(`${formattedDate} <***> --> Serveur démarré sur le port ${port}`);
+    log(`${formattedDate} <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START
