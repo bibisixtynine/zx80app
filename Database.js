@@ -1,7 +1,5 @@
 // DataBase.js
 
-const { Client } = require('pg');
-
 /**
  * This class provides a simple interface to interact with a PostgreSQL database.
  * It allows saving and loading key-value pairs.
@@ -24,8 +22,9 @@ const { Client } = require('pg');
  */
 
 
-console.log("📀📀📀📀16:48 - 17 février 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀")
+console.log("📀📀📀📀 NEW DEPLOY 02/17/24 09:45 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀")
 
+const { Client } = require('pg');
 
 class Database {
   constructor(tableName = 'key_value_store') {
@@ -39,6 +38,7 @@ class Database {
       }
     });
 
+    this.isReconnecting = false;
     console.log(`📀☀️ constructor() ... NEW Client ${this.tableName} instantiated ---------------`);
   }
 
@@ -51,18 +51,36 @@ class Database {
       console.log(`📀☀️ open() ... CONNECTED ---------------`);
     } catch (err) {
       console.error(`📀💥 open() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-      //throw err; // Rethrow the error for upstream handling
     }
 
-    // Add reconnection strategy
+    // Add reconnection strategy :
+    // In the cas of the neon database, it goes sleeping after 5mn of inactivity
+    // This generate 2 error events
+    // To avoid auto-restart of the server if theses errors where not handled, 
+    // we add a reconnection strategy : just log the error.
+    // We don't try to reconnect because the compute time of the database cost !
     this.client.on('error', async (err) => {
       console.error(`📀💥 onerror() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-      
-      //await this.reconnect();
     });
   }
 
   async reconnect() {
+    ///////////////////////////////
+    // already reconnecting ? => wait
+    if (this.isReconnecting) {
+      console.log('📀☀️ A reconnect attempt is already in progress.');
+      while (this.isReconnecting) {
+        await new Promise(resolve => setTimeout(resolve, 100)); // Wait in a loop
+      }
+      return;
+    }
+    //
+    ///////////////////////////////
+
+    ///////////////////////////////
+    //
+    this.isReconnecting = true;
+    
     try {
       console.log('📀☀️ reconnect().end ... TRY');
       await this.client.end();
@@ -77,6 +95,10 @@ class Database {
       }
     });
     await this.open();
+
+    this.isReconnecting = false;
+    //
+    ///////////////////////////////
   }
 
   // PUBLIC : Save a key-value pair to the database
@@ -84,16 +106,10 @@ class Database {
     try {
       // Execute SQL query to insert or update the key-value pair
       await this.client.query(`INSERT INTO ${this.tableName} (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`, [url, fileContent]);
-      // console.log("\x1b[32m", `=> ${url} saved`, "\x1b[0m");
     } catch (err) {
-      //if (this.isConnectionError(err)) {
-        console.error("\x1b[31m", `📀💥 set() ... ## Error ## --> ${this.formatErrorMessage(err)}`);
-        await this.reconnect();
-        return this.set(url, fileContent); // Retry the query
-      //} else {
-      //  console.error("\x1b[31m", 'Error executing SAVE query', err, "\x1b[0m"); // Log query execution error
-      //  throw err; // Rethrow the error for upstream handling
-      //}
+      console.error("\x1b[31m", `📀💥 set() ... ## Error ## --> ${this.formatErrorMessage(err)}`);
+      await this.reconnect();
+      return this.set(url, fileContent); // Retry the query
     }
   }
 
@@ -125,47 +141,34 @@ class Database {
         return null;
       }
     } catch (err) {
-      //if (this.isConnectionError(err)) {
-        // If a connection error is detected, reconnect and retry the get operation
-        console.error(`📀💥 get() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-        await this.reconnect();
-        return this.get(url);
-      //} else {
-      //  If the error is not a connection error, log it and re-throw
-      //  console.error("\x1b[31m", `Error executing GET query for ${url}`, err, "\x1b[0m");
-      //  throw err;
-      //}
+      // If a connection error is detected, reconnect and retry the get operation
+      console.error(`📀💥 get() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
+      await this.reconnect();
+      return this.get(url);
     }
   }
   
-// PUBLIC : Retrieve all key-value pairs from the database as a JSON string
-async getAll() {
-  try {
-    // Execute SQL query to select all key-value pairs
-    const result = await this.client.query(`SELECT key, value FROM ${this.tableName}`);
-    // Convert the result rows to an object
-    const keyValuePairs = {};
-    result.rows.forEach(row => {
-      keyValuePairs[row.key] = row.value;
-    });
-    // Return the object as a JSON string
-    return JSON.stringify(keyValuePairs);
-  } catch (err) {
-    // Detect if the error is related to the connection and reconnect if necessary
-    //if (this.isConnectionError(err)) {
+  // PUBLIC : Retrieve all key-value pairs from the database as a JSON string
+  async getAll() {
+    try {
+      // Execute SQL query to select all key-value pairs
+      const result = await this.client.query(`SELECT key, value FROM ${this.tableName}`);
+      // Convert the result rows to an object
+      const keyValuePairs = {};
+      result.rows.forEach(row => {
+        keyValuePairs[row.key] = row.value;
+      });
+      // Return the object as a JSON string
+      return JSON.stringify(keyValuePairs);
+    } catch (err) {
+      // Detect if the error is related to the connection and reconnect if necessary
       console.error(`📀💥 getAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
       await this.reconnect();
       return this.getAll(); // Retry the query after reconnection
-    //} else {
-    //  console.error("\x1b[31m", 'Error executing GET ALL query', err, "\x1b[0m"); // Log query execution error
-    //  throw err; // Rethrow the error for upstream handling
-    //}
+    }
   }
-}
-
-
   
- // PUBLIC : Load the database from a JSON formatted string
+  // PUBLIC : Load the database from a JSON formatted string
   async setAll(jsonString) {
     try {
       // Parse the JSON string to an object
@@ -178,22 +181,13 @@ async getAll() {
       }
       // Commit the transaction
       await this.client.query('COMMIT');
-      // console.log("\x1b[32m", `=> All key-value pairs were set`, "\x1b[0m");
     } catch (err) {
       // If an error occurs, rollback the transaction
-      //if (this.isConnectionError(err)) {
-        console.error(`📀💥 setAll() setAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
-        await this.reconnect();
-        return this.setAll(jsonString); // Retry the query after reconnection
-      //} else {
-      //  await this.client.query('ROLLBACK');
-      //  console.error("\x1b[31m", 'Error executing SET ALL query', err, "\x1b[0m"); // Log query execution error
-      //  throw err; // Rethrow the error for upstream handling
-      //}
+      console.error(`📀💥 setAll() setAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
+      await this.reconnect();
+      return this.setAll(jsonString); // Retry the query after reconnection
     }
   }
-
-
   
   // PUBLIC : Erase all key-value pairs from the database
   async eraseAll() {
@@ -203,14 +197,9 @@ async getAll() {
       //console.log("\x1b[32m", 'All key-value pairs have been erased from the database.', "\x1b[0m");
     } catch (err) {
       // If there is a connection error, try to reconnect and call eraseAll again
-      //if (this.isConnectionError(err)) {
-        console.error(`📀💥 eraseAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
-        await this.reconnect();
-        return this.eraseAll(); // Retry the query after reconnection
-      //} else {
-      //  console.error("\x1b[31m", 'Error executing ERASE ALL query', err, "\x1b[0m"); // Log query execution error
-      //  throw err; // Rethrow the error for upstream handling
-      //}
+      console.error(`📀💥 eraseAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
+      await this.reconnect();
+      return this.eraseAll(); // Retry the query after reconnection
     }
   }
 
@@ -222,15 +211,9 @@ async getAll() {
       await this.client.query(`DELETE FROM ${this.tableName} WHERE key = $1`, [key]);
       //console.log("\x1b[32m", `Key-value pair with key '${key}' has been erased from the database.`, "\x1b[0m");
     } catch (err) {
-      //if (this.isConnectionError(err)) {
-        console.error(`📀💥 erase() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-        // If a connection error, try to reconnect and call erase again
-        await this.reconnect();
-        return this.erase(key); // Retry the query after reconnection
-      //} else {
-      //  console.error("\x1b[31m", 'Error executing ERASE query', err, "\x1b[0m"); // Log query execution error
-      //  throw err; // Rethrow the error for upstream handling
-      //}
+      console.error(`📀💥 erase() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
+      await this.reconnect();
+      return this.erase(key); // Retry the query after reconnection
     }
   }
 
@@ -242,7 +225,6 @@ async getAll() {
       console.log('📀☀️ close() ... OK');
     } catch (err) {
       console.error(`📀💥 close() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-      //throw err; // Rethrow the error for upstream handling
     }
   }
 
@@ -255,15 +237,8 @@ async getAll() {
       return result.rows[0].exists; // Return true if a key with the prefix exists, otherwise false
     } catch (err) {
       console.error(`📀💥 hasKeyWithPrefix() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); 
-
-      //if (this.isConnectionError(err)) {
-        await this.reconnect();
-        return this.hasKeyWithPrefix(prefix); // Retry the query after reconnection
-      //} else {
-      //  console.error("\x1b[31m", `📀 DATABASE Error executing hasKeyWithPrefix() :\n`, err, "\x1b[0m"); // Log query execution error
-        
-      //  throw err; // Rethrow the error for upstream handling
-      //}
+      await this.reconnect();
+      return this.hasKeyWithPrefix(prefix); // Retry the query after reconnection
     }
   }
 
