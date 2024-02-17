@@ -3,8 +3,7 @@ let g_isEditMode = true;
 switchUI(g_isEditMode);
 
 // utilisateur
-let g_username = localStorage.getItem("username");
-if (!g_username) newUsername();
+let g_username = "unknown user"
 
 // app
 let g_currentApp = { name: "", description: "", image: "", code: "" };
@@ -178,60 +177,27 @@ function changeFontSize(delta) {
 //
 window.onload = function () {
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-  const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
-  if (lastEditedApp) {
-    console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
-    LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
-  } else {
-    console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
-    LoadApp(g_username, "Docs"); // Charger l'application par défaut
-  }
+  fetch('/getUsername')
+    .then(response => response.text())
+    .then(username => {
+        g_username = username;
+        localStorage.setItem("username", g_username);
+
+        const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
+        if (lastEditedApp) {
+          console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
+          LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
+        } else {
+          console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
+          LoadApp(g_username, "Docs"); // Charger l'application par défaut
+        }
+    });
+
 };
 //
 // window.onload()
 /////////////////////////////////////////////////////////
 
-
-/////////////////////////////////////////////////////////
-// Settings clicked
-//
-function askUsername() {
-  const newUsername = prompt("Change de Dossier Perso :", g_username);
-  if (newUsername) {
-    g_username = newUsername;
-    localStorage.setItem("username", g_username);
-    // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-    const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
-    console.log("lasteditedapp = ", lastEditedApp);
-    if (lastEditedApp) {
-      LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
-    } else {
-      LoadApp(g_username, "Docs"); // Charger l'application par défaut
-    }
-  }
-}
-
-function newUsername() {
-  g_username = "";
-  g_username = prompt(
-    "Choisissez votre identifiant unique (par exemple votre prenom suivi d'un code à 4 chiffres, sans aucun espace) :",
-    g_username
-  );
-  if (g_username) {
-    localStorage.setItem("username", g_username);
-    // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-    const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
-    console.log("lasteditedapp = ", lastEditedApp);
-    if (lastEditedApp) {
-      LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
-    } else {
-      LoadApp(g_username, "Docs"); // Charger l'application par défaut
-    }
-  } else window.location.reload(true);
-}
-//
-// Settings clicked
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////
@@ -573,9 +539,9 @@ document
 document
   .getElementById("loadButton")
   .addEventListener("click", () => displayStore());
-document
-  .getElementById("settingsButton")
-  .addEventListener("click", () => askUsername());
+//document
+//  .getElementById("settingsButton")
+//  .addEventListener("click", () => askUsername());
 document
   .getElementById("newProjectButton")
   .addEventListener("click", () => newProject());

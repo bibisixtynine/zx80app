@@ -7,7 +7,9 @@
 // libs
 
 (async () => {
-  
+
+const { getUserInfo } = require("@replit/repl-auth")
+
 const Database = require("./Database");
 const express = require('express');
 const cors = require('cors');
@@ -27,9 +29,23 @@ app.use(express.static('public'));
 const db = new Database('key_value_store')
 await db.open();
 
+
+
+
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/logged-only/index.html');
+});
+
+app.get('/getUsername', function (req, res) {
+  const user = getUserInfo(req)
+  res.send(`${user.name}`);
+});
+
+  
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
-// (1/6) augmente console.log pour enregistrer aussi dans le repertoire jerome
+// (1/6) augmente console.log pour enregistrer aussi dans le repertoire ilboued
 //
 log = async function() {
     const args = Array.from(arguments);
@@ -43,9 +59,9 @@ log = async function() {
     }).join(' ');
     console.log(message);  // Affiche dans la console
     try {
-        let log = await db.get('jerome/Logs/app.js')
+        let log = await db.get('ilboued/Logs/app.js')
         if (!log) log = ''
-        await db.set('jerome/Logs/app.js', log + message + '\n');
+        await db.set('ilboued/Logs/app.js', log + message + '\n');
     } catch (err) {
         originalConsoleLog('Erreur lors de l\u2019\u00e9criture dans la base de donn\u00e9es:', err);
     }
@@ -90,7 +106,8 @@ function formattedLog(user,action,appName,ip) {
 //   -> a besoin de app, formattedLog, 
 
 app.post('/save', async (req, res) => {
-  const user = req.body.user; // identifiant de l'utilisateur
+  //const user = req.body.user; // identifiant de l'utilisateur
+  const user = getUserInfo(req).name;
   
   formattedLog(user,'SAVED 💋',req.body.name,req.ip)
   
@@ -130,7 +147,9 @@ app.post('/save', async (req, res) => {
 // (4/6) GET /loadApp OK
 //
 app.get('/loadApp', async (req, res) => {
-  const user = req.query.user;
+  //const user = req.query.user;
+  const user = getUserInfo(req).name;
+
   formattedLog(user,'LOADED',req.query.name,req.ip)
   try {
     await checkAndCreateUserDir(user);
@@ -197,7 +216,9 @@ async function checkAndCreateUserDir(user, ip) {
 //
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
-  const user = req.query.user;
+  //const user = req.query.user;
+  const user = getUserInfo(req).name;
+
   try {
     await checkAndCreateUserDir(user, req.ip);
     // Retrieve the list of apps from the database with key user
@@ -226,7 +247,7 @@ app.listen(port, () => {
     now.setHours(now.getHours() + 1); // utc+1
     let formattedDate = now.toISOString().replace('T', ' ').replace('Z', '').substring(0, 16);
   
-    log(`${formattedDate} <💫🤩🚀> --> Serveur démarré sur le port ${port}`);
+    log(`${formattedDate} <***> --> Serveur démarré sur le port ${port}`);
 });
 //                                                                                    
 // SERVER START

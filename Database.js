@@ -22,6 +22,10 @@ const { Client } = require('pg');
  *   await db.close(); // Closes the database connection.
  * })();
  */
+
+
+
+
 class Database {
   constructor(tableName = 'key_value_store') {
     this.tableName = tableName; // Store the table name for future use
@@ -34,7 +38,7 @@ class Database {
       }
     });
 
-    console.log("\x1b[32m", `Database.js : => ${this.tableName} instantiated`, "\x1b[0m");
+    console.log(`📀☀️ constructor() ... NEW Client ${this.tableName} instantiated ---------------`);
   }
 
   // PUBLIC : Connect method with error handling + Create key/value table if not exists
@@ -43,26 +47,27 @@ class Database {
       await this.client.connect(); // Attempt to connect to the database
       // Create the key_value_store table if it does not exist
       await this.client.query(`CREATE TABLE IF NOT EXISTS ${this.tableName} ( key VARCHAR(255) PRIMARY KEY, value TEXT );`);
-      console.log("\x1b[32m", `Database.js : connected !!!`, "\x1b[0m");
+      console.log(`📀☀️ open() ... CONNECTED ---------------`);
     } catch (err) {
-      console.error("\x1b[31m", `Database.js : Error executing open() :\x1b[0m\n`, err); // Log query execution error
+      console.error(`📀💥 open() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
       throw err; // Rethrow the error for upstream handling
     }
 
     // Add reconnection strategy
     this.client.on('error', async (err) => {
-      console.error("\x1b[31m", `Database.js : ignore received error :\x1b[0m\n`, err); // Log query execution error
+      console.error(`📀💥 onerror() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
       
       //await this.reconnect();
     });
   }
 
   async reconnect() {
-    console.log("\x1b[33m", 'Database.js : Attempting to reconnect to the database...', "\x1b[0m");
     try {
+      console.log('📀☀️ reconnect().end ... TRY');
       await this.client.end();
+      console.log('📀☀️ reconnect().end ... SUCCESS');
     } catch (err) {
-      console.error("\x1b[31m", `Database.js : Error executing reconnect() :\x1b[0m\n`, err); // Log query execution error
+      console.error(`📀💥 reconnect().end ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
     }
     this.client = new Client({
       connectionString: process.env.DATABASE_URL,
@@ -81,7 +86,7 @@ class Database {
       // console.log("\x1b[32m", `=> ${url} saved`, "\x1b[0m");
     } catch (err) {
       //if (this.isConnectionError(err)) {
-        console.error("\x1b[31m", `Database.js : Error executing set() :\x1b[0m\n`, err); // Log query execution error
+        console.error("\x1b[31m", `📀💥 set() ... ## Error ## --> ${this.formatErrorMessage(err)}`);
         await this.reconnect();
         return this.set(url, fileContent); // Retry the query
       //} else {
@@ -105,17 +110,6 @@ class Database {
     return connectionErrorCodes.includes(err.code) || (err.message && err.message.includes('timeout'));
   }
 
-  /*
-  isConnectionError(err) {
-    // Add logic to determine if the error is a connection error.
-    // This is dependent on the specifics of the PostgreSQL library in use.
-    // As an example
-    return err.code === '57P01' || // admin_shutdown
-           err.code === '57P02' || // crash_shutdown
-           err.code === '57P03' || // cannot_connect_now
-           err.code === '01002';   // connection_exception
-  }*/
-
   // PUBLIC : Retrieve a value by key from the database
   async get(url) {
     try {
@@ -126,13 +120,13 @@ class Database {
         // console.log("\x1b[32m", `=> ${url} loaded`, "\x1b[0m");
         return result.rows[0].value;
       } else {
-        console.log("\x1b[33m", `=> ${url} not found`, "\x1b[0m");
+        console.log(`📀💥 get() ... ## ERROR ## <${url}> not found`);
         return null;
       }
     } catch (err) {
       //if (this.isConnectionError(err)) {
         // If a connection error is detected, reconnect and retry the get operation
-        console.error("\x1b[31m", `Database.js : Error executing get() :\x1b[0m\n`, err); // Log query execution error
+        console.error(`📀💥 get() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
         await this.reconnect();
         return this.get(url);
       //} else {
@@ -158,7 +152,7 @@ async getAll() {
   } catch (err) {
     // Detect if the error is related to the connection and reconnect if necessary
     //if (this.isConnectionError(err)) {
-      console.error("\x1b[31m", `Database.js : Error executing getAll() :\x1b[0m\n`, err); // Log query execution error
+      console.error(`📀💥 getAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
       await this.reconnect();
       return this.getAll(); // Retry the query after reconnection
     //} else {
@@ -183,11 +177,11 @@ async getAll() {
       }
       // Commit the transaction
       await this.client.query('COMMIT');
-      console.log("\x1b[32m", `=> All key-value pairs were set`, "\x1b[0m");
+      // console.log("\x1b[32m", `=> All key-value pairs were set`, "\x1b[0m");
     } catch (err) {
       // If an error occurs, rollback the transaction
       //if (this.isConnectionError(err)) {
-        console.error("\x1b[31m", `Database.js : Error executing setAll() :\x1b[0m\n`, err); // Log query execution error
+        console.error(`📀💥 setAll() setAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
         await this.reconnect();
         return this.setAll(jsonString); // Retry the query after reconnection
       //} else {
@@ -205,11 +199,11 @@ async getAll() {
     try {
       // Execute SQL query to delete all key-value pairs
       await this.client.query(`DELETE FROM ${this.tableName}`);
-      console.log("\x1b[32m", 'All key-value pairs have been erased from the database.', "\x1b[0m");
+      //console.log("\x1b[32m", 'All key-value pairs have been erased from the database.', "\x1b[0m");
     } catch (err) {
       // If there is a connection error, try to reconnect and call eraseAll again
       //if (this.isConnectionError(err)) {
-        console.error("\x1b[31m", `Database.js : Error executing eraseAll() :\x1b[0m\n`, err); // Log query execution error
+        console.error(`📀💥 eraseAll() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); // Log query execution error
         await this.reconnect();
         return this.eraseAll(); // Retry the query after reconnection
       //} else {
@@ -225,10 +219,10 @@ async getAll() {
     try {
       // Execute SQL query to delete the key-value pair
       await this.client.query(`DELETE FROM ${this.tableName} WHERE key = $1`, [key]);
-      console.log("\x1b[32m", `Key-value pair with key '${key}' has been erased from the database.`, "\x1b[0m");
+      //console.log("\x1b[32m", `Key-value pair with key '${key}' has been erased from the database.`, "\x1b[0m");
     } catch (err) {
       //if (this.isConnectionError(err)) {
-        console.error("\x1b[31m", `Database.js : Error executing erase() :\x1b[0m\n`, err);
+        console.error(`📀💥 erase() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
         // If a connection error, try to reconnect and call erase again
         await this.reconnect();
         return this.erase(key); // Retry the query after reconnection
@@ -244,9 +238,9 @@ async getAll() {
   async close() {
     try {
       await this.client.end(); // Close the database connection
-      console.log("\x1b[32m", 'Database connection closed.', "\x1b[0m");
+      console.log('📀☀️ close() ... OK');
     } catch (err) {
-      console.error("\x1b[31m", 'Error closing the database connection', err, "\x1b[0m"); // Log closing connection error
+      console.error(`📀💥 close() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
       throw err; // Rethrow the error for upstream handling
     }
   }
@@ -259,13 +253,13 @@ async getAll() {
       const result = await this.client.query(`SELECT EXISTS(SELECT 1 FROM ${this.tableName} WHERE key LIKE $1 LIMIT 1)`, [prefix + '%']);
       return result.rows[0].exists; // Return true if a key with the prefix exists, otherwise false
     } catch (err) {
-      console.error("\x1b[31m", `Database.js : Error executing hasKeyWithPrefix() :\x1b[0m\n`, err); // Log query execution error
+      console.error(`📀💥 hasKeyWithPrefix() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`); 
 
       //if (this.isConnectionError(err)) {
         await this.reconnect();
         return this.hasKeyWithPrefix(prefix); // Retry the query after reconnection
       //} else {
-      //  console.error("\x1b[31m", `Database.js : Error executing hasKeyWithPrefix() :\n`, err, "\x1b[0m"); // Log query execution error
+      //  console.error("\x1b[31m", `📀 DATABASE Error executing hasKeyWithPrefix() :\n`, err, "\x1b[0m"); // Log query execution error
         
       //  throw err; // Rethrow the error for upstream handling
       //}
@@ -273,6 +267,17 @@ async getAll() {
   }
 
 
+  
+  // PUBLIC: Replace all newline characters in an error message with ###
+  formatErrorMessage(err) {
+    if (typeof err === 'string') {
+      return err.replace(/\r\n|\r|\n/g, '###');
+    } else if (err instanceof Error) {
+      return err.message.replace(/\r\n|\r|\n/g, '###');
+    } else {
+      return 'Unknown error format';
+    }
+  }
 }
 
 // Export the Database class as a module for external use
