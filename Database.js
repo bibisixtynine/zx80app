@@ -24,6 +24,7 @@ const { Client } = require('pg');
  */
 
 
+console.log("📀📀📀📀16:48 - 17 février 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀")
 
 
 class Database {
@@ -50,7 +51,7 @@ class Database {
       console.log(`📀☀️ open() ... CONNECTED ---------------`);
     } catch (err) {
       console.error(`📀💥 open() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-      throw err; // Rethrow the error for upstream handling
+      //throw err; // Rethrow the error for upstream handling
     }
 
     // Add reconnection strategy
@@ -241,7 +242,7 @@ async getAll() {
       console.log('📀☀️ close() ... OK');
     } catch (err) {
       console.error(`📀💥 close() ... ## ERROR ## --> ${this.formatErrorMessage(err)}`);
-      throw err; // Rethrow the error for upstream handling
+      //throw err; // Rethrow the error for upstream handling
     }
   }
 
