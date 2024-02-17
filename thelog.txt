@@ -1,26 +1,4 @@
 22:02 Deployment
 
-02/16/24 10:48 PM ------> postgresql usage : 27% - 26.53
+02/17/24 01:23 PM ------> postgresql usage : 27,17
 
-02/16/24 10:48 PM 📀💥 onerror() ... ## ERROR ## --> Connection terminated unexpectedly
-02/16/24 10:48 PM 📀💥 onerror() ... ## ERROR ## --> terminating connection due to administrator command
-
-02/16/24 10:43 PM <jerome> LOADED <Logs> 🛜88.182.60.159
-02/16/24 10:43 PM 📀☀️ open() ... CONNECTED ---------------
-02/16/24 10:43 PM 📀☀️ reconnect().end ... SUCCESS
-02/16/24 10:43 PM 📀💥 hasKeyWithPrefix() ... ## ERROR ## --> Client has encountered a connection error and is not queryable
-02/16/24 10:43 PM 📀☀️ reconnect().end ... TRY
-
-02/16/24 10:31 PM 📀💥 onerror() ... ## ERROR ## --> Connection terminated unexpectedly
-02/16/24 10:31 PM 📀💥 onerror() ... ## ERROR ## --> terminating connection due to administrator command
-02/16/24 10:31 PM 📀💥 onerror() ... ## ERROR ## --> Connection terminated unexpectedly
-02/16/24 10:31 PM 📀💥 onerror() ... ## ERROR ## --> terminating connection due to administrator command
-
-02/16/24 10:25 PM <💫🤩🚀> --> Serveur démarré sur le port 3000
-02/16/24 10:25 PM 📀☀️ open() ... CONNECTED ---------------
-02/16/24 10:25 PM 📀☀️ constructor() ... NEW Client key_value_store instantiated ---------------
-
-02/16/24 10:25 PM > qwark@0.0.3 start
-02/16/24 10:25 PM > node server.js
-02/16/24 10:25 PM forwarding local port 3000 to external port 1104
-02/16/24 10:25 PM starting up user application

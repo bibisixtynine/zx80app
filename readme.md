@@ -1,4 +1,4 @@
-# QWARK ALPHA 0.0.3
+# QWARK ALPHA 0.0.4
 ## the multi-platform T-PAC, Tiny - Phaser App Creator !
 
 
@@ -13,10 +13,10 @@ A tiny environment that allow to code, run and publish your apps on a store, usi
 What is currently working for now :
   - qwark should work on any platform
   - editing (basic) with codemirror (syntax coloring)
-  - run
-  - load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
-  - create new project from existing
-  - create link to share the game
+  - running
+  - logging with replit auth
+  - load/save in the cloud
+  - (create link to share the game) suspended, come back soon !
   - fullscreen preview
   - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
   - Error message
@@ -28,7 +28,6 @@ What is not working/in progress :
   - W4 no interactive tutorial
   - W5 single file only
   - W6 assets must come from an url...
-  - W9 load/save in the cloud... the username (in settings) will be used as the folder name : use foldername compatible rules for the name of username
   - W10 delete project not available
   
 Bugs :
