@@ -10,7 +10,7 @@
 
 const { getUserInfo } = require("@replit/repl-auth")
 
-const Database = require("./Database");
+const Database = require("./Database2");
 const express = require('express');
 const cors = require('cors');
 const fsPromises = require('fs').promises;
@@ -27,27 +27,46 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 const db = new Database('key_value_store')
-await db.open();
 
 
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// (x/y) getApp available public code without being logged
+//
+// ex: https://zx80.app/publicApp/MyApp
+app.get('/publicApp/:appName', (req, res) => {
+  const appName = req.params.appName;
+  res.send(`Welcome to ${appName}`);
+});
+//                                                                                    
+// (x/y) getApp available public code without being logged
+//
+///////////////////////////////////////////////////////////////////////////////////////
 
 
+  
 ///////////////////////////////////////////////////////////////////////////////////////
 //                                                                                    
 // (0/6) replit logging
 //
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/logged-only/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/getUsername', function (req, res) {
   const user = getUserInfo(req)
-  res.send(`${user.name}`);
+  if (user) {
+    res.send(user.name);
+  } else {
+    res.send('not logged in');
+  }
 });
 //                                                                                    
 // (0/6) replit logging
 //
 ///////////////////////////////////////////////////////////////////////////////////////
+
+  
 
   
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -114,34 +133,42 @@ function formattedLog(user,action,appName,ip) {
 
 app.post('/save', async (req, res) => {
   //const user = req.body.user; // identifiant de l'utilisateur
-  const user = getUserInfo(req).name;
+  const userInfo = getUserInfo(req);
+  const user = userInfo ? userInfo.name : null;
+
+  if (user) {
+    formattedLog(user,'SAVED 💋',req.body.name,req.ip)
+    
+    try {
+      let { name, code } = req.body;
+      // Si 'name' est vide, lui attribuer la valeur 'Docs'
+      name = name.trim() ? name : 'Docs';
   
-  formattedLog(user,'SAVED 💋',req.body.name,req.ip)
+      const appKeyPrefix = `${user}/${name}`;
+      const appCodeKey = `${appKeyPrefix}/app.js`;
   
-  try {
-    let { name, code } = req.body;
-    // Si 'name' est vide, lui attribuer la valeur 'Docs'
-    name = name.trim() ? name : 'Docs';
-
-    const appKeyPrefix = `${user}/${name}`;
-    const appCodeKey = `${appKeyPrefix}/app.js`;
-
-    // a) Sauvegarde des fichiers app.js dans la base de donnees
-    await db.set(appCodeKey, code);
-
-    // b) Mise \\u00e0 jour de la liste des applications de l'utilisateur dans la base de donnees
-    const appsListKey = `${user}/apps`;
-    let appsList = await db.get(appsListKey);
-    appsList = appsList ? JSON.parse(appsList) : [];
-    if (!appsList.includes(name)) {
-      appsList.push(name);
-      await db.set(appsListKey, JSON.stringify(appsList));
+      // a) Sauvegarde des fichiers app.js dans la base de donnees
+      await db.set(appCodeKey, code);
+  
+      // b) Mise \\u00e0 jour de la liste des applications de l'utilisateur dans la base de donnees
+      const appsListKey = `${user}/apps`;
+      let appsList = await db.get(appsListKey);
+      appsList = appsList ? JSON.parse(appsList) : [];
+      if (!appsList.includes(name)) {
+        appsList.push(name);
+        await db.set(appsListKey, JSON.stringify(appsList));
+      }
+  
+      res.send(`<${name}> sauvegardé avec succés par <${user}>`);
+    } catch (error) {
+      res.status(500).send(`Erreur lors de la sauvegarde <${name}> par <${user}>`);
     }
 
-    res.send(`<${name}> sauvegardé avec succés par <${user}>`);
-  } catch (error) {
-    res.status(500).send(`Erreur lors de la sauvegarde <${name}> par <${user}>`);
+  } else {
+    formattedLog(req.ip, 'tried to SAVE ☠️','','')
+    res.status(401).send('Vous devez être connecté pour sauvegarder une application');
   }
+
 });
 //                                                                                    
 // POST /save
@@ -154,26 +181,31 @@ app.post('/save', async (req, res) => {
 // (4/6) GET /loadApp OK
 //
 app.get('/loadApp', async (req, res) => {
-  //const user = req.query.user;
-  const user = getUserInfo(req).name;
-
-  formattedLog(user,'LOADED',req.query.name,req.ip)
-  try {
-    await checkAndCreateUserDir(user);
-
-    const appName = req.query.name;
-    const appKeyPrefix = `${user}/${appName}`;
-    const appCodeKey = `${appKeyPrefix}/app.js`;
-
-    const appCode = await db.get(appCodeKey);
-
-    if (appCode) {
-      res.json({ name: appName, code: appCode });
-    } else {
-      throw new Error('code not found in the database.');
+  const userInfo = getUserInfo(req);
+  const user = userInfo ? userInfo.name : null;
+  
+  if (user) {
+    formattedLog(user,'LOADED',req.query.name,req.ip)
+    try {
+      await checkAndCreateUserDir(user);
+  
+      const appName = req.query.name;
+      const appKeyPrefix = `${user}/${appName}`;
+      const appCodeKey = `${appKeyPrefix}/app.js`;
+  
+      const appCode = await db.get(appCodeKey);
+  
+      if (appCode) {
+        res.json({ name: appName, code: appCode });
+      } else {
+        throw new Error('code not found in the database.');
+      }
+    } catch (error) {
+      res.status(500).send(`No app <${req.query.name}> missing for user <${req.query.user}>`);
     }
-  } catch (error) {
-    res.status(500).send(`No app <${req.query.name}> missing for user <${req.query.user}>`);
+  } else {
+    formattedLog(req.ip, 'tried to LOAD ☠️','','')
+    res.status(500).send('Vous devez être connecté pour charger une application');
   }
 });
 //                                                                                    
@@ -223,19 +255,24 @@ async function checkAndCreateUserDir(user, ip) {
 //
 // Route pour lister les applications
 app.get('/listApps', async (req, res) => {
-  //const user = req.query.user;
-  const user = getUserInfo(req).name;
-
-  try {
-    await checkAndCreateUserDir(user, req.ip);
-    // Retrieve the list of apps from the database with key user
-    const appsListKey = `${user}/apps`;
-    const appsListJson = await db.get(appsListKey);
-    const appsList = JSON.parse(appsListJson);
-    res.json(appsList);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(`😭🛑 Liste des App introuvable`);
+  const userInfo = getUserInfo(req);
+  const user = userInfo ? userInfo.name : null;
+  
+  if (user) {
+    try {
+      await checkAndCreateUserDir(user, req.ip);
+      // Retrieve the list of apps from the database with key user
+      const appsListKey = `${user}/apps`;
+      const appsListJson = await db.get(appsListKey);
+      const appsList = JSON.parse(appsListJson);
+      res.json(appsList);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send(`😭🛑 Liste des App introuvable`);
+    }
+  } else {
+    formattedLog(req.ip, 'tried to listApps ☠️','','')
+    res.status(500).send('Vous devez être connecté pour charger une application');
   }
 });
 //                                                                                    

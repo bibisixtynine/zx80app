@@ -1,8 +1,11 @@
+// NOT IMPLEMENTED YET ... THESE FUNCTIONS ARE NOT USED IN THE CURRENT VERSION OF QWARK,
+// THEY ARE JUST HERE TO BE USED IN THE FUTURE.
+
+
+
 /////////////////////////////////////////////////////////////
 // editor (cm6)
 //
-
-
 const g_view = cm6.createEditorView(undefined, document.getElementById("editor"));
 
 let g_options = {

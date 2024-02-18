@@ -203,19 +203,25 @@ window.onload = function () {
 /////////////////////////////////////////////////////////
 // link clicked
 //
-function displayAppLink() {
-  /*
-  // Obtenez l'URL de la page courante sans les paramètres
-  const currentPageURL = `${window.location.origin}/`//${window.location.pathname}`;
 
-  // Obtenez le nom d'utilisateur
-  const username = localStorage.getItem("username");
+// generateUrlWithActionAndCode - Generates a URL with specified action and code
+function generateUrlWithActionAndCode(baseUrl, action, code) {
+  // Encode the action and code to ensure they are URL-safe
+  const encodedAction = encodeURIComponent(action);
+  const encodedCode = encodeURIComponent(code);
 
+  // Construct the full URL with the base, action, and code
+  return `${baseUrl}?action=${encodedAction}&code=${encodedCode}`;
+}
+
+
+
+function displayAppLink(appCode) {
+  
   // Assurez-vous que l'utilisateur a sélectionné une application valide
-  if (currentApp.name) {
+  //if (appName) {
     // Créez l'URL du lien en remplaçant les espaces par "%20"
-    const appLinkURL =
-      `${currentPageURL}${username}/${currentApp.name}`.replace(/ /g, "%20");
+    const appLinkURL = generateUrlWithActionAndCode("https://zx80-run.replit.app", "show", appCode)
 
     // Créez un élément de texte pour afficher le lien
     const linkTextElement = document.createElement("textarea");
@@ -238,13 +244,12 @@ function displayAppLink() {
 
     // Affichez un message pour informer l'utilisateur que le lien a été copié
     alert(
-      `Le lien vers <${currentApp.name}> a été copié dans le presse-papiers.`
+      `Le lien vers <${g_currentApp.name}> a été copié dans le presse-papiers.`
     );
-  } else {
+  //} else {
     // Si aucune application n'est sélectionnée, affichez un message d'erreur
-    alert("Veuillez sélectionner une application avant de générer le lien.");
-  }*/
-  alert("temporairement indisponible");
+  //  alert("Veuillez sélectionner une application avant de générer le lien.");
+  //}
 
 }
 //
@@ -306,7 +311,7 @@ function LoadApp(username,appname) {
 
       console.log("LOAD => currentApp.name = ", g_currentApp.name);
     })
-    .catch((error) => alert("Erreur lors du chargement de l'app: " + error));
+    .catch((error) => alert("erreur lors du chargement de l'app... êtes-vous connecté ?"));
 }
 //
 // LoadApp()
@@ -319,7 +324,7 @@ function LoadApp(username,appname) {
 function runButtonPressed() {
   if (g_isEditMode) {
     // En venant du mode édition, exécuter le code
-    Exec();
+    Exec(g_view.state.doc.toString());
   } else {
     // En  venant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
@@ -346,7 +351,7 @@ function runButtonPressed() {
 /////////////////////////////////////////////////////////
 // Exec()
 //
-function Exec() {
+function Exec(code) {
   document.getElementById("ui").style.display = "block";
   console.log("🕛👍 SAVE STATE !")
   saveEditorState()
@@ -356,7 +361,6 @@ function Exec() {
   switchUI(g_isEditMode);
 
   // run !
-  let code = g_view.state.doc.toString();
   const script = document.createElement("script");
   script.type = "module";
   script.id = "dynamic-module-script";
@@ -514,7 +518,7 @@ function displayStore() {
         container.appendChild(appDiv);
       });
     })
-    .catch((error) => alert("Erreur lors du chargement de la liste: " + error));
+    .catch((error) => alert("erreur lors de la récupération des applications... êtes-vous connecté ?"));
 }
 //
 // displayStore()
@@ -539,16 +543,15 @@ document
 document
   .getElementById("loadButton")
   .addEventListener("click", () => displayStore());
-//document
-//  .getElementById("settingsButton")
-//  .addEventListener("click", () => askUsername());
+document
+  .getElementById("settingsButton")
+  .addEventListener("click", () => LoginWithReplit());
 document
   .getElementById("newProjectButton")
   .addEventListener("click", () => newProject());
-
 document
   .getElementById("linkButton")
-  .addEventListener("click", () => displayAppLink());
+  .addEventListener("click", () => displayAppLink(g_view.state.doc.toString()));
 //
 // UI
 /////////////////////////////////////////////////////////

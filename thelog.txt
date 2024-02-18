@@ -1,147 +1,42 @@
-02/17/24 07:23:12 PM
-📀💥 onerror() ... ## ERROR ## --> Connection terminated unexpectedly
-02/17/24 07:23:12 PM
-📀💥 onerror() ... ## ERROR ## --> terminating connection due to administrator command
-02/17/24 07:17:56 PM
-2024-02-17 19:17 <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port 3000
-02/17/24 07:17:55 PM
-📀☀️ open() ... CONNECTED ---------------
-02/17/24 07:17:49 PM
-📀☀️ constructor() ... NEW Client key_value_store instantiated ---------------
-02/17/24 07:17:27 PM
-📀📀📀📀16:48 - 17 février 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀
-02/17/24 07:16:03 PM
-> node server.js
-02/17/24 07:16:03 PM
-> qwark@0.0.3 start
-02/17/24 07:14:33 PM
-forwarding local port 3000 to external port 1104
-02/17/24 07:14:33 PM
-starting up user application
-02/17/24 07:13:50 PM
-exec [sh -c npm run start] error=exec: already started
-02/17/24 07:13:50 PM
-exec [sh -c npm run start] error=exit status 1
-02/17/24 07:13:48 PM
-npm notice
-02/17/24 07:13:48 PM
-npm notice Changelog: <https://github.com/npm/cli/releases/tag/v10.4.0>
-02/17/24 07:13:47 PM
-New minor version of npm available! 10.2.3 -> 10.4.0
-02/17/24 07:13:47 PM
-notice
-02/17/24 07:13:47 PM
-npm
-02/17/24 07:13:47 PM
-npm notice
-02/17/24 07:13:46 PM
-dataType: undefined,
-02/17/24 07:13:46 PM
-column: undefined,
-02/17/24 07:13:46 PM
-schema: undefined,
-02/17/24 07:13:46 PM
-hint: undefined,
-02/17/24 07:13:46 PM
-severity: 'FATAL',
-02/17/24 07:13:46 PM
-length: 116,
-02/17/24 07:13:46 PM
-at /home/runner/6b4425b3-6d0d-4cb8-aad2-44b282df04bf/node_modules/pg/lib/connection.js:117:12
-02/17/24 07:13:46 PM
-at addChunk (node:internal/streams/readable:545:12)
-02/17/24 07:13:46 PM
-at TLSSocket.<anonymous> (/home/runner/6b4425b3-6d0d-4cb8-aad2-44b282df04bf/node_modules/pg-protocol/dist/index.js:11:42)
-02/17/24 07:13:46 PM
-at Parser.parse (/home/runner/6b4425b3-6d0d-4cb8-aad2-44b282df04bf/node_modules/pg-protocol/dist/parser.js:39:38)
-02/17/24 07:13:46 PM
-at Parser.parseErrorMessage (/home/runner/6b4425b3-6d0d-4cb8-aad2-44b282df04bf/node_modules/pg-protocol/dist/parser.js:287:98)
-02/17/24 07:13:46 PM
-02/17/24 07:13:46 PM
-throw er; // Unhandled 'error' event
-02/17/24 07:13:46 PM
-}
-02/17/24 07:13:46 PM
-constraint: undefined,
-02/17/24 07:13:46 PM
-internalQuery: undefined,
-02/17/24 07:13:46 PM
-internalPosition: undefined,
-02/17/24 07:13:46 PM
-position: undefined,
-02/17/24 07:13:46 PM
-code: '57P01',
-02/17/24 07:13:46 PM
-at Readable.push (node:internal/streams/readable:375:5) {
-02/17/24 07:13:46 PM
-[... lines matching original stack trace ...]
-02/17/24 07:13:46 PM
-at Parser.parse (/home/runner/6b4425b3-6d0d-4cb8-aad2-44b282df04bf/node_modules/pg-protocol/dist/parser.js:40:17)
-02/17/24 05:14:49 PM
-📀☀️ reconnect().end ... TRY
-02/17/24 05:14:49 PM
-📀💥 hasKeyWithPrefix() ... ## ERROR ## --> Client has encountered a connection error and is not queryable
-02/17/24 05:01:42 PM
-📀💥 onerror() ... ## ERROR ## --> Connection terminated unexpectedly
-02/17/24 05:01:42 PM
-📀💥 onerror() ... ## ERROR ## --> terminating connection due to administrator command
-02/17/24 04:56:34 PM
-2024-02-17 16:56 <ilboued> LOADED <Docs> 🛜104.28.42.22
-02/17/24 04:56:21 PM
-2024-02-17 16:56 <ilboued> LOADED <Docs> 🛜104.28.42.27
-02/17/24 04:56:11 PM
-2024-02-17 16:56 <ilboued> LOADED <Docs> 🛜104.28.42.27
-02/17/24 04:55:21 PM
-2024-02-17 16:55 <ilboued> LOADED <Oliver s Quest> 🛜104.28.42.24
-02/17/24 04:55:12 PM
-2024-02-17 16:55 <ilboued> LOADED <Oliver s Quest> 🛜104.28.42.22
-02/17/24 04:54:57 PM
-2024-02-17 16:54 <ilboued> LOADED <Docs> 🛜104.28.42.25
-02/17/24 04:54:42 PM
-2024-02-17 16:54 <ilboued> LOADED <Oliver s Quest> 🛜104.28.42.19
-02/17/24 04:53:58 PM
-2024-02-17 16:53 <ilboued> LOADED <Docs> 🛜104.28.42.16
-02/17/24 04:53:47 PM
-2024-02-17 16:53 <ilboued> LOADED <Logs> 🛜104.28.42.16
-02/17/24 04:53:19 PM
-2024-02-17 16:53 <ilboued> LOADED <Earth Attack> 🛜104.28.42.19
-02/17/24 04:53:05 PM
-2024-02-17 16:53 <ilboued> LOADED <Earth Attack> 🛜104.28.42.19
-02/17/24 04:52:02 PM
-2024-02-17 16:52 <ilboued> LOADED <Oliver s Quest> 🛜104.28.42.26
-02/17/24 04:51:27 PM
-2024-02-17 16:51 <ilboued> LOADED <Earth Attack> 🛜104.28.42.19
-02/17/24 04:51:22 PM
-2024-02-17 16:51 <ilboued> LOADED <Earth Attack 2> 🛜104.28.42.19
-02/17/24 04:51:07 PM
-2024-02-17 16:51 <ilboued> SAVED 💋 <Earth Attack 2> 🛜104.28.42.19
-02/17/24 04:50:49 PM
-2024-02-17 16:50 <ilboued> LOADED <Earth Attack> 🛜104.28.42.19
-02/17/24 04:50:42 PM
-2024-02-17 16:50 <ilboued> LOADED <Earth Attack> 🛜104.28.42.19
-02/17/24 04:50:38 PM
-2024-02-17 16:50 <ilboued> LOADED <Phaser In Fire> 🛜104.28.42.19
-02/17/24 04:50:34 PM
-2024-02-17 16:50 <ilboued> LOADED <Phaser In Fire> 🛜104.28.42.19
-02/17/24 04:50:29 PM
-2024-02-17 16:50 <ilboued> LOADED <Logs> 🛜104.28.42.19
-02/17/24 04:50:11 PM
-2024-02-17 16:50 <ilboued> LOADED <Logs> 🛜104.28.42.19
-02/17/24 04:50:04 PM
-2024-02-17 16:50 <ilboued> LOADED <Phaser In Fire> 🛜104.28.42.19
-02/17/24 04:48:59 PM
-2024-02-17 16:48 <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port 3000
-02/17/24 04:48:59 PM
-📀☀️ open() ... CONNECTED ---------------
-02/17/24 04:48:58 PM
-📀☀️ constructor() ... NEW Client key_value_store instantiated ---------------
-02/17/24 04:48:58 PM
-📀📀📀📀16:48 - 17 février 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀
-02/17/24 04:48:57 PM
-> node server.js
-02/17/24 04:48:57 PM
-> qwark@0.0.3 start
-02/17/24 04:48:54 PM
-forwarding local port 3000 to external port 1104
-02/17/24 04:48:53 PM
-starting up user 
+Deployement de 03:56 LT du dimanche 18/2
+
+Utilisation de Database.js
+-> Ne provoque plus de server crash/reload quand plusieurs appels à la database sont faits alors qu'elle est passée en mode sommeil
+-> aucun crash sur le deployement précédent
+
+2024-02-18T02:56:00Z info: Deployment: 6b4425b3-6d0d-4cb8-aad2-44b282df04bf
+2024-02-18T02:56:00Z info: Build: d909ef22-54bf-4a91-81b2-c442de3a0fd7
+2024-02-18T02:56:00Z info: Connecting to builder
+2024-02-18T02:56:01Z info: Builder connected
+2024-02-18T02:56:01Z info: Installing packages
+2024-02-18T02:56:01Z info: Skipping Build as no Build command set
+2024-02-18T02:56:01Z info: Pushing pid1 binary layer...
+2024-02-18T02:56:03Z info: Created pid1 binary layer
+2024-02-18T02:56:05Z info: Skipping Python layer creation
+2024-02-18T02:56:05Z info: Skipping Node layer creation
+2024-02-18T02:56:05Z info: Pushing Repl layer...
+2024-02-18T02:56:05Z info: Pushing hosting layer...
+2024-02-18T02:56:05Z info: Retrieved cached nix layer
+2024-02-18T02:56:05Z info: Created hosting layer
+2024-02-18T02:56:07Z info: Created Repl layer
+2024-02-18T02:56:08Z info: Pushed image manifest
+2024-02-18T02:56:08Z info: Pushed soci index manifest
+2024-02-18T02:56:08Z info: Pushed referrer manifest
+2024-02-18T02:56:15Z info: Creating Autoscale service
+2024-02-18T02:56:26Z info: Waiting for service to be ready
+2024-02-18T02:56:28Z info: Deployment successful
+
+
+02/18/24 03:58:13 AM 2024-02-18 03:58 <ilboued> LOADED <Docs> 🛜88.182.60.159
+02/18/24 03:58:10 AM 2024-02-18 03:58 <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port 3000
+02/18/24 03:58:10 AM 📀☀️ open() ... CONNECTED ---------------
+02/18/24 03:58:09 AM 📀☀️ constructor() ... NEW Client key_value_store instantiated ---------------
+02/18/24 03:58:02 AM 📀📀📀📀 NEW DEPLOY 02/17/24 09:45 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀
+02/18/24 03:57:37 AM > qwark@0.0.3 start
+02/18/24 03:57:37 AM > node server.js
+02/18/24 03:56:24 AM forwarding local port 3000 to external port 1104
+02/18/24 03:56:24 AM starting up user application
+
+
+
+
