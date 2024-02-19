@@ -83,10 +83,161 @@ let g_options = {
 
 const g_initialState = cm6.createEditorState(
   `
-        ////////////////////
-        // LOADING  QWARK //
-        ////////////////////
+        ///////////////////////////////////////////////////////
+        // CONNECTEZ-VOUS AVEC LA ROUE DENTÉE EN HAUT DROITE //
+        ///////////////////////////////////////////////////////
 
+        // Pour pouvoir utiliser toutes les fonctions de Quark,
+        // vous devez vous identifier avec un compte replit.com
+
+        // Utilisez le bouton ⚙️ en haut à droite pour créer un
+        // compte replit (si besoin) et vous connecter !
+
+        // Qwark utilise le système d'authentification de replit.com,
+        // qui est aussi son hébergeur, et l'endroit ou Qwark est
+        // construit.
+
+        // Si vous voulez une petite démo, appuyer sur le bouton
+        // </> en bas à gauche pour exécuter le code ci-dessous.
+        // Revenez ensuite ici en appuyant à nouveau sur le bouton.
+
+
+        // Bienvenue dans le monde des bâtisseurs d'App !
+
+
+
+class Example extends Phaser.Scene {
+  // 1) Chargement des assets
+  preload() {
+    this.load.image("sky", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/space3.png?v=1703078606075");
+    this.load.image("logo", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/phaser3-logo.png?v=1703078601649");
+    this.load.image("red", "https://cdn.glitch.global/e73a15d2-2f8a-477d-80bc-a6e8167fe97a/red.png?v=1703078593867");
+  }
+
+  // 2) Initialisation de la scène
+  create() {
+    this.background = this.add.image(0, 0, "sky").setOrigin(0.5, 0.5);
+    this.resizeBackground();
+
+    const particles = this.add.particles(0, 0, "red", {
+      speed: 100,
+      scale: { start: 1, end: 0 },
+      blendMode: "ADD",
+    });
+
+    const logo = this.physics.add.image(400, 100, "logo");
+    logo.setVelocity(100, 200);
+    logo.setBounce(1, 1);
+    logo.setCollideWorldBounds(true);
+    logo.setScale(0.5); // Réduit la taille de 50%
+
+    // Configuration initiale des limites du monde physique
+    this.physics.world.bounds.width = window.innerWidth;
+    this.physics.world.bounds.height = window.innerHeight;
+
+    particles.startFollow(logo);
+
+    // met à jour les tailles
+    const gameContainer = document.getElementById("gameContainer");
+    const scaleX = gameContainer.offsetWidth / this.background.width;
+    const scaleY = gameContainer.offsetHeight / this.background.height;
+    const scale = Math.max(scaleX, scaleY);
+
+    this.background
+      .setScale(scale)
+      .setPosition(
+        gameContainer.offsetWidth / 2,
+        gameContainer.offsetHeight / 2
+      );
+    // Mise à jour des limites du monde physique
+    this.physics.world.setBounds(
+      0,
+      0,
+      gameContainer.offsetWidth,
+      gameContainer.offsetHeight
+    );
+
+    // Forcez une mise à jour immédiate du monde physique
+    this.physics.world.step(0);
+  }
+
+  resizeBackground() {
+    const gameContainer = document.getElementById("gameContainer");
+    const scaleX = gameContainer.offsetWidth / this.background.width;
+    const scaleY = gameContainer.offsetHeight / this.background.height;
+    const scale = Math.max(scaleX, scaleY);
+
+    this.background
+      .setScale(scale)
+      .setPosition(
+        gameContainer.offsetWidth / 2,
+        gameContainer.offsetHeight / 2
+      );
+  }
+
+  resizeScene() {
+    // Mise à jour des limites du monde physique
+    const gameContainer = document.getElementById("gameContainer");
+    this.physics.world.setBounds(
+      0,
+      0,
+      gameContainer.offsetWidth,
+      gameContainer.offsetHeight
+    );
+
+    // Forcez une mise à jour immédiate du monde physique
+    this.physics.world.step(0);
+  }
+}
+
+const config = {
+  type: Phaser.AUTO,
+  width: window.innerWidth, // Largeur initiale basée sur la fenêtre du navigateur
+  height: window.innerHeight, // Hauteur initiale basée sur la fenêtre du navigateur
+  scene: Example,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 200 },
+      fixedStep: false,
+      //fps: 60
+    },
+  },
+  scale: {
+    mode: Phaser.Scale.RESIZE, // Active le redimensionnement automatique
+    parent: "gameContainer", // Optionnel: ID de l'élément conteneur du jeu
+    width: "100%", // for android 7 moto g5
+    height: "100%", // idem
+  },
+};
+
+const game = new Phaser.Game(config);
+
+let resizeTimer;
+
+setTimeout(function () {
+  handleResize();
+}, 500);
+
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () {
+    //clear()
+    //print(window.innerWidth, 'xxxx', window.innerHeight)
+    //game.scale.resize(window.innerWidth, window.innerHeight)
+
+    game.scene.scenes.forEach((scene) => {
+      if (scene instanceof Example) {
+        scene.resizeBackground();
+        scene.resizeScene();
+      }
+    });
+  }, 250);
+
+  // Écouter les changements de taille et d'orientation
+  window.addEventListener("resize", handleResize, false);
+  window.addEventListener("orientationchange", handleResize, false);
+}
         `,
   g_options
 );
@@ -311,7 +462,7 @@ function LoadApp(username,appname) {
 
       console.log("LOAD => currentApp.name = ", g_currentApp.name);
     })
-    .catch((error) => alert("erreur lors du chargement de l'app... êtes-vous connecté ?"));
+    .catch((error) => console.log("erreur lors du chargement de l'app... êtes-vous connecté ?",error));
 }
 //
 // LoadApp()
@@ -466,7 +617,7 @@ function Save() {
         localStorage.getItem("lastEditedApp-" + g_username)
       );
     })
-    .catch((error) => alert("Erreur lors de la sauvegarde: " + error));
+    .catch((error) => console.log("Erreur lors de la sauvegarde: " + error));
 }
 //
 // Save()
@@ -518,7 +669,7 @@ function displayStore() {
         container.appendChild(appDiv);
       });
     })
-    .catch((error) => alert("erreur lors de la récupération des applications... êtes-vous connecté ?"));
+    .catch((error) => console.log("erreur lors de la récupération des applications... êtes-vous connecté ?",error));
 }
 //
 // displayStore()
