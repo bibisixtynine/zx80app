@@ -1,5 +1,5 @@
 // Variable pour suivre le mode actuel
-switchUI(true);
+editMode(true);
 
 // utilisateur
 let g_username = "unknown user";
@@ -483,10 +483,10 @@ function LoadApp(username, appname) {
 // </> button pressed
 //
 function runButtonPressed() {
-  if (g_isEditMode) {
+  if (editMode.mode) {
     // En venant du mode édition, exécuter le code
     saveEditorState();
-    switchUI(false);
+    editMode(false);
     Exec(g_view.state.doc.toString());
   } else {
     // En  venant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
@@ -546,10 +546,10 @@ function Exec(code) {
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
-// switchUI()
+// editMode()
 //
-function switchUI(isEditMode) {
-  g_isEditMode = isEditMode;
+function editMode(isEditMode) {
+  editMode.mode = isEditMode;
 
   const elementsToHide = [
     document.getElementById("saveButton"),
@@ -584,7 +584,7 @@ function switchUI(isEditMode) {
   }
 }
 //
-// switchUI()
+// editMode()
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
@@ -635,7 +635,7 @@ function displayStore() {
     .then((response) => response.json())
     .then((apps) => {
       // Cacher les boutons & cm6 en mode exécution
-      switchUI(false);
+      editMode(false);
       // Cacher le bouton actionButton
       const actionButtonElement = document.getElementById("actionButton");
       if (actionButtonElement) actionButtonElement.style.display = "none";
@@ -652,7 +652,7 @@ function displayStore() {
         appDiv.addEventListener("click", () => {
           const container = document.getElementById("appsList-container");
           container.style.display = "none";
-          switchUI(true);
+          editMode(true);
           // Afficher le bouton actionButton
           const actionButtonElement = document.getElementById("actionButton");
           if (actionButtonElement) actionButtonElement.style.display = "block";
