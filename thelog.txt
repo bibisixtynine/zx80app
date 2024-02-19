@@ -1,42 +1,4 @@
-Deployement de 03:56 LT du dimanche 18/2
-
-Utilisation de Database.js
--> Ne provoque plus de server crash/reload quand plusieurs appels à la database sont faits alors qu'elle est passée en mode sommeil
--> aucun crash sur le deployement précédent
-
-2024-02-18T02:56:00Z info: Deployment: 6b4425b3-6d0d-4cb8-aad2-44b282df04bf
-2024-02-18T02:56:00Z info: Build: d909ef22-54bf-4a91-81b2-c442de3a0fd7
-2024-02-18T02:56:00Z info: Connecting to builder
-2024-02-18T02:56:01Z info: Builder connected
-2024-02-18T02:56:01Z info: Installing packages
-2024-02-18T02:56:01Z info: Skipping Build as no Build command set
-2024-02-18T02:56:01Z info: Pushing pid1 binary layer...
-2024-02-18T02:56:03Z info: Created pid1 binary layer
-2024-02-18T02:56:05Z info: Skipping Python layer creation
-2024-02-18T02:56:05Z info: Skipping Node layer creation
-2024-02-18T02:56:05Z info: Pushing Repl layer...
-2024-02-18T02:56:05Z info: Pushing hosting layer...
-2024-02-18T02:56:05Z info: Retrieved cached nix layer
-2024-02-18T02:56:05Z info: Created hosting layer
-2024-02-18T02:56:07Z info: Created Repl layer
-2024-02-18T02:56:08Z info: Pushed image manifest
-2024-02-18T02:56:08Z info: Pushed soci index manifest
-2024-02-18T02:56:08Z info: Pushed referrer manifest
-2024-02-18T02:56:15Z info: Creating Autoscale service
-2024-02-18T02:56:26Z info: Waiting for service to be ready
-2024-02-18T02:56:28Z info: Deployment successful
-
-
-02/18/24 03:58:13 AM 2024-02-18 03:58 <ilboued> LOADED <Docs> 🛜88.182.60.159
-02/18/24 03:58:10 AM 2024-02-18 03:58 <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port 3000
-02/18/24 03:58:10 AM 📀☀️ open() ... CONNECTED ---------------
-02/18/24 03:58:09 AM 📀☀️ constructor() ... NEW Client key_value_store instantiated ---------------
-02/18/24 03:58:02 AM 📀📀📀📀 NEW DEPLOY 02/17/24 09:45 📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀📀
-02/18/24 03:57:37 AM > qwark@0.0.3 start
-02/18/24 03:57:37 AM > node server.js
-02/18/24 03:56:24 AM forwarding local port 3000 to external port 1104
-02/18/24 03:56:24 AM starting up user application
-
+lundi 19 février - midi : Database Compute 35.56 
 
 
 

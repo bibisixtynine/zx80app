@@ -13,14 +13,14 @@
 
 // contact : ilboued@proton.me
 
-let ui = document.getElementById('ui')
-ui.style.height = "auto"
+let ui = document.getElementById("ui");
+ui.style.height = "auto";
 
-let el = document.getElementById('gameContainer')
-el.style.whiteSpace = 'pre-wrap'
-el.style.overflow = 'auto'
-el.style.margin = 'auto'
-el.style.maxWidth = '500px'
+let el = document.getElementById("gameContainer");
+el.style.whiteSpace = "pre-wrap";
+el.style.overflow = "auto";
+el.style.margin = "auto";
+el.style.maxWidth = "500px";
 el.innerHTML = `
 <div id='phaser-scene' style="position:absolute; top:0; left:0; background:transparent; pointer-events: none;"></div>
 <h1 style="color:yellow; text-align:center;">
@@ -72,11 +72,5 @@ N'hésite pas à partager cela avec tes utilisateurs !
 
 
 
-`
-window.scrollTo(0,0)
-
-
-
-
-
-
+`;
+window.scrollTo(0, 0);

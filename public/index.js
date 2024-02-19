@@ -1,14 +1,12 @@
 // Variable pour suivre le mode actuel
-let g_isEditMode = true;
-switchUI(g_isEditMode);
+switchUI(true);
 
 // utilisateur
-let g_username = "unknown user"
+let g_username = "unknown user";
 
 // app
 let g_currentApp = { name: "", description: "", image: "", code: "" };
 let g_isAppAlreadyLoadedFromLocalStorage = false;
-
 
 /////////////////////////////////////////////////////////////
 // Écoutez et afficher les messages provenant du service worker
@@ -32,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //
 // Écoutez et afficher les messages provenant du service worker
 /////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////////
 // displayConsoleMessage
@@ -71,11 +68,13 @@ function displayConsoleMessage(...args) {
 // displayConsoleMessage
 /////////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////////
 // editor (cm6)
 //
-const g_view = cm6.createEditorView(undefined, document.getElementById("editor"));
+const g_view = cm6.createEditorView(
+  undefined,
+  document.getElementById("editor"),
+);
 
 let g_options = {
   oneDark: true,
@@ -239,14 +238,13 @@ function handleResize() {
   window.addEventListener("orientationchange", handleResize, false);
 }
         `,
-  g_options
+  g_options,
 );
 
 g_view.setState(g_initialState);
 //
 // editor (cm6)
 /////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////////
 // resetEditorState - Réinitialise l'état de l'éditeur
@@ -258,7 +256,6 @@ function resetEditorState(newCode) {
 //
 // resetEditorState - Réinitialise l'état de l'éditeur
 /////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////////
 // saveEditorState
@@ -278,14 +275,13 @@ function saveEditorState() {
 // saveEditorState
 /////////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////////
 // loadEditorState
 //
 function loadEditorState() {
   const savedContent = localStorage.getItem("editorContent");
-  resetEditorState(savedContent)
-  
+  resetEditorState(savedContent);
+
   // Restaurer la position de défilement
   const savedScrollPosition = localStorage.getItem("editorScrollPosition");
   if (savedScrollPosition) {
@@ -295,7 +291,6 @@ function loadEditorState() {
 //
 // loadEditorState
 /////////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////
 // Gestion de la taille des fonts de l'éditeur, et stockage/restitution
@@ -322,34 +317,47 @@ function changeFontSize(delta) {
 // changeFontSize()
 /////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////
 // window.onload()
 //
+function extracteRunInstructionsFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const devName = urlParams.get("devName");
+  const appName = urlParams.get("appName");
+
+  if (devName && appName) {
+    alert(`${devName}:${appName}`);
+  }
+}
+
 window.onload = function () {
+  // L'url contient-elle un code à executer ?
+  extracteRunInstructionsFromUrl();
+
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
-  fetch('/getUsername')
-    .then(response => response.text())
-    .then(username => {
-        g_username = username;
-        localStorage.setItem("username", g_username);
+  fetch("/getUsername")
+    .then((response) => response.text())
+    .then((username) => {
+      g_username = username;
+      localStorage.setItem("username", g_username);
 
-        const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
-        if (lastEditedApp) {
-          console.log(`EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
-          LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
-        } else {
-          console.log(`NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}` );
-          LoadApp(g_username, "Docs"); // Charger l'application par défaut
-        }
+      const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
+      if (lastEditedApp) {
+        console.log(
+          `EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
+        );
+        LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
+      } else {
+        console.log(
+          `NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
+        );
+        LoadApp(g_username, "Docs"); // Charger l'application par défaut
+      }
     });
-
 };
 //
 // window.onload()
 /////////////////////////////////////////////////////////
-
-
 
 /////////////////////////////////////////////////////////
 // link clicked
@@ -365,48 +373,47 @@ function generateUrlWithActionAndCode(baseUrl, action, code) {
   return `${baseUrl}?action=${encodedAction}&code=${encodedCode}`;
 }
 
-
-
 function displayAppLink(appCode) {
-  
   // Assurez-vous que l'utilisateur a sélectionné une application valide
   //if (appName) {
-    // Créez l'URL du lien en remplaçant les espaces par "%20"
-    const appLinkURL = generateUrlWithActionAndCode("https://zx80-run.replit.app", "show", appCode)
+  // Créez l'URL du lien en remplaçant les espaces par "%20"
+  const appLinkURL = generateUrlWithActionAndCode(
+    "https://zx80.app",
+    "show",
+    appCode,
+  );
 
-    // Créez un élément de texte pour afficher le lien
-    const linkTextElement = document.createElement("textarea");
-    linkTextElement.value = appLinkURL;
-    linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
-    linkTextElement.style.position = "absolute";
-    linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
+  // Créez un élément de texte pour afficher le lien
+  const linkTextElement = document.createElement("textarea");
+  linkTextElement.value = appLinkURL;
+  linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
+  linkTextElement.style.position = "absolute";
+  linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
 
-    // Ajoutez le champ de texte à la page
-    document.body.appendChild(linkTextElement);
+  // Ajoutez le champ de texte à la page
+  document.body.appendChild(linkTextElement);
 
-    // Sélectionnez le texte dans le champ de texte
-    linkTextElement.select();
+  // Sélectionnez le texte dans le champ de texte
+  linkTextElement.select();
 
-    // Copiez le texte sélectionné dans le presse-papiers
-    document.execCommand("copy");
+  // Copiez le texte sélectionné dans le presse-papiers
+  document.execCommand("copy");
 
-    // Supprimez le champ de texte de la page (il n'est plus nécessaire)
-    document.body.removeChild(linkTextElement);
+  // Supprimez le champ de texte de la page (il n'est plus nécessaire)
+  document.body.removeChild(linkTextElement);
 
-    // Affichez un message pour informer l'utilisateur que le lien a été copié
-    alert(
-      `Le lien vers <${g_currentApp.name}> a été copié dans le presse-papiers.`
-    );
+  // Affichez un message pour informer l'utilisateur que le lien a été copié
+  alert(
+    `Le lien vers <${g_currentApp.name}> a été copié dans le presse-papiers.`,
+  );
   //} else {
-    // Si aucune application n'est sélectionnée, affichez un message d'erreur
+  // Si aucune application n'est sélectionnée, affichez un message d'erreur
   //  alert("Veuillez sélectionner une application avant de générer le lien.");
   //}
-
 }
 //
 // link clicked
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // newProjetct clicked
@@ -418,7 +425,7 @@ function newProject() {
     localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name); // Sauvegarder le nom de l'application sélectionnée
     console.log(
       "NEW PROJECT, STORAGE = ",
-      localStorage.getItem("lastEditedApp-" + g_username)
+      localStorage.getItem("lastEditedApp-" + g_username),
     );
     Save();
   } else {
@@ -429,15 +436,14 @@ function newProject() {
 // usernameDisplay clicked
 /////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////
 // LoadApp()
 //
-function LoadApp(username,appname) {
+function LoadApp(username, appname) {
   fetch(
     `/loadApp?name=${encodeURIComponent(appname)}&user=${encodeURIComponent(
-      username
-    )}`
+      username,
+    )}`,
   )
     .then((response) => response.json())
     .then((appData) => {
@@ -448,26 +454,30 @@ function LoadApp(username,appname) {
       const monParam = urlParams.get("param");
       console.log("##### param = ", monParam);
       if (monParam && !g_isAppAlreadyLoadedFromLocalStorage) {
-        console.log("🕛 BACK TO STATE ! isAppAlreadyLoadedFromLocalStorage")
-        loadEditorState()
+        console.log("🕛 BACK TO STATE ! isAppAlreadyLoadedFromLocalStorage");
+        loadEditorState();
         g_isAppAlreadyLoadedFromLocalStorage = true;
       } else {
-        console.log("🤓 FIRST LOAD -? isAppAlreadyLoadedFromLocalStorage")
+        console.log("🤓 FIRST LOAD -? isAppAlreadyLoadedFromLocalStorage");
         // Réinitialisez l'état de l'éditeur avec le nouveau code
         resetEditorState(appData.code);
       }
       g_currentApp.name = appData.name;
-  
+
       localStorage.setItem("lastEditedApp-" + username, g_currentApp.name);
 
       console.log("LOAD => currentApp.name = ", g_currentApp.name);
     })
-    .catch((error) => console.log("erreur lors du chargement de l'app... êtes-vous connecté ?",error));
+    .catch((error) =>
+      console.log(
+        "erreur lors du chargement de l'app... êtes-vous connecté ?",
+        error,
+      ),
+    );
 }
 //
 // LoadApp()
 /////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////
 // </> button pressed
@@ -475,11 +485,12 @@ function LoadApp(username,appname) {
 function runButtonPressed() {
   if (g_isEditMode) {
     // En venant du mode édition, exécuter le code
+    saveEditorState();
+    switchUI(false);
     Exec(g_view.state.doc.toString());
   } else {
     // En  venant du mode exécution, recharger la page avec un contrôle sur le paramètre 'param'
 
-    
     // Créez un objet URL à partir de l'URL actuelle
     let url = new URL(window.location.href);
     let params = new URLSearchParams(url.search);
@@ -498,18 +509,11 @@ function runButtonPressed() {
 // </> button pressed
 /////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////
 // Exec()
 //
 function Exec(code) {
   document.getElementById("ui").style.display = "block";
-  console.log("🕛👍 SAVE STATE !")
-  saveEditorState()
-
-  // Cacher les boutons en mode exécution
-  g_isEditMode = false;
-  switchUI(g_isEditMode);
 
   // run !
   const script = document.createElement("script");
@@ -526,26 +530,27 @@ function Exec(code) {
       "\nligne:",
       lineno,
       "colonne:",
-      colno
+      colno,
     );
     alert(
       `${message}
       ${source}
-      ligne ${lineno} (colonne ${colno})`
+      ligne ${lineno} (colonne ${colno})`,
     );
   };
 
-  document.body.appendChild(script);   // go !
+  document.body.appendChild(script); // go !
 }
 //
 // Exec()()
 /////////////////////////////////////////////////////////
 
-
 /////////////////////////////////////////////////////////
 // switchUI()
 //
 function switchUI(isEditMode) {
+  g_isEditMode = isEditMode;
+
   const elementsToHide = [
     document.getElementById("saveButton"),
     document.getElementById("zoomInButton"),
@@ -557,31 +562,30 @@ function switchUI(isEditMode) {
   ];
   if (isEditMode) {
     elementsToHide.forEach((el) => el.classList.remove("hidden"));
-    document.getElementById("toolbar").style.display = "flex"
-    document.getElementById("safeSpaceAboveEditor").style.display = "block"
-    document.getElementById("editor").style.display = "block"
-    document.getElementById("safeSpaceUnderEditor").style.display = "block"
-    document.getElementById("actionButton").style.top = "auto"
-    document.getElementById("actionButton").style.right = "auto"
-    document.getElementById("actionButton").style.bottom = "20px"
-    document.getElementById("actionButton").style.left = "20px"
-  
+    document.getElementById("toolbar").style.display = "flex";
+    document.getElementById("safeSpaceAboveEditor").style.display = "block";
+    document.getElementById("editor").style.display = "block";
+    document.getElementById("safeSpaceUnderEditor").style.display = "block";
+    document.getElementById("actionButton").style.top = "auto";
+    document.getElementById("actionButton").style.right = "auto";
+    document.getElementById("actionButton").style.bottom = "20px";
+    document.getElementById("actionButton").style.left = "20px";
   } else {
     elementsToHide.forEach((el) => el.classList.add("hidden"));
-    document.getElementById("toolbar").style.display = "none"
-    document.getElementById("safeSpaceAboveEditor").style.display = "none"
-    document.getElementById("editor").style.display = "none"
-    document.getElementById("safeSpaceUnderEditor").style.display = "none"
-    document.getElementById("actionButton").style.bottom = "auto"
-    document.getElementById("actionButton").style.left = "auto"
-    document.getElementById("actionButton").style.top = "calc( env( safe-area-inset-top ) + 10px )"
-    document.getElementById("actionButton").style.right = "10px"
+    document.getElementById("toolbar").style.display = "none";
+    document.getElementById("safeSpaceAboveEditor").style.display = "none";
+    document.getElementById("editor").style.display = "none";
+    document.getElementById("safeSpaceUnderEditor").style.display = "none";
+    document.getElementById("actionButton").style.bottom = "auto";
+    document.getElementById("actionButton").style.left = "auto";
+    document.getElementById("actionButton").style.top =
+      "calc( env( safe-area-inset-top ) + 10px )";
+    document.getElementById("actionButton").style.right = "10px";
   }
 }
 //
 // switchUI()
 /////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////
 // Save()
@@ -592,7 +596,7 @@ function Save() {
   localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name);
   console.log(
     "SAVE, STORAGE = ",
-    localStorage.getItem("lastEditedApp-" + g_username)
+    localStorage.getItem("lastEditedApp-" + g_username),
   );
 
   const settings = {
@@ -614,7 +618,7 @@ function Save() {
       localStorage.setItem("lastEditedApp-" + g_username, g_currentApp.name); // Sauvegarder le nom de l'application sauvegardée
       console.log(
         "SAVE, STORAGE = ",
-        localStorage.getItem("lastEditedApp-" + g_username)
+        localStorage.getItem("lastEditedApp-" + g_username),
       );
     })
     .catch((error) => console.log("Erreur lors de la sauvegarde: " + error));
@@ -622,7 +626,6 @@ function Save() {
 //
 // Save()
 /////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////
 // displayStore()
@@ -632,14 +635,13 @@ function displayStore() {
     .then((response) => response.json())
     .then((apps) => {
       // Cacher les boutons & cm6 en mode exécution
-      g_isEditMode = false
-      switchUI(g_isEditMode);
+      switchUI(false);
       // Cacher le bouton actionButton
       const actionButtonElement = document.getElementById("actionButton");
-      if (actionButtonElement) actionButtonElement.style.display = 'none';
+      if (actionButtonElement) actionButtonElement.style.display = "none";
 
-      const container = document.getElementById("appsList-container"); 
-      container.style.display = "grid"
+      const container = document.getElementById("appsList-container");
+      container.style.display = "grid";
       container.innerHTML = `<h1 style="color:green;">${g_username}'s Store</h1><br>`; // Nettoie le contenu actuel du conteneur.
       apps.forEach((app) => {
         // Crée un élément div pour chaque application.
@@ -648,14 +650,13 @@ function displayStore() {
         appDiv.style.cursor = "pointer"; // Ajoute un curseur de pointeur pour indiquer qu'il s'agit d'un élément cliquable.
         // Ajoute un écouteur d'événements pour gérer les clics sur le bouton de l'application.
         appDiv.addEventListener("click", () => {
-          const container = document.getElementById("appsList-container"); 
-          container.style.display = "none"
-          g_isEditMode = true
+          const container = document.getElementById("appsList-container");
+          container.style.display = "none";
           switchUI(true);
           // Afficher le bouton actionButton
           const actionButtonElement = document.getElementById("actionButton");
-          if (actionButtonElement) actionButtonElement.style.display = 'block';
-          LoadApp(g_username,app); // Appelle la fonction loadApp avec le nom de l'application.
+          if (actionButtonElement) actionButtonElement.style.display = "block";
+          LoadApp(g_username, app); // Appelle la fonction loadApp avec le nom de l'application.
         });
         // Ajoute le nom de l'application au div.
         appDiv.innerText = app;
@@ -669,12 +670,16 @@ function displayStore() {
         container.appendChild(appDiv);
       });
     })
-    .catch((error) => console.log("erreur lors de la récupération des applications... êtes-vous connecté ?",error));
+    .catch((error) =>
+      console.log(
+        "erreur lors de la récupération des applications... êtes-vous connecté ?",
+        error,
+      ),
+    );
 }
 //
 // displayStore()
 /////////////////////////////////////////////////////////
-
 
 /////////////////////////////////////////////////////////
 // UI
@@ -682,9 +687,7 @@ function displayStore() {
 document
   .getElementById("actionButton")
   .addEventListener("click", () => runButtonPressed());
-document
-  .getElementById("saveButton")
-  .addEventListener("click", () => Save());
+document.getElementById("saveButton").addEventListener("click", () => Save());
 document
   .getElementById("zoomInButton")
   .addEventListener("click", () => changeFontSize(1));
