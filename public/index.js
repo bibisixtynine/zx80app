@@ -1,4 +1,4 @@
-// Variable pour suivre le mode actuel
+
 editMode(true);
 
 // utilisateur
@@ -320,15 +320,38 @@ function changeFontSize(delta) {
 /////////////////////////////////////////////////////////
 // window.onload()
 //
+function executeAppFromUrl(code) {
+  editMode(false);
+  Exec(code);
+}
 function extracteRunInstructionsFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
-  const devName = urlParams.get("devName");
-  const appName = urlParams.get("appName");
-
-  if (devName && appName) {
-    alert(`${devName}:${appName}`);
+  const executeAppId = urlParams.get("key");
+  if (executeAppId) {
+    // Make a fetch request to the server to get the app code using the provided ID
+    fetch(`/getPublishedApp/${executeAppId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load the app.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data && data.code) {
+          executeAppFromUrl(data.code);
+        } else {
+          alert('No code to execute.');
+        }
+      })
+      .catch(error => {
+        alert('Error loading app: ' + error.message);
+        console.error('Error loading app:', error);
+      });
   }
 }
+
+
+
 
 window.onload = function () {
   // L'url contient-elle un code à executer ?
@@ -362,6 +385,77 @@ window.onload = function () {
 /////////////////////////////////////////////////////////
 // link clicked
 //
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// publish(appDeveloper, appName) - Publish the application and provide a link for execution
+//
+function publish(appDeveloper, appName) {
+  // Retrieve the current code from the editor
+  const appCode = g_view.state.doc.toString();
+  // Define the settings for the payload
+  const payload = {
+    developer: appDeveloper,
+    name: appName,
+    code: appCode,
+  };
+  // Make a fetch POST request to publish the app and save with a unique id in the database
+  fetch("/publish", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.key) {
+      // Construct the app execution URL with the returned unique key
+      const executionUrl = `https://zx80.app?key=${encodeURIComponent(data.key)}`;
+      // Provide feedback to the user with the execution URL
+      if (navigator.share) {
+        navigator.share({
+          title: appName,
+          text: 'Your app is published! Use this link to execute it:',
+          url: executionUrl,
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing:', error));
+      } else {
+        // Créez un élément de texte pour afficher le lien
+        const linkTextElement = document.createElement("textarea");
+        linkTextElement.value = executionUrl;
+        linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
+        linkTextElement.style.position = "absolute";
+        linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
+      
+        // Ajoutez le champ de texte à la page
+        document.body.appendChild(linkTextElement);
+        // Sélectionnez le texte dans le champ de texte
+        linkTextElement.select();
+        // Copiez le texte sélectionné dans le presse-papiers
+        document.execCommand("copy");
+        // Supprimez le champ de texte de la page (il n'est plus nécessaire)
+        document.body.removeChild(linkTextElement);
+        // Affichez un message pour informer l'utilisateur que le lien a été copié
+        alert(
+          `Le lien "${executionUrl}" vers votre app <${g_currentApp.name}> a été copié dans le presse-papiers.`,
+        );
+      }
+    } else {
+      // Handle any errors or issues with publishing
+      alert(`Failed to publish the app: ${data.message}`);
+    }
+  })
+  .catch((error) => {
+    console.error('Error publishing the app:', error);
+    alert('An error occurred while publishing the app.');
+  });
+}
+//
+// publish(appDeveloper, appName) - Publish the application and provide a link for execution
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // generateUrlWithActionAndCode - Generates a URL with specified action and code
 function generateUrlWithActionAndCode(baseUrl, action, code) {
@@ -705,7 +799,7 @@ document
   .addEventListener("click", () => newProject());
 document
   .getElementById("linkButton")
-  .addEventListener("click", () => displayAppLink(g_view.state.doc.toString()));
+  .addEventListener("click", () => publish(g_username, g_currentApp.name));
 //
 // UI
 /////////////////////////////////////////////////////////

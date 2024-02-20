@@ -289,6 +289,83 @@
   //
   ///////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // (7/7) POST /publish - For publishing an app with a unique ID
+  //
+  app.post('/publish', async (req, res) => {
+    const userInfo = getUserInfo(req);
+    const user = userInfo ? userInfo.name : null;
+  
+    if (user) {
+      try {
+        const { developer, name, code } = req.body; // data from the publish request
+        const uniqueId = require('crypto').randomBytes(16).toString('hex'); // generate a unique ID for the app
+  
+        const appKeyPrefix = `published/${uniqueId}`;
+        const appCodeKey = `${appKeyPrefix}/app.js`;
+        const appDataKey = `${appKeyPrefix}/data.json`;
+  
+        // Prepare data to be saved with the app code
+        const appData = {
+          developer,
+          name,
+          uniqueId
+        };
+  
+        // Save the code and app data to the database under the unique ID
+        await db.set(appCodeKey, code);
+        await db.set(appDataKey, JSON.stringify(appData));
+  
+        // Return the unique ID to the client
+        res.json({ key: uniqueId });
+      } catch (error) {
+        console.error('Failed to publish the app:', error);
+        res.status(500).send('Failed to publish the app.');
+      }
+    } else {
+      formattedLog(req.ip, 'tried to PUBLISH ☠️', '', '');
+      res.status(401).send('You must be logged in to publish an app.');
+    }
+  });
+  //
+  // POST /publish - For publishing an app with a unique ID
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // (8/7) POST /publish - For publishing an app with a unique ID
+  //
+  app.get('/getPublishedApp/:id', async (req, res) => {
+    const uniqueId = req.params.id;
+    const appKeyPrefix = `published/${uniqueId}`;
+  
+    // Assume the key for the app code is structured like so: 'published/{uniqueId}/app.js'
+    const appCodeKey = `${appKeyPrefix}/app.js`;
+  
+    try {
+      const appCode = await db.get(appCodeKey);
+  
+      if (appCode) {
+        res.json({ code: appCode });
+      } else {
+        res.status(404).send('App not found.');
+      }
+    } catch (error) {
+      console.error('Error retrieving the app code:', error);
+      res.status(500).send('Internal server error.');
+    }
+  });
+  //
+  // (8/7) POST /publish - For publishing an app with a unique ID
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  
   ///////////////////////////////////////////////////////////////////////////////////////////
   //
   // SERVER START

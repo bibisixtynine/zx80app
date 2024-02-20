@@ -1,4 +1,11 @@
 lundi 19 février - midi : Database Compute 35.56 
 
+bug?
+- effacer l'historique
+- aller sur le site -> la page par défaut qui demande la connexion et donne un exemple apparait
+- se connecter
+- la page Doc n'apparait pas, alors que le nom de l'app est bien Doc (se voit si on sauvegarde),
+c'est la page par defaut qui est réaffichée
+
 
 
