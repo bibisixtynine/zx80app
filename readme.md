@@ -1,15 +1,14 @@
-# QWARK ALPHA 0.0.5
-## the multi-platform T-PAC, Tiny - Phaser App Creator !
+# QWARK ALPHA 0.0.6
+## the multi-platform Pixel Art Tiny App To Everyone builder !
 
 
-Are you looking to code tiny Game Apps ?
+Are you looking to create some PATATE (Pixel Art Tiny Apps To Everyone) ?
+Share your wondefuls Pixel Art Tiniy Apps To Everyone in one click ?
 
-And more, how to distribute your wonderful Tiny Phaser Apps to everyone, regardless of the operating system, or if it's a smartphone, a tablet, a laptop, a desktop, windows, osx, linux, android, ios etc...
-
-Qwark is there ! A tiny environment that allow to code, run and publish your apps on a store, using the js Phaser 3.7 library !
+Qwark is there ! A tiny environment that allow to code, run and share your apps !
 
 What is currently working for now :
-  - qwark should work on any platform as a pwa (you should be able to install this webapp)
+  - Qwark should work on any platform as a pwa (you should be able to install this webapp)
   - editing
   - running
   - logging (with replit.com auth)
