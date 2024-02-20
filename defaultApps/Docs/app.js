@@ -13,14 +13,14 @@
 
 // contact : ilboued@proton.me
 
-let ui = document.getElementById('ui')
-ui.style.height = "auto"
+let ui = document.getElementById("ui");
+ui.style.height = "auto";
 
-let el = document.getElementById('gameContainer')
-el.style.whiteSpace = 'pre-wrap'
-el.style.overflow = 'auto'
-el.style.margin = 'auto'
-el.style.maxWidth = '500px'
+let el = document.getElementById("gameContainer");
+el.style.whiteSpace = "pre-wrap";
+el.style.overflow = "auto";
+el.style.margin = "auto";
+el.style.maxWidth = "500px";
 el.innerHTML = `
 <div id='phaser-scene' style="position:absolute; top:0; left:0; background:transparent; pointer-events: none;"></div>
 <h1 style="color:yellow; text-align:center;">
@@ -53,6 +53,8 @@ Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey
 
 <i style="color:grey" class="fas fa-plus"></i> créé une nouvelle webApp
 
+<i style="color:grey" class="fas fa-cog"></i> pour t'identifier
+
 <h2 style="color:orange">🤩 Installe Qwark ! Ton expérience utilisateur sera bien meilleur sans les barres de navigation.</h2>
 <span style="color:orange">-></span> Sur iPhone&Cie, il faut appuyer sur le bouton de partage, représenté par un carré avec une flêche vers le haut, puis selectionner : "ajouter à l'écran d'accueil", ou "ajouter au dock"
 
@@ -70,11 +72,5 @@ N'hésite pas à partager cela avec tes utilisateurs !
 
 
 
-`
-window.scrollTo(0,0)
-
-
-
-
-
-
+`;
+window.scrollTo(0, 0);
