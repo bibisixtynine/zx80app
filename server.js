@@ -32,15 +32,109 @@
   // (x/y) getApp available public code without being logged
   //
   // ex: https://zx80.app/publicApp/MyApp
-  app.get("/publicApp/:appName", (req, res) => {
-    const appName = req.params.appName;
-    res.send(`Welcome to ${appName}`);
-  });
+  //app.get("/publicApp/:appName/*", (req, res) => {
+  //  const appName = req.params.appName;
+  //  const additionnalPath = req.params[0];
+  //  res.send(`Welcome to ${appName} ${additionnalPath}`);
+  //});
   //
   // (x/y) getApp available public code without being logged
   //
   ///////////////////////////////////////////////////////////////////////////////////////
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                    
+// 1) GET /publicApp/:appName
+//   => url -> additionnalPath
+//   => zx80.app/publicApp/MyApp/ -> index.html
+//   => zx80.app/publicApp/MyApp/index.html -> index.html
+//   => zx80.app/publicApp/MyApp/manifest.json -> manifest.json
+//   => zx80.app/publicApp/MyApp/style.css -> style.css
+//   => zx80.app/publicApp/MyApp/script.js -> script.js
+//   => zx80.app/publicApp/MyApp/images/logo.png -> images/logo.png
+  
+
+app.get('/publicApp/:appName/*', async (req, res) => {
+  const appName = req.params.appName;
+  const additionalPath = req.params[0] || 'index.html';
+  res.send(appName + ' is running on ' + additionalPath);
+  //formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
+
+  /*
+  try {
+    
+    let { name, image, description, code } = req.body;
+    // Si 'name' est vide, lui attribuer la valeur 'Docs'
+    name = name.trim() ? name : 'Docs';
+
+    const appDir = 'public/' + user + '/' + name
+    
+    // a) Création des fichiers app.json et app.js
+    await fsPromises.mkdir(appDir, { recursive: true });
+    await fsPromises.writeFile(appDir + '/app.json', JSON.stringify({ name, image, description }));
+    await fsPromises.writeFile(appDir + '/app.js', code);
+    
+    // b) Création du index.html
+    let modelPath,indexPath,modelContent
+    // Lire le contenu de index_model.html
+    modelPath = './index_model.html'; // Chemin vers index_model.html
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
+    // Sauvegarder le contenu modifié dans index.html
+    indexPath = appDir + '/index.html'; // Chemin où index.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+    
+    // c) Création du manifest.json
+    // Lire le contenu de manifest_model.json
+    modelPath = './manifest_model.json'; // Chemin vers manifest_model.json
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
+    // Sauvegarder le contenu modifié dans manifest.json
+    indexPath = appDir + '/manifest.json'; // Chemin où manifest.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+
+    // d) Création du sw.js
+    // Lire le contenu de sw_model.js
+    modelPath = './sw_model.js'; // Chemin vers sw_model.js
+    modelContent = await fsPromises.readFile(modelPath, 'utf8');
+    // Remplacer $${name} par la valeur de 'name'
+    modelContent = modelContent.replace(/\$\${name}/g, user+'/'+name);
+    // Sauvegarder le contenu modifié dans sw.js
+    indexPath = appDir + '/sw.js'; // Chemin où manifest.html sera créé
+    await fsPromises.writeFile(indexPath, modelContent);
+    
+    res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
+  } catch (error) {
+    res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
+  }*/
+});
+//                                                                                    
+// POST /save
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   ///////////////////////////////////////////////////////////////////////////////////////
   //
   // (0/6) replit logging
@@ -380,7 +474,7 @@
       .substring(0, 16);
 
     log(
-      `${formattedDate} <💫--------🤩--------🚀> --> Serveur 240224-03:25 démarré sur le port ${port}`,
+      `${formattedDate} <💫--------🤩--------🚀> --> Serveur 22fev 22h30 démarré sur le port ${port}`,
     );
   });
   //

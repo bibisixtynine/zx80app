@@ -351,45 +351,16 @@ function extracteRunInstructionsFromUrl() {
 }
 
 
-// Fonction pour mettre à jour l'icône
-function setUserIconConnectionState(isUserConnected) {
-    const icon = document.getElementById('userIcon');
-    if (isUserConnected) {
-        // Utilisateur connecté
-        icon.className = "fas fa-user-alt";
-        icon.style.color = "#63E6BE";
-    } else {
-        // Utilisateur non connecté
-        icon.className = "fas fa-user-alt-slash";
-        icon.style.color = "#b92d2d";
-    }
-}
-
 
 
 window.onload = function () {
   // L'url contient-elle un code à executer ?
   extracteRunInstructionsFromUrl();
 
-  (async function() {
-    try {
-        const user = await getUserInfo();
-        if (user) {
-          setUserIconConnectionState(true)
-        }
-    } catch(error) {
-        console.error("Erreur lors de la récupération des informations utilisateur : ", error);
-        setUserIconConnectionState(false)
-    }
-  })();
-  
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
   fetch("/getUsername")
     .then((response) => response.text())
     .then((username) => {
-      
-      //setUserIconConnectionState(true)
-      
       g_username = username;
       localStorage.setItem("username", g_username);
 
@@ -400,7 +371,6 @@ window.onload = function () {
         );
         LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
       } else {
-        //setUserIconConnectionState(false)
         console.log(
           `NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
         );
