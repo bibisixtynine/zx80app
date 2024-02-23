@@ -474,7 +474,7 @@ app.get('/publicApp/:appName/*', async (req, res) => {
       .substring(0, 16);
 
     log(
-      `${formattedDate} <💫--------🤩--------🚀> --> Serveur 22fev 22h30 démarré sur le port ${port}`,
+      `${formattedDate} <💫--------🤩--------🚀> --> Serveur 22fev 23h07 démarré sur le port ${port}`,
     );
   });
   //

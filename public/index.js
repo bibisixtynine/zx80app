@@ -1,4 +1,3 @@
-
 editMode(true);
 
 // utilisateur
@@ -330,91 +329,91 @@ function extracteRunInstructionsFromUrl() {
   if (executeAppId) {
     // Make a fetch request to the server to get the app code using the provided ID
     fetch(`/getPublishedApp/${executeAppId}`)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to load the app.');
+          throw new Error("Failed to load the app.");
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data && data.code) {
           executeAppFromUrl(data.code);
         } else {
-          alert('No code to execute.');
+          alert("No code to execute.");
         }
       })
-      .catch(error => {
-        alert('Error loading app: ' + error.message);
-        console.error('Error loading app:', error);
+      .catch((error) => {
+        alert("Error loading app: " + error.message);
+        console.error("Error loading app:", error);
       });
   }
 }
 
-
 // Fonction pour mettre à jour l'icône
 function setUserIconConnectionState(isUserConnected) {
-    const icon = document.getElementById('userIcon');
-    if (isUserConnected) {
-        // Utilisateur connecté
-        icon.className = "fas fa-user-alt";
-        icon.style.color = "#63E6BE";
-    } else {
-        // Utilisateur non connecté
-        icon.className = "fas fa-user-alt-slash";
-        icon.style.color = "#b92d2d";
-    }
+  const icon = document.getElementById("userIcon");
+  if (isUserConnected) {
+    // Utilisateur connecté
+    icon.className = "fas fa-user-alt";
+    icon.style.color = "#63E6BE";
+  } else {
+    // Utilisateur non connecté
+    icon.className = "fas fa-user-alt-slash";
+    icon.style.color = "#b92d2d";
+  }
 }
 
-
+(async function () {
+  try {
+    const user = await getUserInfo();
+    if (user) {
+      setUserIconConnectionState(true);
+    }
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des informations utilisateur : ",
+      error,
+    );
+    //setUserIconConnectionState(false)
+  }
+})();
 
 window.onload = function () {
   // L'url contient-elle un code à executer ?
   extracteRunInstructionsFromUrl();
 
-  (async function() {
-    try {
-        const user = await getUserInfo();
-        if (user) {
-          setUserIconConnectionState(true)
-        }
-    } catch(error) {
-        console.error("Erreur lors de la récupération des informations utilisateur : ", error);
-        setUserIconConnectionState(false)
-    }
-  })();
-  
   // Sélectionner l'application qui était en cours d'édition lors du rechargement de la page
   fetch("/getUsername")
     .then((response) => response.text())
     .then((username) => {
-      
-      //setUserIconConnectionState(true)
-      
-      g_username = username;
-      localStorage.setItem("username", g_username);
+      if (username !== "not logged in") {
+        setUserIconConnectionState(true);
 
-      const lastEditedApp = localStorage.getItem("lastEditedApp-" + g_username);
-      if (lastEditedApp) {
-        console.log(
-          `EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
+        g_username = username;
+        localStorage.setItem("username", g_username);
+
+        const lastEditedApp = localStorage.getItem(
+          "lastEditedApp-" + g_username,
         );
-        LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
+        if (lastEditedApp) {
+          console.log(
+            `EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
+          );
+          LoadApp(g_username, lastEditedApp); // Charger l'application sélectionnée
+        } else {
+          console.log(
+            `NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
+          );
+          LoadApp(g_username, "Docs"); // Charger l'application par défaut
+        }
       } else {
-        //setUserIconConnectionState(false)
-        console.log(
-          `NOT EXIST -> window.onload: lasteditedapp = ${lastEditedApp}, user = ${g_username}`,
-        );
-        LoadApp(g_username, "Docs"); // Charger l'application par défaut
+        setUserIconConnectionState(false);
       }
     });
 };
 //
 // window.onload()
 /////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////
-// link clicked
-//
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // publish(appDeveloper, appName) - Publish the application and provide a link for execution
@@ -436,107 +435,56 @@ function publish(appDeveloper, appName) {
       "Content-Type": "application/json",
     },
   })
-  .then((response) => response.json())
-  .then((data) => {
-    if (data.key) {
-      // Construct the app execution URL with the returned unique key
-      const executionUrl = `https://zx80.app?key=${encodeURIComponent(data.key)}`;
-      // Provide feedback to the user with the execution URL
-      if (navigator.share) {
-        navigator.share({
-          title: appName,
-          text: 'Your app is published! Use this link to execute it:',
-          url: executionUrl,
-        })
-        .then(() => console.log('Successful share'))
-        .catch((error) => console.log('Error sharing:', error));
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.key) {
+        // Construct the app execution URL with the returned unique key
+        const executionUrl = `https://zx80.app?key=${encodeURIComponent(
+          data.key,
+        )}`;
+        // Provide feedback to the user with the execution URL
+        if (navigator.share) {
+          navigator
+            .share({
+              title: appName,
+              text: "Your app is published! Use this link to execute it:",
+              url: executionUrl,
+            })
+            .then(() => console.log("Successful share"))
+            .catch((error) => console.log("Error sharing:", error));
+        } else {
+          // Créez un élément de texte pour afficher le lien
+          const linkTextElement = document.createElement("textarea");
+          linkTextElement.value = executionUrl;
+          linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
+          linkTextElement.style.position = "absolute";
+          linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
+
+          // Ajoutez le champ de texte à la page
+          document.body.appendChild(linkTextElement);
+          // Sélectionnez le texte dans le champ de texte
+          linkTextElement.select();
+          // Copiez le texte sélectionné dans le presse-papiers
+          document.execCommand("copy");
+          // Supprimez le champ de texte de la page (il n'est plus nécessaire)
+          document.body.removeChild(linkTextElement);
+          // Affichez un message pour informer l'utilisateur que le lien a été copié
+          alert(
+            `Le lien "${executionUrl}" vers votre app <${g_currentApp.name}> a été copié dans le presse-papiers.`,
+          );
+        }
       } else {
-        // Créez un élément de texte pour afficher le lien
-        const linkTextElement = document.createElement("textarea");
-        linkTextElement.value = executionUrl;
-        linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
-        linkTextElement.style.position = "absolute";
-        linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
-      
-        // Ajoutez le champ de texte à la page
-        document.body.appendChild(linkTextElement);
-        // Sélectionnez le texte dans le champ de texte
-        linkTextElement.select();
-        // Copiez le texte sélectionné dans le presse-papiers
-        document.execCommand("copy");
-        // Supprimez le champ de texte de la page (il n'est plus nécessaire)
-        document.body.removeChild(linkTextElement);
-        // Affichez un message pour informer l'utilisateur que le lien a été copié
-        alert(
-          `Le lien "${executionUrl}" vers votre app <${g_currentApp.name}> a été copié dans le presse-papiers.`,
-        );
+        // Handle any errors or issues with publishing
+        alert(`Failed to publish the app: ${data.message}`);
       }
-    } else {
-      // Handle any errors or issues with publishing
-      alert(`Failed to publish the app: ${data.message}`);
-    }
-  })
-  .catch((error) => {
-    console.error('Error publishing the app:', error);
-    alert('An error occurred while publishing the app.');
-  });
+    })
+    .catch((error) => {
+      console.error("Error publishing the app:", error);
+      alert("An error occurred while publishing the app.");
+    });
 }
 //
 // publish(appDeveloper, appName) - Publish the application and provide a link for execution
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-// generateUrlWithActionAndCode - Generates a URL with specified action and code
-function generateUrlWithActionAndCode(baseUrl, action, code) {
-  // Encode the action and code to ensure they are URL-safe
-  const encodedAction = encodeURIComponent(action);
-  const encodedCode = encodeURIComponent(code);
-
-  // Construct the full URL with the base, action, and code
-  return `${baseUrl}?action=${encodedAction}&code=${encodedCode}`;
-}
-
-function displayAppLink(appCode) {
-  // Assurez-vous que l'utilisateur a sélectionné une application valide
-  //if (appName) {
-  // Créez l'URL du lien en remplaçant les espaces par "%20"
-  const appLinkURL = generateUrlWithActionAndCode(
-    "https://zx80.app",
-    "show",
-    appCode,
-  );
-
-  // Créez un élément de texte pour afficher le lien
-  const linkTextElement = document.createElement("textarea");
-  linkTextElement.value = appLinkURL;
-  linkTextElement.setAttribute("readonly", ""); // Rendre le champ en lecture seule pour empêcher l'édition accidentelle
-  linkTextElement.style.position = "absolute";
-  linkTextElement.style.left = "-9999px"; // Déplacez le champ en dehors de la vue de l'utilisateur
-
-  // Ajoutez le champ de texte à la page
-  document.body.appendChild(linkTextElement);
-
-  // Sélectionnez le texte dans le champ de texte
-  linkTextElement.select();
-
-  // Copiez le texte sélectionné dans le presse-papiers
-  document.execCommand("copy");
-
-  // Supprimez le champ de texte de la page (il n'est plus nécessaire)
-  document.body.removeChild(linkTextElement);
-
-  // Affichez un message pour informer l'utilisateur que le lien a été copié
-  alert(
-    `Le lien vers <${g_currentApp.name}> a été copié dans le presse-papiers.`,
-  );
-  //} else {
-  // Si aucune application n'est sélectionnée, affichez un message d'erreur
-  //  alert("Veuillez sélectionner une application avant de générer le lien.");
-  //}
-}
-//
-// link clicked
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -557,7 +505,7 @@ function newProject() {
   }
 }
 //
-// usernameDisplay clicked
+// newProjetct clicked
 /////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////
