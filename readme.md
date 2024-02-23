@@ -1,4 +1,4 @@
-# QWARK ALPHA 0.0.6
+# QWARK ALPHA 0.0.7
 ## the multi-platform Pixel Art Tiny App To Everyone builder !
 
 
@@ -13,9 +13,9 @@ What is currently working for now :
   - running
   - logging (with replit.com auth)
   - load/save in the cloud
-  - create link to share the game
-  - fullscreen preview
-  - debugging with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop
+  - share the game via a link
+  - preview
+  - debugging (with chrome/chromium/edge/safari developper tools integrated in the explorer... on desktop)
   - Error messages
 
 What is not working/in progress :

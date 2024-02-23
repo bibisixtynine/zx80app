@@ -49,11 +49,11 @@ Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey
 
 <i style="color:grey" class="fas fa-cloud-upload-alt"></i> sauvegarde tes changements
 
-<i style="color:grey" class="fas fa-link"></i> récupère un lien vers ta webApp
+<i style="color:grey" class="fas fa-share-alt"></i> partage ta webApp
 
 <i style="color:grey" class="fas fa-plus"></i> créé une nouvelle webApp
 
-<i style="color:grey" class="fas fa-cog"></i> pour t'identifier
+<i style="color: #b92d2d" class="fas fa-user-alt-slash"></i> pour t'identifier
 
 <h2 style="color:orange">🤩 Installe Qwark ! Ton expérience utilisateur sera bien meilleur sans les barres de navigation.</h2>
 <span style="color:orange">-></span> Sur iPhone&Cie, il faut appuyer sur le bouton de partage, représenté par un carré avec une flêche vers le haut, puis selectionner : "ajouter à l'écran d'accueil", ou "ajouter au dock"
