@@ -1,14 +1,14 @@
-# zx80.app ALPHA 0.0.8
-## the multi-platform Pixel Art Tiny App To Everyone builder !
+# zx80.app 0.0.8
+## the multi-platform Pixel Art Tiny App To Everyone webapp builder !
 
 
 Are you looking to create some PATATE (Pixel Art Tiny Apps To Everyone) ?
-Share your wondefuls Pixel Art Tiniy Apps To Everyone in one click ?
+Share your wondefuls Pixel Art Tiny Apps To Everyone in one click ?
 
-zx80.app is there ! A tiny environment that allow to code, run and share your apps !
+zx80.app is there ! A tiny environment that allow to code, run and share your webapps !
 
 What is currently working for now :
-  - zx80.app should work on any platform as a pwa (you should be able to install this webapp)
+  - zx80.app works on any platform and can be installed as a PWA (Progressive Web App)
   - editing
   - running
   - logging (with replit.com auth)
@@ -33,7 +33,7 @@ Bugs :
   
 ## MINIMAL REQUIREMENT TESTED (but may work on older configuration) :
 
-As far as you can install the 2023 (lower version may also work... not tested) Chrome/Chromium/Thorium,microsoft edge/safari(17 on osx) webbrower version 119? or more, or , (with the exception of iOS, where Safari is a must), you'll be able to achieve this easily !
+As far as you can install the 2023 (lower version may also work... not tested) Chrome 106+/Chromium/Thorium,microsoft edge/safari(17 on osx) webbrower version 119+, or , (with the exception of iOS, where Safari is a must), you'll be able to achieve this easily !
 (min requirement ios 12 with Safari, osx catalina 10.15 with Chrome/Chromium, windows 7 (with Thorium), windows 10/11 with Chrome/Chromium/Thorium/Edge, Linux with Chrome/Chromium/Thorium, Android 6 with Chrome/Chromium
 It may also works well with other browsers but without the install app functionnality and offline mode.
 

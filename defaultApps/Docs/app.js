@@ -24,9 +24,9 @@ el.style.maxWidth = "500px";
 el.innerHTML = `
 <div id='phaser-scene' style="position:absolute; top:0; left:0; background:transparent; pointer-events: none;"></div>
 <h1 style="color:yellow; text-align:center;">
----
+-----
 zx80.app
----
+-----
 </h1>
 <h1 style="color:orange">
 👏 Bravissimo !
