@@ -1,0 +1,40 @@
+LAST DEPLOY 
+deploy : 02/23/24 - 10h27
+
+ ----
+- OK ->
+ ----
+=> Android 6 + chrome 106 -> Nexus 7 2013 
+=> iOS15 -> iPhone 6S (2015), iPod 7, iPad 5 (2017), iPad Air 2 (fin 2014), iPad mini 4, iPad Pro
+
+Could be OK
+=> iOS12 -> iPhone 5S (2013), iPod 6, iPad Air (2013), iPad mini 2 (2013)
+
+
+1) Are OK :
+   ------
+macprom2pro osx sonoma 14.2.1
+galaxy s7
+iphone 13mini ios 17.3.1
+ipad air 2 ios 15.7.3
+nexus 7 (2013?) android 6.0.1 chrome 106
+
+
+2) Should be OK with iOS 15.7.3 :
+   ----------------------------
+iPhone 6S,+
+iPhone SE (all)
+iPad Air 2,+
+iPad 5,+
+iPad mini 4,+
+iPod Touch 7,+
+iPad Pro (all)
+
+
+3) Could be OK with iOS 12.6.7 except for Replit Auth2 :
+   ---------------------------------------------------
+iPhone 5S,6,+
+iPod Touch 6,+
+iPad Air (all)
+iPad 5,+
+iPad mini 2,+

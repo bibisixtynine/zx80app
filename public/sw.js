@@ -1,6 +1,6 @@
 const version = "💖"
 
-const CACHE_NAME = "qwarky-v" + version;
+const CACHE_NAME = "zx80.appy-v" + version;
 
 // variables de mise en tampon pour les emmissions de message vers la page HTML tant que celle-ci n'est pas ready
 const messageBuffer = [];
