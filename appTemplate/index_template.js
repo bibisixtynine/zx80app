@@ -86,14 +86,14 @@ const g_initialState = cm6.createEditorState(
         // CONNECTEZ-VOUS AVEC LA ROUE DENTÉE EN HAUT DROITE //
         ///////////////////////////////////////////////////////
 
-        // Pour pouvoir utiliser toutes les fonctions de Quark,
+        // Pour pouvoir utiliser toutes les fonctions de zx80.app,
         // vous devez vous identifier avec un compte replit.com
 
         // Utilisez le bouton ⚙️ en haut à droite pour créer un
         // compte replit (si besoin) et vous connecter !
 
-        // Qwark utilise le système d'authentification de replit.com,
-        // qui est aussi son hébergeur, et l'endroit ou Qwark est
+        // zx80.app utilise le système d'authentification de replit.com,
+        // qui est aussi son hébergeur, et l'endroit ou zx80.app est
         // construit.
 
         // Si vous voulez une petite démo, appuyer sur le bouton

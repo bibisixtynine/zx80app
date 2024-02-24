@@ -1,14 +1,14 @@
-# QWARK ALPHA 0.0.7
+# zx80.app ALPHA 0.0.8
 ## the multi-platform Pixel Art Tiny App To Everyone builder !
 
 
 Are you looking to create some PATATE (Pixel Art Tiny Apps To Everyone) ?
 Share your wondefuls Pixel Art Tiniy Apps To Everyone in one click ?
 
-Qwark is there ! A tiny environment that allow to code, run and share your apps !
+zx80.app is there ! A tiny environment that allow to code, run and share your apps !
 
 What is currently working for now :
-  - Qwark should work on any platform as a pwa (you should be able to install this webapp)
+  - zx80.app should work on any platform as a pwa (you should be able to install this webapp)
   - editing
   - running
   - logging (with replit.com auth)

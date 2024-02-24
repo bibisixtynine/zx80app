@@ -25,19 +25,19 @@ el.innerHTML = `
 <div id='phaser-scene' style="position:absolute; top:0; left:0; background:transparent; pointer-events: none;"></div>
 <h1 style="color:yellow; text-align:center;">
 ---
-Qwark
+zx80.app
 ---
 </h1>
 <h1 style="color:orange">
 👏 Bravissimo !
 </h1>
-Tu viens de lancer un aperçu de ta première webApp conçue avec <span style="color:yellow">Qwark</span> !
+Tu viens de lancer un aperçu de ta première webApp conçue avec <span style="color:yellow">zx80.app</span> !
 Pour revenir à son code, appuye à nouveau sur <i style="color:grey" class="fas fa-code"></i>.
 Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey" class="fas fa-link"></i> !
 <h2 style="color:orange">
-🧐 Qwark ? Quésaco ?
+🧐 zx80.app ? Quésaco ?
 </h2>
-<span style="color:yellow">Qwark</span> est une boîte à outils très pratique pour créer et partager facilement des mini-jeux, sous la forme de webApp !
+<span style="color:yellow">zx80.app</span> est une boîte à outils très pratique pour créer et partager facilement des mini-jeux, sous la forme de webApp !
 <h2 style="color:orange">
 😜 Quelques instructions...
 </h2>
@@ -55,7 +55,7 @@ Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey
 
 <i style="color: #b92d2d" class="fas fa-user-alt-slash"></i> pour t'identifier
 
-<h2 style="color:orange">🤩 Installe Qwark ! Ton expérience utilisateur sera bien meilleur sans les barres de navigation.</h2>
+<h2 style="color:orange">🤩 Installe zx80.app ! Ton expérience utilisateur sera bien meilleur sans les barres de navigation.</h2>
 <span style="color:orange">-></span> Sur iPhone&Cie, il faut appuyer sur le bouton de partage, représenté par un carré avec une flêche vers le haut, puis selectionner : "ajouter à l'écran d'accueil", ou "ajouter au dock"
 
 <span style="color:orange">-></span> Sur Chrome, une icone à presser représentant un écran d'ordi avec une flêche vers le bas devrait apparaître automatiquement, sinon cherche dans le menu un item comme "installation"

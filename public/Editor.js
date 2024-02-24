@@ -1,4 +1,4 @@
-// NOT IMPLEMENTED YET ... THESE FUNCTIONS ARE NOT USED IN THE CURRENT VERSION OF QWARK,
+// NOT IMPLEMENTED YET ... THESE FUNCTIONS ARE NOT USED IN THE CURRENT VERSION OF zx80.app,
 // THEY ARE JUST HERE TO BE USED IN THE FUTURE.
 
 
@@ -15,7 +15,7 @@ let g_options = {
 const g_initialState = cm6.createEditorState(
   `
         ////////////////////
-        // LOADING  QWARK //
+        // LOADING  zx80.app //
         ////////////////////
 
         `,
