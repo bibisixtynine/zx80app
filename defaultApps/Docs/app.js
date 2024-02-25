@@ -33,7 +33,7 @@ zx80.app
 </h1>
 Tu viens de lancer un aperçu de ta première webApp conçue avec <span style="color:yellow">zx80.app</span> !
 Pour revenir à son code, appuye à nouveau sur <i style="color:grey" class="fas fa-code"></i>.
-Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey" class="fas fa-link"></i> !
+Pour obtenir un lien à partager vers ta webApp, appuye sur <i style="color:grey" class="fas fa-share-alt"></i> !
 <h2 style="color:orange">
 🧐 zx80.app ? Quésaco ?
 </h2>

@@ -11,8 +11,8 @@ Could be OK
 => iOS12 -> iPhone 5S (2013), iPod 6, iPad Air (2013), iPad mini 2 (2013)
 
 
-1) Are OK :
-   ------
+1) Are OK and tested :
+   -----------------
 macprom2pro osx sonoma 14.2.1
 galaxy s7
 iphone 13mini ios 17.3.1
@@ -20,9 +20,9 @@ ipad air 2 ios 15.7.3
 nexus 7 (2013?) android 6.0.1 chrome 106
 
 
-2) Should be OK with iOS 15.7.3 :
-   ----------------------------
-iPhone 6S,+
+2) Should be OK (but not tested) with iOS 15.7.3 :
+   ---------------------------------------------
+iPhone 6s,+
 iPhone SE (all)
 iPad Air 2,+
 iPad 5,+
@@ -33,8 +33,12 @@ iPad Pro (all)
 
 3) Could be OK with iOS 12.6.7 except for Replit Auth2 :
    ---------------------------------------------------
-iPhone 5S,6,+
+iPhone 5s,6,+
 iPod Touch 6,+
 iPad Air (all)
 iPad 5,+
 iPad mini 2,+
+
+
+
+
