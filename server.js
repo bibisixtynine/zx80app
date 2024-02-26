@@ -139,7 +139,7 @@ app.get('/publicApp/:appName/*', async (req, res) => {
   //
   // (0/6) replit logging
   //
-  app.get("/", function (req, res) {
+  app.get("/", function (req, res) { // ????? not reachable ???
     res.sendFile(__dirname + "/index.html");
   });
 
@@ -220,6 +220,38 @@ app.get('/publicApp/:appName/*', async (req, res) => {
   //
   ///////////////////////////////////////////////////////////////////////////////////////
 
+
+  
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+// GET /askai
+// 
+app.get('/askai', async (req, res) => {
+  const ZXai = require('./ZXai');
+  const zxai = new ZXai();
+
+  const question = req.query.question;
+
+  if (!question) {
+    return res.status(400).send('Question is required.');
+  }
+
+  try {
+    const answer = await zxai.ask(question);
+    res.json({ answer });
+  } catch (error) {
+    console.error('Error asking AI:', error);
+    res.status(500).send('Failed to get an answer from AI.');
+  }
+});
+//
+// GET /askai
+// 
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+  
   ///////////////////////////////////////////////////////////////////////////////////////
   //
   // (3/6) POST /save
