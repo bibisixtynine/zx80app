@@ -532,7 +532,7 @@ function LoadApp(username, appname) {
       } else {
         console.log("🤓 FIRST LOAD -? isAppAlreadyLoadedFromLocalStorage");
         // Réinitialisez l'état de l'éditeur avec le nouveau code
-        resetEditorState(appData.code);
+        resetEditorState(js_beautify(appData.code, { indent_size: 2, space_in_empty_paren: true }));
       }
       g_currentApp.name = appData.name;
 
@@ -581,6 +581,38 @@ function runButtonPressed() {
 // </> button pressed
 /////////////////////////////////////////////////////////
 
+
+/////////////////////////////////////////////////////////
+// askai()
+//
+function askai() {
+  const currentCode = g_view.state.doc.toString();
+
+  fetch('/askai', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ code: currentCode }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data && data.code) {
+        //const code = JSON.parse(data.code).code;
+        resetEditorState(data.code);
+        alert('Code updated with AI suggestions.');
+      } else {
+        alert('AI could not generate code.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error asking AI:', error);
+      alert('An error occurred while processing your request.');
+    });
+}
+//
+// askai()
+/////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 // Exec()
 //
@@ -756,6 +788,9 @@ function displayStore() {
 /////////////////////////////////////////////////////////
 // UI
 //
+document
+  .getElementById("askai")
+  .addEventListener("click", () => askai());
 document
   .getElementById("actionButton")
   .addEventListener("click", () => runButtonPressed());

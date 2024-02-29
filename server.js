@@ -226,19 +226,21 @@ app.get('/publicApp/:appName/*', async (req, res) => {
 //
 // GET /askai
 // 
-app.get('/askai', async (req, res) => {
-  const ZXai = require('./ZXai');
-  const zxai = new ZXai();
-
-  const question = req.query.question;
-
-  if (!question) {
-    return res.status(400).send('Question is required.');
+app.post('/askai', async (req, res) => {
+  const { code } = req.body; // Extraire 'code' du corps de la requête
+  if (!code) {
+    return res.status(400).send('Code is required.');
   }
-
   try {
-    const answer = await zxai.ask(question);
-    res.json({ answer });
+    const ZXai = require('./ZXai');
+    const zxai = new ZXai();
+    
+    const answer = await zxai.ask(code);
+    
+    res.json({
+      code: answer,
+      comment: "no comment" 
+    }); // Send the code and comments as a response
   } catch (error) {
     console.error('Error asking AI:', error);
     res.status(500).send('Failed to get an answer from AI.');

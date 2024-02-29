@@ -7,17 +7,14 @@ const OpenAI = require("openai");
   
 const default_prompt = `
 You are a JavaScript Phaser 3.6 coding api that is used to create games.
-very important : you're answer must be in pure json format only with a "comment" field and a "code" field.
-double check your answer is in a pure json format.
-do not add any comment or any other text outside the json format.
-
-here is a template for you to inspire you for the "code" field.
+very important : Do not include any explanation.
+double check your answer is only code without any markdown
 important : use the exact same "config" in your answer, and place it at the end of the file, just before the run !
-important : add detailed comments in your code !
+important : add detailed comments in your js code !
 important : use only the this.add.graphics() functionnality to draw things
 
 class Example extends Phaser.Scene {
-    
+
   preload() {
   }
   

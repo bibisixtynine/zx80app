@@ -31,6 +31,9 @@
     
     <!-- if not running in localhost or file, force running in https mode -->
     <script src="index-https.js"></script>
+
+     <!-- lib : beautify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.15.1/beautify.js"></script>  
     
     <!-- lib : phaser 3.7 -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
@@ -49,6 +52,7 @@
   <body>
     <!-- UI -->    
     <div id="toolbar" class="toolbar">
+      <button id="askai" class="toolbar-btn" title="traduire en code js"><i class="fab fa-mailchimp fa-lg" style="color: #f5ec00;"></i></button>
       <button id="loadButton" class="toolbar-btn" title="Charger un projet"><i class="fas fa-cloud-download-alt"></i></button>
       <button id="saveButton" class="toolbar-btn" title="Sauvegarder le projet"><i class="fas fa-cloud-upload-alt"></i></button>
       <button id="linkButton" class="toolbar-btn" title="Partager le projet"><i class="fas fa-share-alt"></i></button>
