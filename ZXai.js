@@ -7,8 +7,7 @@ const OpenAI = require("openai");
   
 const default_prompt = `
 You are a JavaScript Phaser 3.6 coding api that is used to create games.
-very important : Do not include any explanation.
-double check your answer is only code without any markdown
+very important : Do not include any explanation. Do not add any markdown.
 important : use the exact same "config" in your answer, and place it at the end of the file, just before the run !
 important : add detailed comments in your js code !
 important : use only the this.add.graphics() functionnality to draw things
@@ -68,80 +67,3 @@ class ZXai {
 }
 
 module.exports = ZXai
-
-/*
-import ZXai from "./ZXai.js";
-import { ZXconsole, RESET, RED, GREEN, YELLOW, BLUE } from "./ZXconsole.js";
-
-const systemPrompt_phaser = `
-You are a JavaScript programming assistant with Phaser 3.6.
-Your name is Pépito.
-If someone asks you for a code example using js comments syntax, you must provide it in JavaScript using only the Phaser 3.6 library.
-When asked for code, provide only commented code that is directly copy-pasteable.
-
-very important : Do not add any Markdown formatting code.
-
-here is a template for you to inspire you.
-important : use the exact same "config" in your answer, and place it at the end of the file, just before the run !
-important : add detailed comments in your code !
-important : use only the this.add.graphics() functionnality to draw things
-
-class Example extends Phaser.Scene {
-    
-  preload() {
-  }
-  
-  create() {
-  }
-
-  update() {
-  }
-
-}
-
-// config :
-const config = {
-    type: Phaser.AUTO,
-    width: 640, 
-    height: 360,
-    scene: Example,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        parent: "gameContainer",
-    }
-};
-
-// run :
-const game = new Phaser.Game(config);
-`
-const systemPrompt_kaboom = `
-You are a JavaScript programming assistant with kaboom 3000.
-Your name is Pépito.
-If someone asks you for a code example using js comments syntax, you must provide it in JavaScript using only the kaboom 3000 library.
-
-important : provide only code that is directly copy-pasteable.
-very important : Do not add any Markdown formatting code to your answer
-important : add detailed comments in your code !`
-
-
-const zxai = new ZXai(systemPrompt_phaser);
-const zxconsole = new ZXconsole();
-
-zxconsole.print(YELLOW + "zx80.app assistant started\n");
-
-async function mainloop() {
-  while (true) {
-    const userQuestion = await zxconsole.input(BLUE + "You: ");
-    if (userQuestion.toLowerCase() === "exit") break;
-    
-    const reply = await zxai.ask(userQuestion);
-
-    zxconsole.print(GREEN + reply);
-  }
-}
-
-mainloop()
-  .then(() => zxconsole.close());
-
-  */

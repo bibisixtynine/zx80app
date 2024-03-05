@@ -42,27 +42,24 @@
   //
   ///////////////////////////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 1) GET /publicApp/:appName
+  //   => url -> additionnalPath
+  //   => zx80.app/publicApp/MyApp/ -> index.html
+  //   => zx80.app/publicApp/MyApp/index.html -> index.html
+  //   => zx80.app/publicApp/MyApp/manifest.json -> manifest.json
+  //   => zx80.app/publicApp/MyApp/style.css -> style.css
+  //   => zx80.app/publicApp/MyApp/script.js -> script.js
+  //   => zx80.app/publicApp/MyApp/images/logo.png -> images/logo.png
 
+  app.get("/publicApp/:appName/*", async (req, res) => {
+    const appName = req.params.appName;
+    const additionalPath = req.params[0] || "index.html";
+    res.send(appName + " is running on " + additionalPath);
+    //formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
 
-///////////////////////////////////////////////////////////////////////////////////////
-//                                                                                    
-// 1) GET /publicApp/:appName
-//   => url -> additionnalPath
-//   => zx80.app/publicApp/MyApp/ -> index.html
-//   => zx80.app/publicApp/MyApp/index.html -> index.html
-//   => zx80.app/publicApp/MyApp/manifest.json -> manifest.json
-//   => zx80.app/publicApp/MyApp/style.css -> style.css
-//   => zx80.app/publicApp/MyApp/script.js -> script.js
-//   => zx80.app/publicApp/MyApp/images/logo.png -> images/logo.png
-  
-
-app.get('/publicApp/:appName/*', async (req, res) => {
-  const appName = req.params.appName;
-  const additionalPath = req.params[0] || 'index.html';
-  res.send(appName + ' is running on ' + additionalPath);
-  //formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
-
-  /*
+    /*
   try {
     
     let { name, image, description, code } = req.body;
@@ -111,35 +108,18 @@ app.get('/publicApp/:appName/*', async (req, res) => {
   } catch (error) {
     res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
   }*/
-});
-//                                                                                    
-// POST /save
-//
-/////////////////////////////////////////////////////////////////////////////////////////
+  });
+  //
+  // POST /save
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   ///////////////////////////////////////////////////////////////////////////////////////
   //
   // (0/6) replit logging
   //
-  app.get("/", function (req, res) { // ????? not reachable ???
+  app.get("/", function (req, res) {
+    // ????? not reachable ???
     res.sendFile(__dirname + "/index.html");
   });
 
@@ -220,36 +200,36 @@ app.get('/publicApp/:appName/*', async (req, res) => {
   //
   ///////////////////////////////////////////////////////////////////////////////////////
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GET /askai
+  //
+  app.post("/askai", async (req, res) => {
+    const { code } = req.body; // Extraire 'code' du corps de la requête
+    if (!code) {
+      return res.status(400).send("Code is required.");
+    }
+    try {
+      const ZXai = require("./ZXai");
+      const zxai = new ZXai();
 
-  
-/////////////////////////////////////////////////////////////////////////////////////////
-//
-// GET /askai
-// 
-app.post('/askai', async (req, res) => {
-  const { code } = req.body; // Extraire 'code' du corps de la requête
-  if (!code) {
-    return res.status(400).send('Code is required.');
-  }
-  try {
-    const ZXai = require('./ZXai');
-    const zxai = new ZXai();
-    
-    const answer = await zxai.ask(code);
-    
-    res.json({
-      code: answer,
-      comment: "no comment" 
-    }); // Send the code and comments as a response
-  } catch (error) {
-    console.error('Error asking AI:', error);
-    res.status(500).send('Failed to get an answer from AI.');
-  }
-});
-//
-// GET /askai
-// 
-/////////////////////////////////////////////////////////////////////////////////////////
+      const answer = await zxai.ask(code);
+
+      res.json({
+        code: answer,
+        comment: "no comment",
+      }); // Send the code and comments as a response
+    } catch (error) {
+      console.error("Error asking AI:", error);
+      res.status(500).send("Failed to get an answer from AI.");
+    }
+  });
+  //
+  // GET /askai
+  //
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -417,45 +397,43 @@ app.post('/askai', async (req, res) => {
   //
   ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-
   /////////////////////////////////////////////////////////////////////////////////////////
   //
   // (7/7) POST /publish - For publishing an app with a unique ID
   //
-  app.post('/publish', async (req, res) => {
+  app.post("/publish", async (req, res) => {
     const userInfo = getUserInfo(req);
     const user = userInfo ? userInfo.name : null;
-  
+
     if (user) {
       try {
         const { developer, name, code } = req.body; // data from the publish request
-        const uniqueId = require('crypto').randomBytes(16).toString('hex'); // generate a unique ID for the app
-  
+        const uniqueId = require("crypto").randomBytes(16).toString("hex"); // generate a unique ID for the app
+
         const appKeyPrefix = `published/${uniqueId}`;
         const appCodeKey = `${appKeyPrefix}/app.js`;
         const appDataKey = `${appKeyPrefix}/data.json`;
-  
+
         // Prepare data to be saved with the app code
         const appData = {
           developer,
           name,
-          uniqueId
+          uniqueId,
         };
-  
+
         // Save the code and app data to the database under the unique ID
         await db.set(appCodeKey, code);
         await db.set(appDataKey, JSON.stringify(appData));
-  
+
         // Return the unique ID to the client
         res.json({ key: uniqueId });
       } catch (error) {
-        console.error('Failed to publish the app:', error);
-        res.status(500).send('Failed to publish the app.');
+        console.error("Failed to publish the app:", error);
+        res.status(500).send("Failed to publish the app.");
       }
     } else {
-      formattedLog(req.ip, 'tried to PUBLISH ☠️', '', '');
-      res.status(401).send('You must be logged in to publish an app.');
+      formattedLog(req.ip, "tried to PUBLISH ☠️", "", "");
+      res.status(401).send("You must be logged in to publish an app.");
     }
   });
   //
@@ -463,29 +441,28 @@ app.post('/askai', async (req, res) => {
   //
   /////////////////////////////////////////////////////////////////////////////////////////
 
-
   /////////////////////////////////////////////////////////////////////////////////////////
   //
   // (8/7) POST /publish - For publishing an app with a unique ID
   //
-  app.get('/getPublishedApp/:id', async (req, res) => {
+  app.get("/getPublishedApp/:id", async (req, res) => {
     const uniqueId = req.params.id;
     const appKeyPrefix = `published/${uniqueId}`;
-  
+
     // Assume the key for the app code is structured like so: 'published/{uniqueId}/app.js'
     const appCodeKey = `${appKeyPrefix}/app.js`;
-  
+
     try {
       const appCode = await db.get(appCodeKey);
-  
+
       if (appCode) {
         res.json({ code: appCode });
       } else {
-        res.status(404).send('App not found.');
+        res.status(404).send("App not found.");
       }
     } catch (error) {
-      console.error('Error retrieving the app code:', error);
-      res.status(500).send('Internal server error.');
+      console.error("Error retrieving the app code:", error);
+      res.status(500).send("Internal server error.");
     }
   });
   //
@@ -493,7 +470,6 @@ app.post('/askai', async (req, res) => {
   //
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  
   ///////////////////////////////////////////////////////////////////////////////////////////
   //
   // SERVER START
