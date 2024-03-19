@@ -1,5 +1,5 @@
 {
-  "name": "zx80.app",
+  "name": "zx80",
   "version": "0.0.3",
   "description": "A Phaser 3 webApp creator",
   "main": "server.js",

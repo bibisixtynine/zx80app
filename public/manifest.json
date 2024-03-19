@@ -4,8 +4,8 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
-    "name": "zx80.app",
-    "short_name": "zx80.app",
+    "name": "zx80",
+    "short_name": "zx80",
     "description": "the super cool computer !",
     "icons": [
         {

@@ -790,11 +790,15 @@ function displayStore() {
 //
 document
   .getElementById("askai")
-  .addEventListener("click", () => askai());
+  .addEventListener("click", () => alert("not implemented yet"));
+ // .addEventListener("click", () => askai());
+
 document
   .getElementById("actionButton")
   .addEventListener("click", () => runButtonPressed());
-document.getElementById("saveButton").addEventListener("click", () => Save());
+document
+  .getElementById("saveButton")
+  .addEventListener("click", () => Save());
 document
   .getElementById("zoomInButton")
   .addEventListener("click", () => changeFontSize(1));

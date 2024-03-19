@@ -53,10 +53,10 @@
   //   => zx80.app/publicApp/MyApp/script.js -> script.js
   //   => zx80.app/publicApp/MyApp/images/logo.png -> images/logo.png
 
-  app.get("/publicApp/:appName/*", async (req, res) => {
-    const appName = req.params.appName;
-    const additionalPath = req.params[0] || "index.html";
-    res.send(appName + " is running on " + additionalPath);
+  //app.get("/publicApp/:appName/*", async (req, res) => {
+  //  const appName = req.params.appName;
+  //  const additionalPath = req.params[0] || "index.html";
+  //  res.send(appName + " is running on " + additionalPath);
     //formattedLog(user,'SAVED  🛑',req.body.name,req.ip)
 
     /*
@@ -107,8 +107,8 @@
     res.send(`😎🚀 <${name}> sauvegardée avec succès par <${user}>`);
   } catch (error) {
     res.status(500).send(`😢🛑 Erreur lors de la sauvegarde <${name}> par <${user}>`);
-  }*/
-  });
+  }
+  });*/
   //
   // POST /save
   //
