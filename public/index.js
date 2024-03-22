@@ -72,11 +72,11 @@ function displayConsoleMessage(...args) {
 //
 const g_view = cm6.createEditorView(
   undefined,
-  document.getElementById("editor"),
+  document.getElementById("editor")
 );
 
 let g_options = {
-  oneDark: true,
+  oneDark: true
 };
 
 const g_initialState = cm6.createEditorState(
@@ -237,7 +237,7 @@ function handleResize() {
   window.addEventListener("orientationchange", handleResize, false);
 }
         `,
-  g_options,
+  g_options
 );
 
 g_view.setState(g_initialState);
